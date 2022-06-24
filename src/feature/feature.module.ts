@@ -4,6 +4,6 @@ import { StudentModule } from './student/student.module';
 import { PersonModule } from './person/person.module';
 
 @Module({
-  imports: [TeacherModule, StudentModule, PersonModule]
+  imports: [TeacherModule, StudentModule, PersonModule],
 })
 export class FeatureModule {}

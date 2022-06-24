@@ -1,4 +1,12 @@
-import { IsEmail, IsInt, IsNotEmpty, IsPositive, Length, Max, MinLength } from "class-validator";
+import {
+  IsEmail,
+  IsInt,
+  IsNotEmpty,
+  IsPositive,
+  Length,
+  Max,
+  MinLength,
+} from 'class-validator';
 
 export class CreatePersonDto {
   @IsNotEmpty()
@@ -9,13 +17,13 @@ export class CreatePersonDto {
   @MinLength(7)
   @Length(4, 5)
   gender: string;
-  
+
   @IsEmail()
   @Length(7, 20)
-  email: string
-  
+  email: string;
+
   @IsInt()
   @IsPositive()
   @Max(150)
-  age: number
+  age: number;
 }

@@ -1,15 +1,15 @@
-import { Person } from "feature/person/entities/person.entity";
-import { Column, Entity } from "typeorm";
+import { Person } from 'feature/person/entities/person.entity';
+import { Column, Entity } from 'typeorm';
 
 export enum EDU {
   MATRIC = 'Matric',
   INTER = 'Inter',
   GRADUATE = 'Graduate',
-  MASTER = 'Master'
+  MASTER = 'Master',
 }
 
 @Entity()
-export class Teacher extends Person{
+export class Teacher extends Person {
   @Column({ nullable: false, type: 'enum', enum: EDU })
-  education: EDU
+  education: EDU;
 }

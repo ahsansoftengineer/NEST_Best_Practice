@@ -10,9 +10,9 @@ import { Employee } from './entities/employee.entity';
   providers: [
     {
       provide: 'EMPLOYEE_SERVICE',
-      useClass: EmployeeService
+      useClass: EmployeeService,
     },
     // EmployeeService
-  ]
+  ],
 })
 export class EmployeeModule {}

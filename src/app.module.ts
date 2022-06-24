@@ -12,11 +12,11 @@ import { entities } from 'entities';
       password: 'root',
       database: 'crud',
       // This how you Registered your Model Classes
-      entities, 
+      entities,
       synchronize: true,
-      dropSchema:true
+      dropSchema: true,
     }),
-  ], 
+  ],
   // providers: [
   //   {
   //     provide: 'APP_GUARD',

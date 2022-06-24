@@ -1,11 +1,11 @@
-import { Person } from "feature/person/entities/person.entity";
-import { Column, Entity } from "typeorm";
+import { Person } from 'feature/person/entities/person.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class Employee extends Person{
+export class Employee extends Person {
   @Column({
     nullable: false,
-    default: ''
+    default: '',
   })
-  password: string
+  password: string;
 }
