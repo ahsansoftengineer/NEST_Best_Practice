@@ -31,8 +31,8 @@ export class PersonController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
-    return this.personService.update(+id, updatePersonDto);
+  update(@Param('id') id: string, @Body() data: UpdatePersonDto) {
+    return this.personService.update(data);
   }
 
   @Delete(':id')
