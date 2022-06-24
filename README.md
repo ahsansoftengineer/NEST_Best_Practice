@@ -10,5 +10,5 @@ npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt typeorm mysql2 bcrypt
 ```
 ### DevDependencies
 ```java
-npm i -D @types/bcrypt -D @types/passport-local @types/passport-jwt @types/express-session 
+npm i -D @types/bcrypt -D @types/passport-local @types/passport-jwt @types/express-session  webpack-node-externals run-script-webpack-plugin webpack
 ```
