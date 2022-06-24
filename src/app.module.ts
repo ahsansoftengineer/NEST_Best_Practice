@@ -1,11 +1,27 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { entities } from 'entities';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'crud',
+      // This how you Registered your Model Classes
+      entities, 
+      synchronize: true,
+      dropSchema:true
+    }),
+  ], 
+  // providers: [
+  //   {
+  //     provide: 'APP_GUARD',
+  //     useClass: JwtAuthGuard,
+  //   },
+  // ],
 })
-export class AppModule {
-
-}
+export class AppModule {}
