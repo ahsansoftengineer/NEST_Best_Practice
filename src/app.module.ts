@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from 'app.controller';
-import { entities } from 'entities';
 import { FeatureModule } from 'feature/feature.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,11 +14,10 @@ import { AuthModule } from './auth/auth.module';
       password: 'root',
       database: 'crud',
       // This how you Registered your Model Classes
-      entities,
       synchronize: true,
       dropSchema: true,
+      logging: true
     }),
-    AuthModule,
   ],
   controllers: [AppController]
   // providers: [
