@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from 'app.controller';
+import configuration from 'config/configuration';
 import { FeatureModule } from 'feature/feature.module';
 
 @Module({
@@ -15,7 +17,7 @@ import { FeatureModule } from 'feature/feature.module';
       database: 'crud',
       // This how you Registered your Model Classes
       synchronize: true,
-      dropSchema: true,
+      // dropSchema: true,
       logging: true
     }),
   ],
