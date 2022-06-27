@@ -1,7 +1,7 @@
 import {  Controller, Get } from '@nestjs/common';
 import { all_entities } from 'entity/all.entity';
 import { Question } from 'entity/question.entity';
-import {  createConnection, getRepository } from 'typeorm';
+import {  createConnection, getRepository, LessThanOrEqual } from 'typeorm';
 
 createConnection({
   type: 'mysql',
@@ -20,36 +20,75 @@ export class AppController {
   @Get('/')
   async getHello() {
     const em = getRepository(Question) // entityManager
+    // PROJECTION AND SELECT
+    // const data = await em.find(
+    //   {
+    //     select: ['name', 'question']
+    //   }
+    // )
+
+    // FILTER WHERE
+    // const data = await em.find(
+    //   {
+    //     where: {
+    //       name:'Ahsan',
+    //       des: 'Yet Des' 
+    //     }
+    //   }
+    // )
     
-    // INSERT
-    // const data  = await em.insert({
-    //   name: 'Ahsan',
-    //   des: "No Description is Provided",
-    //   question: 'Why learning This'
-    // })
-    // SAVE
-    // const data  = await em.save({
-    //   name: "Furqan",
-    //   des: 'DESK',
-    //   question: "Majid is who"
-    // })
+    // FILTER WHERE / OR
+    // const data = await em.find(
+    //   {
+    //     where: [
+    //       {
+    //         name:'Ahsan',
+    //         des: 'Yet Des' 
+    //       },
+    //       {
+    //         name: 'Furqan'
+    //       }
+    //     ]
+    //   }
+    // )
 
-    // UPDATE
-    // const data = await em.update(3, { question: 'New New Updated Question'})
-
-    // DELETE
-    // const data = await em.delete(6)
-
-    // FIND ALL
-    // const data = await em.find()
-
-    // FIND one by id return Object
-    // const data = await em.findOneById(3)
-
-    // FIND BY returns Array
-    // const data = await em.findBy({id: 3})
-
-    const data = await em.findOne({where: {id: 1}})
+    // FILTER ORDER BY / ASENDING DESC
+    // const data = await em.find(
+    //   {
+    //     order: {
+    //         id: "DESC"
+    //     },
+    //     where: [
+    //       {
+    //         name:'Ahsan',
+    //         des: 'Yet Des' 
+    //       },
+    //       {
+    //         name: 'Furqan'
+    //       }
+    //     ],
+    //   }
+    // ) 
+    // ORDER BY SKIP TAKE
+    const data = await em.find(
+      {
+        order: {
+            id: "DESC"
+        },
+        // skip: 1,
+        take: 5
+      }
+    ) 
+    // LESSTHAN NOT
+    // const data = await em.find({
+    //     id: LessThanOrEqual(5),
+    //     order: {
+    //         id: "DESC"
+    //     },
+    //     skip: 1,
+    //     take: 5
+    //   }
+    // ) 
     return data
   }
 }
