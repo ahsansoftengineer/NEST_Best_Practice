@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from 'app.controller';
-// import { all_entities } from 'entity/all.entity';
+import { all_entities } from 'entity/all.entity';
 import { FeatureModule } from 'feature/feature.module';
-import { all_schema_entities } from 'schema/all.entity';
 
 @Module({
   imports: [
@@ -15,9 +14,7 @@ import { all_schema_entities } from 'schema/all.entity';
       username: 'root',
       password: 'root',
       database: 'test',
-      // entityPrefix: "entity",
-      // entities: all_entities,
-      entities: all_schema_entities,
+      entities: all_entities,
       // entities: [User, Card],
       // entities: ['./entity/*.ts'],
       // This how you Registered your Model Classes
