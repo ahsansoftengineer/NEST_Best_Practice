@@ -4,6 +4,6 @@ import { FeatureModule } from './feature/feature.module';
 
 @Module({
   imports: [FeatureModule],
-  controllers: [AppController]
+  controllers: [AppController],
 })
 export class AppModule {}
