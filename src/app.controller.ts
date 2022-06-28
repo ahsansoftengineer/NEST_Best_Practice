@@ -114,6 +114,55 @@ export class AppController {
     question2.text = "who let the dogs out?"
     question2.categories = [cate1, cate2]
     const results = await repo.save(question2)
-    return {result, results}
+    // return {result, results} 
+
+    // * MANY TO MANY
+    // * * DELETING MANY TO MANY RECORDS
+    const QuestionRepo = await repo.getRepository(Question).findOne({
+      where: { id: 2},
+      relations:[
+        'categories'
+      ]
+    })
+    // * * Eager Loading is not availaible in findOneBy
+    // const QuestionRepo = await repo.getRepository(Question).findOneBy({id: 2})
+    QuestionRepo.categories =  QuestionRepo.categories.filter((category) => {
+      return category.id !== 3
+    })
+    // const data = await repo.save(QuestionRepo)
+    // return {result, results, data} 
+
+    // * MANY TO MANY SOFT DELETE (NOT WORKING PURPOSAL)
+    // It will delete the record from JUNCTION TABLE
+    // await repo.getRepository(Question).softRemove(data)
+
+    // * JOINS
+    // * * LEFT JOIN GET MANY
+    // const questions = await ( repo
+    //   .getRepository(Question)
+    //   .createQueryBuilder("question")
+    //   .leftJoinAndSelect("question.categories", "category")
+    //   .getMany()
+    // )
+    // * * RIGHT JOIN GET ONE
+    const questions = await ( repo
+      .getRepository(Question)
+      .createQueryBuilder("question")
+      .leftJoinAndSelect("question.categories", "category")
+      .getOne()
+    )
+    // * UNI DIRECTIONAL AND BI DIRECTIONAL
+    // * * Relations can be uni-directional and bi-directional. Uni-directional relations are relations with a relation decorator only on one side. Bi-directional relations are relations with decorators on both sides of a relation.
+
+    // * EAGER RELATIONS
+    // * * Eager relations only work when you use find* methods. If you use QueryBuilder eager relations are disabled and have to use leftJoinAndSelect to load the relation. Eager relations can only be used on one side of the relationship, using eager: true on both sides of relationship is disallowed.
+
+    // * Note: 
+    // * * if you came from other languages (Java, PHP, etc.) and are used to use lazy relations everywhere - be careful. Those languages aren't asynchronous and lazy loading is achieved different way, that's why you don't work with promises there. In JavaScript and Node.JS you have to use promises if you want to have lazy-loaded relations. This is non-standard technique and considered experimental in TypeORM.
+
+
+
+    const data = {questions}
+    return data
   }
 }
