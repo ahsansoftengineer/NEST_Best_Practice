@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class BaseDTOService<C, U> {
+export class BaseDTOService<C, U, M> {
   create(data: C) {
-    return 'This action adds a new user';
+    return {message: 'created'}
   }
 
   findAll() {
-    return `This action returns all user`;
+    return {message: 'multiple record'};
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number){
+    return {message: 'single record'};
   }
 
   update(id: number, data: U) {
-    return `This action updates a #${id} user`;
+    return {message: 'updated'}
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return {message: 'deleted'};
   }
 }
