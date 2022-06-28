@@ -86,7 +86,7 @@ export class AppController {
     //   .leftJoinAndSelect("photo.user", "user")
     //   .getMany()
 
-    // * MANY TO MANY
+    // * MANY TO MANY Cascade Disabled 
     const category1 = new Category()
     category1.name = "animals"
     await repo.save(category1)
@@ -99,8 +99,21 @@ export class AppController {
     question.title = "dogs"
     question.text = "who let the dogs out?"
     question.categories = [category1, category2]
-    const data = await repo.save(question)
+    const result = await repo.save(question)
 
-    return data
+    // * MANY TO MANY
+    // * *  Cascade Enabled we can save it within one go
+    const cate1 = new Category()
+    cate1.name = "animals"
+
+    const cate2 = new Category()
+    cate2.name = "zoo"
+
+    const question2 = new Question()
+    question2.title = "dogs"
+    question2.text = "who let the dogs out?"
+    question2.categories = [cate1, cate2]
+    const results = await repo.save(question2)
+    return {result, results}
   }
 }

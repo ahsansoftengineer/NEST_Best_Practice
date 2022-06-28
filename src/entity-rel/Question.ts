@@ -17,8 +17,16 @@ export class Question {
 
   @Column()
   text: string
-
-  @ManyToMany(() => Category)
-  @JoinTable()
+  // Unidirectional
+  // @ManyToMany(() => Category)
+  // @JoinTable()
+  // categories: Category[]
+  
+  // Bi Directional
+  // Casecade Enable 
+  @ManyToMany((type) => Category, (category) => category.questions, {
+    cascade: true,
+  })
+  @JoinTable({name: 'Question_Category'})
   categories: Category[]
 }
