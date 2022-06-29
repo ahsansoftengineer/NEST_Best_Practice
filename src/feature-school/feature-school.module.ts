@@ -9,8 +9,21 @@ import { AddressModule } from './address/address.module';
 import { SchoolModule } from './school/school.module';
 import { PrincipalModule } from './principal/principal.module';
 import { FamilyModule } from './family/family.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
-  imports: [PersonModule, StudentModule, ParentModule, TeacherModule, ClassRoomModule, SubjectModule, AddressModule, SchoolModule, PrincipalModule, FamilyModule]
+  imports: [
+    PersonModule, 
+    StudentModule, 
+    ParentModule, 
+    TeacherModule, 
+    ClassRoomModule, 
+    SubjectModule, 
+    AddressModule, 
+    SchoolModule, 
+    PrincipalModule, 
+    FamilyModule, 
+    // LocationModule
+  ]
 })
-export class FeatureSchoolModule {}
+export class FeatureSchoolModule { }

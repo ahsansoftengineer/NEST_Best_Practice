@@ -1,10 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
 export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
 }
 
-@Entity()
+@TableInheritance({ column: { type: "varchar", name: "type" } })
 export class Person {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
