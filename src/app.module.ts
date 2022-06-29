@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'entities';
+import { FeatureSchoolModule } from './feature-school/feature-school.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { entities } from 'entities';
       synchronize: true,
       dropSchema: true,
     }),
+    FeatureSchoolModule,
   ],
   // providers: [
   //   {
