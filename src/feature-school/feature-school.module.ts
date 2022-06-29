@@ -14,7 +14,7 @@ import { LocationModule } from './location/location.module';
 @Module({
   imports: [
     PersonModule, 
-    // StudentModule, 
+    StudentModule, 
     // ParentModule, 
     // TeacherModule, 
     // ClassRoomModule, 
