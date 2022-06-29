@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
 export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
 }
-
+@Entity()
 @TableInheritance({ column: { type: "varchar", name: "type" } })
-export class Person {
+export class Person extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 

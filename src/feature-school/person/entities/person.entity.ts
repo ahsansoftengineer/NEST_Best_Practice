@@ -1,6 +1,6 @@
 import { Address } from "feature-school/address/entities/address.entity";
 import { BaseModel } from "shared/BaseModel";
-import { Column, Index, JoinTable, ManyToMany } from "typeorm";
+import { Column, Entity, Index, JoinTable, ManyToMany, TableInheritance } from "typeorm";
 
 export enum GENDER{
   MALE = 'male',
@@ -15,6 +15,9 @@ export enum USERROLE{
 }
 @Index(["title", "lastName"], {unique: true})
 @Index(["title", "middleName", "lastName"], { unique: true })
+
+@Entity()
+@TableInheritance()
 export class Person extends BaseModel{
   @Column({ nullable: false, length: 20 })
   middleName: string

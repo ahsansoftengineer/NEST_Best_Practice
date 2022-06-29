@@ -1,7 +1,8 @@
+import { ChildEntity } from 'typeorm';
 import { Person } from 'feature/person/entities/person.entity';
 import { Column, Entity } from 'typeorm';
 
-@Entity()
+@ChildEntity()
 export class Student extends Person {
   @Column({
     nullable: false,

@@ -14,15 +14,15 @@ import { LocationModule } from './location/location.module';
 @Module({
   imports: [
     PersonModule, 
-    StudentModule, 
-    ParentModule, 
-    TeacherModule, 
-    ClassRoomModule, 
-    SubjectModule, 
-    AddressModule, 
-    SchoolModule, 
-    PrincipalModule, 
-    FamilyModule, 
+    // StudentModule, 
+    // ParentModule, 
+    // TeacherModule, 
+    // ClassRoomModule, 
+    // SubjectModule, 
+    // AddressModule, 
+    // SchoolModule, 
+    // PrincipalModule, 
+    // FamilyModule, 
     // LocationModule
   ]
 })
