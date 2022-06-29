@@ -13,11 +13,10 @@ export enum USERROLE{
   PARENT = 'Parent',
   STUDENT = 'Student'
 }
-@Index(["title", "lastName"], {unique: true})
-@Index(["title", "middleName", "lastName"], { unique: true })
-
 @Entity()
-@TableInheritance()
+@TableInheritance({ column: { type: "varchar", name: "type" } })
+@Index(["title", "lastName"], {unique: true, })
+@Index(["title", "middleName", "lastName"], { unique: true })
 export class Person extends BaseModel{
   @Column({ nullable: false, length: 20 })
   middleName: string
@@ -25,18 +24,23 @@ export class Person extends BaseModel{
   @Column({ nullable: false, length: 20 })
   lastName: string
 
-  @Index("username-idx")
+  // @Index("username-idx")
   @Column({ length: 20, unique: true })
   username: string
 
   @Column({ length: 20 })
   password: string
 
-  @Column({ nullable: false, default: 'male', type: 'enum', enum: GENDER })
-  gender: string;
+  @Column({ 
+    nullable: false, 
+    default: 'male', 
+    type: 'enum', 
+    enum: GENDER 
+  })
+  gender: GENDER;
 
   @Column("date")
-  dateOfBirth: Date
+  dateOfBirth: string
 
   @Column({
     type: "enum",
@@ -45,7 +49,7 @@ export class Person extends BaseModel{
   })
   role: USERROLE
 
-  @ManyToMany(() => Address)
-  @JoinTable()
-  address: Address[]
+  // @ManyToMany(() => Address)
+  // @JoinTable()
+  // address: Address[]
 }

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'entities';
-import { FeatureModule } from 'feature/feature.module';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
 
 @Module({
@@ -12,7 +11,7 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'SchoolMgmt',
+      database: 'schoolmgmt',
       // This how you Registered your Model Classes
       entities,
       synchronize: true,

@@ -1,7 +1,7 @@
-import { Person } from "feature/person/entities/person.entity";
+import { Person } from "feature-school/person/entities/person.entity";
 import { ChildEntity } from "typeorm";
 
-ChildEntity()
+@ChildEntity()
 export class Parent extends Person{
   
 }

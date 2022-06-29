@@ -10,6 +10,5 @@ import { Person } from './entities/person.entity';
   ],
   controllers: [PersonController],
   providers: [PersonService],
-  // exports: [PersonService]
 })
 export class PersonModule {}

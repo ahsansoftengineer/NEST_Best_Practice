@@ -25,13 +25,13 @@ export class CreatePersonDto  {
   password: string
 
   @IsNotEmpty()
-  @IsEnum(GENDER, { each: true })
+  @IsEnum(GENDER)
   gender: GENDER;
 
-  dateOfBirth: Date
+  dateOfBirth: string
 
   @IsNotEmpty()
-  @IsEnum(USERROLE, { each: true })
+  @IsEnum(USERROLE)
   role: USERROLE
 
   // @IsEnum(Address, { array: true })
