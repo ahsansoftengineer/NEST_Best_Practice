@@ -24,7 +24,7 @@ export class StudentController {
     return this._ss.update(id, data);
   }
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this._ss.remove(+id);
   }
 }
