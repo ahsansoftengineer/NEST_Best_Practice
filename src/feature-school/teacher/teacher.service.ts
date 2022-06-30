@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { Injector } from '@nestjs/core/injector/injector';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Student } from 'feature-school/student/entities/student.entity';
+import { Repository } from 'typeorm';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
+import { Teacher } from './entities/teacher.entity';
 
 @Injectable()
 export class TeacherService {
-  create(createTeacherDto: CreateTeacherDto) {
-    return 'This action adds a new teacher';
-  }
-
+  constructor(
+    @InjectRepository(Teacher)
+    private repo: Repository<Teacher>
+  ) {}
   findAll() {
-    return `This action returns all teacher`;
+    return this.repo.find() ;
   }
-
   findOne(id: number) {
-    return `This action returns a #${id} teacher`;
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${id} does not exsist` };
+    });
   }
-
-  update(id: number, updateTeacherDto: UpdateTeacherDto) {
-    return `This action updates a #${id} teacher`;
+  create(data: CreateTeacherDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-
+  async update(id: number, data: UpdateTeacherDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
   remove(id: number) {
-    return `This action removes a #${id} teacher`;
+    // return this.repo.delete(id);
+    return this.repo.delete({ id });
   }
 }

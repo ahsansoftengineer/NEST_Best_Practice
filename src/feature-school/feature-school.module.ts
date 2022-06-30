@@ -16,7 +16,7 @@ import { LocationModule } from './location/location.module';
     PersonModule, 
     StudentModule, 
     ParentModule, 
-    // TeacherModule, 
+    TeacherModule, 
     // ClassRoomModule, 
     // SubjectModule, 
     AddressModule, 

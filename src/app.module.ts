@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { entities } from 'entities';
+import { entities } from 'core/entities';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
 
 @Module({
