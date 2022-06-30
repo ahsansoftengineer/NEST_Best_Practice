@@ -1,5 +1,5 @@
 import { Address } from "feature-school/address/entities/address.entity";
-import { BaseModel } from "shared/BaseModel";
+import { BaseModel } from "core/BaseModel";
 import { Column, Entity, Index, JoinTable, ManyToMany, TableInheritance } from "typeorm";
 
 export enum GENDER{
