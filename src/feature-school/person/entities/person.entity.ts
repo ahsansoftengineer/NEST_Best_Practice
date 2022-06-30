@@ -61,5 +61,5 @@ export class Person extends BaseModel{
     cascade: true,
   })
   @JoinTable({name: 'person_address'})
-  address: Address
+  address: Address[]
 }
