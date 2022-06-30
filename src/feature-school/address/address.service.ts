@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
+import { Address } from './entities/address.entity';
 
 @Injectable()
 export class AddressService {
-  create(createAddressDto: CreateAddressDto) {
-    return 'This action adds a new address';
+  constructor(
+    @InjectRepository(Address)
+    private repo: Repository<Address>,
+  ) {}
+  // getPerson(){
+  //   // getting data from token and show the record of the 
+  //   return 1
+  // }
+  // findAll() {
+  //   return this.repo.find() || { message: `record does not exsist` };
+  // }
+  private findOne(id: number) {
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${id} does not exsist` };
+    });
   }
-
-  findAll() {
-    return `This action returns all address`;
+  create(data: CreateAddressDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} address`;
+  async update(id: number, data: UpdateAddressDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
   }
-
-  update(id: number, updateAddressDto: UpdateAddressDto) {
-    return `This action updates a #${id} address`;
-  }
-
   remove(id: number) {
-    return `This action removes a #${id} address`;
+    // return this.repo.delete(id);
+    return this.repo.delete({ id });
   }
 }

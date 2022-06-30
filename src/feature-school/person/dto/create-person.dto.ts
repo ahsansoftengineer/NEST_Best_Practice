@@ -1,12 +1,15 @@
+import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   Length,
 } from 'class-validator';
 import { CreateDto } from 'core/CreateDto';
+import { Address } from 'feature-school/address/entities/address.entity';
 import { GENDER, USERROLE } from '../entities/person.entity';
 
 // enum ContactPreference{
@@ -74,6 +77,11 @@ export class CreatePersonDto extends CreateDto {
   @IsEnum(USERROLE)
   role: USERROLE
 
-  // @IsEnum(Address, { array: true })
-  // address: Address[]
+  @ApiProperty({
+    enum: Address,
+    example: [{title: 'My Address', desc: "Any Description u want"}],
+    description:'Address[] Token is Optional'
+  })
+  @IsOptional()
+  address: Address[]
 }

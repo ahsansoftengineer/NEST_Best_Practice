@@ -56,6 +56,7 @@ export class Person extends BaseModel{
   })
   image: string
 
+  
   @ManyToMany(() => Address, (a) => a.id, {
     cascade: true,
   })

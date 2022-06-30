@@ -11,6 +11,6 @@ export class BaseModel extends BaseEntity{
   title: string
 
   @ApiProperty()
-  @Column({ length: 150 })
+  @Column({ length: 150, default: '' })
   desc: string
 }
