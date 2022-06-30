@@ -34,9 +34,10 @@ export class CreatePersonDto extends CreateDto {
   // contactPreference: ContactPreference
 
   // @ValidateIf(o => o.contactPreference === ContactPreference.EMAIL)
-  @IsNotEmpty()
+  @ApiProperty({
+    example: 'abc@gmail.com'
+  })
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   // @ValidateIf(o => o.contactPreference === ContactPreference.PHONE)
@@ -45,20 +46,30 @@ export class CreatePersonDto extends CreateDto {
   // @IsNotEmpty()
   // phone: string;
 
-  @ApiProperty()
+  @ApiProperty() 
   @Length(7, 20)
   password: string
 
-  @ApiProperty()
+  @ApiProperty({
+    enum: GENDER,
+    // isArray: true,
+    // example: [GENDER.MALE, GENDER.FEMALE],
+    example: GENDER.MALE
+  })
   @IsNotEmpty()
   @IsEnum(GENDER)
   gender: GENDER;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: '1992-07-04'
+  })
   @IsDateString()
   dateOfBirth: string
 
-  @ApiProperty()
+  @ApiProperty({
+    enum: USERROLE,
+    example: USERROLE.ADMIN,
+  })
   @IsNotEmpty()
   @IsEnum(USERROLE)
   role: USERROLE

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
 import { Person } from './entities/person.entity';
 
 @Injectable()
@@ -23,7 +22,7 @@ export class PersonService {
     const result = this.repo.create(data);
     return this.repo.save(result);
   }
-  async update(id: number, data: UpdatePersonDto) {
+  async update(id: number, data: CreatePersonDto) {
     await this.repo.update(id, data);
     const result = await this.findOne(id);
     return result || { message: `id ${id} does not exsist` };

@@ -24,6 +24,8 @@ export class Person extends BaseModel{
   @Column({ nullable: false, length: 20 })
   lastName: string
 
+  @Column({ length: 20, unique: true })
+  email: string
   // @Index("username-idx")
   @Column({ length: 20, unique: true })
   username: string
