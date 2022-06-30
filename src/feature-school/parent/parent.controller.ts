@@ -1,34 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ParentService } from './parent.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
+import { ParentService } from './parent.service';
 
+@ApiTags('parent')
 @Controller('parent')
 export class ParentController {
-  constructor(private readonly parentService: ParentService) {}
-
-  @Post()
-  create(@Body() createParentDto: CreateParentDto) {
-    return this.parentService.create(createParentDto);
-  }
-
+  constructor(private readonly _ss: ParentService) {}
   @Get()
   findAll() {
-    return this.parentService.findAll();
+    return this._ss.findAll();
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.parentService.findOne(+id);
+    return this._ss.findOne(+id);
   }
-
+  @Post()
+  create(@Body() data: CreateParentDto) {
+    return this._ss.create(data);
+  }
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateParentDto: UpdateParentDto) {
-    return this.parentService.update(+id, updateParentDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateParentDto) {
+    return this._ss.update(id, data);
   }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.parentService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this._ss.remove(+id);
   }
 }

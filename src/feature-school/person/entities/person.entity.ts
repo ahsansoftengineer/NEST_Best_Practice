@@ -49,6 +49,11 @@ export class Person extends BaseModel{
   })
   role: USERROLE
 
+  @Column({
+    default: 'no image set'
+  })
+  image: string
+
   // @ManyToMany(() => Address)
   // @JoinTable()
   // address: Address[]
