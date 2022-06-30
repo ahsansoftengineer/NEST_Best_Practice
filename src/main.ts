@@ -7,7 +7,12 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe({
+    // whitelist: true,
+    // skipNullProperties: true,
+    // skipUndefinedProperties: true,
+    // skipMissingProperties: true
+  }))
   const config = new DocumentBuilder()
     .setTitle('School Management System (AHSAN)')
     .setDescription('This application has five major roles (Admin, Headmaster, Teacher, Parents, Student)')

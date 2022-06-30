@@ -1,14 +1,18 @@
 import { Optional } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
+  IsArray,
   IsDateString,
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   Length,
   ValidateNested,
 } from 'class-validator';
 import { CreateDto } from 'core/CreateDto';
+import { CreateAddressDto } from 'feature-school/address/dto/create-address.dto';
 import { Address } from 'feature-school/address/entities/address.entity';
 import { GENDER, USERROLE } from '../entities/person.entity';
 
@@ -23,9 +27,13 @@ export class CreatePersonDto extends CreateDto {
   title: string
 
   @ApiProperty()
+  @Length(3, 20)
+  @IsOptional()
   middleName: string
 
   @ApiProperty()
+  @Length(3, 20)
+  @IsOptional()
   lastName: string
 
   @ApiProperty()
@@ -41,6 +49,8 @@ export class CreatePersonDto extends CreateDto {
     example: 'abc@gmail.com'
   })
   @IsEmail()
+  @Length(3, 20)
+  @IsOptional()
   email: string;
 
   // @ValidateIf(o => o.contactPreference === ContactPreference.PHONE)
@@ -67,6 +77,7 @@ export class CreatePersonDto extends CreateDto {
     example: '1992-07-04'
   })
   @IsDateString()
+  @IsOptional()
   dateOfBirth: string
 
   @ApiProperty({
@@ -82,8 +93,11 @@ export class CreatePersonDto extends CreateDto {
     example: [{title: 'My Address', desc: "Any Description u want"}],
     description:'Address[] Token is Optional'
   })
-  // @ValidateIf(x => x.address)
   @ValidateNested()
+  @Type(() => CreateAddressDto)
   address?: Address[]
+  // @IsArray()
+  // @ValidateIf(x => x.address)
+
 
 }

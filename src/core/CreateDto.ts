@@ -1,5 +1,6 @@
+import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, Length, MaxLength } from "class-validator";
+import { IsNotEmpty, IsOptional, Length, MaxLength } from "class-validator";
 
 export class CreateDto  {
   @ApiProperty({
@@ -13,5 +14,6 @@ export class CreateDto  {
     description: 'Other usefull information'
   })
   @MaxLength(100)
-  desc: string
+  @IsOptional()
+  desc?: string
 }
