@@ -6,9 +6,14 @@ import {
   IsNotEmpty,
   Length,
 } from 'class-validator';
+import { CreateDto } from 'core/CreateDto';
 import { GENDER, USERROLE } from '../entities/person.entity';
 
-export class CreatePersonDto  {
+// enum ContactPreference{
+//   EMAIL = 'email',
+//   PHONE = 'phone'
+// }
+export class CreatePersonDto extends CreateDto {
   @ApiProperty()
   @IsNotEmpty()
   @Length(3, 20)
@@ -24,10 +29,21 @@ export class CreatePersonDto  {
   @Length(7, 20)
   username: string
 
-  @ApiProperty()
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // contactPreference: ContactPreference
+
+  // @ValidateIf(o => o.contactPreference === ContactPreference.EMAIL)
+  @IsNotEmpty()
   @IsEmail()
-  @Length(7, 20)
+  @IsNotEmpty()
   email: string;
+
+  // @ValidateIf(o => o.contactPreference === ContactPreference.PHONE)
+  // @IsNotEmpty()
+  // @IsPhoneNumber()
+  // @IsNotEmpty()
+  // phone: string;
 
   @ApiProperty()
   @Length(7, 20)
