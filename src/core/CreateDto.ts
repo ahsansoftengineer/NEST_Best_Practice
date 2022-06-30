@@ -2,12 +2,16 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, Length, MaxLength } from "class-validator";
 
 export class CreateDto  {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'This Title Property Means the Major Property of the Table'
+  })
   @IsNotEmpty()
   @Length(3, 20)
   title: string
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Other usefull information'
+  })
   @MaxLength(100)
   desc: string
 }

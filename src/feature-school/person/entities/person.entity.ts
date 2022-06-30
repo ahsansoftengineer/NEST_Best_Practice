@@ -55,8 +55,4 @@ export class Person extends BaseModel{
     default: 'no image set'
   })
   image: string
-
-  // @ManyToMany(() => Address)
-  // @JoinTable()
-  // address: Address[]
 }
