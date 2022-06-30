@@ -5,5 +5,6 @@ export class UpdatePersonDto extends PartialType(CreatePersonDto) {
   // @IsNotEmpty()
   // @IsNumber()
   // id: number
+  
 }
 
