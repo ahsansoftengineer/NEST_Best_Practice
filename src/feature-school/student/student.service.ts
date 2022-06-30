@@ -16,7 +16,7 @@ export class StudentService {
   }
   findOne(id: number) {
     return this.repo.findOneBy({ id }).then((data) => {
-      return data || { message: `id ${data.id} does not exsist` };
+      return data || { message: `id ${id} does not exsist` };
     });
   }
   create(data: CreateStudentDto) {
@@ -24,8 +24,8 @@ export class StudentService {
     return this.repo.save(result);
   }
   async update(id: number, data: UpdateStudentDto) {
-    const result = await this.findOne(id);
-    if(result) await this.repo.update(id, data);
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
     return result || { message: `id ${id} does not exsist` };
   }
   remove(id: number) {
