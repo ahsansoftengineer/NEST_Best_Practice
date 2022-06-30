@@ -10,6 +10,7 @@ import {
 } from 'class-validator';
 import { CreateDto } from 'core/CreateDto';
 import { Address } from 'feature-school/address/entities/address.entity';
+import { IsNull } from 'typeorm';
 import { GENDER, USERROLE } from '../entities/person.entity';
 
 // enum ContactPreference{
@@ -77,11 +78,11 @@ export class CreatePersonDto extends CreateDto {
   @IsEnum(USERROLE)
   role: USERROLE
 
-  @ApiProperty({
-    enum: Address,
-    example: [{title: 'My Address', desc: "Any Description u want"}],
-    description:'Address[] Token is Optional'
-  })
-  @IsOptional()
-  address: Address[]
+  // @ApiProperty({
+  //   enum: Address,
+  //   example: [{title: 'My Address', desc: "Any Description u want"}],
+  //   description:'Address[] Token is Optional'
+  // })
+  // @IsOptional()
+  // address?: Address[]
 }
