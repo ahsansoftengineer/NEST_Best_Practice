@@ -6,8 +6,8 @@ import { Address } from "feature-school/address/entities/address.entity";
 
 export const entities = [
   BaseModel,
+  Address,
   Person,
   Student,
   Parent,
-  Address
 ];

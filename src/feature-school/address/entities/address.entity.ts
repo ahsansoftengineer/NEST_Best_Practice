@@ -1,11 +1,11 @@
 import { BaseModel } from "core/BaseModel";
+import { Person } from "feature-school/person/entities/person.entity";
 import { Student } from "feature-school/student/entities/student.entity";
-import { ManyToMany } from "typeorm";
+import { Entity, JoinTable, ManyToMany } from "typeorm";
 
+@Entity()
 export class Address extends BaseModel{
-  @ManyToMany(() => Student)
-  // @JoinTable({
-  //   name: 'person_address'
-  // })
-  student: Student[]
+  // @ManyToMany(() => Person)
+  // @JoinTable()
+  // person: Person
 }

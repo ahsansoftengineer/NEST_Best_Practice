@@ -6,7 +6,7 @@ import { Address } from "feature-school/address/entities/address.entity";
 export class Student extends Person {
   // parents: Parent[]
   // classes: ClassRoom
-  @ManyToMany(() => Address)
-  @JoinTable()
-  address: Address[]
+
+
+
 }
