@@ -1,6 +1,10 @@
-import { Parent } from "feature-school/parent/entities/parent.entity";
 import { BaseModel } from "core/BaseModel";
+import { Entity, JoinColumn, OneToOne } from "typeorm";
+import { Person } from "feature-school/person/entities/person.entity";
 
+@Entity()
 export class Family extends BaseModel{
-  parent: Parent
+  @OneToOne(() => Person, (a) => a.id)
+  @JoinColumn({name: 'headOfFamily'})
+  headOfFamily: Person
 }

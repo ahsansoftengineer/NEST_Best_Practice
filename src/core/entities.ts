@@ -6,6 +6,7 @@ import { Address } from "feature-school/address/entities/address.entity";
 import { Teacher } from "feature-school/teacher/entities/teacher.entity";
 import { Principal } from "feature-school/principal/entities/principal.entity";
 import { School } from "feature-school/school/entities/school.entity";
+import { Family } from "feature-school/family/entities/family.entity";
 
 export const entities = [
   BaseModel,
@@ -15,5 +16,6 @@ export const entities = [
   Parent,
   Teacher,
   Principal,
-  School
+  School,
+  Family
 ];

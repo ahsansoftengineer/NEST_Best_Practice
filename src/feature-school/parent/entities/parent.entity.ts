@@ -1,6 +1,7 @@
-import { ChildEntity, JoinTable, ManyToMany } from "typeorm";
+import { ChildEntity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Student } from "feature-school/student/entities/student.entity";
+import { Family } from "feature-school/family/entities/family.entity";
 
 @ChildEntity()
 export class Parent extends Person{

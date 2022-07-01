@@ -40,3 +40,70 @@ module.exports = function (options, webpack) {
   };
 };
 ```
+### CREATE AN CHILD ENTITY
+* * 1 Create Entity
+```java
+@ChildEntity() // @Entity() for Simple
+export class Parent extends Person{
+  @ManyToMany(() => Student, (a) => a.id, {
+    cascade: true,
+  })
+  @JoinTable({name: 'parent_student'})
+  students: Student[]
+}
+```
+* * 2 Registering to Module
+```java
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([Parent]), // .forFeature Not .forRoot
+    PersonModule // TableInheritance
+  ],
+  controllers: [ParentController],
+  providers: [ParentService]
+})
+export class ParentModule {}
+```
+* * 3 Adding to Entity array
+```typescript
+export const entities = [
+  BaseModel, // Also the Base Entity Model is Required for defination
+  Person, // Table Inheritance Entity Model is also Required
+  Parent // The Entity
+];
+```
+* * 4 Import this Module to Parent Module
+```java
+@Module({
+  imports: [
+    PersonModule, 
+    ParentModule, 
+  ]
+})
+export class FeatureSchoolModule { }
+```
+* * 5 Import Parent Module to App Module
+```java
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'schoolmgmt',
+      // This how you Registered your Model Classes
+      entities,
+      synchronize: true,
+      dropSchema: true,
+      // logger: 'advanced-console',
+      logging: true,
+      // subscribers: [],
+      // migrations: [],
+    }),
+    FeatureSchoolModule,
+  ],
+})
+export class AppModule {}
+```

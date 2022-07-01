@@ -1,6 +1,7 @@
 import { Address } from "feature-school/address/entities/address.entity";
 import { BaseModel } from "core/BaseModel";
-import { Column, Entity, Index, JoinTable, ManyToMany, TableInheritance } from "typeorm";
+import { Column, Entity, Index, JoinTable, ManyToMany, OneToMany, OneToOne, TableInheritance } from "typeorm";
+import { Family } from "feature-school/family/entities/family.entity";
 
 export enum GENDER{
   MALE = 'male',
@@ -62,4 +63,9 @@ export class Person extends BaseModel{
   })
   @JoinTable({name: 'person_address'})
   address: Address[]
+
+  @OneToOne(() => Family, (a) => a.headOfFamily, {
+    cascade: true,
+  })
+  family: Family
 }

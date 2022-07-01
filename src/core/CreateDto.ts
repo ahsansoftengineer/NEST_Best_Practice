@@ -1,4 +1,3 @@
-import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsOptional, Length, MaxLength } from "class-validator";
 
@@ -7,7 +6,7 @@ export class CreateDto  {
     description: 'This Title Property Means the Major Property of the Table'
   })
   @IsNotEmpty()
-  @Length(3, 20)
+  @Length(3, 40)
   title: string
 
   @ApiProperty({

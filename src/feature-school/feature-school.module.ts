@@ -22,7 +22,7 @@ import { LocationModule } from './location/location.module';
     AddressModule, 
     SchoolModule, 
     PrincipalModule, 
-    // FamilyModule, 
+    FamilyModule, 
     // LocationModule
   ]
 })
