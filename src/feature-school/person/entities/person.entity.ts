@@ -68,5 +68,9 @@ export class Person extends BaseModel{
     cascade: true,
     eager: true
   })
-  family: Family
+  familyHead: Family
+
+  @ManyToMany(() => Family, (a) => a.members)
+  @JoinTable({name: 'person_member'})
+  members: Family[]
 }
