@@ -66,6 +66,7 @@ export class Person extends BaseModel{
 
   @OneToOne(() => Family, (a) => a.headOfFamily, {
     cascade: true,
+    eager: true
   })
   family: Family
 }

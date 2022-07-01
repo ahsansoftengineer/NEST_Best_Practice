@@ -1,26 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateFamilyDto } from './dto/create-family.dto';
 import { UpdateFamilyDto } from './dto/update-family.dto';
+import { Family } from './entities/family.entity';
 
 @Injectable()
 export class FamilyService {
-  create(createFamilyDto: CreateFamilyDto) {
-    return 'This action adds a new family';
-  }
-
+  constructor(
+    @InjectRepository(Family)
+    private repo: Repository<Family>,
+  ) {}
   findAll() {
-    return `This action returns all family`;
+    return this.repo.find() || { message: `record does not exsist` };
   }
-
   findOne(id: number) {
-    return `This action returns a #${id} family`;
-  }
-
-  update(id: number, updateFamilyDto: UpdateFamilyDto) {
-    return `This action updates a #${id} family`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} family`;
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${data.id} does not exsist` };
+    });
   }
 }
