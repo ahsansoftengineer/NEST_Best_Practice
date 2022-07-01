@@ -11,11 +11,10 @@ export class Teacher extends Person {
   @JoinTable({name: 'teacher_student'})
   students: Student[]
 
-  @ManyToOne(() => Principal, {
-    // eager: true
-  })
-  @JoinColumn({
-    // name: 'principalId'
-  })
+  @ManyToOne(() => Principal, (o) => o.teachers)
+  // @JoinColumn({
+  //   name: 'principalId'
+
+  // })
   principal: Principal
 }

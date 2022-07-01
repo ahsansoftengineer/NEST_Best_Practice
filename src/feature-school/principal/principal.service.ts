@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Teacher } from 'feature-school/teacher/entities/teacher.entity';
 import { Repository } from 'typeorm';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
@@ -12,7 +13,8 @@ export class PrincipalService {
     private repo: Repository<Principal>
   ) {}
   findAll() {
-    return this.repo.find() ;
+    return this.addTeacherToPrincipal()
+    // return this.repo.find() ;
   }
   findOne(id: number) {
     return this.repo.findOneBy({ id }).then((data) => {
@@ -27,6 +29,14 @@ export class PrincipalService {
     let result: any = await this.findOne(id);
     if(result) result = await this.repo.update(id, data);
     return result || { message: `id ${id} does not exsist` };
+  }
+  addTeacherToPrincipal(){
+    return this.repo.createQueryBuilder('person')
+    
+    .andWhere('person.type = "Principal"')
+    .innerJoinAndSelect('person.teachers', 'teacher')
+    // .leftJoinAndSelect('person.person', 'Teacher')
+    .getMany();
   }
   remove(id: number) {
     // return this.repo.delete(id);

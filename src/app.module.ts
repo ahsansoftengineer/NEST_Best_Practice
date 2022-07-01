@@ -16,6 +16,10 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
       entities,
       synchronize: true,
       dropSchema: true,
+      // logger: 'advanced-console',
+      logging: true,
+      // subscribers: [],
+      // migrations: [],
     }),
     FeatureSchoolModule,
     // FeatureModule

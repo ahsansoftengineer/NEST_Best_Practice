@@ -58,6 +58,7 @@ export class Person extends BaseModel{
   
   @ManyToMany(() => Address, (a) => a.id, {
     cascade: true,
+    eager: true,
   })
   @JoinTable({name: 'person_address'})
   address: Address[]
