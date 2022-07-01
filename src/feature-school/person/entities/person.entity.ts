@@ -64,7 +64,7 @@ export class Person extends BaseModel{
   @JoinTable({name: 'person_address'})
   address: Address[]
 
-  @OneToOne(() => Family, (a) => a.headOfFamily, {
+  @OneToOne(() => Family, (a) => a.parent, {
     cascade: true,
     eager: true
   })

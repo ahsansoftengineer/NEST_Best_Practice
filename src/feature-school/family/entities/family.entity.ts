@@ -6,5 +6,5 @@ import { Person } from "feature-school/person/entities/person.entity";
 export class Family extends BaseModel{
   @OneToOne(() => Person, (a) => a.id)
   @JoinColumn()
-  headOfFamily: Person
+  parent: Person
 }
