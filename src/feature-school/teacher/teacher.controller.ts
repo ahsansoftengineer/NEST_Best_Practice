@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
-import { findAll } from 'core/ClousureClass';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('teacher')
 @Controller('teacher')
 export class TeacherController {
   constructor(private readonly _ss: TeacherService) {}

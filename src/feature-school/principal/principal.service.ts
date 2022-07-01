@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
+import { Principal } from './entities/principal.entity';
 
 @Injectable()
 export class PrincipalService {
-  create(createPrincipalDto: CreatePrincipalDto) {
-    return 'This action adds a new principal';
-  }
-
+  constructor(
+    @InjectRepository(Principal)
+    private repo: Repository<Principal>
+  ) {}
   findAll() {
-    return `This action returns all principal`;
+    return this.repo.find() ;
   }
-
   findOne(id: number) {
-    return `This action returns a #${id} principal`;
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${id} does not exsist` };
+    });
   }
-
-  update(id: number, updatePrincipalDto: UpdatePrincipalDto) {
-    return `This action updates a #${id} principal`;
+  create(data: CreatePrincipalDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-
+  async update(id: number, data: UpdatePrincipalDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
   remove(id: number) {
-    return `This action removes a #${id} principal`;
+    // return this.repo.delete(id);
+    return this.repo.delete({ id });
   }
 }
