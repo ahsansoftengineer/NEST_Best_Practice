@@ -55,7 +55,6 @@ export class Person extends BaseModel{
     default: 'no image set'
   })
   image: string
-
   
   @ManyToMany(() => Address, (a) => a.id, {
     cascade: true,

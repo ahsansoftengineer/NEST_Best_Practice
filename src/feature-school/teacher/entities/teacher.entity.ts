@@ -1,6 +1,21 @@
 import { Person } from "feature-school/person/entities/person.entity";
-import { ChildEntity } from "typeorm";
+import { Principal } from "feature-school/principal/entities/principal.entity";
+import { Student } from "feature-school/student/entities/student.entity";
+import { ChildEntity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 
 @ChildEntity()
 export class Teacher extends Person {
+  @ManyToMany(() => Student, (a) => a.id, {
+    cascade: true,
+  })
+  @JoinTable({name: 'teacher_student'})
+  students: Student[]
+
+  @ManyToOne(() => Principal, {
+    // eager: true
+  })
+  @JoinColumn({
+    // name: 'principalId'
+  })
+  principal: Principal
 }
