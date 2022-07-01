@@ -7,7 +7,7 @@ export class BaseModel extends BaseEntity{
   id: number
 
   @ApiProperty()
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: false, length: 40 })
   title: string
 
   @ApiProperty()

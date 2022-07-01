@@ -13,8 +13,8 @@ export class PrincipalService {
     private repo: Repository<Principal>
   ) {}
   findAll() {
-    return this.addTeacherToPrincipal()
-    // return this.repo.find() ;
+    // return this.addTeacherToPrincipal()
+    return this.repo.find() ;
   }
   findOne(id: number) {
     return this.repo.findOneBy({ id }).then((data) => {
@@ -32,7 +32,6 @@ export class PrincipalService {
   }
   addTeacherToPrincipal(){
     return this.repo.createQueryBuilder('person')
-    
     .andWhere('person.type = "Principal"')
     .innerJoinAndSelect('person.teachers', 'teacher')
     // .leftJoinAndSelect('person.person', 'Teacher')

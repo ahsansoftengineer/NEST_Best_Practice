@@ -18,19 +18,19 @@ export enum USERROLE{
 @Index(["title", "lastName"], {unique: true, })
 @Index(["title", "middleName", "lastName"], { unique: true })
 export class Person extends BaseModel{
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: false, length: 40 })
   middleName: string
 
-  @Column({ nullable: false, length: 20 })
+  @Column({ nullable: false, length: 40 })
   lastName: string
 
-  @Column({ length: 20, unique: true })
+  @Column({ length: 40, unique: true })
   email: string
   // @Index("username-idx")
-  @Column({ length: 20, unique: true })
+  @Column({ length: 40, unique: true })
   username: string
 
-  @Column({ length: 20 })
+  @Column({ length: 40 })
   password: string
 
   @Column({ 

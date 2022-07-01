@@ -1,34 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
 
 @Controller('school')
 export class SchoolController {
-  constructor(private readonly schoolService: SchoolService) {}
-
-  @Post()
-  create(@Body() createSchoolDto: CreateSchoolDto) {
-    return this.schoolService.create(createSchoolDto);
-  }
-
+  constructor(private readonly _ss: SchoolService) {}
   @Get()
-  findAll() {
-    return this.schoolService.findAll();
+  findAll(){
+    return this._ss.findAll();
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.schoolService.findOne(+id);
+    return this._ss.findOne(+id);
   }
-
+  @Post()
+  create(@Body() data: CreateSchoolDto) {
+    return this._ss.create(data);
+  }
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSchoolDto: UpdateSchoolDto) {
-    return this.schoolService.update(+id, updateSchoolDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateSchoolDto) {
+    return this._ss.update(id, data);
   }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.schoolService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this._ss.remove(+id);
+    
   }
 }

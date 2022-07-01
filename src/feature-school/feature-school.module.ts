@@ -20,7 +20,7 @@ import { LocationModule } from './location/location.module';
     // ClassRoomModule, 
     // SubjectModule, 
     AddressModule, 
-    // SchoolModule, 
+    SchoolModule, 
     PrincipalModule, 
     // FamilyModule, 
     // LocationModule
