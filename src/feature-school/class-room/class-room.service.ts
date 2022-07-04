@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateClassRoomDto } from './dto/create-class-room.dto';
 import { UpdateClassRoomDto } from './dto/update-class-room.dto';
+import { ClassRoom } from './entities/class-room.entity';
 
 @Injectable()
 export class ClassRoomService {
-  create(createClassRoomDto: CreateClassRoomDto) {
-    return 'This action adds a new classRoom';
-  }
-
+  constructor(
+    @InjectRepository(ClassRoom)
+    private repo: Repository<ClassRoom>,
+  ) {}
   findAll() {
-    return `This action returns all classRoom`;
+    return this.repo.find() || { message: `record does not exsist` };
   }
-
   findOne(id: number) {
-    return `This action returns a #${id} classRoom`;
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${id} does not exsist` };
+    });
   }
-
-  update(id: number, updateClassRoomDto: UpdateClassRoomDto) {
-    return `This action updates a #${id} classRoom`;
+  create(data: CreateClassRoomDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-
+  async update(id: number, data: UpdateClassRoomDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
   remove(id: number) {
-    return `This action removes a #${id} classRoom`;
+    // return this.repo.delete(id);
+    return this.repo.delete({ id });
   }
 }

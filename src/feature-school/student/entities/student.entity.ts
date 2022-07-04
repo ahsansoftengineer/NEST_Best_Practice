@@ -2,6 +2,7 @@ import { ChildEntity, JoinTable, ManyToMany } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";
 import { Teacher } from "feature-school/teacher/entities/teacher.entity";
+import { ClassRoom } from "feature-school/class-room/entities/class-room.entity";
 
 @ChildEntity()
 export class Student extends Person {
@@ -16,5 +17,8 @@ export class Student extends Person {
   })
   @JoinTable({name: 'teacher_student'})
   teachers: Teacher[]
-  // classes: ClassRoom
+
+  @ManyToMany(() => ClassRoom, (a) => a.id, )
+  @JoinTable({name: 'class_student'})
+  classes: ClassRoom[]
 }

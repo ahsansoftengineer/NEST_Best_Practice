@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
+import { Subject } from './entities/subject.entity';
 
 @Injectable()
 export class SubjectService {
-  create(createSubjectDto: CreateSubjectDto) {
-    return 'This action adds a new subject';
-  }
-
+  constructor(
+    @InjectRepository(Subject)
+    private repo: Repository<Subject>,
+  ) {}
   findAll() {
-    return `This action returns all subject`;
+    return this.repo.find() || { message: `record does not exsist` };
   }
-
   findOne(id: number) {
-    return `This action returns a #${id} subject`;
+    return this.repo.findOneBy({ id }).then((data) => {
+      return data || { message: `id ${id} does not exsist` };
+    });
   }
-
-  update(id: number, updateSubjectDto: UpdateSubjectDto) {
-    return `This action updates a #${id} subject`;
+  create(data: CreateSubjectDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-
+  async update(id: number, data: UpdateSubjectDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
   remove(id: number) {
-    return `This action removes a #${id} subject`;
+    // return this.repo.delete(id);
+    return this.repo.delete({ id });
   }
 }

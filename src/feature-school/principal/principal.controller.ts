@@ -3,7 +3,7 @@ import { PrincipalService } from './principal.service';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
-@ApiTags('teacher')
+@ApiTags('principal')
 @Controller('principal')
 export class PrincipalController {
   constructor(private readonly _ss: PrincipalService) {}

@@ -1,34 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ClassRoomService } from './class-room.service';
 import { CreateClassRoomDto } from './dto/create-class-room.dto';
 import { UpdateClassRoomDto } from './dto/update-class-room.dto';
 
-@Controller('class-room')
+@Controller('class')
+@ApiTags('class')
 export class ClassRoomController {
-  constructor(private readonly classRoomService: ClassRoomService) {}
-
-  @Post()
-  create(@Body() createClassRoomDto: CreateClassRoomDto) {
-    return this.classRoomService.create(createClassRoomDto);
-  }
-
+  constructor(private readonly _ss: ClassRoomService) {}
   @Get()
   findAll() {
-    return this.classRoomService.findAll();
+    return this._ss.findAll();
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.classRoomService.findOne(+id);
+    return this._ss.findOne(+id);
   }
-
+  @Post()
+  create(@Body() data: CreateClassRoomDto) {
+    console.log(data);    
+    return this._ss.create(data);
+  }
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClassRoomDto: UpdateClassRoomDto) {
-    return this.classRoomService.update(+id, updateClassRoomDto);
+  update(
+    @Param('id', ParseIntPipe) id: number, 
+    @Body() data: UpdateClassRoomDto
+  ) {
+    return this._ss.update(id, data);
   }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.classRoomService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this._ss.remove(+id);
   }
 }
