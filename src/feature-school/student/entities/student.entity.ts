@@ -18,7 +18,6 @@ export class Student extends Person {
   @JoinTable({name: 'teacher_student'})
   teachers: Teacher[]
 
-  @ManyToMany(() => ClassRoom, (a) => a.id, )
-  @JoinTable({name: 'class_student'})
-  classes: ClassRoom[]
+  @ManyToMany(() => ClassRoom, (a) => a.id )
+  class: ClassRoom[]
 }

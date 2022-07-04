@@ -20,12 +20,14 @@ export class ClassRoom extends BaseModel {
   @Column({ })
   dateTo: Date
 
-  @ManyToOne(() => Teacher, (a) => a.id)
-  @JoinColumn()
+  @ManyToOne(() => Teacher, (a) => a.id,{
+    eager: true
+  })
   teacher: Teacher
 
   @ManyToMany(() => Student, (a) => a.id, {
     cascade: true,
+    // eager: true,
   })
   @JoinTable({
     name: 'class_student', 
@@ -34,8 +36,7 @@ export class ClassRoom extends BaseModel {
   students: Student[]
 
   @ManyToOne(() => Subject, (a) => a.id, {
-    cascade: true,
+    eager: true,
   })
-  @JoinColumn()
   subject: Subject
 }

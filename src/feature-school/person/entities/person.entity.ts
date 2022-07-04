@@ -16,8 +16,8 @@ export enum USERROLE{
 }
 @Entity()
 @TableInheritance({ column: { type: "varchar", name: "type" } })
-@Index(["title", "lastName"], {unique: true, })
-@Index(["title", "middleName", "lastName"], { unique: true })
+// @Index(["title", "lastName"], {unique: true, })
+// @Index(["title", "middleName", "lastName"], { unique: true })
 export class Person extends BaseModel{
   @Column({ nullable: false, length: 40 })
   middleName: string
@@ -61,14 +61,14 @@ export class Person extends BaseModel{
     cascade: true,
     eager: true,
   })
-  @JoinTable({name: 'person_address'})
+  @JoinTable({name: 'person_address', joinColumns: [{name: 'addressId'}, {name: 'personId'}]})
   address: Address[]
 
-  @OneToOne(() => Family, (a) => a.parent, {
-    cascade: true,
-    eager: true
-  })
-  familyHead: Family
+  // @OneToOne(() => Family, (a) => a.parent, {
+  //   cascade: true,
+  //   eager: true
+  // })
+  // familyHead: Family
 
   @ManyToMany(() => Family, (a) => a.members)
   @JoinTable({name: 'person_member'})

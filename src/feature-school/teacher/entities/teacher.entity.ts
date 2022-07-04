@@ -1,3 +1,4 @@
+import { ClassRoom } from "feature-school/class-room/entities/class-room.entity";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Principal } from "feature-school/principal/entities/principal.entity";
 import { Student } from "feature-school/student/entities/student.entity";
@@ -17,4 +18,7 @@ export class Teacher extends Person {
 
   // })
   principal: Principal
+
+  @OneToMany(() => ClassRoom, (a) => a.id)
+  class: ClassRoom[]
 }
