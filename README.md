@@ -2,6 +2,8 @@
 ### Starting Appliication
 ```java
 npm i -g @nestjs/cli
+ npm i --location=global @nestjs/cli
+npm install -g pnpm // Fast installati
 nest new project-name
 ```
 ### Dependencies
@@ -10,7 +12,7 @@ npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt typeorm mysql2 bcrypt
 ```
 ### DevDependencies
 ```java
-npm i -D @types/bcrypt -D @types/passport-local @types/passport-jwt @types/express-session  webpack-node-externals run-script-webpack-plugin webpack
+npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  webpack-node-externals run-script-webpack-plugin webpack
 ```
 
 ### Hot Reloading
