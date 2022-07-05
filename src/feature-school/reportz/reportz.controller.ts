@@ -1,34 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ReportzService } from './reportz.service';
 import { CreateReportzDto } from './dto/create-reportz.dto';
 import { UpdateReportzDto } from './dto/update-reportz.dto';
+import { BaseController } from 'core/BaseController';
 
 @Controller('reportz')
-export class ReportzController {
-  constructor(private readonly reportzService: ReportzService) {}
-
+export class ReportzController extends BaseController {
+  constructor(readonly _ss: ReportzService) {
+    super()
+    // super._ss = this._ss
+  }
   @Post()
-  create(@Body() createReportzDto: CreateReportzDto) {
-    return this.reportzService.create(createReportzDto);
+  create(@Body() data: CreateReportzDto) {
+    console.log(data)
+    return this._ss.create(data);
   }
-
-  @Get()
-  findAll() {
-    return this.reportzService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reportzService.findOne(+id);
-  }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReportzDto: UpdateReportzDto) {
-    return this.reportzService.update(+id, updateReportzDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reportzService.remove(+id);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateReportzDto) {
+    return this._ss.update(id, data);
   }
 }
