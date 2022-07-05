@@ -3,8 +3,10 @@ import { ReportzService } from './reportz.service';
 import { CreateReportzDto } from './dto/create-reportz.dto';
 import { UpdateReportzDto } from './dto/update-reportz.dto';
 import { BaseController } from 'core/BaseController';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('reportz')
+@Controller('report')
+@ApiTags('report')
 export class ReportzController extends BaseController {
   constructor(readonly _ss: ReportzService) {
     super()

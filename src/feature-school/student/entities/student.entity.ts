@@ -1,4 +1,4 @@
-import { ChildEntity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { ChildEntity, Column, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";
 import { Teacher } from "feature-school/teacher/entities/teacher.entity";
@@ -23,9 +23,13 @@ export class Student extends Person {
   @ManyToMany(() => ClassRoom, (a) => a.id )
   class: ClassRoom[]
 
-  @ManyToOne(() => Reportz, (a) => a.id )
-  report: Reportz[]
+  @OneToMany(() => Reportz, (a) => a.student, {
+    eager:true
+  })
+  reportzs: Reportz[]
 
-  @ManyToOne(() => HomeWork, (a) => a.id )
-  homeWork: HomeWork[]
+  @OneToMany(() => HomeWork, (a) => a.student, {
+    eager:true
+  })
+  homeWorks: HomeWork[]
 }

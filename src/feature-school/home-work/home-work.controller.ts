@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { HomeWorkService } from './home-work.service';
 import { CreateHomeWorkDto } from './dto/create-home-work.dto';
 import { UpdateHomeWorkDto } from './dto/update-home-work.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('home-work')
+@Controller('home_work')
+@ApiTags('home_work')
 export class HomeWorkController {
   constructor(private readonly homeWorkService: HomeWorkService) {}
 

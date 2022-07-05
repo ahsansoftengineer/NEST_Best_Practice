@@ -13,10 +13,6 @@ export class Teacher extends Person {
   students: Student[]
 
   @ManyToOne(() => Principal, (o) => o.teachers)
-  // @JoinColumn({
-  //   name: 'principalId'
-
-  // })
   principal: Principal
 
   @OneToMany(() => ClassRoom, (a) => a.id)

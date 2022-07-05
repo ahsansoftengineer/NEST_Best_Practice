@@ -11,8 +11,8 @@ export class CreateReportzDto extends CreateDto {
 
   @ApiProperty({
     enum: Student,
-    example: [{title: 'Student Id', desc: "Report of the Student"}],
-    description:'Student Id is optional'
+    isArray: false,
+    example: [{id: 101}],
   })
   // @ValidateNested()
   // @Type(() => CreateStudentDto)

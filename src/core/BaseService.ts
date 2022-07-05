@@ -2,9 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { BaseModel } from './BaseModel';
 
-@Injectable()
 export class BaseService {
-  repo: Repository<BaseModel>
+  public repo: Repository<BaseModel>
   findAll() {
     console.log('Base Service findAllCalled');
     return this.repo.find() || { message: `record does not exsist` };

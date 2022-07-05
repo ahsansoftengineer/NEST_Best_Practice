@@ -1,11 +1,8 @@
-import { Controller, Get, Param, Delete, ParseIntPipe } from '@nestjs/common';
-import { Http2ServerResponse } from 'http2';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Get, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { BaseService } from './BaseService';
 
-@Controller('student')
-export class BaseController {
-  _ss: any
+export abstract class BaseController {
+  _ss: BaseService
   @Get()
   findAll() {
     return this._ss.findAll();
