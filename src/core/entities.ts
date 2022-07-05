@@ -9,6 +9,8 @@ import { School } from "feature-school/school/entities/school.entity";
 import { Family } from "feature-school/family/entities/family.entity";
 import { ClassRoom } from "feature-school/class-room/entities/class-room.entity";
 import { Subject } from "feature-school/subject/entities/subject.entity";
+import { HomeWork } from "feature-school/home-work/entities/home-work.entity";
+import { Reportz } from "feature-school/reportz/entities/reportz.entity";
 
 export const entities = [
   BaseModel,
@@ -21,5 +23,7 @@ export const entities = [
   School,
   Family,
   ClassRoom,
-  Subject
+  Subject,
+  HomeWork,
+  Reportz
 ];

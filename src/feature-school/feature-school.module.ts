@@ -9,7 +9,8 @@ import { AddressModule } from './address/address.module';
 import { SchoolModule } from './school/school.module';
 import { PrincipalModule } from './principal/principal.module';
 import { FamilyModule } from './family/family.module';
-import { LocationModule } from './location/location.module';
+import { HomeWorkModule } from './home-work/home-work.module';
+import { ReportzModule } from './reportz/reportz.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { LocationModule } from './location/location.module';
     SchoolModule, 
     PrincipalModule, 
     FamilyModule, 
-    // LocationModule
+    HomeWorkModule, 
+    ReportzModule, 
   ]
 })
 export class FeatureSchoolModule { }

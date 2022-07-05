@@ -61,7 +61,7 @@ export class Person extends BaseModel{
     cascade: true,
     eager: true,
   })
-  @JoinTable({name: 'person_address', joinColumns: [{name: 'addressId'}, {name: 'personId'}]})
+  @JoinTable({name: 'person_address'})
   address: Address[]
 
   // @OneToOne(() => Family, (a) => a.parent, {
