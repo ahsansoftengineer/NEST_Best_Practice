@@ -4,14 +4,14 @@ import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDat
 export class BaseModel extends BaseEntity{
   @ApiProperty()
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @ApiProperty()
-  @Column({ nullable: false, length: 40 })
-  title: string
+  @Column({ length: 40 })
+  title: string;
 
   @ApiProperty()
-  @Column({ length: 150 })
+  @Column({ nullable: true, length: 150, default: '' })
   desc: string
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
