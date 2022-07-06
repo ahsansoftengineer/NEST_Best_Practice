@@ -24,12 +24,12 @@ export class Student extends Person {
   class: ClassRoom[]
 
   @OneToMany(() => Reportz, (a) => a.student, {
-    eager:true
+    // eager:true
   })
   reportzs: Reportz[]
 
   @OneToMany(() => HomeWork, (a) => a.student, {
-    eager:true
+    // eager:true
   })
   homeWorks: HomeWork[]
 }

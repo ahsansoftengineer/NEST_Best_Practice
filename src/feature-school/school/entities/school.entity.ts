@@ -9,11 +9,17 @@ export class School extends BaseModel {
     cascade: true
   })
   principal: Principal
-
+  // @ApiProperty()
+  // @Column({ nullable: false })
+  // principalId!: Principal["id"];
+  
   @OneToOne(() => Address, {
     eager: true,
     cascade: true
   })
   @JoinColumn({name: 'addressId'})
   address: Address;
+  // @ApiProperty()
+  // @Column({ nullable: false })
+  // addressId!: Address["id"];
 }

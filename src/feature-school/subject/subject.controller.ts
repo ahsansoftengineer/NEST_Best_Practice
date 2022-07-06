@@ -3,18 +3,13 @@ import { SubjectService } from './subject.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { BaseController } from 'core/BaseController';
 
 @Controller('subject')
 @ApiTags('subject')
-export class SubjectController {
-  constructor(private readonly _ss: SubjectService) {}
-  @Get()
-  findAll() {
-    return this._ss.findAll();
-  }
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this._ss.findOne(+id);
+export class SubjectController extends BaseController {
+  constructor(public _ss: SubjectService) {
+    super()
   }
   @Post()
   create(@Body() data: CreateSubjectDto) {
@@ -23,9 +18,5 @@ export class SubjectController {
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateSubjectDto) {
     return this._ss.update(id, data);
-  }
-  @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this._ss.remove(+id);
   }
 }
