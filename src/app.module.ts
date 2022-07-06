@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'core/entities';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
-
+import * as cors from 'cors'
+// import * as helmet from ''
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -14,12 +15,15 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
       database: 'schoolmgmt',
       // This how you Registered your Model Classes
       entities,
+      logging: true,
+      // Other Settings
+      retryDelay: 10000,
+      retryAttempts: 2,
       // synchronize: true,
       // dropSchema: true,
       // logger: 'advanced-console',
-      logging: true,
-      // subscribers: [],
       // migrations: [],
+      // subscribers: [],
     }),
     FeatureSchoolModule,
     // FeatureModule
@@ -31,4 +35,9 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
   //   },
   // ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(cors())
+  }
+
+}

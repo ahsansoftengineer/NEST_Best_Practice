@@ -1,12 +1,19 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { LoggerMiddleware } from 'middleware/LoggerMiddleware';
 import { AppModule } from './app.module';
 
 declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.enableCors()
+  // app.useGlobalFilters()
+  // app.useGlobalGuards()
+  // app.useGlobalInterceptors()
+  // app.useLogger(false)
+
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true, // It is Working Only the Properties avalaible in DTO will go through
     // skipMissingProperties?: boolean;

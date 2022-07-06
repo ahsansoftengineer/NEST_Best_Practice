@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Person } from "feature-school/person/entities/person.entity";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Address{
@@ -16,5 +17,9 @@ export class Address{
   @IsOptional()
   @Column({ length: 150, default: '' })
   desc: string
+
+  // @ManyToMany(() => Person, (a) => a.address)
+  // @JoinTable({name: 'person_address'})
+  // person: Person[]
 
 }

@@ -58,7 +58,7 @@ export class Person extends BaseModel{
   image: string
   
   @ManyToMany(() => Address, (a) => a.id, {
-    cascade: true,
+    cascade: ['insert', 'update', 'remove'],
     eager: true,
   })
   @JoinTable({name: 'person_address'})
