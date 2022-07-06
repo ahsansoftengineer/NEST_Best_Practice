@@ -1,7 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
 export class BaseModel extends BaseEntity{
+  // For MongoDB
+  // @PrimaryGeneratedColumn("uuid")
+  // id: string;
+
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,9 +18,26 @@ export class BaseModel extends BaseEntity{
   @Column({ nullable: true, length: 150, default: '' })
   desc: string
 
-  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  @CreateDateColumn({ 
+    type: "timestamp", 
+    default: () => "CURRENT_TIMESTAMP(6)" 
+  })
   public createdAt: Date;
   
-  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({
+    type: "timestamp", 
+    default: () => "CURRENT_TIMESTAMP(6)", 
+    onUpdate: "CURRENT_TIMESTAMP(6)" })
   public updatedAt: Date;
+
+  // @DeleteDateColumn({ 
+  //   type: "timestamp", 
+  //   default: () => "CURRENT_TIMESTAMP(6)", 
+  //   onUpdate: "CURRENT_TIMESTAMP(6)" 
+  // })
+  // public deletedAt: Date;
+
+  // @VersionColumn()
+  // public version: Date;
+  
 }

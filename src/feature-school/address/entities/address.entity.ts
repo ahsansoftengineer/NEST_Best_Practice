@@ -4,6 +4,7 @@ import { Person } from "feature-school/person/entities/person.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
+// @Entity({ database: "secondDB" })
 export class Address{
   @ApiProperty()
   @PrimaryGeneratedColumn()

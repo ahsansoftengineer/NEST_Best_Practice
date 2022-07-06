@@ -15,7 +15,8 @@ import * as cors from 'cors'
       database: 'schoolmgmt',
       // This how you Registered your Model Classes
       entities,
-      logging: true,
+      // logging: true,
+      logging: ["query", "error"] /* true, 'all', new MyCustomLogger()*/,
       // Other Settings
       retryDelay: 10000,
       retryAttempts: 2,
