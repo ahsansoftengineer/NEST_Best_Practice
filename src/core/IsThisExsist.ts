@@ -10,10 +10,11 @@ import {
 export class IsThisExsistConstraint implements ValidatorConstraintInterface {
 
   validate(userName: any, args: ValidationArguments) {
-    return UserRepository.findOneByName(userName).then(user => {
-      if (user) return false;
-      return true;
-    });
+    return true
+    // return UserRepository.findOneByName(userName).then(user => {
+    //   if (user) return false;
+    //   return true;
+    // });
   }
 }
 
@@ -24,7 +25,7 @@ export function IsUserAlreadyExist(validationOptions?: ValidationOptions) {
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: IsUserAlreadyExistConstraint,
+      validator: IsThisExsistConstraint,
     });
   };
 }
