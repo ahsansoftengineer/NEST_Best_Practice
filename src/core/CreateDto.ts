@@ -3,6 +3,7 @@ import { IsNotEmpty, IsOptional, Length, MaxLength } from "class-validator";
 
 export class CreateDto  {
   @ApiProperty({
+    example: 'Most Specific Detail for This Table',
     description: 'This Title Property Means the Major Property of the Table'
   })
   @IsNotEmpty()
@@ -16,6 +17,7 @@ export class CreateDto  {
   title: string
 
   @ApiProperty({
+    example: 'Additional Info for this this row',
     description: 'Other usefull information'
   })
   @MaxLength(100,{

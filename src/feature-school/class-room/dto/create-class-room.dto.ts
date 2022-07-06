@@ -20,12 +20,12 @@ export class CreateClassRoomDto extends CreateDto {
 
   @ApiProperty()
   @Min(0)
-  @ValidatePromise()
+  // @ValidatePromise()
   teacherId: number
 
   @ApiProperty()
   @Min(0)
-  @ValidatePromise()
+  // @ValidatePromise()
   subjectId: number
 
   // @ApiProperty({

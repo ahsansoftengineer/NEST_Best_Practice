@@ -1,5 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePersonDto } from 'feature-school/person/dto/create-person.dto';
+import { PartialType } from '@nestjs/swagger';
 import { CreatePrincipalDto } from './create-principal.dto';
 
-export class UpdatePrincipalDto extends PartialType(CreatePersonDto) {}
+export class UpdatePrincipalDto extends PartialType(CreatePrincipalDto) {}

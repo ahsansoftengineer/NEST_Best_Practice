@@ -1,7 +1,7 @@
 import { PartialType } from "@nestjs/swagger";
-import { CreatePersonDto } from 'feature-school/person/dto/create-person.dto';
+import { CreateParentDto } from "./create-parent.dto";
 
-export class UpdateParentDto extends PartialType(CreatePersonDto) {
+export class UpdateParentDto extends PartialType(CreateParentDto) {
     // @IsNotEmpty()
   // @IsNumber()
   // id: number

@@ -15,7 +15,7 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
       // This how you Registered your Model Classes
       entities,
       synchronize: true,
-      // dropSchema: true,
+      dropSchema: true,
       // logger: 'advanced-console',
       logging: true,
       // subscribers: [],
