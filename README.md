@@ -1,18 +1,21 @@
 ## Basic Setup for NestJS
 ### Starting Appliication
-```java
+```shell
+npm config set timeout 6000000
 npm i -g @nestjs/cli
- npm i --location=global @nestjs/cli
-npm install -g pnpm // Fast installati
+npm i --location=global @nestjs/cli
+npm install -g pnpm // Fast installation
+npm cache clean --force
+rm package-lock.json
 nest new project-name
 ```
 ### Dependencies
 ```java
-npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt typeorm mysql2 bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension 
+npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt typeorm mysql2 bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi 
 ```
 ### DevDependencies
 ```java
-npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  webpack-node-externals run-script-webpack-plugin webpack
+npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi webpack-node-externals run-script-webpack-plugin webpack 
 ```
 
 ### Hot Reloading
