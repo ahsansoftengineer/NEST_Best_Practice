@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { getEntityManagerToken, InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'core/BaseService';
 import { Subject } from 'feature-school/subject/entities/subject.entity';
 import { Teacher } from 'feature-school/teacher/entities/teacher.entity';
@@ -12,12 +12,14 @@ import { ClassRoom } from './entities/class-room.entity';
 export class ClassRoomService extends BaseService {
   constructor(
     @InjectRepository(ClassRoom) public repo: Repository<ClassRoom>,
-    // @InjectRepository(Teacher) public  repoTecher: Repository<Teacher>,
+    @InjectRepository(Teacher) public  repoTecher: Repository<Teacher>,
     // @InjectRepository(Subject) public  repoSubject: Repository<Subject>,
   ) {super()}
   create(data: CreateClassRoomDto) {
-    // const teacher =  this.repoTecher.findOneBy({id: data.teacherId})
+    const teacher =  this.repoTecher.findOneBy({id: data.teacherId})
+    console.log(teacher)
     // const subj =  this.repoSubject.findOneBy({id: data.subjectId})
+    // getEntityManagerToken(Teacher)
 
     // if(!teacher) throw new NotFoundException({}, "Teacher Record Doesn\'t exsit")
     // if(!subj) throw new NotFoundException({}, "Subject Record Doesn\'t exsit")
