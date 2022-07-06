@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsDateString, IsNotEmpty, IsNumber, Length, Min, ValidatePromise} from "class-validator"
+import { IsDateString, IsNotEmpty, Length, Min } from "class-validator"
 import { CreateDto } from "core/CreateDto"
 
 export class CreateClassRoomDto extends CreateDto {

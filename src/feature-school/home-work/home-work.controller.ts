@@ -1,36 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { HomeWorkService } from './home-work.service';
 import { CreateHomeWorkDto } from './dto/create-home-work.dto';
 import { UpdateHomeWorkDto } from './dto/update-home-work.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { BaseController } from 'core/BaseController';
 
 @Controller('home_work')
 @ApiTags('home_work')
-export class HomeWorkController {
-  constructor(private readonly homeWorkService: HomeWorkService) {}
-
+export class HomeWorkController extends BaseController{
+  constructor(public _ss: HomeWorkService) {
+    super()
+  }
   @Post()
-  create(@Body() createHomeWorkDto: CreateHomeWorkDto) {
-    return this.homeWorkService.create(createHomeWorkDto);
+  create(@Body() data: CreateHomeWorkDto) {
+    return this._ss.create(data);
   }
-
-  @Get()
-  findAll() {
-    return this.homeWorkService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.homeWorkService.findOne(+id);
-  }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHomeWorkDto: UpdateHomeWorkDto) {
-    return this.homeWorkService.update(+id, updateHomeWorkDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.homeWorkService.remove(+id);
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateHomeWorkDto) {
+    return this._ss.update(id, data);
   }
 }

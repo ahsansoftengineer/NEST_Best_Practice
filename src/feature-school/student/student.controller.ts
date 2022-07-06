@@ -8,7 +8,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('student')
 @Controller('student')
 export class StudentController extends BaseController {
-  constructor(readonly _ss: StudentService) {
+  constructor(public _ss: StudentService) {
     super()
   }
   @Post()
