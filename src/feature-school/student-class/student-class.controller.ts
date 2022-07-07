@@ -6,7 +6,7 @@ import { BaseController } from 'core/BaseController';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('student-class')
-@ApiTags('student-class')
+@ApiTags('stud')
 export class StudentClassController {
   constructor(public _ss: StudentClassService) {
   }
