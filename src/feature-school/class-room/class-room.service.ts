@@ -16,17 +16,7 @@ export class ClassRoomService extends BaseService {
     // @InjectRepository(Subject) public  repoSubject: Repository<Subject>,
   ) {super()}
   create(data: CreateClassRoomDto) {
-    // const teacher =  this.repoTecher.findOneBy({id: data.teacherId})
-    // const subj =  this.repoSubject.findOneBy({id: data.subjectId})
-
-    // if(!teacher) throw new NotFoundException({}, "Teacher Record Doesn\'t exsit")
-    // if(!subj) throw new NotFoundException({}, "Subject Record Doesn\'t exsit")
-    const res1 = {...data, teacher: {id: data.teacherId}, subject:{id:  data.subjectId}}
-    console.log(res1);
-    delete res1.teacherId
-    delete res1.subjectId
-    console.log(res1);
-    const result = this.repo.create(res1);
+    const result = this.repo.create(data);
     return this.repo.save(result);
   }
   async update(id: number, data: UpdateClassRoomDto) {
