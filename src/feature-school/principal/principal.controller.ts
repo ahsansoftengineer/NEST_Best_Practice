@@ -26,7 +26,7 @@ export class PrincipalController extends BaseController{
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: 'uploads/principal/',
+        destination: 'public',
         filename: FileRenameInterceptor,
       }),
       fileFilter: FileImageTypeInterceptor,

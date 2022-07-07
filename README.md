@@ -11,7 +11,7 @@ nest new project-name
 ```
 ### Dependencies
 ```java
-npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler typeorm mysql2 bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf @nestjs/throttler
+npm i --save @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static typeorm mysql2 bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf 
 ```
 ### DevDependencies
 ```java

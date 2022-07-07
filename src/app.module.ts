@@ -5,11 +5,18 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
 import * as cors from 'cors'
 import { MulterModule } from '@nestjs/platform-express';
 import { MulterConfigService } from 'settings/MulterConfigService';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 // import * as helmet from ''
 @Module({
   imports: [
     MulterModule.register({
-      dest: './uploads'
+      dest: './public'
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'), // http://localhost:3000/mysql-107a1.png
+      // serveStaticOptions: {extensions: ['png', '.png']}
+
     }),
     // MulterModule.registerAsync({
     //   useFactory: () => ({
