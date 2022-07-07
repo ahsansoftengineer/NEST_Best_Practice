@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { StudentClassService } from './student-class.service';
 import { CreateStudentClassDto } from './dto/create-student-class.dto';
 import { UpdateStudentClassDto } from './dto/update-student-class.dto';
-import { BaseController } from 'core/BaseController';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('student-class')

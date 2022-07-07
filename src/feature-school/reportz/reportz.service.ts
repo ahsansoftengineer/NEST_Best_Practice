@@ -7,14 +7,17 @@ import { UpdateReportzDto } from './dto/update-reportz.dto';
 import { Reportz } from './entities/reportz.entity';
 
 @Injectable()
-export class ReportzService extends BaseService{
-  constructor(@InjectRepository(Reportz) public repo: Repository<Reportz>) {
+export class ReportzService extends BaseService {
+  constructor( @InjectRepository(Reportz) public repo: Repository<Reportz>){
     super()
   }
-  create(createReportzDto: CreateReportzDto) {
-    return 'This action adds a new reportz';
+  create(data: CreateReportzDto) {
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-  update(id: number, updateReportzDto: UpdateReportzDto) {
-    return `This action updates a #${id} reportz`;
+  async update(id: number, data: UpdateReportzDto) {
+    let result: any = await this.findOne(id);
+    if(result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
   }
 }

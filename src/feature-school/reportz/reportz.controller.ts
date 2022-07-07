@@ -7,18 +7,18 @@ import { ApiTags } from '@nestjs/swagger';
 
 @Controller('report')
 @ApiTags('report')
-export class ReportzController extends BaseController {
-  constructor(readonly _ss: ReportzService) {
+export class ReportzController extends BaseController{
+  constructor(public _ss: ReportzService) {
     super()
-    // super._ss = this._ss
   }
   @Post()
   create(@Body() data: CreateReportzDto) {
-    console.log(data)
     return this._ss.create(data);
   }
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateReportzDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number, 
+    @Body() data: UpdateReportzDto) {
     return this._ss.update(id, data);
   }
 }

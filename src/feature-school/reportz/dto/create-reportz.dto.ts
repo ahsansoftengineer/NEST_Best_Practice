@@ -10,20 +10,9 @@ export class CreateReportzDto extends CreateDto {
   teacherComments: string
 
   @ApiProperty({
-    enum: Student,
-    isArray: false,
-    example: [{id: 101}],
-  })
-  // @ValidateNested()
-  // @Type(() => CreateStudentDto)
-  student?: Student
-
-  @ApiProperty({
     description:"Student Entity Id"
   })
   @IsNotEmpty()
-  @Min(1)
+  @Min(0)
   studentId: number
-
-
 }
