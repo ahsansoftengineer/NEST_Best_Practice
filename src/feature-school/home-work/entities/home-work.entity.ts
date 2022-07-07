@@ -11,7 +11,7 @@ export class HomeWork extends BaseModel {
   homeWorkContent: string
 
   @ApiProperty()
-  @OneToMany(() => Student, (a) => a.homeWorks )
+  @ManyToOne(() => Student, (a) => a.homeWorks )
   student: Student
 
   @ApiProperty()

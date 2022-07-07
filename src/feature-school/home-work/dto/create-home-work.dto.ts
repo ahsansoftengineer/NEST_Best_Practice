@@ -11,15 +11,7 @@ export class CreateHomeWorkDto extends CreateDto {
   homeWorkContent: string
 
   @ApiProperty({
-    enum: Student,
-    isArray: false,
-    example: [{id: '101'}],
-  })
-  // @ValidateNested()
-  // @Type(() => CreateAddressDto)
-  student?: Student
-
-  @ApiProperty({
+    example: 1,
     description:"Student Entity Id"
   })
   @IsNotEmpty()

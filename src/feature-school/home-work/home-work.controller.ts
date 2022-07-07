@@ -5,8 +5,8 @@ import { UpdateHomeWorkDto } from './dto/update-home-work.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/BaseController';
 
-@Controller('home_work')
-@ApiTags('home_work')
+@Controller('home-work')
+@ApiTags('home-work')
 export class HomeWorkController extends BaseController{
   constructor(public _ss: HomeWorkService) {
     super()
