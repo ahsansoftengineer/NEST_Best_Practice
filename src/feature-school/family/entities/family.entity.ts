@@ -1,8 +1,9 @@
 import { BaseModel } from "core/BaseModel";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";
 import { ApiProperty } from "@nestjs/swagger";
+import { FamilyMember } from "feature-school/family-member/entities/family-member.entity";
 
 @Entity()
 export class Family extends BaseModel{
@@ -13,5 +14,8 @@ export class Family extends BaseModel{
   @ApiProperty()
   @Column({nullable: true})
   parentId: number;
+
+  @OneToMany(() => FamilyMember, (a) => a.family)
+  familyMember: FamilyMember
   // id, parentId, title=Family Name
 }

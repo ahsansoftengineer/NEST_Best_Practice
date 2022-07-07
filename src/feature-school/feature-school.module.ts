@@ -12,6 +12,7 @@ import { FamilyModule } from './family/family.module';
 import { HomeWorkModule } from './home-work/home-work.module';
 import { ReportzModule } from './reportz/reportz.module';
 import { StudentClassModule } from './student-class/student-class.module';
+import { FamilyMemberModule } from './family-member/family-member.module';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { StudentClassModule } from './student-class/student-class.module';
     PrincipalModule, 
     FamilyModule, 
     HomeWorkModule, 
-    ReportzModule, StudentClassModule, 
+    ReportzModule, StudentClassModule, FamilyMemberModule, 
   ]
 })
 export class FeatureSchoolModule { }

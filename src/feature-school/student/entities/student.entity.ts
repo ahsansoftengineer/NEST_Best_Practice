@@ -6,6 +6,7 @@ import { ClassRoom } from "feature-school/class-room/entities/class-room.entity"
 import { Reportz } from "feature-school/reportz/entities/reportz.entity";
 import { HomeWork } from "feature-school/home-work/entities/home-work.entity";
 import { StudentClass } from "feature-school/student-class/entities/student-class.entity";
+import { FamilyMember } from "feature-school/family-member/entities/family-member.entity";
 
 @ChildEntity()
 export class Student extends Person {
@@ -27,4 +28,7 @@ export class Student extends Person {
     eager:true
   })
   homeWorks: HomeWork[]
+
+  @OneToMany(() => FamilyMember, (a) => a.student)
+  familyMember: FamilyMember
 }
