@@ -2,8 +2,9 @@ import { BaseModel } from "core/BaseModel";
 import { Family } from "feature-school/family/entities/family.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";
 import { Student } from "feature-school/student/entities/student.entity";
-import { Column, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 
+@Entity()
 export class FamilyMember extends BaseModel {
   // title = parent_or_family_member
   @ManyToOne(() => Student, (a) => a.familyMember, {

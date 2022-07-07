@@ -27,7 +27,9 @@ import { FamilyMemberModule } from './family-member/family-member.module';
     PrincipalModule, 
     FamilyModule, 
     HomeWorkModule, 
-    ReportzModule, StudentClassModule, FamilyMemberModule, 
+    ReportzModule, 
+    StudentClassModule, 
+    FamilyMemberModule, 
   ]
 })
 export class FeatureSchoolModule { }
