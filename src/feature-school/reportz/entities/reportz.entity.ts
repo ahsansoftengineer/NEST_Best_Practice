@@ -11,11 +11,9 @@ export class Reportz extends BaseModel {
   @Column({ nullable: false, length: 200 })
   teacherComments: string
   
-  @ApiProperty()
-  @ManyToOne(() => Student, (a) => a.homeWorks )
+  @ManyToOne(() => Student, (a) => a.reportz )
   student: Student
 
-  @ApiProperty()
   @Column({nullable: true})
   studentId: number;
 }

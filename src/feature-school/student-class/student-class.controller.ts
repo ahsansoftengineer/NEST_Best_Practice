@@ -5,7 +5,7 @@ import { UpdateStudentClassDto } from './dto/update-student-class.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('student-class')
-@ApiTags('stud')
+@ApiTags('student-class')
 export class StudentClassController {
   constructor(public _ss: StudentClassService) {
   }

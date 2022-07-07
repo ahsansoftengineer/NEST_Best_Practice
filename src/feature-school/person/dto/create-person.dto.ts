@@ -14,7 +14,7 @@ import {
 import { CreateDto } from 'core/CreateDto';
 import { CreateAddressDto } from 'feature-school/address/dto/create-address.dto';
 import { Address } from 'feature-school/address/entities/address.entity';
-import { GENDER, USERROLE } from '../entities/person.entity';
+import { GENDER } from '../entities/person.entity';
 
 // enum ContactPreference{
 //   EMAIL = 'email',
@@ -33,7 +33,7 @@ export class CreatePersonDto extends CreateDto {
 
   @ApiProperty()
   @Length(3, 20)
-  @IsOptional()
+  @IsNotEmpty()
   lastName: string
 
   @ApiProperty()
@@ -79,14 +79,6 @@ export class CreatePersonDto extends CreateDto {
   @IsDateString()
   @IsOptional()
   dateOfBirth: string
-
-  @ApiProperty({
-    enum: USERROLE,
-    example: USERROLE.ADMIN,
-  })
-  @IsNotEmpty()
-  @IsEnum(USERROLE)
-  role: USERROLE
 
   @ApiProperty({
     enum: Address,

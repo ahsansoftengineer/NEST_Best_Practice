@@ -7,7 +7,7 @@ export enum GENDER{
   MALE = 'male',
   FEMALE = 'female'
 }
-export enum USERROLE{
+export enum PERSON_TYPE{
   ADMIN = 'Admin',
   PRINCIPAL = 'Principal',
   TEACHER = 'Teacher',
@@ -19,16 +19,29 @@ export enum USERROLE{
 // @Index(["title", "lastName"], {unique: true, })
 // @Index(["title", "middleName", "lastName"], { unique: true })
 export class Person extends BaseModel{
-  @Column({ nullable: false, length: 40 })
+  @Column({
+    type: "enum",
+    enum: PERSON_TYPE,
+    nullable: true,
+  })
+  type: PERSON_TYPE
+
+  @Column({ nullable: true, length: 40 })
   middleName: string
 
   @Column({ nullable: false, length: 40 })
   lastName: string
 
-  @Column({ length: 40, unique: true })
+  @Column({ 
+    length: 40, 
+    // unique: true 
+  })
   email: string
   // @Index("username-idx")
-  @Column({ length: 40, unique: true })
+  @Column({ 
+    length: 40, 
+    // unique: true 
+  })
   username: string
 
   @Column({ length: 40 })
@@ -45,12 +58,7 @@ export class Person extends BaseModel{
   @Column("date")
   dateOfBirth: string
 
-  @Column({
-    type: "enum",
-    enum: USERROLE,
-    default: USERROLE.STUDENT,
-  })
-  role: USERROLE
+
 
   @Column({
     default: 'no image set'

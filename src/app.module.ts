@@ -22,6 +22,7 @@ import * as cors from 'cors'
       retryAttempts: 2,
       // synchronize: true, 
       // dropSchema: true,
+
       // logger: 'advanced-console',
       // migrations: [],
       // subscribers: [],

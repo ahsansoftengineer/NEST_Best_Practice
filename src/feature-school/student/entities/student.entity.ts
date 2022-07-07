@@ -9,13 +9,11 @@ import { StudentClass } from "feature-school/student-class/entities/student-clas
 
 @ChildEntity()
 export class Student extends Person {
+  // Teacher Relation Ship with Student Via Class
+
   // @ManyToMany(() => Parent, (a) => a.students)
   // @JoinTable({name: 'parent_student'})
   // parents: Parent[]
-  
-  @ManyToMany(() => Teacher, (a) => a.students)
-  @JoinTable({name: 'teacher_student'})
-  teachers: Teacher[]
 
   @OneToMany(() => StudentClass, (a) => a.student )
   studentClass: StudentClass[]
@@ -23,7 +21,7 @@ export class Student extends Person {
   @OneToMany(() => Reportz, (a) => a.student, {
     eager:true
   })
-  reportzs: Reportz[]
+  reportz: Reportz[]
 
   @OneToMany(() => HomeWork, (a) => a.student, {
     eager:true
