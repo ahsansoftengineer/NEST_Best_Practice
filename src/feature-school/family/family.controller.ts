@@ -13,13 +13,12 @@ export class FamilyController  extends BaseController {
   }
   @Post()
   create(@Body() data: CreateFamilyDto) {
-    console.log('in')
-    return this._ss.create(data);
+    return this._ss.createSimple(data);
   }
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() data: UpdateFamilyDto) {
-    return this._ss.update(id, data);
+    return this._ss.updateSimple(id, data);
   }
 }
