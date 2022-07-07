@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { StudentClassService } from './student-class.service';
 import { CreateStudentClassDto } from './dto/create-student-class.dto';
 import { UpdateStudentClassDto } from './dto/update-student-class.dto';
+import { BaseController } from 'core/BaseController';
 
 @Controller('student-class')
 export class StudentClassController {
-  constructor(private readonly studentClassService: StudentClassService) {}
-
-  @Post()
-  create(@Body() createStudentClassDto: CreateStudentClassDto) {
-    return this.studentClassService.create(createStudentClassDto);
+  constructor(public _ss: StudentClassService) {
   }
-
   @Get()
   findAll() {
-    return this.studentClassService.findAll();
+    return this._ss.findAll();
+  }
+  @Get(':dateFrom')
+  findOne(@Param('dateFrom', ParseIntPipe) dateFrom: Date) {
+    return this._ss.findOne(dateFrom);
+  }
+  @Delete(':dateFrom')
+  remove(@Param('dateFrom') dateFrom: Date) {
+    return this._ss.remove(dateFrom);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.studentClassService.findOne(+id);
+  @Post()
+  create(@Body() data: CreateStudentClassDto) {
+    // const rec:any = await this._ss. 
+    return this._ss.create(data);
+  }
+  @Patch(':dateFrom')
+  update(
+    @Param('dateFrom', ParseIntPipe) dateFrom: Date, 
+    @Body() data: UpdateStudentClassDto
+  ) {
+    return this._ss.update(dateFrom, data);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStudentClassDto: UpdateStudentClassDto) {
-    return this.studentClassService.update(+id, updateStudentClassDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.studentClassService.remove(+id);
-  }
 }
