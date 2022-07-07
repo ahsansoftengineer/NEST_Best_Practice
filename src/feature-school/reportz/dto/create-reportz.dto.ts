@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, Length } from "class-validator"
+import { IsNotEmpty, Length, Min } from "class-validator"
 import { CreateDto } from "core/CreateDto"
 import { Student } from "feature-school/student/entities/student.entity"
 
@@ -17,5 +17,13 @@ export class CreateReportzDto extends CreateDto {
   // @ValidateNested()
   // @Type(() => CreateStudentDto)
   student?: Student
+
+  @ApiProperty({
+    description:"Student Entity Id"
+  })
+  @IsNotEmpty()
+  @Min(1)
+  studentId: number
+
 
 }

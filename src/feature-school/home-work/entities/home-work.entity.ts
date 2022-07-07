@@ -13,4 +13,8 @@ export class HomeWork extends BaseModel {
   @ApiProperty()
   @OneToMany(() => Student, (a) => a.homeWorks )
   student: Student
+
+  @ApiProperty()
+  @Column({nullable: true})
+  studentId: number;
 }

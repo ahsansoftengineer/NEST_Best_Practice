@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { BaseModel } from "core/BaseModel"
 import { Student } from "feature-school/student/entities/student.entity"
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
+import { Column, Entity, OneToMany } from "typeorm"
 
 @Entity()
 export class Reportz extends BaseModel {
@@ -13,4 +13,7 @@ export class Reportz extends BaseModel {
 
   @OneToMany(() => Student, (a) => a.reportzs )
   student: Student
+
+  @Column({nullable: true})
+  studentId: number;
 }

@@ -20,7 +20,7 @@ import * as cors from 'cors'
       // Other Settings
       retryDelay: 10000,
       retryAttempts: 2,
-      // synchronize: true,
+      // synchronize: true, 
       // dropSchema: true,
       // logger: 'advanced-console',
       // migrations: [],
