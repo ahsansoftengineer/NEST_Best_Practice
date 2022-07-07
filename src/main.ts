@@ -9,8 +9,11 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.enableCors()
-  app.use(csurf())
+  app.enableCors({
+    allowedHeaders:"*",
+    origin: "*"
+  })
+  // app.use(csurf())
   // app.useGlobalFilters()
   // app.useGlobalGuards()
   // app.useGlobalInterceptors()

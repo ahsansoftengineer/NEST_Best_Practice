@@ -9,6 +9,8 @@ import {
   IsNotEmpty,
   IsOptional,
   Length,
+  Max,
+  MaxLength,
   ValidateNested,
 } from 'class-validator';
 import { CreateDto } from 'core/CreateDto';
@@ -88,6 +90,13 @@ export class CreatePersonDto extends CreateDto {
   @ValidateNested()
   @Type(() => CreateAddressDto)
   address?: Address[]
+
+  @ApiProperty({
+    example: '1992-07-04'
+  })
+  @IsOptional()
+  @MaxLength(100)
+  image: string
   // @IsArray()
   // @ValidateIf(x => x.address)
 

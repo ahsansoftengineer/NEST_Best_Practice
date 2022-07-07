@@ -3,9 +3,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from 'core/entities';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
 import * as cors from 'cors'
+import { MulterModule } from '@nestjs/platform-express';
+import { MulterConfigService } from 'settings/MulterConfigService';
 // import * as helmet from ''
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './uploads'
+    }),
+    // MulterModule.registerAsync({
+    //   useFactory: () => ({
+    //     dest: './uploads',
+    //   }),
+    // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

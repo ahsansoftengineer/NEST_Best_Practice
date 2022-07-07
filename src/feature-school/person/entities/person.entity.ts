@@ -58,10 +58,9 @@ export class Person extends BaseModel{
   @Column("date")
   dateOfBirth: string
 
-
-
   @Column({
-    default: 'no image set'
+    default: 'no image set',
+    length: 100
   })
   image: string
   
