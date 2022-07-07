@@ -2,8 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/BaseController';
 import { ClassRoomService } from './class-room.service';
-import { CreateClassRoomDto } from './dto/create-class-room.dto';
-import { UpdateClassRoomDto } from './dto/update-class-room.dto';
+import { CreateClassRoomDto, UpdateClassRoomDto } from './dto/create-class-room.dto';
 
 @Controller('class')
 @ApiTags('class')
@@ -23,4 +22,5 @@ export class ClassRoomController extends BaseController {
   ) {
     return this._ss.update(id, data);
   }
+
 }

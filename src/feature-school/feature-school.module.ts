@@ -11,6 +11,7 @@ import { PrincipalModule } from './principal/principal.module';
 import { FamilyModule } from './family/family.module';
 import { HomeWorkModule } from './home-work/home-work.module';
 import { ReportzModule } from './reportz/reportz.module';
+import { StudentClassModule } from './student-class/student-class.module';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ReportzModule } from './reportz/reportz.module';
     PrincipalModule, 
     FamilyModule, 
     HomeWorkModule, 
-    ReportzModule, 
+    ReportzModule, StudentClassModule, 
   ]
 })
 export class FeatureSchoolModule { }

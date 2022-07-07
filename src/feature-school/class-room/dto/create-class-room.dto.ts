@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty, PartialType } from "@nestjs/swagger"
 import { IsDateString, IsNotEmpty, Length, Min } from "class-validator"
 import { CreateDto } from "core/CreateDto"
 
@@ -20,13 +20,14 @@ export class CreateClassRoomDto extends CreateDto {
 
   @ApiProperty()
   @Min(0)
-  // @ValidatePromise()
   teacherId: number
 
   @ApiProperty()
   @Min(0)
-  // @ValidatePromise()
   subjectId: number
+}
+export class UpdateClassRoomDto extends PartialType(CreateClassRoomDto) {}
+
 
   // @ApiProperty({
   //   enum: CustomObjectType,
@@ -46,6 +47,7 @@ export class CreateClassRoomDto extends CreateDto {
   // @ValidateNested()
   // @Type(() => CustomObjectType)
   // subject: Subject
+
   // @ApiProperty({
   //   enum: CustomObjectType,
   //   example: [{id: 1}, {id: 2}],
@@ -55,5 +57,3 @@ export class CreateClassRoomDto extends CreateDto {
   // @Type(() => CustomObjectType)
   // students: Student[]
 
-
-}
