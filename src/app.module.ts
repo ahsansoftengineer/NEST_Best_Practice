@@ -28,6 +28,12 @@ import * as cors from 'cors'
       // subscribers: [],
     }),
     FeatureSchoolModule,
+    // GraphQLModule.forRoot({
+    //   cors: {
+    //     origin: 'http://localhost:3000',
+    //     credentials: true,
+    //   },
+    // }),
     // FeatureModule
   ],
   // providers: [
