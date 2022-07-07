@@ -70,7 +70,7 @@ export class Person extends BaseModel{
   // })
   // familyHead: Family
 
-  @ManyToMany(() => Family, (a) => a.members)
-  @JoinTable({name: 'person_member'})
-  members: Family[]
+  // @ManyToMany(() => Family, (a) => a.members)
+  // @JoinTable({name: 'person_member'})
+  // members: Family[]
 }

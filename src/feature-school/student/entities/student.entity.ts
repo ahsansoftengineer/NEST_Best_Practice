@@ -9,9 +9,9 @@ import { StudentClass } from "feature-school/student-class/entities/student-clas
 
 @ChildEntity()
 export class Student extends Person {
-  @ManyToMany(() => Parent, (a) => a.students)
-  @JoinTable({name: 'parent_student'})
-  parents: Parent[]
+  // @ManyToMany(() => Parent, (a) => a.students)
+  // @JoinTable({name: 'parent_student'})
+  // parents: Parent[]
   
   @ManyToMany(() => Teacher, (a) => a.students)
   @JoinTable({name: 'teacher_student'})

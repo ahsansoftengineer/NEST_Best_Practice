@@ -1,14 +1,17 @@
 import { BaseModel } from "core/BaseModel";
-import { Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
+import { Parent } from "feature-school/parent/entities/parent.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Family extends BaseModel{
-  @OneToOne(() => Person, (a) => a.id)
-  @JoinColumn()
-  parent: Person
+  @OneToOne(() => Parent, (a) => a.headOfFamily, {eager: true})
+  @JoinColumn({name: 'parentId'})
+  parent: Parent
 
-  @ManyToMany(() => Person, (a) => a.members)
-  // @JoinTable({name: 'person_member'})
-  members: Person
+  @ApiProperty()
+  @Column({nullable: true})
+  parentId: number;
+  // id, parentId, title=Family Name
 }
