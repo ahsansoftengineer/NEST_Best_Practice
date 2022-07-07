@@ -39,7 +39,7 @@ export class ClassRoom extends BaseModel {
 
   @ApiProperty()
   @OneToMany(() => StudentClass, (a) => a.classRoom,{
-    // eager: true
+    eager: true
   })
   studentClass: StudentClass[]
 }

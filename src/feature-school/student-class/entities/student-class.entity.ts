@@ -13,16 +13,14 @@ export class StudentClass {
   @Column({ })
   dateTo: Date
   
-  @ManyToOne(() => ClassRoom, (a) => a.studentClass,{
-    eager: true
-  })
+  @ManyToOne(() => ClassRoom, (a) => a.studentClass)
   classRoom: ClassRoom
 
   @ApiProperty()
   @Column({ nullable: true})
   classRoomId: number
   
-  @ManyToOne(() => Student, (a) => a.class, {
+  @ManyToOne(() => Student, (a) => a.studentClass, {
     eager: true,
   })
   student: Student

@@ -17,14 +17,14 @@ import { LoggerMiddleware } from 'middleware/LoggerMiddleware';
 })
 export class StudentModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      // .forRoutes({path: 'student', method: RequestMethod.GET} )
-      .exclude(
-        {path: 'student', method: RequestMethod.GET}, 
-        {path: 'student', method: RequestMethod.POST}
-      )
-      .forRoutes(StudentController)
+    // consumer
+    //   .apply(LoggerMiddleware)
+    //   // .forRoutes({path: 'student', method: RequestMethod.GET} )
+    //   .exclude(
+    //     {path: 'student', method: RequestMethod.GET}, 
+    //     {path: 'student', method: RequestMethod.POST}
+    //   )
+    //   .forRoutes(StudentController)
   }
 
 }

@@ -5,23 +5,20 @@ import { Teacher } from "feature-school/teacher/entities/teacher.entity";
 import { ClassRoom } from "feature-school/class-room/entities/class-room.entity";
 import { Reportz } from "feature-school/reportz/entities/reportz.entity";
 import { HomeWork } from "feature-school/home-work/entities/home-work.entity";
+import { StudentClass } from "feature-school/student-class/entities/student-class.entity";
 
 @ChildEntity()
 export class Student extends Person {
-  @ManyToMany(() => Parent, (a) => a.id, {
-    cascade: true,
-  })
+  @ManyToMany(() => Parent, (a) => a.students)
   @JoinTable({name: 'parent_student'})
   parents: Parent[]
   
-  @ManyToMany(() => Parent, (a) => a.id, {
-    cascade: true,
-  })
+  @ManyToMany(() => Teacher, (a) => a.students)
   @JoinTable({name: 'teacher_student'})
   teachers: Teacher[]
 
-  @ManyToMany(() => ClassRoom, (a) => a.id )
-  class: ClassRoom[]
+  @OneToMany(() => StudentClass, (a) => a.student )
+  studentClass: StudentClass[]
 
   @OneToMany(() => Reportz, (a) => a.student, {
     // eager:true
