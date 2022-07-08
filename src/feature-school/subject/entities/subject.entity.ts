@@ -1,4 +1,4 @@
-import { BaseModel } from "core/BaseModel";
+import { BaseModel } from "core";
 import { ClassRoom } from "feature-school/class-room/entities/class-room.entity";
 import { Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 

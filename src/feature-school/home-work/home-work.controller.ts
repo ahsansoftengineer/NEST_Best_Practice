@@ -3,7 +3,8 @@ import { HomeWorkService } from './home-work.service';
 import { CreateHomeWorkDto } from './dto/create-home-work.dto';
 import { UpdateHomeWorkDto } from './dto/update-home-work.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core/BaseController';
+import { BaseController } from "core";
+
 
 @Controller('home-work')
 @ApiTags('home-work')

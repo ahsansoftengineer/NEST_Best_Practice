@@ -1,5 +1,5 @@
 import { Principal } from "feature-school/principal/entities/principal.entity";
-import { BaseModel } from "core/BaseModel";
+import { BaseModel } from "core";
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import { Address } from "feature-school/address/entities/address.entity";
 import { ApiProperty } from "@nestjs/swagger";

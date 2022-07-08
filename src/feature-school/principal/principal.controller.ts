@@ -3,7 +3,8 @@ import { PrincipalService } from './principal.service';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core/BaseController';
+import { BaseController } from "core";
+
 import { unlink } from 'fs/promises';
 import { FileUploadInterceptor } from 'interceptor/file-upload.interceptor';
 @ApiTags('principal')

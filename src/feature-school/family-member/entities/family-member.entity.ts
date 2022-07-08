@@ -1,4 +1,4 @@
-import { BaseModel } from "core/BaseModel";
+import { BaseModel } from "core";
 import { Family } from "feature-school/family/entities/family.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";
 import { Student } from "feature-school/student/entities/student.entity";

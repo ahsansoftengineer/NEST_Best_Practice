@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { encodePassword } from 'utils/bcrypt';
+import { encodePassword } from 'utils';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';

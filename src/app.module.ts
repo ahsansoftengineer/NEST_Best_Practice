@@ -2,9 +2,10 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
 import { MulterModule } from '@nestjs/platform-express';
-import { TypeORMConfiguration } from 'config/TypeORMConfiguration';
-import { ServerStaticModuleConfig } from 'config/ServerStaticModuleConfig';
-// import { AuthModule } from 'auth/auth.module';
+import { AuthModule } from 'auth/auth.module';
+import { AppController } from 'app.controller';
+import { AppService } from 'app.service';
+import { ServerStaticModuleConfig, TypeORMConfiguration } from 'config';
 // import * as helmet from ''
 @Module({
   imports: [
@@ -19,8 +20,10 @@ import { ServerStaticModuleConfig } from 'config/ServerStaticModuleConfig';
     ServerStaticModuleConfig,
     TypeORMConfiguration,
     FeatureSchoolModule,
-    // AuthModule
+    AuthModule
   ],
+  controllers: [AppController],
+  providers: [AppService]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

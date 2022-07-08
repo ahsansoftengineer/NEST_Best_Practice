@@ -3,7 +3,8 @@ import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core/BaseController';
+import { BaseController } from "core";
+
 
 @Controller('school')
 @ApiTags('school')

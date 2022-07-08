@@ -3,7 +3,8 @@ import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core/BaseController';
+import { BaseController } from "core";
+
 
 @ApiTags('teacher')
 @Controller('teacher')

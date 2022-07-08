@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { ReportzService } from './reportz.service';
 import { CreateReportzDto } from './dto/create-reportz.dto';
 import { UpdateReportzDto } from './dto/update-reportz.dto';
-import { BaseController } from 'core/BaseController';
+import { BaseController } from "core";
+
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('report')

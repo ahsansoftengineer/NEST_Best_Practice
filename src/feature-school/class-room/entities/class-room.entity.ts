@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseModel } from "core/BaseModel";
+import { BaseModel } from "core";
 import { StudentClass } from "feature-school/student-class/entities/student-class.entity";
 import { Subject } from "feature-school/subject/entities/subject.entity";
 import { Teacher } from "feature-school/teacher/entities/teacher.entity";
