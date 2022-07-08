@@ -1,5 +1,6 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { extname } from 'path';
+import { argv } from 'process';
 import { Observable } from 'rxjs';
 
 // @Injectable()
@@ -16,8 +17,8 @@ import { Observable } from 'rxjs';
 //     return next.handle();
 //   }
 // }
-export const FileRenameInterceptor = (req, file, callback) => {
-  console.log('image rename')
+// First Arg is { body } = req
+export const FileRenameInterceptor = ({body}, file, callback) => {
   const name = file.originalname.split('.')[0];
   const fileExtName = extname(file.originalname);
   const randomName = Array(4)
