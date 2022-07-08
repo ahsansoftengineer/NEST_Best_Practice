@@ -1,16 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { PrincipalService } from './principal.service';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/BaseController';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { FileRenameInterceptor } from 'interceptor/file-rename.interceptor';
-import { FileImageTypeInterceptor } from 'interceptor/file-image.interceptor';
-import { join } from 'path';
 import { unlink } from 'fs/promises';
-import { access, exists, existsSync } from 'fs';
+import { MyFileInterceptor } from 'core/Constant';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{
@@ -18,15 +13,7 @@ export class PrincipalController extends BaseController{
     super()
   }
   @Post()
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: 'public',
-        filename: FileRenameInterceptor,
-      }),
-      fileFilter: FileImageTypeInterceptor,
-    }),
-  )
+  @UseInterceptors(MyFileInterceptor)
   create(
     @Body() body: CreatePrincipalDto, 
     @UploadedFile() file: Express.Multer.File
@@ -36,15 +23,7 @@ export class PrincipalController extends BaseController{
   }
 
   @Patch(':id')
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: 'public',
-        filename: FileRenameInterceptor,
-      }),
-      fileFilter: FileImageTypeInterceptor,
-    }),
-  )
+  @UseInterceptors(MyFileInterceptor)
   async update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() body: UpdatePrincipalDto,
