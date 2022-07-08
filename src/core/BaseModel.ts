@@ -6,15 +6,12 @@ export class BaseModel extends BaseEntity{
   // @PrimaryGeneratedColumn("uuid")
   // id: string;
 
-  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
   @Column({ length: 40 })
   title: string;
 
-  @ApiProperty()
   @Column({ nullable: true, length: 150, default: '' })
   desc: string
 
