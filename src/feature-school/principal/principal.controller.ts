@@ -8,19 +8,13 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FileRenameInterceptor } from 'interceptor/file-rename.interceptor';
 import { FileImageTypeInterceptor } from 'interceptor/file-image.interceptor';
-import { Uploads } from 'core/Constant';
+import * as fs from 'fs'
+import { join } from 'path';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{
   constructor(public _ss: PrincipalService) {
     super()
-  }
-  // @Post()
-  // create(@Body() data: CreatePrincipalDto) {
-  // }
-  @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdatePrincipalDto) {
-    return this._ss.update(id, data);
   }
   @Post()
   @UseInterceptors(
@@ -32,52 +26,42 @@ export class PrincipalController extends BaseController{
       fileFilter: FileImageTypeInterceptor,
     }),
   )
-  uploadFile(@Body() body: CreatePrincipalDto, @UploadedFile() file: Express.Multer.File) {
+  create(
+    @Body() body: CreatePrincipalDto, 
+    @UploadedFile() file: Express.Multer.File
+  ) {
     body.image = file.filename
-    console.log(body)
-    return this._ss.create(body);
+    return this._ss.createSimple(body);
   }
-  // @Post()
-  // @UseInterceptors(FilesInterceptor('files'))
-  // uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
-  //   console.log(files);
-  // }
 
-  // @UseInterceptors(FileInterceptor('file'))
-  // @Post('file/pass-validation')
-  // uploadFileAndPassValidation(
-  //   @Body() body: any,
-  //   @UploadedFile(
-  //     new ParseFilePipeBuilder()
-  //       .addFileTypeValidator({
-  //         fileType: 'json',
-  //       })
-  //       .build(),
-  //   )
-  //   file: Express.Multer.File,
-  // ) {
-  //   return {
-  //     body,
-  //     file: file.buffer.toString(),
-  //   };
-  // }
-
-  // @UseInterceptors(FileInterceptor('file'))
-  // @Post('file/fail-validation')
-  // uploadFileAndFailValidation(
-  //   @Body() body: SampleDto,
-  //   @UploadedFile(
-  //     new ParseFilePipeBuilder()
-  //       .addFileTypeValidator({
-  //         fileType: 'jpg',
-  //       })
-  //       .build(),
-  //   )
-  //   file: Express.Multer.File,
-  // ) {
-  //   return {
-  //     body,
-  //     file: file.buffer.toString(),
-  //   };
-  // }
+  @Patch(':id')
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: 'public',
+        filename: FileRenameInterceptor,
+      }),
+      fileFilter: FileImageTypeInterceptor,
+    }),
+  )
+  async update(
+    @Param('id', ParseIntPipe) id: number, 
+    @Body() body: UpdatePrincipalDto,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    console.log(body, file, id)
+    if(body.image && file){
+      console.log('in delete');
+      
+      await fs.unlink(join(__dirname, '..', '..','public', body.image), (err) => {
+        if (err) throw err;
+        console.log('test1.txt was deleted');
+      })
+      body.image = file.filename;
+      // await fs.unlink(`./public/${body.image}`, (err) => {
+      //   console.log(err);
+      // })
+    }
+    return this._ss.updateSimple(id, body);
+  }
 }

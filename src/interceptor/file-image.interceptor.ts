@@ -3,11 +3,12 @@ import { Observable } from 'rxjs';
 
 // @Injectable()
 // export class FileImageInterceptor implements NestInterceptor {
-//   intercept(context: ExecutionContext, file, next: CallHandler): Observable<any> | any {
+//   intercept(context: ExecutionContext, next: CallHandler): Observable<any> | any {
+//     console.log(context)
 //     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
 //       return next(new Error('Only image files are allowed!'), false);
 //     }
-//     return next(null, true);
+//     return next(null);
 //   }
 // }
 export const FileImageTypeInterceptor = (req, file, callback) => {
