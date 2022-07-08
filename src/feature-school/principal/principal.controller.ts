@@ -4,9 +4,8 @@ import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from "core";
-
 import { unlink } from 'fs/promises';
-import { FileUploadInterceptor } from 'interceptor/file-upload.interceptor';
+import { FileUploadInterceptor } from 'interceptor';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{

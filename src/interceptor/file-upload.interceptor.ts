@@ -1,7 +1,6 @@
 import { FileInterceptor } from "@nestjs/platform-express"
-import { FileImageTypeInterceptor } from "interceptor/file-image.interceptor"
-import { FileRenameInterceptor } from "interceptor/file-rename.interceptor"
 import { diskStorage } from "multer"
+import { FileImageTypeInterceptor, FileRenameInterceptor } from "./index"
 
 const path = require("path")
 
