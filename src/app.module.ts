@@ -4,18 +4,18 @@ import { FeatureSchoolModule } from './feature-school/feature-school.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeORMConfiguration } from 'config/TypeORMConfiguration';
 import { ServerStaticModuleConfig } from 'config/ServerStaticModuleConfig';
-import { AuthModule } from 'auth/auth.module';
+// import { AuthModule } from 'auth/auth.module';
 // import * as helmet from ''
 @Module({
   imports: [
     MulterModule.register({
       dest: './public'
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env.development.local', '.env.development', '.env'],
-    }
-    ),
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    //   envFilePath: ['.env.development.local', '.env.development', '.env'],
+    // }
+    // ),
     ServerStaticModuleConfig,
     TypeORMConfiguration,
     FeatureSchoolModule,
