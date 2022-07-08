@@ -1,30 +1,33 @@
 import { Module } from '@nestjs/common';
-import { PersonModule } from './person/person.module';
-import { StudentModule } from './student/student.module';
-import { ParentModule } from './parent/parent.module';
-import { TeacherModule } from './teacher/teacher.module';
-import { ClassRoomModule } from './class-room/class-room.module';
-import { SubjectModule } from './subject/subject.module';
-import { AddressModule } from './address/address.module';
-import { SchoolModule } from './school/school.module';
-import { PrincipalModule } from './principal/principal.module';
-import { FamilyModule } from './family/family.module';
-import { HomeWorkModule } from './home-work/home-work.module';
-import { ReportzModule } from './reportz/reportz.module';
-import { StudentClassModule } from './student-class/student-class.module';
-import { FamilyMemberModule } from './family-member/family-member.module';
+import { 
+  PersonModule, 
+  PrincipalModule, 
+  TeacherModule, 
+  ParentModule,
+  StudentModule,
+  ClassRoomModule,
+  SubjectModule, 
+  AddressModule, 
+  SchoolModule,
+  FamilyMemberModule,
+  FamilyModule,
+  HomeWorkModule,
+  ReportzModule,
+  StudentClassModule
+ } from './index';
+
 
 @Module({
   imports: [
     PersonModule, 
-    StudentModule, 
-    ParentModule, 
+    PrincipalModule, 
     TeacherModule, 
+    ParentModule, 
+    StudentModule, 
     ClassRoomModule, 
     SubjectModule, 
     AddressModule, 
     SchoolModule, 
-    PrincipalModule, 
     FamilyModule, 
     HomeWorkModule, 
     ReportzModule, 
