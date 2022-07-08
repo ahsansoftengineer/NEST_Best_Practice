@@ -4,16 +4,14 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { TypeORMConfiguration } from 'config/TypeORMConfiguration';
+import { ServerStaticModuleConfig } from 'config/ServerStaticModuleConfig';
 // import * as helmet from ''
 @Module({
   imports: [
     MulterModule.register({
       dest: './public'
     }),
-    ServeStaticModule.forRoot({
-      // http://localhost:3000/mysql-107a1.png
-      rootPath: join(__dirname, '..', 'public'), 
-    }),
+    ServerStaticModuleConfig,
     TypeORMConfiguration,
     FeatureSchoolModule,
   ],

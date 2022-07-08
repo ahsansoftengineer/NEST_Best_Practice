@@ -1,8 +1,5 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { LoggerMiddleware } from 'middleware/LoggerMiddleware';
-import * as csurf from 'csurf';
+import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationConfig } from 'config/ValidationConfig';
 import { SwaggerConfig } from 'config/SwaggerConfig';
@@ -15,14 +12,15 @@ async function bootstrap() {
     allowedHeaders:"*",
     origin: "*"
   })
+  app.useGlobalPipes(ValidationConfig)
+  SwaggerModule.setup('/', app, 
+    SwaggerModule.createDocument(app, SwaggerConfig)
+  )
   // app.use(csurf())
   // app.useGlobalFilters()
   // app.useGlobalGuards()
   // app.useGlobalInterceptors()
   // app.useLogger(false)
-  app.useGlobalPipes(ValidationConfig)
-  const document = SwaggerModule.createDocument(app, SwaggerConfig)
-  SwaggerModule.setup('/', app, document)
   await app.listen(3000);
   if (module.hot) {
     module.hot.accept();
