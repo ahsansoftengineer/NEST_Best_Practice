@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Person } from 'feature-school/person/entities/person.entity';
-import { PersonService } from 'feature-school/person/person.service';
 import { SignUpDto } from './dto/sign-up.dto';
+import { User } from './entity/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private person: PersonService,
     private jwtService: JwtService
     ) {}
 
   async validateUser({username, password}): Promise<any> {
-    const person = await this.person.repo.findOneBy({username});
+    const person = await this.validateUser({username, password});
     if (person  && person.password === password) {
       const {...result } = person;
       return result;
@@ -22,7 +20,7 @@ export class AuthService {
   async signUp(data: SignUpDto){
     return data
   }
-  signInGenerateToken({id, username, email,  type}: Person) {
-    return { access_token: 'bareer ' + this.jwtService.sign({  id, username, type, email})};
+  signInGenerateToken({id, username, type}: User) {
+    return { access_token: 'bareer ' + this.jwtService.sign({  id, username, type})};
   }
 }
