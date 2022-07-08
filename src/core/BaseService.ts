@@ -17,8 +17,9 @@ export class BaseService {
       const result = this.repo.create(data);
       return this.repo.save(result);
   }
-  async updateSimple(id: number, data: any) {
+  async updateSimple(id: number, data: any, cb= null) {
     let result: any = await this.findOne(id);
+    if(cb) await cb(result, data)
     if(result) result = await this.repo.update(id, data);
     return result || { message: `id ${id} does not exsist` };
   }

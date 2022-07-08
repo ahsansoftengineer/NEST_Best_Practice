@@ -14,15 +14,10 @@ import { join } from 'path';
       dest: './public'
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'assets'), // http://localhost:3000/mysql-107a1.png
+      rootPath: join(__dirname, '..', 'public'), // http://localhost:3000/mysql-107a1.png
       // serveStaticOptions: {extensions: ['png', '.png']}
 
     }),
-    // MulterModule.registerAsync({
-    //   useFactory: () => ({
-    //     dest: './uploads',
-    //   }),
-    // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

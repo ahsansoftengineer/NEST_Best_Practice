@@ -8,8 +8,9 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FileRenameInterceptor } from 'interceptor/file-rename.interceptor';
 import { FileImageTypeInterceptor } from 'interceptor/file-image.interceptor';
-import * as fs from 'fs'
 import { join } from 'path';
+import { unlink } from 'fs/promises';
+import { access, exists, existsSync } from 'fs';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{
@@ -49,19 +50,10 @@ export class PrincipalController extends BaseController{
     @Body() body: UpdatePrincipalDto,
     @UploadedFile() file: Express.Multer.File
   ) {
-    console.log(body, file, id)
-    if(body.image && file){
-      console.log('in delete');
-      
-      await fs.unlink(join(__dirname, '..', '..','public', body.image), (err) => {
-        if (err) throw err;
-        console.log('test1.txt was deleted');
-      })
-      body.image = file.filename;
-      // await fs.unlink(`./public/${body.image}`, (err) => {
-      //   console.log(err);
-      // })
-    }
-    return this._ss.updateSimple(id, body);
+    return this._ss.updateSimple(id, body, 
+      async (fetchedRecord, updateRecord) => {
+        await unlink('public/' + fetchedRecord.image).then().catch(console.log)
+        updateRecord.image = file.filename 
+    });
   }
 }
