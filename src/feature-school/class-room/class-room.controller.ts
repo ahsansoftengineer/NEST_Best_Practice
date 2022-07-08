@@ -12,15 +12,14 @@ export class ClassRoomController extends BaseController {
   }
   @Post()
   create(@Body() data: CreateClassRoomDto) {
-    // const rec:any = await this._ss. 
-    return this._ss.create(data);
+    return this._ss.createSimple(data);
   }
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() data: UpdateClassRoomDto
   ) {
-    return this._ss.update(id, data);
+    return this._ss.updateSimple(id, data);
   }
 
 }

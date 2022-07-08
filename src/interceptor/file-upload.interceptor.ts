@@ -7,7 +7,7 @@ const path = require("path")
 
 export const Uploads = path.join(__dirname, '.', 'assests/uploads')
 
-export const MyFileInterceptor =   FileInterceptor('image', {
+export const FileUploadInterceptor =   FileInterceptor('image', {
   storage: diskStorage({
     destination: 'public',
     filename: FileRenameInterceptor,

@@ -13,10 +13,10 @@ export class SchoolController extends BaseController {
   }
   @Post()
   create(@Body() data: CreateSchoolDto) {
-    return this._ss.create(data);
+    return this._ss.createSimple(data);
   }
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateSchoolDto) {
-    return this._ss.update(id, data);
+    return this._ss.updateSimple(id, data);
   }
 }

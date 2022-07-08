@@ -5,7 +5,7 @@ import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/BaseController';
 import { unlink } from 'fs/promises';
-import { MyFileInterceptor } from 'core/Constant';
+import { FileUploadInterceptor } from 'interceptor/file-upload.interceptor';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{
@@ -13,7 +13,7 @@ export class PrincipalController extends BaseController{
     super()
   }
   @Post()
-  @UseInterceptors(MyFileInterceptor)
+  @UseInterceptors(FileUploadInterceptor)
   create(
     @Body() body: CreatePrincipalDto, 
     @UploadedFile() file: Express.Multer.File
@@ -23,7 +23,7 @@ export class PrincipalController extends BaseController{
   }
 
   @Patch(':id')
-  @UseInterceptors(MyFileInterceptor)
+  @UseInterceptors(FileUploadInterceptor)
   async update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() body: UpdatePrincipalDto,

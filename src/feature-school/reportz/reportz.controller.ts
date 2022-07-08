@@ -13,12 +13,12 @@ export class ReportzController extends BaseController{
   }
   @Post()
   create(@Body() data: CreateReportzDto) {
-    return this._ss.create(data);
+    return this._ss.createSimple(data);
   }
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number, 
     @Body() data: UpdateReportzDto) {
-    return this._ss.update(id, data);
+    return this._ss.updateSimple(id, data);
   }
 }
