@@ -5,23 +5,23 @@
   "compilerOptions": {    
     "assets": [
       {
-        "include": "../assets",
+        "include": "../public",
         "outDir": "dist/public",
         "watchAssets": true
       },
       {
-        "include": "../views",
+        "include": "./views",
         "outDir": "dist/views",
         "watchAssets": true
       },
       {
-        "include": "../config/*.yaml", 
-        "outDir": "./dist/config",
+        "include": "./config/*.yaml", 
+        "outDir": "./dist/",
         "watchAssets": true
       },
       {
-        "include": "../config/*.env", 
-        "outDir": "./dist/config",
+        "include": "./config/*.env", 
+        "outDir": "./dist/",
         "watchAssets": true
       }
     ],

@@ -17,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ConfigModule.forRoot({
       isGlobal: true,
       // load: [configuration],
-      envFilePath: ['./config'],
+      envFilePath: ['./config/dev.env'],
     }),
     JwtModule.register({
       secret: 'secret',//`${process.env.JWT_SECRET_KEY}`,
