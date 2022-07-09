@@ -1,5 +1,5 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { entities } from "./entities";
+import { entities } from "core/constant";
 
 export const TypeORMConfiguration = TypeOrmModule.forRoot({
   type: 'mysql',
@@ -9,7 +9,7 @@ export const TypeORMConfiguration = TypeOrmModule.forRoot({
   password: 'root',
   database: 'schoolmgmt',
   // This how you Registered your Model Classes
-  entities,
+  entities: entities,
   // logging: true,
   logging: ["query", "error"] /* true, 'all', new MyCustomLogger()*/,
   // Other Settings
