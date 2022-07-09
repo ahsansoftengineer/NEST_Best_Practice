@@ -3,8 +3,7 @@ import { SubjectService } from './subject.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from "core";
-
+import { BaseController } from 'core/base';
 
 @Controller('subject')
 @ApiTags('subject')

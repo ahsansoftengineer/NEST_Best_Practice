@@ -1,4 +1,3 @@
-import { ApiProperty } from "@nestjs/swagger";
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from "typeorm";
 
 export class BaseModel extends BaseEntity{

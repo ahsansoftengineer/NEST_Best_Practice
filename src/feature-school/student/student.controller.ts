@@ -2,8 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from 
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-import { BaseController } from "core";
-
+import { BaseController } from 'core/base';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('student')

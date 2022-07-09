@@ -1,8 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { hash } from "bcrypt";
-import { IsEnum, IsNotEmpty, Length, Matches } from "class-validator";
+import { IsEnum, IsNotEmpty, Length } from "class-validator";
 import { PERSON_TYPE } from "feature-school/person/entities/person.entity";
-import { BeforeInsert } from "typeorm";
+import { Match } from "core/utils";
 import { SignInDto } from "./sign-in.dto";
 
 export class SignUpDto extends SignInDto {
@@ -14,4 +13,12 @@ export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   @IsEnum(PERSON_TYPE)
   type: PERSON_TYPE
+
+  @ApiProperty({
+    description: 'password must has special character, alpha numeric and capital / small letters'
+  })
+  @IsNotEmpty()
+  @Length(7, 20, {message: 'Confirm Password must be equal to Password'})
+  @Match('password', {message: 'Confirm Password does not match with the Password'})
+  confirmPassword: string
 }

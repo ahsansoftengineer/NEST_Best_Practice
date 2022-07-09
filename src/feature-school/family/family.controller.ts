@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from "core";
-import { CreateFamilyDto } from './dto/create-family.dto';
+import { BaseController } from 'core/base';import { CreateFamilyDto } from './dto/create-family.dto';
 import { UpdateFamilyDto } from './dto/update-family.dto';
 import { FamilyService } from './family.service';
 

@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsOptional, Length, MaxLength } from "class-validator";
+import { IsNotEmpty } from "class-validator";
 
 // Doesnt Required
 export class CustomObjectType  {

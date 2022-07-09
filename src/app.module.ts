@@ -5,7 +5,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from 'auth/auth.module';
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
-import { ServerStaticModuleConfig, TypeORMConfiguration } from 'config';
+import { ServerStaticModuleConfig, TypeORMConfiguration } from 'core/config';
 // import * as helmet from ''
 @Module({
   imports: [

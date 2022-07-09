@@ -2,6 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { hash } from "bcrypt";
 import { IsNotEmpty, Length, Matches } from "class-validator";
 import { BeforeInsert } from "typeorm";
+import { isDeepStrictEqual } from "util";
+import { Match } from "core/utils";
 
 export class SignInDto {
   @ApiProperty({
@@ -22,4 +24,5 @@ export class SignInDto {
   @Length(7, 20, {message: 'username or password invalid'})
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'username or password invalid'})
   password: string
+
 }

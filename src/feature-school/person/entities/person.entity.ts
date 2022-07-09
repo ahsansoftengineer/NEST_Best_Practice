@@ -1,5 +1,6 @@
 import { Address } from "feature-school/address/entities/address.entity";
-import { BaseModel } from "core";
+
+import { BaseModel } from "core/base";
 import { Column, Entity, Index, JoinTable, ManyToMany, OneToMany, OneToOne, TableInheritance } from "typeorm";
 import { Family } from "feature-school/family/entities/family.entity";
 

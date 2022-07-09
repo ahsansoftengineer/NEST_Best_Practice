@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { ValidationConfig } from 'config/ValidationConfig';
-import { SwaggerConfig } from 'config/SwaggerConfig';
+import { ValidationConfig } from 'core/config/ValidationConfig';
+import { SwaggerConfig } from 'core/config/SwaggerConfig';
 
 declare const module: any;
 async function bootstrap() {

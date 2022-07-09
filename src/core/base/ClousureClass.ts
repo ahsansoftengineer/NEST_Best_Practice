@@ -1,5 +1,3 @@
-import { Teacher } from "feature-school/teacher/entities/teacher.entity";
-import { Repository } from "typeorm";
 
 export function findAll() {
   return this.repo.find() || { message: `record does not exsist` };

@@ -1,4 +1,5 @@
-import { BaseModel } from "core";
+
+import { BaseModel } from "core/base";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne } from "typeorm";
 import { Person } from "feature-school/person/entities/person.entity";
 import { Parent } from "feature-school/parent/entities/parent.entity";

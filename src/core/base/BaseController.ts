@@ -1,5 +1,5 @@
 import { Get, Param, Delete, ParseIntPipe } from '@nestjs/common';
-import { BaseService } from './BaseService';
+import { BaseService } from './index';
 
 export abstract class BaseController {
   _ss: BaseService

@@ -3,9 +3,9 @@ import { PrincipalService } from './principal.service';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from "core";
 import { unlink } from 'fs/promises';
-import { FileUploadInterceptor } from 'interceptor';
+import { FileUploadInterceptor } from 'core/interceptor';
+import { BaseController } from 'core/base';
 @ApiTags('principal')
 @Controller('principal')
 export class PrincipalController extends BaseController{
