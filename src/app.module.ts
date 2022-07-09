@@ -9,6 +9,7 @@ import { ServerStaticModuleConfig, TypeORMConfiguration } from 'core/config';
 import { JwtModule } from '@nestjs/jwt';
 import configuration from 'core/config/configuration';
 import { env } from 'process';
+import { TypeOrmModule } from '@nestjs/typeorm';
 // import * as helmet from ''
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { env } from 'process';
       // secretOrPrivateKey:'secret'
     }),
     ServerStaticModuleConfig,
-    TypeORMConfiguration,
+    TypeOrmModule.forRoot(TypeORMConfiguration),
     FeatureSchoolModule,
     AuthModule
   ],

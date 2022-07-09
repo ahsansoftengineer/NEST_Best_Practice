@@ -1,7 +1,7 @@
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { entities } from "core/constant";
 
-export const TypeORMConfiguration = TypeOrmModule.forRoot({
+export const TypeORMConfiguration: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'localhost',
   port: 3306,
@@ -21,4 +21,4 @@ export const TypeORMConfiguration = TypeOrmModule.forRoot({
   // logger: 'advanced-console',
   // migrations: [],
   // subscribers: [],
-})
+}
