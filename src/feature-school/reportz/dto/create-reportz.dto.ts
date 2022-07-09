@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, Length, Min } from "class-validator"
-import { CreateDto } from "core/CreateDto"
+import { CreateDto } from "core/base"
 import { Student } from "feature-school/student/entities/student.entity"
 
 export class CreateReportzDto extends CreateDto {

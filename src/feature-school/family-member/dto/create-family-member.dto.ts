@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, Min } from "class-validator";
-import { CreateDto } from "core/CreateDto";
+import { CreateDto } from "core/base";
 
 export class CreateFamilyMemberDto extends CreateDto {
   @ApiProperty()

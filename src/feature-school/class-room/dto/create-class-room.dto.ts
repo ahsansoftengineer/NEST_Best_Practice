@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger"
 import { IsDateString, IsNotEmpty, Length, Min } from "class-validator"
-import { CreateDto } from "core/CreateDto"
+import { CreateDto } from "core/base"
 
 export class CreateClassRoomDto extends CreateDto {
   @ApiProperty()

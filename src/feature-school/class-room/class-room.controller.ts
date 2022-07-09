@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core';
+import { BaseController } from 'core/base';
 import { ClassRoomService } from './class-room.service';
 import { CreateClassRoomDto, UpdateClassRoomDto } from './dto/create-class-room.dto';
 

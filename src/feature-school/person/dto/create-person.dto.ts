@@ -13,7 +13,7 @@ import {
   MaxLength,
   ValidateNested,
 } from 'class-validator';
-import { CreateDto } from 'core/CreateDto';
+import { CreateDto } from 'core/base';
 import { CreateAddressDto } from 'feature-school/address/dto/create-address.dto';
 import { Address } from 'feature-school/address/entities/address.entity';
 import { GENDER } from '../entities/person.entity';

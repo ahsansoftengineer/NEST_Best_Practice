@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany } from "typeorm"
 import { ApiProperty } from "@nestjs/swagger"
-import { BaseModel } from "core/BaseModel"
 import { Student } from "feature-school/student/entities/student.entity"
+import { BaseModel } from "core/base"
 
 @Entity()
 export class HomeWork extends BaseModel {

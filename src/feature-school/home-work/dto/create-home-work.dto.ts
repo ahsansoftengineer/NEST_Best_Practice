@@ -1,7 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsOptional, Length, Min } from "class-validator";
-import { CreateDto } from "core/CreateDto";
-import { Student } from "feature-school/student/entities/student.entity";
+import { CreateDto } from "core/base";
 
 export class CreateHomeWorkDto extends CreateDto {
 

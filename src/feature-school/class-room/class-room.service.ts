@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { BaseService } from 'core';
+import { BaseService } from 'core/base';
 import { Repository } from 'typeorm';
-import { CreateClassRoomDto, UpdateClassRoomDto } from './dto/create-class-room.dto';
 import { ClassRoom } from './entities/class-room.entity';
 
 @Injectable()
