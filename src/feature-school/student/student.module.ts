@@ -4,7 +4,7 @@ import { StudentController } from './student.controller';
 import { PersonModule } from 'feature-school/person/person.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Student } from './entities/student.entity';
-import { LoggerMiddleware } from 'middleware/LoggerMiddleware';
+import { LoggerMiddleware } from 'core/middleware';
 
 @Module({
   imports:[
