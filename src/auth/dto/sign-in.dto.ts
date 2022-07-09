@@ -1,16 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { hash } from "bcrypt";
 import { IsNotEmpty, Length, Matches } from "class-validator";
-import { BeforeInsert } from "typeorm";
-import { isDeepStrictEqual } from "util";
-import { Match } from "core/utils";
 
 export class SignInDto {
   @ApiProperty({
     description: 'username for the Token is required Length must be 7 to 20 charcter'
   })
   @IsNotEmpty()
-  @Length(7, 20, {message: 'username or password invalid'})
+  @Length(7, 20)
   username: string
 
   // @BeforeInsert()
@@ -21,8 +17,10 @@ export class SignInDto {
     description: 'password must has special character, alpha numeric and capital / small letters'
   })
   @IsNotEmpty()
-  @Length(7, 20, {message: 'username or password invalid'})
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {message: 'username or password invalid'})
+  @Length(7, 20)
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: 'password must has special character, alpha numeric and capital / small letters'
+  })
   password: string
 
 }

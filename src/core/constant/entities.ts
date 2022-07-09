@@ -13,6 +13,7 @@ import { Reportz } from "feature-school/reportz/entities/reportz.entity";
 import { StudentClass } from "feature-school/student-class/entities/student-class.entity";
 import { FamilyMember } from "feature-school/family-member/entities/family-member.entity";
 import { BaseModel } from "../base/index";
+import { User } from "auth/entity/user.entity";
 
 export const entities = [
   BaseModel,
@@ -29,5 +30,6 @@ export const entities = [
   HomeWork,
   Reportz,
   StudentClass,
-  FamilyMember
+  FamilyMember,
+  User
 ];

@@ -14,12 +14,7 @@ import { LocalStrategy } from './strategy/local.strategy';
   imports: [
     PersonModule,
     PassportModule,
-    TypeOrmModule.forFeature([User]),
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '600s' },
-    }),
-    
+    TypeOrmModule.forFeature([User])    
   ],
   controllers: [
     AuthController
@@ -27,7 +22,7 @@ import { LocalStrategy } from './strategy/local.strategy';
   providers: [
     AuthService, 
     LocalStrategy, 
-    // JwtStrategy,
+    JwtStrategy,
     JwtService, 
   ],
 })

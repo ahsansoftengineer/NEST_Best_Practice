@@ -11,7 +11,7 @@ export class SignUpDto extends SignInDto {
     example: PERSON_TYPE.TEACHER
   })
   @IsNotEmpty()
-  @IsEnum(PERSON_TYPE)
+  @IsEnum(PERSON_TYPE, {message: "Type must be (Admin, Principal, Teacher, Parent and Student"})
   type: PERSON_TYPE
 
   @ApiProperty({

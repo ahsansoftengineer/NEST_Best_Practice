@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { comparePassword } from 'core/utils';
+import { comparePassword, encodePassword } from 'core/utils';
 import { Repository } from 'typeorm';
 import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entity/user.entity';
@@ -23,9 +23,18 @@ export class AuthService {
     } else return null;
   }
   async signUp(data: SignUpDto){
-    return data
+    const result =  {...data, password: encodePassword(data.password)}
+    const final =  await this.repo.create(result);
+    return this.generateToken(final) 
   }
-  signInGenerateToken({id, username, type}: User) {
+  async forgetPassword(data: SignUpDto) {
+    let result:any = await this.repo.findOneBy({username: data.username});
+    result =  {...data, password: encodePassword(data.password)}
+    if(result) result = await this.repo.update({username: data.username}, result);
+    return result ? {message: 'updated successfully'}: { message: `username ${result.username} does not exsist` };
+  }
+
+  generateToken({id, username, type}: User) {
     return { access_token: 'bareer ' + this.jwtService.sign({  id, username, type})};
   }
 }
