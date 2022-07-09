@@ -48,4 +48,6 @@ export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   logging: ["query", "error"] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
   retryAttempts: 2,
+  // synchronize: true, 
+  // dropSchema: true,
 }

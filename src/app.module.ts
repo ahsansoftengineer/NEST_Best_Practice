@@ -17,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ConfigModule.forRoot({
       isGlobal: true,
       // load: [configuration],
-      envFilePath: ['./config/dev.env'],
+      envFilePath: ['./config/dev.env', './config/.env', './config/.env'],
     }),
     JwtModule.register({
       secret: 'secret',//`${process.env.JWT_SECRET_KEY}`,
@@ -25,9 +25,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       // secretOrPrivateKey:'secret'
     }),
     ServerStaticModuleConfig,
+    AuthModule,
     TypeOrmModule.forRoot(typeOrmModuleOptions),
     FeatureSchoolModule,
-    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
