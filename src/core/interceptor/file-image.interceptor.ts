@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 // @Injectable()
 // export class FileImageInterceptor implements NestInterceptor {
 //   intercept(context: ExecutionContext, next: CallHandler): Observable<any> | any {
-//     console.log(context)
 //     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
 //       return next(new Error('Only image files are allowed!'), false);
 //     }

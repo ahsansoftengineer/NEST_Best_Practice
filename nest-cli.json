@@ -13,6 +13,16 @@
         "include": "../views",
         "outDir": "dist/views",
         "watchAssets": true
+      },
+      {
+        "include": "../config/*.yaml", 
+        "outDir": "./dist/config",
+        "watchAssets": true
+      },
+      {
+        "include": "../config/*.env", 
+        "outDir": "./dist/config",
+        "watchAssets": true
       }
     ],
     "watchAssets": true

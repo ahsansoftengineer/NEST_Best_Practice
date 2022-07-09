@@ -17,7 +17,6 @@ export class AuthService {
     const user = await this.repo.findOneBy({username});
     if (user) {
       const matched = comparePassword(password, user.password)
-      console.log({matched});
       if(matched)return user
       else return null
     } else return null;

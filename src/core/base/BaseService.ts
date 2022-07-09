@@ -4,7 +4,6 @@ import { BaseModel } from './BaseModel';
 export class BaseService {
   public repo: Repository<BaseModel>
   findAll() {
-    console.log('Base Service findAllCalled');
     return this.repo.find() || { message: `record does not exsist` };
   }
   findOne(id: number) {

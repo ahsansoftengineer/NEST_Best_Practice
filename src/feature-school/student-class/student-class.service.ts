@@ -11,7 +11,6 @@ export class StudentClassService {
   constructor(@InjectRepository(StudentClass) public repo: Repository<StudentClass>) {
   }
   findAll() {
-    console.log('Base Service findAllCalled');
     return this.repo.find() || { message: `record does not exsist` };
   }
   findOne(dateFrom: Date) {

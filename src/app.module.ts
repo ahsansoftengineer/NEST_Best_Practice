@@ -1,26 +1,23 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FeatureSchoolModule } from './feature-school/feature-school.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from 'auth/auth.module';
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
-import { ServerStaticModuleConfig, TypeORMConfiguration } from 'core/config';
+import { ServerStaticModuleConfig, typeOrmModuleOptions } from 'core/config';
 import { JwtModule } from '@nestjs/jwt';
-import configuration from 'core/config/configuration';
-import { env } from 'process';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import * as helmet from ''
 @Module({
   imports: [
-    // ConfigModule,
     MulterModule.register({
       dest: './public'
     }),
     ConfigModule.forRoot({
-      // isGlobal: true,
+      isGlobal: true,
       // load: [configuration],
-      // envFilePath: ['.env.development.local', '.env.development', '.env'],
+      envFilePath: ['./config'],
     }),
     JwtModule.register({
       secret: 'secret',//`${process.env.JWT_SECRET_KEY}`,
@@ -28,7 +25,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       // secretOrPrivateKey:'secret'
     }),
     ServerStaticModuleConfig,
-    TypeOrmModule.forRoot(TypeORMConfiguration),
+    TypeOrmModule.forRoot(typeOrmModuleOptions),
     FeatureSchoolModule,
     AuthModule
   ],

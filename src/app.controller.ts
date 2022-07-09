@@ -8,11 +8,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private its: ConfigService
     ) {
-      console.log(this.its.get('DATABASE_HOST'))
-      console.log(this.its)
-      console.log(process.env.PORT);
       
     }
 
