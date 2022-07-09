@@ -1,16 +1,20 @@
-import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Request } from '@nestjs/common';
+import { Public } from './auth.decorator';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
-import { JwtAuthGuard } from './guard/auth.guard';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
 import { LocalAuthGuard } from './guard/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly _ss: AuthService) {}
   @Post('sign-in')
-  @UseGuards(LocalAuthGuard)
-  signIn(@Body() body: SignInDto) {
+  // @UseGuards(LocalAuthGuard)
+  @Public()
+  signIn(@Request() req, @Body() body: SignInDto) {
+    console.log(body);
+    
     return this._ss.validateUser(body);
   }
 
@@ -21,7 +25,14 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('protected')
-  getProfile(@Body() body) {
-    return body;
+  getProfile(@Request() req) {
+    return req.user;
+  }
+
+  @Public()
+  @Get('public')
+  mypublicRoute(@Body() body){
+    console.log({public: 'Public Route Decorated', body});
+    
   }
 }

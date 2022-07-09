@@ -46,6 +46,7 @@ module.exports = function (options, webpack) {
 };
 ```
 ### CREATE AN CHILD ENTITY
+
 * * 1 Create Entity
 ```java
 @ChildEntity() // @Entity() for Simple
@@ -112,3 +113,28 @@ export class FeatureSchoolModule { }
 })
 export class AppModule {}
 ```
+### Create a Custom Meta Decorator
+* Create a Decorator
+* * [auth.decorator.ts](src/auth/auth.decorator.ts)
+* How to Check the Meta Atached by the Decorator in the Guard
+* * [auth.decorator.ts](src/auth/guard/auth.guard.ts)
+* Configure the Guard as the provide in any Module
+* * [auth.module.ts](src/auth/auth.module.ts)
+```java
+{
+  // This could be set in any module
+  provide: 'APP_GUARD',
+  useClass: JwtAuthGuard,
+},
+```
+* Set the Decorator on the Controller End point
+* * [auth.controller.ts](src/auth/auth.controller.ts)
+```java
+@Post('sign-in')
+// @UseGuards(LocalAuthGuard)
+@Public()
+signIn(@Request() req, @Body() body: SignInDto) {
+  return this._ss.validateUser(body);
+}
+```
+### New Topic

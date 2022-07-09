@@ -1,30 +1,32 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { comparePassword, encodePassword } from 'core/utils';
 import { Repository } from 'typeorm';
+import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entity/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
-    @InjectRepository(User) public repo: Repository<User>
+    @InjectRepository(User) public repo: Repository<User>,
+    private jwtService: JwtService
+
     ) {}
 
-  async validateUser({username, password}): Promise<any> {
-    const user = await this.repo.findOneBy({username});
-    if (user) {
-      const matched = comparePassword(password, user.password)
-      if(matched)return user
-      else return null
-    } else return null;
+  async validateUser(data: SignInDto): Promise<any> {
+    const u = await this.repo.findOneBy({username: data.username});
+    const matched = comparePassword(data.password, u.password)
+    if (u && matched) {
+     return u
+    } else throw  new UnauthorizedException();
   }
   async signUp(data: SignUpDto){
     const result =  {...data, password: encodePassword(data.password)}
     const final =  await this.repo.create(result);
-    return this.generateToken(final) 
+    return this.repo.save(final)
+    // return this.generateToken(final) 
   }
   async forgetPassword(data: SignUpDto) {
     let result:any = await this.repo.findOneBy({username: data.username});
@@ -33,7 +35,7 @@ export class AuthService {
     return result ? {message: 'updated successfully'}: { message: `username ${result.username} does not exsist` };
   }
 
-  generateToken({id, username, type}: User) {
-    return { access_token: 'bareer ' + this.jwtService.sign({  id, username, type})};
-  }
+  // generateToken({id, username, type}: User) {
+  //   return { access_token: 'bareer ' + this.jwtService.sign({  id, username, type})};
+  // }
 }

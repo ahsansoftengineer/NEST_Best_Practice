@@ -9,12 +9,17 @@ import { User } from './entity/user.entity';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategy/local.strategy';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @Module({
   imports: [
     PersonModule,
-    PassportModule,
-    TypeOrmModule.forFeature([User])    
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ session: true }),
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '601s' },
+    }),
   ],
   controllers: [
     AuthController
@@ -23,7 +28,13 @@ import { LocalStrategy } from './strategy/local.strategy';
     AuthService, 
     LocalStrategy, 
     JwtStrategy,
-    JwtService, 
+    // JwtService, 
+    {
+      // This could be set in any module
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
   ],
+  exports: [AuthService]
 })
 export class AuthModule {}
