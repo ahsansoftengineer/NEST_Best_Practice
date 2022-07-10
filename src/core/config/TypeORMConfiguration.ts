@@ -36,7 +36,7 @@ import { entities } from "core/constant";
 //   ),
 //   inject:[ConfigService]
 // }
-
+// STEP 1 
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'localhost',
@@ -44,7 +44,7 @@ export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   username: 'root',
   password: 'root',
   database: 'schoolmgmt',
-  entities: entities,
+  entities, // STEP 2
   logging: ["query", "error"] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
   retryAttempts: 2,

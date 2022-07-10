@@ -11,11 +11,11 @@ nest new project-name
 ```
 ### Dependencies
 ```java
-npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static typeorm mysql2 bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx 
+npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx 
 ```
 ### DevDependencies
 ```java
-npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer webpack-node-externals run-script-webpack-plugin webpack  
+npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session webpack-node-externals run-script-webpack-plugin webpack  
 ```
 
 ### Hot Reloading

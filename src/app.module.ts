@@ -8,16 +8,16 @@ import { AppService } from 'app.service';
 import { ServerStaticModuleConfig, typeOrmModuleOptions } from 'core/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PassportModule } from '@nestjs/passport';
 // import * as helmet from ''
 @Module({
   imports: [
     MulterModule.register({
       dest: './public'
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      // load: [configuration],
-      envFilePath: ['./config/dev.env', './config/.env', './config/.env'],
+ 
+    PassportModule.register({
+      session: true
     }),
     JwtModule.register({
       secret: 'secret',//`${process.env.JWT_SECRET_KEY}`,
