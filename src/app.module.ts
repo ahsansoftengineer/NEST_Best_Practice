@@ -1,40 +1,21 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { FeatureSchoolModule } from './feature-school/feature-school.module';
-import { MulterModule } from '@nestjs/platform-express';
-import { AuthModule } from 'auth/auth.module';
-import { AppController } from 'app.controller';
-import { AppService } from 'app.service';
-import { ServerStaticModuleConfig, typeOrmModuleOptions } from 'core/config';
-import { JwtModule } from '@nestjs/jwt';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PassportModule } from '@nestjs/passport';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { FeatureModule } from 'feature/feature.module';
+import { AuthModule } from '../auth/auth.module';
+import { AtGuard } from '../common/guards';
 // import * as helmet from ''
 @Module({
   imports: [
-    MulterModule.register({
-      dest: './public',
-    }),
-
-    PassportModule.register({
-      session: true,
-    }),
-    JwtModule.register({
-      secret: 'secret', //`${process.env.JWT_SECRET_KEY}`,
-      signOptions: { expiresIn: '600s' },
-      // secretOrPrivateKey:'secret'
-    }),
-    ServerStaticModuleConfig,
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
-    TypeOrmModule.forRoot(typeOrmModuleOptions),
-    FeatureSchoolModule,
+    FeatureModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
-  // exports: [ConfigModule]
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AtGuard,
+    },
+  ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(cors())
-  }
-}
+export class AppModule {}
