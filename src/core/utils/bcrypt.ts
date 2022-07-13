@@ -1,5 +1,4 @@
 import { compareSync, genSaltSync, hash, hashSync } from 'bcrypt';
-import { CONSTANT } from 'core/constant/contants';
 
 export function encodePassword(password: string) {
   const SALT = genSaltSync();
