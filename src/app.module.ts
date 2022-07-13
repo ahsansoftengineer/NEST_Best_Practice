@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { FeatureModule } from 'feature/feature.module';
-import { AuthModule } from '../auth/auth.module';
-import { AtGuard } from '../common/guards';
-// import * as helmet from ''
+import { AuthModule } from './auth/auth.module';
+import { AtGuard } from './common/guards';
+import { PrismaModule } from './prisma/prisma.module';
+
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    AuthModule,
-    FeatureModule
-  ],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, PrismaModule],
   providers: [
     {
       provide: APP_GUARD,
