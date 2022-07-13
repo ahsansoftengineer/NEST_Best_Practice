@@ -4,7 +4,7 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { entities } from 'core/constant';
+import { User } from 'auth/entities/user.entity';
 
 // export default class TypeORMConfig {
 //   static getORMConfig(_ss: ConfigService): TypeOrmModuleOptions {
@@ -47,8 +47,8 @@ export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'schoolmgmt',
-  entities, // STEP 2
+  database: 'klp',
+  entities: [User], // STEP 2
   logging: ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
   retryAttempts: 2,

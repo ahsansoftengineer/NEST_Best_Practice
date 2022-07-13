@@ -2,7 +2,7 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 
-@Injectable()
+@Injectable() // Access Token Guard
 export class AtGuard extends AuthGuard('jwt') {
   constructor(private reflector: Reflector) {
     super();
@@ -13,9 +13,7 @@ export class AtGuard extends AuthGuard('jwt') {
       context.getHandler(),
       context.getClass(),
     ]);
-
     if (isPublic) return true;
-
     return super.canActivate(context);
   }
 }
