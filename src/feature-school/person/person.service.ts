@@ -6,7 +6,7 @@ import { Person } from './entities/person.entity';
 
 @Injectable()
 export class PersonService extends BaseService {
-  constructor( @InjectRepository(Person) public repo: Repository<Person>){
-    super()
+  constructor(@InjectRepository(Person) public repo: Repository<Person>) {
+    super();
   }
 }

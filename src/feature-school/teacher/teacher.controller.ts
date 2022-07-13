@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
@@ -9,14 +18,17 @@ import { BaseController } from 'core/base';
 @Controller('teacher')
 export class TeacherController extends BaseController {
   constructor(public _ss: TeacherService) {
-    super()
+    super();
   }
   @Post()
   create(@Body() data: CreateTeacherDto) {
     return this._ss.createSimple(data);
   }
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateTeacherDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateTeacherDto,
+  ) {
     return this._ss.updateSimple(id, data);
   }
 }

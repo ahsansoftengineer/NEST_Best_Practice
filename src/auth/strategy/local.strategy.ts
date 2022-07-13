@@ -13,11 +13,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       passReqToCallback: true,
     });
   }
-  async validate(
-    request: Request,
-    username: string,
-    password: string,
-  ) {
+  async validate(request: Request, username: string, password: string) {
     const contextId = ContextIdFactory.getByRequest(request);
     // "AuthService" is a request-scoped provider
     const authService = await this.moduleRef.resolve(AuthService, contextId);
@@ -25,7 +21,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   // constructor(
   //   private _ss: AuthService,
   //   private jwtService: JwtService
-    
+
   //   ) {
   //   // You need to tell Strategy Which Field you are going to use by override
   //   super({
@@ -45,6 +41,5 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   //       access_token: this.jwtService.sign(payload),
   //   };
   // }
- 
 }
 // @UseGuards(LocalAuthGuard('local'))

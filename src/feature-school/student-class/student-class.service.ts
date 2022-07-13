@@ -8,8 +8,9 @@ import { StudentClass } from './entities/student-class.entity';
 
 @Injectable()
 export class StudentClassService {
-  constructor(@InjectRepository(StudentClass) public repo: Repository<StudentClass>) {
-  }
+  constructor(
+    @InjectRepository(StudentClass) public repo: Repository<StudentClass>,
+  ) {}
   findAll() {
     return this.repo.find() || { message: `record does not exsist` };
   }
@@ -28,7 +29,7 @@ export class StudentClassService {
   }
   async update(dateFrom: Date, data: UpdateStudentClassDto) {
     let result: any = await this.findOne(dateFrom);
-    if(result) result = await this.repo.update(dateFrom, data);
+    if (result) result = await this.repo.update(dateFrom, data);
     return result || { message: `dateFrom ${dateFrom} does not exsist` };
   }
 }

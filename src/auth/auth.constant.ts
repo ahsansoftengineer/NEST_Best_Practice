@@ -1,4 +1,4 @@
 export const jwtConstants = {
   secret: 'secret',
-  salt: 10
+  salt: 10,
 };

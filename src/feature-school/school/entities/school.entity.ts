@@ -1,23 +1,23 @@
-import { Principal } from "feature-school/principal/entities/principal.entity";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
-import { Address } from "feature-school/address/entities/address.entity";
-import { ApiProperty } from "@nestjs/swagger";
-import { BaseModel } from "core/base";
+import { Principal } from 'feature-school/principal/entities/principal.entity';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Address } from 'feature-school/address/entities/address.entity';
+import { ApiProperty } from '@nestjs/swagger';
+import { BaseModel } from 'core/base';
 @Entity()
 export class School extends BaseModel {
-  @OneToOne(() => Principal, {eager: true})
+  @OneToOne(() => Principal, { eager: true })
   @JoinColumn()
-  principal: Principal
+  principal: Principal;
 
   @ApiProperty()
   @Column({ nullable: true })
   principalId: number;
-  
+
   @OneToOne(() => Address, {
     eager: true,
-    cascade: true
+    cascade: true,
   })
-  @JoinColumn({name: 'addressId'})
+  @JoinColumn({ name: 'addressId' })
   address: Address;
 
   @ApiProperty()

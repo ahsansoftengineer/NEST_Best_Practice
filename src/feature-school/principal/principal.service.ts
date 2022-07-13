@@ -5,11 +5,10 @@ import { Repository } from 'typeorm';
 import { Principal } from './entities/principal.entity';
 
 @Injectable()
-export class PrincipalService extends BaseService{
-  constructor(
-    @InjectRepository(Principal) public repo: Repository<Principal>) {
-      super()
-    }
+export class PrincipalService extends BaseService {
+  constructor(@InjectRepository(Principal) public repo: Repository<Principal>) {
+    super();
+  }
   // addTeacherToPrincipal(){
   //   return this.repo.createQueryBuilder('person')
   //   .andWhere('person.type = "Principal"')

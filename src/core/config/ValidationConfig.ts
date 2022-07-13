@@ -1,4 +1,4 @@
-import { ValidationPipe } from "@nestjs/common";
+import { ValidationPipe } from '@nestjs/common';
 
 export const ValidationConfig = new ValidationPipe({
   whitelist: true, // It is Working Only the Properties avalaible in DTO will go through
@@ -17,4 +17,4 @@ export const ValidationConfig = new ValidationPipe({
   // skipNullProperties: true,
   // skipUndefinedProperties: true,
   // skipMissingProperties: true
-})
+});

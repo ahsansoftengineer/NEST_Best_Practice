@@ -1,9 +1,8 @@
-
-import { BaseModel } from "core/base";
-import { Family } from "feature-school/family/entities/family.entity";
-import { Parent } from "feature-school/parent/entities/parent.entity";
-import { Student } from "feature-school/student/entities/student.entity";
-import { Column, Entity, ManyToOne } from "typeorm";
+import { BaseModel } from 'core/base';
+import { Family } from 'feature-school/family/entities/family.entity';
+import { Parent } from 'feature-school/parent/entities/parent.entity';
+import { Student } from 'feature-school/student/entities/student.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class FamilyMember extends BaseModel {
@@ -11,26 +10,24 @@ export class FamilyMember extends BaseModel {
   @ManyToOne(() => Student, (a) => a.familyMember, {
     eager: true,
   })
-  student: Student
+  student: Student;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   studentId: number;
 
   @ManyToOne(() => Parent, (a) => a.familyMember, {
     eager: true,
   })
-  parent: Parent
+  parent: Parent;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   parentId: number;
 
   @ManyToOne(() => Family, (a) => a.familyMember, {
     eager: true,
   })
-  family: Family
+  family: Family;
 
-  @Column({nullable: true})
-  familyId: number
-
-
+  @Column({ nullable: true })
+  familyId: number;
 }

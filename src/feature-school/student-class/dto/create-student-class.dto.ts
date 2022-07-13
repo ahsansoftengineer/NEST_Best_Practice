@@ -1,25 +1,24 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, IsDateString, Min } from "class-validator"
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsDateString, Min } from 'class-validator';
 
 export class CreateStudentClassDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
-  dateFrom: Date
+  dateFrom: Date;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsDateString()
-  dateTo: Date
+  dateTo: Date;
 
   @ApiProperty()
   @IsNotEmpty()
   @Min(0)
-  studentId: number
+  studentId: number;
 
   @ApiProperty()
   @IsNotEmpty()
   @Min(0)
-  classRoomId: number
-
+  classRoomId: number;
 }

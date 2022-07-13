@@ -7,12 +7,8 @@ import { Principal } from './entities/principal.entity';
 import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
-  
-  imports:[
-    TypeOrmModule.forFeature([Principal]),
-    PersonModule
-  ],
+  imports: [TypeOrmModule.forFeature([Principal]), PersonModule],
   controllers: [PrincipalController],
-  providers: [PrincipalService]
+  providers: [PrincipalService],
 })
 export class PrincipalModule {}

@@ -1,5 +1,3 @@
 import { BaseController } from './BaseController';
 
-export abstract class BaseControllerFile extends BaseController {
-
-}
+export abstract class BaseControllerFile extends BaseController {}

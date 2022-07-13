@@ -1,4 +1,3 @@
-
 export function findAll() {
   return this.repo.find() || { message: `record does not exsist` };
 }

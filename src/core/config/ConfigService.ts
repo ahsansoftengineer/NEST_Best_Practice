@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { readFileSync } from "fs";
-import * as dotenv from 'dotenv'
+import { Injectable } from '@nestjs/common';
+import { readFileSync } from 'fs';
+import * as dotenv from 'dotenv';
 
 // @Injectable()
 // export class ConfigService {

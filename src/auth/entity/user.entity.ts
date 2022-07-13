@@ -1,9 +1,19 @@
-import { Address } from "feature-school/address/entities/address.entity";
+import { Address } from 'feature-school/address/entities/address.entity';
 
-import { BaseModel } from "core/base";
-import { Column, Entity, Index, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
-import { Family } from "feature-school/family/entities/family.entity";
-import { PERSON_TYPE } from "feature-school/person/entities/person.entity";
+import { BaseModel } from 'core/base';
+import {
+  Column,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  TableInheritance,
+} from 'typeorm';
+import { Family } from 'feature-school/family/entities/family.entity';
+import { PERSON_TYPE } from 'feature-school/person/entities/person.entity';
 
 @Entity()
 export class User {
@@ -11,19 +21,18 @@ export class User {
   id: number;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: PERSON_TYPE,
     nullable: true,
   })
-  type: PERSON_TYPE
+  type: PERSON_TYPE;
 
   @Column({ nullable: true, length: 250 })
-  password: string
+  password: string;
 
-  @Column({ 
-    length: 40, 
-    unique: true 
+  @Column({
+    length: 40,
+    unique: true,
   })
-  username: string
-
+  username: string;
 }

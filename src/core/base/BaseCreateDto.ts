@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsOptional, Length, MaxLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, Length, MaxLength } from 'class-validator';
 
-export class CreateDto  {
+export class CreateDto {
   @ApiProperty({
     example: 'Most Specific Detail for This Table',
-    description: 'This Title Property Means the Major Property of the Table'
+    description: 'This Title Property Means the Major Property of the Table',
   })
   @IsNotEmpty()
   @Length(3, 40, {
@@ -14,13 +14,13 @@ export class CreateDto  {
       developerNote: 'This is Developer Note',
     },
   })
-  title: string
+  title: string;
 
   @ApiProperty({
     example: 'Additional Info for this this row',
-    description: 'Other usefull information'
+    description: 'Other usefull information',
   })
-  @MaxLength(100,{
+  @MaxLength(100, {
     message: 'Your useful information cannot be greater than 100 charater',
     context: {
       errorCode: 1003,
@@ -28,8 +28,7 @@ export class CreateDto  {
     },
   })
   @IsOptional()
-  desc?: string
-
+  desc?: string;
 
   // const model = new MyClass();
   // validate(model).then(errors => {

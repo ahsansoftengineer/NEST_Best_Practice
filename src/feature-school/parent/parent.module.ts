@@ -6,11 +6,8 @@ import { PersonModule } from 'feature-school/person/person.module';
 import { Parent } from './entities/parent.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Parent]),
-    PersonModule
-  ],
+  imports: [TypeOrmModule.forFeature([Parent]), PersonModule],
   controllers: [ParentController],
-  providers: [ParentService]
+  providers: [ParentService],
 })
 export class ParentModule {}

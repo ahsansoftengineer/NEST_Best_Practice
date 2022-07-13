@@ -1,4 +1,9 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
 import { extname } from 'path';
 import { argv } from 'process';
 import { Observable } from 'rxjs';
@@ -18,13 +23,12 @@ import { Observable } from 'rxjs';
 //   }
 // }
 // First Arg is { body } = req
-export const FileRenameInterceptor = ({body}, file, callback) => {
+export const FileRenameInterceptor = ({ body }, file, callback) => {
   const name = file.originalname.split('.')[0];
   const fileExtName = extname(file.originalname);
   const randomName = Array(4)
     .fill(null)
     .map(() => Math.round(Math.random() * 16).toString(16))
     .join('');
-    callback(null, `${name}-${randomName}${fileExtName}`);
+  callback(null, `${name}-${randomName}${fileExtName}`);
 };
-

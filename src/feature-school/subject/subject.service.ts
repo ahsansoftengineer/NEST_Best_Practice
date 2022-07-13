@@ -8,9 +8,7 @@ import { Subject } from './entities/subject.entity';
 
 @Injectable()
 export class SubjectService extends BaseService {
-  constructor(
-    @InjectRepository(Subject) public repo: Repository<Subject>,
-  ) {
-    super()
+  constructor(@InjectRepository(Subject) public repo: Repository<Subject>) {
+    super();
   }
 }

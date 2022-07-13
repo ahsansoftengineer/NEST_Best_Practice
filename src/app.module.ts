@@ -13,14 +13,14 @@ import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
     MulterModule.register({
-      dest: './public'
+      dest: './public',
     }),
- 
+
     PassportModule.register({
-      session: true
+      session: true,
     }),
     JwtModule.register({
-      secret: 'secret',//`${process.env.JWT_SECRET_KEY}`,
+      secret: 'secret', //`${process.env.JWT_SECRET_KEY}`,
       signOptions: { expiresIn: '600s' },
       // secretOrPrivateKey:'secret'
     }),

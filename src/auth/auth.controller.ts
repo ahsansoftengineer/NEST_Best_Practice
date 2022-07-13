@@ -1,4 +1,12 @@
-import { Controller, Post, Body, UseGuards, Get, Request, Session } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseGuards,
+  Get,
+  Request,
+  Session,
+} from '@nestjs/common';
 import { Public } from './auth.decorator';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
@@ -14,7 +22,7 @@ export class AuthController {
   @Public()
   signIn(@Request() req, @Body() body: SignInDto) {
     console.log(body);
-    
+
     return this._ss.validateUser(body);
   }
 
@@ -31,16 +39,15 @@ export class AuthController {
 
   @Public()
   @Get('public')
-  mypublicRoute(@Body() body){
-    console.log({public: 'Public Route Decorated', body});
-    
+  mypublicRoute(@Body() body) {
+    console.log({ public: 'Public Route Decorated', body });
   }
 
   @Public()
   @Get('session')
-  getAuthSession(@Session() session: Record<string, any>){
-    session.authenticated = true
-    return {session, sid: session.id}
+  getAuthSession(@Session() session: Record<string, any>) {
+    session.authenticated = true;
+    return { session, sid: session.id };
     // session.id
   }
 }

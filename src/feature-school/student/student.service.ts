@@ -9,6 +9,6 @@ import { Student } from './entities/student.entity';
 @Injectable()
 export class StudentService extends BaseService {
   constructor(@InjectRepository(Student) public repo: Repository<Student>) {
-    super()
+    super();
   }
 }

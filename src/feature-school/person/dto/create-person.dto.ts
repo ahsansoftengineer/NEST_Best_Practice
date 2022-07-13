@@ -26,21 +26,21 @@ export class CreatePersonDto extends CreateDto {
   @ApiProperty()
   @IsNotEmpty()
   @Length(3, 20)
-  title: string
+  title: string;
 
   @ApiProperty()
   @Length(3, 20)
   @IsOptional()
-  middleName: string
+  middleName: string;
 
   @ApiProperty()
   @Length(3, 20)
   @IsNotEmpty()
-  lastName: string
+  lastName: string;
 
   @ApiProperty()
   @Length(7, 20)
-  username: string
+  username: string;
 
   // @ApiProperty()
   // @IsNotEmpty()
@@ -48,7 +48,7 @@ export class CreatePersonDto extends CreateDto {
 
   // @ValidateIf(o => o.contactPreference === ContactPreference.EMAIL)
   @ApiProperty({
-    example: 'abc@gmail.com'
+    example: 'abc@gmail.com',
   })
   @IsEmail()
   @Length(3, 20)
@@ -61,44 +61,42 @@ export class CreatePersonDto extends CreateDto {
   // @IsNotEmpty()
   // phone: string;
 
-  @ApiProperty() 
+  @ApiProperty()
   @Length(7, 20)
-  password: string
+  password: string;
 
   @ApiProperty({
     enum: GENDER,
     // isArray: true,
     // example: [GENDER.MALE, GENDER.FEMALE],
-    example: GENDER.MALE
+    example: GENDER.MALE,
   })
   @IsNotEmpty()
   @IsEnum(GENDER)
   gender: GENDER;
 
   @ApiProperty({
-    example: '1992-07-04'
+    example: '1992-07-04',
   })
   @IsDateString()
   @IsOptional()
-  dateOfBirth: string
+  dateOfBirth: string;
 
   @ApiProperty({
     enum: Address,
-    example: [{title: 'My Address', desc: "Any Description u want"}],
-    description:'Address[] Token is Optional'
+    example: [{ title: 'My Address', desc: 'Any Description u want' }],
+    description: 'Address[] Token is Optional',
   })
   @ValidateNested()
   @Type(() => CreateAddressDto)
-  address?: Address[]
+  address?: Address[];
 
   @ApiProperty({
-    example: '1992-07-04'
+    example: '1992-07-04',
   })
   @IsOptional()
   @MaxLength(100)
-  image: string
+  image: string;
   // @IsArray()
   // @ValidateIf(x => x.address)
-
-
 }

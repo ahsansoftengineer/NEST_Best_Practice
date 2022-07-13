@@ -5,10 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Family } from './entities/family.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Family]),
-  ],
+  imports: [TypeOrmModule.forFeature([Family])],
   controllers: [FamilyController],
-  providers: [FamilyService]
+  providers: [FamilyService],
 })
 export class FamilyModule {}

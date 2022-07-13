@@ -7,6 +7,6 @@ import { ClassRoom } from './entities/class-room.entity';
 @Injectable()
 export class ClassRoomService extends BaseService {
   constructor(@InjectRepository(ClassRoom) public repo: Repository<ClassRoom>) {
-    super()
+    super();
   }
 }

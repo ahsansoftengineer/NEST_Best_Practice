@@ -1,4 +1,13 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Patch,
+  Param,
+  ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { PrincipalService } from './principal.service';
 import { CreatePrincipalDto } from './dto/create-principal.dto';
 import { UpdatePrincipalDto } from './dto/update-principal.dto';
@@ -8,31 +17,36 @@ import { FileUploadInterceptor } from 'core/interceptor';
 import { BaseController } from 'core/base';
 @ApiTags('principal')
 @Controller('principal')
-export class PrincipalController extends BaseController{
+export class PrincipalController extends BaseController {
   constructor(public _ss: PrincipalService) {
-    super()
+    super();
   }
   @Post()
   @UseInterceptors(FileUploadInterceptor)
   create(
-    @Body() body: CreatePrincipalDto, 
-    @UploadedFile() file: Express.Multer.File
+    @Body() body: CreatePrincipalDto,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    body.image = file.filename
+    body.image = file.filename;
     return this._ss.createSimple(body);
   }
 
   @Patch(':id')
   @UseInterceptors(FileUploadInterceptor)
   async update(
-    @Param('id', ParseIntPipe) id: number, 
+    @Param('id', ParseIntPipe) id: number,
     @Body() body: UpdatePrincipalDto,
-    @UploadedFile() file: Express.Multer.File
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    return this._ss.updateSimple(id, body, 
+    return this._ss.updateSimple(
+      id,
+      body,
       async (fetchedRecord, updateRecord) => {
-        await unlink('public/' + fetchedRecord.image).then().catch(console.log)
-        updateRecord.image = file.filename 
-    });
+        await unlink('public/' + fetchedRecord.image)
+          .then()
+          .catch(console.log);
+        updateRecord.image = file.filename;
+      },
+    );
   }
 }

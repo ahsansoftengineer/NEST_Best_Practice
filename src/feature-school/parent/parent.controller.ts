@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  UseInterceptors,
+  UploadedFiles,
+} from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
@@ -9,8 +20,8 @@ import { ParentService } from './parent.service';
 @ApiTags('parent')
 @Controller('parent')
 export class ParentController extends BaseController {
-  constructor(public  _ss: ParentService) {
-    super()
+  constructor(public _ss: ParentService) {
+    super();
   }
   @Post()
   create(@Body() data: CreateParentDto) {

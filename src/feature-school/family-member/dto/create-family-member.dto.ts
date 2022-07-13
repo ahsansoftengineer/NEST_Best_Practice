@@ -1,13 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, Min } from "class-validator";
-import { CreateDto } from "core/base";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, Min } from 'class-validator';
+import { CreateDto } from 'core/base';
 
 export class CreateFamilyMemberDto extends CreateDto {
   @ApiProperty()
   @IsNotEmpty()
   @Min(0)
   studentId: number;
-  
+
   @ApiProperty()
   @IsNotEmpty()
   @Min(0)
@@ -16,5 +16,5 @@ export class CreateFamilyMemberDto extends CreateDto {
   @ApiProperty()
   @IsNotEmpty()
   @Min(0)
-  familyId: number
+  familyId: number;
 }

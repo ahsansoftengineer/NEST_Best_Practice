@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { BaseModel } from './BaseModel';
 
 export class BaseService {
-  public repo: Repository<BaseModel>
+  public repo: Repository<BaseModel>;
   findAll() {
     return this.repo.find() || { message: `record does not exsist` };
   }
@@ -12,13 +12,13 @@ export class BaseService {
     });
   }
   createSimple(data: any) {
-      const result = this.repo.create(data);
-      return this.repo.save(result);
+    const result = this.repo.create(data);
+    return this.repo.save(result);
   }
-  async updateSimple(id: number, data: any, cb= null) {
+  async updateSimple(id: number, data: any, cb = null) {
     let result: any = await this.findOne(id);
-    if(cb) await cb(result, data)
-    if(result) result = await this.repo.update(id, data);
+    if (cb) await cb(result, data);
+    if (result) result = await this.repo.update(id, data);
     return result || { message: `id ${id} does not exsist` };
   }
   remove(id: number) {

@@ -7,13 +7,10 @@ import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from 'auth/auth.decorator';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {//jwt2, jwt3
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+  //jwt2, jwt3
   // Extracting Token form Headers
-  constructor(
-    private jwtService: JwtService,
-    private reflector: Reflector
-    
-    ) {
+  constructor(private jwtService: JwtService, private reflector: Reflector) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true, // production set it to false
@@ -22,8 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {//jwt2, jwt3
   }
 
   async validate(u: any) {
-    
-    const payload = { sub: u.id, username: u.username};
+    const payload = { sub: u.id, username: u.username };
     return {
       access_token: this.jwtService.sign(payload),
     };

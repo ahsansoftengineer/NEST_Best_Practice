@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'core/base';
@@ -8,8 +7,8 @@ import { UpdateParentDto } from './dto/update-parent.dto';
 import { Parent } from './entities/parent.entity';
 
 @Injectable()
-export class ParentService extends BaseService{
+export class ParentService extends BaseService {
   constructor(@InjectRepository(Parent) public repo: Repository<Parent>) {
-    super()
+    super();
   }
 }

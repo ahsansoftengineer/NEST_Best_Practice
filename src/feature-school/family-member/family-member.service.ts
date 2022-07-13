@@ -7,8 +7,10 @@ import { UpdateFamilyMemberDto } from './dto/update-family-member.dto';
 import { FamilyMember } from './entities/family-member.entity';
 
 @Injectable()
-export class FamilyMemberService extends BaseService{
-  constructor(@InjectRepository(FamilyMember) public repo: Repository<FamilyMember>) {
-    super()
+export class FamilyMemberService extends BaseService {
+  constructor(
+    @InjectRepository(FamilyMember) public repo: Repository<FamilyMember>,
+  ) {
+    super();
   }
 }

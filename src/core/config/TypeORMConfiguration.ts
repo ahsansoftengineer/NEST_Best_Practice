@@ -1,10 +1,14 @@
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { TypeOrmModule, TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { entities } from "core/constant";
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import {
+  TypeOrmModule,
+  TypeOrmModuleAsyncOptions,
+  TypeOrmModuleOptions,
+} from '@nestjs/typeorm';
+import { entities } from 'core/constant';
 
 // export default class TypeORMConfig {
 //   static getORMConfig(_ss: ConfigService): TypeOrmModuleOptions {
-    
+
 //     return {
 //       type: 'mysql',
 //       host: _ss.get('DB_HOST'),
@@ -19,9 +23,9 @@ import { entities } from "core/constant";
 //       // Other Settings
 //       retryDelay: 10000,
 //       retryAttempts: 2,
-//       // synchronize: true, 
+//       // synchronize: true,
 //       // dropSchema: true,
-    
+
 //       // logger: 'advanced-console',
 //       // migrations: [],
 //       // subscribers: [],
@@ -36,7 +40,7 @@ import { entities } from "core/constant";
 //   ),
 //   inject:[ConfigService]
 // }
-// STEP 1 
+// STEP 1
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'localhost',
@@ -45,9 +49,9 @@ export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   password: 'root',
   database: 'schoolmgmt',
   entities, // STEP 2
-  logging: ["query", "error"] /* true, 'all', new MyCustomLogger()*/,
+  logging: ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
   retryAttempts: 2,
-  // synchronize: true, 
+  // synchronize: true,
   // dropSchema: true,
-}
+};

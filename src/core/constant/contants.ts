@@ -1,3 +1,3 @@
-export const CONSTANT =  {
-  SALT : 10
-}
+export const CONSTANT = {
+  SALT: 10,
+};

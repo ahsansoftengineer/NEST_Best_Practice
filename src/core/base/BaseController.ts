@@ -2,7 +2,7 @@ import { Get, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { BaseService } from './index';
 
 export abstract class BaseController {
-  _ss: BaseService
+  _ss: BaseService;
   @Get()
   findAll() {
     return this._ss.findAll();

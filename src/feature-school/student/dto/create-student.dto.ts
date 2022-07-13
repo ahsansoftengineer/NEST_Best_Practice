@@ -1,5 +1,3 @@
-import { CreatePersonDto } from "feature-school/person/dto/create-person.dto";
+import { CreatePersonDto } from 'feature-school/person/dto/create-person.dto';
 
-export class CreateStudentDto extends CreatePersonDto{
-  
-}
+export class CreateStudentDto extends CreatePersonDto {}

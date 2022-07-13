@@ -9,7 +9,6 @@ import { Family } from './entities/family.entity';
 @Injectable()
 export class FamilyService extends BaseService {
   constructor(@InjectRepository(Family) public repo: Repository<Family>) {
-    super()
+    super();
   }
-
 }
