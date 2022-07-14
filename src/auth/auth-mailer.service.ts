@@ -1,6 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ENV } from 'core/constant';
 
 @Injectable()
 export class MailService {
@@ -12,7 +13,7 @@ export class MailService {
   async forgetPassword(to: string | string[], hased =  ''): Promise<any> {
     await this._ss.sendMail({
       to, // list of receivers
-      from: 'ahsansoftengineer@gmail.com', // sender address
+      from: ENV.MAIL_USER, // sender address
       subject: 'Testing Nest MailerModule ✔', // Subject line
       text: 'welcome', // plaintext body
       html: `

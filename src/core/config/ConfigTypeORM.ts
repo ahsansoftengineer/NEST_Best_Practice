@@ -2,15 +2,15 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { User } from 'auth/entities/user.entity';
-import { envar } from 'core/constant';
+import { ENV } from 'core/constant';
 // STEP 1
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
-  type: envar.DB_TYPE,
-  host: envar.DB_HOST,
-  port: envar.DB_PORT,
-  username: envar.DB_USERNAME,
-  password: envar.DB_PASSWORD,
-  database: envar.DB_DATABASE,
+  type: ENV.DB_TYPE,
+  host: ENV.DB_HOST,
+  port: ENV.DB_PORT,
+  username: ENV.DB_USERNAME,
+  password: ENV.DB_PASSWORD,
+  database: ENV.DB_DATABASE,
   entities: [User], // STEP 2
   logging: ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
