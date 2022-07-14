@@ -1,27 +1,27 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { User } from '@prisma/client';
+import { AppModule } from 'app.module';
+import { AuthService } from 'auth/auth.service';
+import { ROLE, User } from 'auth/entities/user.entity';
+import { Tokens } from 'auth/types';
 import { decode } from 'jsonwebtoken';
-import { AppModule } from '../../../app.module';
-import { PrismaService } from '../../../prisma/prisma.service';
-import { AuthService } from '../../auth.service';
-import { Tokens } from '../../types';
+import { Repository } from 'typeorm';
 
 const user = {
   email: 'test@gmail.com',
-  password: 'super-secret-password',
+  password: 'aBc@123',
+  confirmPassword: 'aBc@123',
+  role: ROLE.ADMIN
 };
 
 describe('Auth Flow', () => {
-  let prisma: PrismaService;
   let authService: AuthService;
   let moduleRef: TestingModule;
-
+  let repo: Repository<User>
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    prisma = moduleRef.get(PrismaService);
     authService = moduleRef.get(AuthService);
   });
 
@@ -31,14 +31,11 @@ describe('Auth Flow', () => {
 
   describe('signup', () => {
     beforeAll(async () => {
-      await prisma.cleanDatabase();
+      await repo.clear();
     });
 
     it('should signup', async () => {
-      const tokens = await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
+      const tokens = await authService.signupLocal(user);
 
       expect(tokens.access_token).toBeTruthy();
       expect(tokens.refresh_token).toBeTruthy();
@@ -47,29 +44,22 @@ describe('Auth Flow', () => {
     it('should throw on duplicate user signup', async () => {
       let tokens: Tokens | undefined;
       try {
-        tokens = await authService.signupLocal({
-          email: user.email,
-          password: user.password,
-        });
+        tokens = await authService.signupLocal(user);
       } catch (error) {
         expect(error.status).toBe(403);
       }
-
       expect(tokens).toBeUndefined();
     });
   });
 
   describe('signin', () => {
     beforeAll(async () => {
-      await prisma.cleanDatabase();
+      await repo.clear();
     });
     it('should throw if no existing user', async () => {
       let tokens: Tokens | undefined;
       try {
-        tokens = await authService.signinLocal({
-          email: user.email,
-          password: user.password,
-        });
+        tokens = await authService.signinLocal(user);
       } catch (error) {
         expect(error.status).toBe(403);
       }
@@ -78,15 +68,8 @@ describe('Auth Flow', () => {
     });
 
     it('should login', async () => {
-      await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
-
-      const tokens = await authService.signinLocal({
-        email: user.email,
-        password: user.password,
-      });
+      await authService.signupLocal(user);
+      const tokens = await authService.signinLocal(user);
 
       expect(tokens.access_token).toBeTruthy();
       expect(tokens.refresh_token).toBeTruthy();
@@ -109,7 +92,7 @@ describe('Auth Flow', () => {
 
   describe('logout', () => {
     beforeAll(async () => {
-      await prisma.cleanDatabase();
+      await repo.clear();
     });
 
     it('should pass if call to non existent user', async () => {
@@ -118,27 +101,20 @@ describe('Auth Flow', () => {
     });
 
     it('should logout', async () => {
-      await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
+      await authService.signupLocal(user);
 
       let userFromDb: User | null;
 
-      userFromDb = await prisma.user.findFirst({
-        where: {
-          email: user.email,
-        },
+      userFromDb = await repo.findOneBy({
+        email: user.email,
       });
       expect(userFromDb?.hashedRt).toBeTruthy();
 
       // logout
       await authService.logout(userFromDb!.id);
 
-      userFromDb = await prisma.user.findFirst({
-        where: {
-          email: user.email,
-        },
+      userFromDb = await repo.findOneBy({
+        email: user.email,
       });
 
       expect(userFromDb?.hashedRt).toBeFalsy();
@@ -147,7 +123,7 @@ describe('Auth Flow', () => {
 
   describe('refresh', () => {
     beforeAll(async () => {
-      await prisma.cleanDatabase();
+      await repo.clear();
     });
 
     it('should throw if no existing user', async () => {
@@ -163,10 +139,7 @@ describe('Auth Flow', () => {
 
     it('should throw if user logged out', async () => {
       // signup and save refresh token
-      const _tokens = await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
+      const _tokens = await authService.signupLocal(user);
 
       const rt = _tokens.refresh_token;
 
@@ -190,12 +163,9 @@ describe('Auth Flow', () => {
     });
 
     it('should throw if refresh token incorrect', async () => {
-      await prisma.cleanDatabase();
+      await repo.clear();
 
-      const _tokens = await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
+      const _tokens = await authService.signupLocal(user);
       console.log({
         _tokens,
       });
@@ -216,12 +186,9 @@ describe('Auth Flow', () => {
     });
 
     it('should refresh tokens', async () => {
-      await prisma.cleanDatabase();
+      await repo.clear()
       // log in the user again and save rt + at
-      const _tokens = await authService.signupLocal({
-        email: user.email,
-        password: user.password,
-      });
+      const _tokens = await authService.signupLocal(user);
 
       const rt = _tokens.refresh_token;
       const at = _tokens.access_token;
