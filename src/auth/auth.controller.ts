@@ -15,28 +15,32 @@ import { Tokens } from './types';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private _ss: AuthService) {}
 
   @Public()
   @Post('local/signup')
   @HttpCode(HttpStatus.CREATED)
-  signupLocal(@Body() dto: SignUpDto): Promise<Tokens> {
-    console.log(dto);
-    
-    return this.authService.signupLocal(dto);
+  signupLocal(@Body() body: SignUpDto): Promise<Tokens> {
+    return this._ss.signupLocal(body);
   }
 
   @Public()
   @Post('local/signin')
   @HttpCode(HttpStatus.OK)
-  signinLocal(@Body() dto: SignInDto): Promise<Tokens> {
-    return this.authService.signinLocal(dto);
+  signinLocal(@Body() body: SignInDto): Promise<Tokens> {
+    return this._ss.signinLocal(body);
+  }
+  @Public()
+  @Post('forget-password')
+  @HttpCode(HttpStatus.OK)
+  forgetPassword(@Body() body: {email: string}): Promise<Tokens> {
+    return this._ss.forgetPassword(body.email);
   }
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
-    return this.authService.logout(userId);
+    return this._ss.logout(userId);
   }
 
   @Public()
@@ -47,6 +51,6 @@ export class AuthController {
     @GetCurrentUserId() userId: number,
     @GetCurrentUser('refreshToken') refreshToken: string,
   ): Promise<Tokens> {
-    return this.authService.refreshTokens(userId, refreshToken);
+    return this._ss.refreshTokens(userId, refreshToken);
   }
 }

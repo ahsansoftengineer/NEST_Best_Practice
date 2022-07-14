@@ -18,12 +18,12 @@ export class User{
   })
   role: ROLE;
 
-  // @Index("username-idx")
+  // @Index("email-idx")
   @Column({
     length: 40,
     unique: true
   })
-  username: string;
+  email: string;
 
   @Column({ length: 1000 })
   password: string;

@@ -1,8 +1,9 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmModuleOptions } from 'core/config';
+import { configMailer, typeOrmModuleOptions } from 'core/config';
 import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './common/guards';
 
@@ -11,6 +12,7 @@ import { AtGuard } from './common/guards';
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule, 
     TypeOrmModule.forRoot(typeOrmModuleOptions),
+    MailerModule.forRoot(configMailer)
   ],
   providers: [
     {
@@ -18,5 +20,8 @@ import { AtGuard } from './common/guards';
       useClass: AtGuard,
     },
   ],
+  exports: [
+    MailerModule // Those modules has Services Must needs to be exported
+  ]
 })
 export class AppModule {}

@@ -1,6 +1,8 @@
-export * from './ServerStaticModuleConfig';
-export * from './SwaggerConfig';
-export * from './TypeORMConfiguration';
-export * from './ValidationConfig';
-export * from './SessionConfig';
+export * from './ConfigMailer';
+export * from './ConfigMulter';
+export * from './ConfigSession';
+export * from './ConfigStaticFiles';
+export * from './ConfigSwagger';
+export * from './ConfigTypeORM';
+export * from './ConfigValidation';
 // export * from './configuration'

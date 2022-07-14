@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailService } from './auth-mailer.service';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -14,6 +15,6 @@ import { AtStrategy, RtStrategy } from './strategies';
     
   ],
   controllers: [AuthController],
-  providers: [AuthService, AtStrategy, RtStrategy],
+  providers: [MailService, AuthService, AtStrategy, RtStrategy],
 })
 export class AuthModule {}

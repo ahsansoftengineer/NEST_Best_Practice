@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
 import { Repository } from 'typeorm';
+import { MailService } from './auth-mailer.service';
 // import * as argon from 'argon2';
 
 import { SignUpDto } from './dto';
@@ -14,24 +15,25 @@ import { JwtPayload, Tokens } from './types';
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
-    private config: ConfigService,
+    private _jwt: JwtService,
+    private _config: ConfigService,
+    private _mail: MailService ,
     @InjectRepository(User) public repo: Repository<User>
   ) {}
 
   async signupLocal(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
-    const existUser = await this.repo.findOneBy({username: data.username})
+    const existUser = await this.repo.findOneBy({email: data.email})
 
-    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.username);
+    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.email);
 
     const user =  this.repo.create({...data, password: hashResult});
     await this.repo.save(user).catch((error) => {
       throw new ForbiddenException('Credentials incorrect');
     })
     
-    const tokens = await this.getTokens(user.id, user.username);
+    const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
 
     return tokens;
@@ -39,17 +41,29 @@ export class AuthService {
 
   async signinLocal(dto: SignInDto): Promise<Tokens> {
 
-    const user = await this.repo.findOneBy({username: dto.username})
+    const user = await this.repo.findOneBy({email: dto.email})
 
     if (!user) throw new ForbiddenException('Access Denied');
 
     const passwordMatches = await argon.verify(user.password, dto.password);
     if (!passwordMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.username);
+    const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
 
     return tokens;
+  }
+
+  async forgetPassword(email: string){
+    const user = await this.repo.findOneBy({email})
+    if (!user) throw new ForbiddenException('Username is incorrect');
+    return this._mail.forgetPassword(email)
+  }
+
+  async changePassword(changePasswordCode: string){
+    const user = await this.repo.findOneBy({email})
+    if (!user) throw new ForbiddenException('Username is incorrect');
+    return this._mail.forgetPassword(email)
   }
 
   async logout(id: number): Promise<boolean> {
@@ -68,7 +82,7 @@ export class AuthService {
     const rtMatches = await argon.verify(user.hashedRt, rt);
     if (!rtMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.username);
+    const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
 
     return tokens;
@@ -79,19 +93,19 @@ export class AuthService {
     await this.repo.update(id, {hashedRt: hash})
   }
 
-  async getTokens(userId: number, username: string): Promise<Tokens> {
+  async getTokens(userId: number, email: string): Promise<Tokens> {
     const jwtPayload: JwtPayload = {
       sub: userId,
-      username: username,
+      email: email,
     };
 
     const [at, rt] = await Promise.all([
-      this.jwtService.signAsync(jwtPayload, {
-        secret: this.config.get<string>('AT_SECRET'),
+      this._jwt.signAsync(jwtPayload, {
+        secret: this._config.get<string>('AT_SECRET'),
         expiresIn: '15m',
       }),
-      this.jwtService.signAsync(jwtPayload, {
-        secret: this.config.get<string>('RT_SECRET'),
+      this._jwt.signAsync(jwtPayload, {
+        secret: this._config.get<string>('RT_SECRET'),
         expiresIn: '7d',
       }),
     ]);

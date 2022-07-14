@@ -11,7 +11,7 @@ nest new project-name
 ```
 ### Dependencies
 ```java
-npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2
+npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse
 ```
 ### DevDependencies
 ```java
@@ -96,7 +96,7 @@ export class FeatureSchoolModule { }
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'root',
+      email: 'root',
       password: 'root',
       database: 'schoolmgmt',
       // This how you Registered your Model Classes

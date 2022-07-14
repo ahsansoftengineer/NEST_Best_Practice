@@ -4,11 +4,11 @@ import { IsNotEmpty, Length, Matches } from 'class-validator';
 export class SignInDto {
   @ApiProperty({
     description:
-      'username for the Token is required Length must be 7 to 20 charcter',
+      'email for the Token is required Length must be 7 to 20 charcter',
   })
   @IsNotEmpty()
   @Length(7, 20)
-  username: string;
+  email: string;
 
   // @BeforeInsert()
   // async hashPassword() {
