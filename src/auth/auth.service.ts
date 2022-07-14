@@ -61,9 +61,9 @@ export class AuthService {
   }
 
   async changePassword(changePasswordCode: string){
-    const user = await this.repo.findOneBy({email})
-    if (!user) throw new ForbiddenException('Username is incorrect');
-    return this._mail.forgetPassword(email)
+    // const user = await this.repo.findOneBy({email})
+    // if (!user) throw new ForbiddenException('Username is incorrect');
+    // return this._mail.forgetPassword(email)
   }
 
   async logout(id: number): Promise<boolean> {

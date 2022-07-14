@@ -1,1 +1,1 @@
-export * from './EnvConfig'
+export * from './Environment'

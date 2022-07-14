@@ -8,7 +8,8 @@ export class MailService {
     private _config: ConfigService,
     private readonly _ss: MailerService,
   ) {}
-  async forgetPassword(to: string | string[]): Promise<any> {
+  // hasedString (email, id of changed password table)
+  async forgetPassword(to: string | string[], hased =  ''): Promise<any> {
     await this._ss.sendMail({
       to, // list of receivers
       from: 'ahsansoftengineer@gmail.com', // sender address
@@ -16,7 +17,7 @@ export class MailService {
       text: 'welcome', // plaintext body
       html: `
         <h1>Message Heading</h1>
-        <a href>change password</a>
+        <a href="http://localhost:3000/changePassword/${hased}">change password</a>
         <p> this is some paragraph </p>
       `,
       // template:  __dirname + 'welcome',//The `.pug .ejs .hbs` extension is appended automatically.
