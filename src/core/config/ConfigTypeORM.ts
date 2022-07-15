@@ -4,7 +4,7 @@ import {
 import { ENV } from 'core/constant';
 import { entities } from 'core/utils/entities';
 // STEP 1
-export const typeOrmModuleOptions: TypeOrmModuleOptions = {
+export const configTypeORM: TypeOrmModuleOptions = {
   type: ENV.DB_TYPE,
   host: ENV.DB_HOST,
   port: ENV.DB_PORT,

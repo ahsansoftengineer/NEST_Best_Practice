@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { configMailer, typeOrmModuleOptions } from 'core/config';
+import { configMailer, configStaticFiles, configTypeORM } from 'core/config';
 import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 
@@ -14,8 +14,9 @@ import { AtGuard } from './core/guards';
     MulterModule.register({
       dest: './public',
     }),
+    configStaticFiles,
     AuthModule, 
-    TypeOrmModule.forRoot(typeOrmModuleOptions),
+    TypeOrmModule.forRoot(configTypeORM),
     MailerModule.forRoot(configMailer)
   ],
   providers: [

@@ -1,9 +1,16 @@
-import { DocumentBuilder } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-export const SwaggerConfig = new DocumentBuilder()
-  .setTitle('School Management System (AHSAN)')
+export const configSwagger = (app) =>  {
+  const swaggerDoc = new DocumentBuilder()
+  .setTitle('Karachi Lawyer Portal (KLP)')
   .setDescription(
-    'This application has five major roles (Admin, Headmaster, Teacher, Parents, Student)',
+    'This Application in Process',
   )
   .setVersion('1.0.0')
-  .build();
+  .build()
+  SwaggerModule.setup(
+    '/', app,
+    SwaggerModule.createDocument(app,  swaggerDoc)
+  )
+}
+  

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ROLE } from 'auth/entities/user.entity';
 import { IsEnum, IsNotEmpty, Length } from 'class-validator';
-import { Match } from 'core/utils';
+import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
 
 export class SignUpDto extends SignInDto {

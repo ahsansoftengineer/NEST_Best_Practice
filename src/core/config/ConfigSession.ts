@@ -1,6 +1,6 @@
 import * as session from 'express-session';
 
-export const SessionConfig = session({
+export const configSession = session({
   name: 'NESTJS_SESSION_ID_AHSAN',
   secret: 'secret',
   resave: false,

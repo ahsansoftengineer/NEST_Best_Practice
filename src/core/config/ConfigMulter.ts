@@ -5,7 +5,7 @@ import {
 } from '@nestjs/platform-express';
 
 @Injectable()
-export class MulterConfigService implements MulterOptionsFactory {
+export class configMulter implements MulterOptionsFactory {
   createMulterOptions(): MulterModuleOptions {
     return {
       dest: './public',
