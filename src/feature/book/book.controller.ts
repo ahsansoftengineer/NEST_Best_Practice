@@ -1,16 +1,19 @@
 import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
+import { Public } from 'core/decorators';
 import { InterceptorImage, InterceptorPDF } from 'core/interceptor';
 import { unlink } from 'fs/promises';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 
 @Controller('book')
+@ApiTags('book')
 export class BookController extends BaseController{
   constructor(public _ss: BookService) {
     super()
   }
-
+  @Public()
   @Post()
   @UseInterceptors(InterceptorImage, InterceptorPDF)
   create(
@@ -20,6 +23,10 @@ export class BookController extends BaseController{
   ) {
     body.image = image.filename;
     body.pdf = pdf.filename;
+    console.log(body);
+    console.log(image);
+    console.log(pdf);
+    
     return this._ss.createSimple(body);
   }
 

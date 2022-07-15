@@ -6,6 +6,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
 import { RtGuard } from '../core/guards';
@@ -14,18 +15,19 @@ import { SignInDto, SignUpDto } from './dto';
 import { Tokens } from './types';
 
 @Controller('auth')
+@ApiTags('auth')
 export class AuthController {
   constructor(private _ss: AuthService) {}
 
   @Public()
-  @Post('local/signup')
+  @Post('local/sign-up')
   @HttpCode(HttpStatus.CREATED)
   signupLocal(@Body() body: SignUpDto): Promise<Tokens> {
     return this._ss.signupLocal(body);
   }
 
   @Public()
-  @Post('local/signin')
+  @Post('local/sign-in')
   @HttpCode(HttpStatus.OK)
   signinLocal(@Body() body: SignInDto): Promise<Tokens> {
     return this._ss.signinLocal(body);
