@@ -7,10 +7,10 @@ export class CreateBookDto extends CreateDto {
   @ApiProperty()
   // @IsNotEmpty()
   @Length(3, 200)
-  bookImage: string;
+  image: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @Length(3, 200)
-  bookPDF: string;
+  pdf: string;
 }

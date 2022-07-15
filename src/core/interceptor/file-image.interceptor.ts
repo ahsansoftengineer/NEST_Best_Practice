@@ -26,3 +26,13 @@ export const FileImageTypeInterceptor = (req, file, callback) => {
   }
   callback(null, true);
 };
+
+export const FilePDFTypeInterceptor = (req, file, callback) => {
+  if (!file.originalname.match(/\.(pdf)$/)) {
+    return callback(
+      new HttpException('Only pdf files are allowed!', HttpStatus.FORBIDDEN),
+      false,
+    );
+  }
+  callback(null, true);
+};

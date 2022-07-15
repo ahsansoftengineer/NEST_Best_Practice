@@ -1,5 +1,5 @@
-import { Get, Param, Delete, ParseIntPipe } from '@nestjs/common';
-import { BaseService } from './index';
+import { Get, Param, Delete, ParseIntPipe, Post, Body, Patch } from '@nestjs/common';
+import { BaseService, CreateDto } from './index';
 
 export abstract class BaseController {
   _ss: BaseService;
@@ -15,4 +15,16 @@ export abstract class BaseController {
   remove(@Param('id') id: number) {
     return this._ss.remove(+id);
   }
+  
+  // @Post()
+  // create(@Body() body: CreateDto) {
+  //   return this._ss.createSimple(body);
+  // }
+  // @Patch(':id')
+  // update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @Body() body: CreateDto,
+  // ) {
+  //   return this._ss.updateSimple(id, body);
+  // }
 }

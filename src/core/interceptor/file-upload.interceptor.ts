@@ -5,7 +5,15 @@ import { FileImageTypeInterceptor, FileRenameInterceptor } from './index';
 
 export const Uploads = join(__dirname, '.', 'assests/uploads');
 
-export const FileUploadInterceptor = FileInterceptor('image', {
+export const InterceptorImage = FileInterceptor('image', {
+  storage: diskStorage({
+    destination: 'public',
+    filename: FileRenameInterceptor,
+  }),
+  fileFilter: FileImageTypeInterceptor,
+});
+
+export const InterceptorPDF = FileInterceptor('pdf', {
   storage: diskStorage({
     destination: 'public',
     filename: FileRenameInterceptor,
