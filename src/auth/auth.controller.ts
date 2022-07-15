@@ -4,10 +4,14 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'core/decorators/roles.decorator';
+import { HandleUniqueError } from 'core/error/HandleUniqueError';
+import { InterceptorImage } from 'core/interceptor';
 
 import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
 import { RtGuard } from '../core/guards';
@@ -23,8 +27,17 @@ export class AuthController {
   @Public()
   @Post('local/sign-up')
   @HttpCode(HttpStatus.CREATED)
-  signupLocal(@Body() body: SignUpDto): Promise<Tokens> {
-    return this._ss.signupLocal(body);
+  @UseInterceptors(InterceptorImage)
+  signupLocal(
+    @Body() body: SignUpDto,
+    @UploadedFile() image: Express.Multer.File,
+    ): Promise<Tokens> {
+    body.image = image.filename
+    try{
+      return this._ss.signupLocal(body);
+    }catch(e){
+      HandleUniqueError(e)
+    }
   }
 
   @Public()

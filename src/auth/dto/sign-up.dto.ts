@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, Length } from 'class-validator';
+import { COURT, GENDER, SPECIALIZATION } from 'auth/entities/user.entity';
+import { IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
 import { ROLE } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
@@ -12,7 +13,7 @@ export class SignUpDto extends SignInDto {
   })
   @IsNotEmpty()
   @IsEnum(ROLE, {
-    message: 'Type must be (Admin, Layer, Client',
+    message: 'Type must be (Admin, Lawyer, Client, User)',
   })
   role: ROLE;
 
@@ -26,4 +27,46 @@ export class SignUpDto extends SignInDto {
     message: 'Confirm Password does not match with the Password',
   })
   confirmPassword: string;
+
+  @IsNotEmpty()
+  @Length(11, 17)
+  mobile: string;
+
+  @ApiProperty({
+    enum: GENDER,
+    isArray: false,
+    example: GENDER.MALE,
+  })
+  @IsNotEmpty()
+  @IsEnum(GENDER)
+  gender: GENDER;
+
+  @IsNotEmpty()
+  city: string;
+
+  @ApiProperty({
+    enum: SPECIALIZATION,
+    isArray: false,
+    example: SPECIALIZATION.CIVIL,
+  })
+  @IsNotEmpty()
+  @IsEnum(SPECIALIZATION)
+  specialization: SPECIALIZATION;
+
+  @ApiProperty({
+    enum: COURT,
+    isArray: false,
+    example: COURT.HIGH,
+  })
+  @IsNotEmpty()
+  @IsEnum(COURT)
+  court: COURT;
+
+  // @IsNotEmpty()
+  // @Length(11, 17)
+  @IsOptional()
+  address: string;
+
+  @IsOptional()
+  image: string;
 }

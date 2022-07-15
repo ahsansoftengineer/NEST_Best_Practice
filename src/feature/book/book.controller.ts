@@ -22,8 +22,8 @@ export class BookController extends BaseController{
   @Post()
   @UseInterceptors(Interceptor_Files_PDF_Image)
   uploadFile(
-    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
     @Body() body: CreateBookDto,
+    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
     ) {
       body.image = files.image[0].filename
       body.pdf = files.pdf[0].filename
