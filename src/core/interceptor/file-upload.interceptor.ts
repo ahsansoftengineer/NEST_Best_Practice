@@ -1,7 +1,7 @@
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
-import { FileImageTypeInterceptor, FileRenameInterceptor } from './index';
+import { FileImageTypeInterceptor, FileRenameInterceptor, FilePDFTypeInterceptor } from './index';
 
 export const Uploads = join(__dirname, '.', 'assests/uploads');
 
@@ -18,5 +18,5 @@ export const InterceptorPDF = FileInterceptor('pdf', {
     destination: 'public',
     filename: FileRenameInterceptor,
   }),
-  fileFilter: FileImageTypeInterceptor,
+  fileFilter: FilePDFTypeInterceptor,
 });

@@ -1,6 +1,6 @@
 import { BaseModel } from "core/base";
-import { Column } from "typeorm";
-
+import { Column, Entity } from "typeorm";
+@Entity()
 export class Book extends BaseModel{
 
   @Column({ nullable: true, length: 200, default: '' })

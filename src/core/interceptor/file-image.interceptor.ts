@@ -18,6 +18,8 @@ import { Observable } from 'rxjs';
 //   }
 // }
 export const FileImageTypeInterceptor = (req, file, callback) => {
+  console.log('image => ', file);
+  
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
     return callback(
       new HttpException('Only image files are allowed!', HttpStatus.FORBIDDEN),
@@ -28,6 +30,7 @@ export const FileImageTypeInterceptor = (req, file, callback) => {
 };
 
 export const FilePDFTypeInterceptor = (req, file, callback) => {
+  console.log('pdf => ', file);
   if (!file.originalname.match(/\.(pdf)$/)) {
     return callback(
       new HttpException('Only pdf files are allowed!', HttpStatus.FORBIDDEN),

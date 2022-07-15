@@ -15,7 +15,7 @@ import { AtGuard } from './core/guards';
     MulterModule.register({
       dest: './public',
     }),
-    configStaticFiles,
+    // configStaticFiles,
     TypeOrmModule.forRoot(configTypeORM),
     MailerModule.forRoot(configMailer),
     AuthModule, 

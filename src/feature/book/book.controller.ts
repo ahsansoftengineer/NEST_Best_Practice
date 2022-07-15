@@ -21,13 +21,13 @@ export class BookController extends BaseController{
     @UploadedFile('image') image: Express.Multer.File,
     @UploadedFile('pdf') pdf: Express.Multer.File,
   ) {
-    body.image = image.filename;
-    body.pdf = pdf.filename;
+    // body.image = image.filename;
+    // body.pdf = pdf.filename;
     console.log(body);
     console.log(image);
     console.log(pdf);
     
-    return this._ss.createSimple(body);
+    // return this._ss.createSimple(body);
   }
 
   @Patch(':id')
