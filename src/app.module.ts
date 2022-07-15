@@ -13,9 +13,9 @@ import { AtGuard } from './core/guards';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     MulterModule.register({
-      dest: './public',
+      dest: '../public',
     }),
-    // configStaticFiles,
+    configStaticFiles,
     TypeOrmModule.forRoot(configTypeORM),
     MailerModule.forRoot(configMailer),
     AuthModule, 

@@ -1,12 +1,22 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
+import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Public } from 'core/decorators';
-import { InterceptorImage, InterceptorPDF } from 'core/interceptor';
+import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
+import { extname } from 'path';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 
+const fileTypeFilter = (req, file, callback) => {
+  const ext = extname(file.originalname);
+  if ('jpg|jpeg|png|gif|pdf'.indexOf(ext.substring(1, ext.length)) == -1) {
+    req.fileValidationError = 'Invalid file type';
+    return callback(new Error('Invalid file type'), false);
+  }
+  return callback(null, true);
+};
 @Controller('book')
 @ApiTags('book')
 export class BookController extends BaseController{
@@ -15,23 +25,28 @@ export class BookController extends BaseController{
   }
   @Public()
   @Post()
-  @UseInterceptors(InterceptorImage, InterceptorPDF)
+  @UseInterceptors(FilesInterceptor('files[]', 2, {
+      fileFilter: fileTypeFilter,
+    })
+  )
+
   create(
-    @Body() body: CreateBookDto,
-    @UploadedFile('image') image: Express.Multer.File,
-    @UploadedFile('pdf') pdf: Express.Multer.File,
+    @Body() body: any,
+    @UploadedFiles() files ,
+    // @UploadedFile('pdf') pdf: Express.Multer.File,
   ) {
     // body.image = image.filename;
     // body.pdf = pdf.filename;
     console.log(body);
-    console.log(image);
-    console.log(pdf);
-    
+    console.log(files);
+    // console.log(pdf);
+    // console.log(pdf);
+    return true
     // return this._ss.createSimple(body);
   }
 
   @Patch(':id')
-  @UseInterceptors(InterceptorImage, InterceptorPDF)
+  @UseInterceptors(InterceptorImage)
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: CreateBookDto,
@@ -59,3 +74,5 @@ export class BookController extends BaseController{
   
 
 }
+
+
