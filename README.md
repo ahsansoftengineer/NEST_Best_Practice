@@ -13,7 +13,7 @@ nest new project-name
 * * Don't know the use case of dotenv cli
 ### Dependencies
 ```java
-npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse
+npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli
 ```
 ### DevDependencies
 ```java
