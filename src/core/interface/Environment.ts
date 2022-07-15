@@ -5,5 +5,7 @@ export interface Environment{
   DB_PORT: number
   DB_USERNAME: string
   DB_PASSWORD: string
+  DB_SYNC: boolean
+  DB_DROP: boolean
   [name: string]: any
 }

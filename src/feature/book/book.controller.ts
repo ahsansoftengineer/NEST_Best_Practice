@@ -1,7 +1,9 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Public } from 'core/decorators';
+import { GlobalExceptionFilter } from 'core/error/GlobalExceptionFilter';
+import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage, Interceptor_Files_PDF_Image } from 'core/interceptor';
 // import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
@@ -10,6 +12,8 @@ import { CreateBookDto } from './dto/create-book.dto';
 
 @Controller('book')
 @ApiTags('book')
+@Catch(GlobalExceptionFilter)
+//QueryFailedError, EntityNotFoundError
 export class BookController extends BaseController{
   constructor(public _ss: BookService) {
     super()
@@ -23,7 +27,10 @@ export class BookController extends BaseController{
     ) {
       body.image = files.image[0].filename
       body.pdf = files.pdf[0].filename
-      return this._ss.createSimple(body);
+      return this._ss.createSimple(body).catch(e => {
+        return HandleUniqueError(e)
+      });
+        
   }
 
   @Patch(':id')
@@ -40,8 +47,8 @@ export class BookController extends BaseController{
         await unlink('public/' + fetchedRecord.image, )
           .then()
           .catch(console.log);
-          updateRecord.image = files.image[0].filename;
-          updateRecord.pdf = files.pdf[0].filename;
+          if(files?.image[0]) updateRecord.image = files.image[0].filename;
+          if(files?.pdf[0]) updateRecord.pdf = files.pdf[0].filename;
       },
     );
   }
