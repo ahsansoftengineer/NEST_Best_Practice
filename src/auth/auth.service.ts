@@ -9,6 +9,7 @@ import { MailService } from './auth-mailer.service';
 
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
+import { UpdateUser } from './dto/user-update.dto';
 import { User } from './entities/user.entity';
 import { JwtPayload, Tokens } from './types';
 
@@ -20,7 +21,7 @@ export class AuthService {
     private _mail: MailService ,
     @InjectRepository(User) public repo: Repository<User>
   ) {}
-
+ 
   async signupLocal(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
@@ -38,7 +39,14 @@ export class AuthService {
 
     return tokens;
   }
-
+  async updateUser(email: string, data: UpdateUser, oldData: User){
+    const hashResult = await argon.hash(data.password);
+    if(oldData.password != hashResult) data.password = hashResult
+    else delete data.password
+    delete data.email
+    return await this.repo.update({email}, {...data});
+    
+  }
   async signinLocal(dto: SignInDto): Promise<Tokens> {
 
     const user = await this.repo.findOneBy({email: dto.email})

@@ -2,7 +2,11 @@ import {
   Body,
   Controller,
   HttpCode,
+  HttpException,
   HttpStatus,
+  Param,
+  ParseIntPipe,
+  Patch,
   Post,
   UploadedFile,
   UseGuards,
@@ -12,11 +16,13 @@ import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'core/decorators/roles.decorator';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage } from 'core/interceptor';
+import { unlink } from 'fs/promises';
 
 import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
 import { RtGuard } from '../core/guards';
 import { AuthService } from './auth.service';
 import { SignInDto, SignUpDto } from './dto';
+import { UpdateUser } from './dto/user-update.dto';
 import { Tokens } from './types';
 
 @Controller('auth')
@@ -39,7 +45,22 @@ export class AuthController {
       HandleUniqueError(e)
     }
   }
-
+  @Patch('user/:email')
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(InterceptorImage)
+  async updateUser(
+    @Body() body: UpdateUser,
+    @Param('email', ParseIntPipe) email: string,
+    @UploadedFile() image: Express.Multer.File,
+    ){
+      const result = await this._ss.repo.findOneBy({email})
+      if(!result) throw new HttpException(`email ${email} does not exsist`, HttpStatus.NOT_FOUND)
+      if(image){
+        await unlink('public/' + result.image)
+        body.image = image.filename
+      }
+      return this._ss.updateUser(email, body, result);
+  }
   @Public()
   @Post('local/sign-in')
   @HttpCode(HttpStatus.OK)
