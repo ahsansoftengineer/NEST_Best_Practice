@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { BookModule } from './book/book.module';
 
-@Module({})
+@Module({
+  imports: [BookModule]
+})
 export class FeatureModule {}
