@@ -1,22 +1,13 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
-import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Public } from 'core/decorators';
-import { InterceptorImage } from 'core/interceptor';
+import { InterceptorImage, Interceptor_Files_PDF_Image } from 'core/interceptor';
+// import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
-import { extname } from 'path';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 
-const fileTypeFilter = (req, file, callback) => {
-  const ext = extname(file.originalname);
-  if ('jpg|jpeg|png|gif|pdf'.indexOf(ext.substring(1, ext.length)) == -1) {
-    req.fileValidationError = 'Invalid file type';
-    return callback(new Error('Invalid file type'), false);
-  }
-  return callback(null, true);
-};
 @Controller('book')
 @ApiTags('book')
 export class BookController extends BaseController{
@@ -25,54 +16,34 @@ export class BookController extends BaseController{
   }
   @Public()
   @Post()
-  @UseInterceptors(FilesInterceptor('files[]', 2, {
-      fileFilter: fileTypeFilter,
-    })
-  )
-
-  create(
-    @Body() body: any,
-    @UploadedFiles() files ,
-    // @UploadedFile('pdf') pdf: Express.Multer.File,
-  ) {
-    // body.image = image.filename;
-    // body.pdf = pdf.filename;
-    console.log(body);
-    console.log(files);
-    // console.log(pdf);
-    // console.log(pdf);
-    return true
-    // return this._ss.createSimple(body);
+  @UseInterceptors(Interceptor_Files_PDF_Image)
+  uploadFile(
+    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
+    @Body() body: CreateBookDto,
+    ) {
+      body.image = files.image[0].filename
+      body.pdf = files.pdf[0].filename
+      return this._ss.createSimple(body);
   }
 
   @Patch(':id')
-  @UseInterceptors(InterceptorImage)
+  @UseInterceptors(Interceptor_Files_PDF_Image)
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: CreateBookDto,
-    @UploadedFile('image') image: Express.Multer.File,
-    @UploadedFile('pdf') pdf: Express.Multer.File,
+    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
   ) {
     return this._ss.updateSimple(
       id,
       body,
-      // (fetchedRecord, updateRecord) => {
-      //   unlinkSync('public/' + fetchedRecord.image);
-      //   updateRecord.image = image.filename;
-      //   updateRecord.pdf = pdf.filename;
-      // },
       async (fetchedRecord, updateRecord) => {
         await unlink('public/' + fetchedRecord.image, )
           .then()
           .catch(console.log);
-          updateRecord.image = image.filename;
-          updateRecord.pdf = pdf.filename;
+          updateRecord.image = files.image[0].filename;
+          updateRecord.pdf = files.pdf[0].filename;
       },
     );
   }
 
-  
-
 }
-
-
