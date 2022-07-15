@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Roles } from 'core/decorators/roles.decorator';
 
 import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
 import { RtGuard } from '../core/guards';
@@ -46,6 +47,7 @@ export class AuthController {
   }
 
   @Public()
+  // @Roles()
   @UseGuards(RtGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)

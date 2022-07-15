@@ -1,11 +1,5 @@
+import { ROLE } from "core/enums";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-
-export enum ROLE {
-  ADMIN = 'Admin',
-  LAYER = 'Layer',
-  CLIENT = 'Client',
-}
-
 @Entity()
 export class User{
   @PrimaryGeneratedColumn()
