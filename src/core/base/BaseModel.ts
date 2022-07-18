@@ -2,10 +2,8 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  VersionColumn,
 } from 'typeorm';
 
 export class BaseModel extends BaseEntity {
@@ -16,7 +14,7 @@ export class BaseModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 40 })
+  @Column({ length: 100 })
   title: string;
 
   @Column({ nullable: true, length: 150, default: '' })

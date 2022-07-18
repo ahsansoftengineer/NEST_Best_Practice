@@ -1,3 +1,4 @@
+import { unlink } from 'fs/promises';
 import { Repository } from 'typeorm';
 import { BaseModel } from './BaseModel';
 
@@ -24,5 +25,8 @@ export class BaseService {
   remove(id: number) {
     // return this.repo.delete(id);
     return this.repo.delete({ id });
+  }
+  delFile(filename: string){
+    return unlink('public/' + filename).catch(console.log);
   }
 }

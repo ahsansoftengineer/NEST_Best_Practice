@@ -1,16 +1,13 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch, Get, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { GetCurrentUser, GetCurrentUserId, Public } from 'core/decorators';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { GlobalExceptionFilter } from 'core/error/GlobalExceptionFilter';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
-import { InterceptorImage, Interceptor_Files_PDF_Image } from 'core/interceptor';
-// import { InterceptorImage } from 'core/interceptor';
-import { unlink } from 'fs/promises';
+import { Interceptor_Files_PDF_Image } from 'core/interceptor';
 import { BookService } from './book.service';
-import { CreateBookDto } from './dto/create-book.dto';
+import { CreateBookDto } from './dto/book.dto';
 
 @Controller('book')
 @ApiTags('book')
@@ -50,11 +47,11 @@ export class BookController extends BaseController{
       body,
       async (fetchedRecord, updateRecord) => {
         if(files?.image) {
-          this.deleteFiles(fetchedRecord.image)
+          this._ss.delFile(fetchedRecord.image)
           updateRecord.image = files.image[0].filename;
         }
         if(files?.pdf) {
-          this.deleteFiles(fetchedRecord.pdf)
+          this._ss.delFile(fetchedRecord.pdf)
           updateRecord.pdf = files.pdf[0].filename;
         }
       },
@@ -67,15 +64,12 @@ export class BookController extends BaseController{
     const result = await this._ss.repo.findOneBy({id})
     if(result){
       return this._ss.remove(+id).then(x => {
-        this.deleteFiles(result.image)
-        this.deleteFiles(result.pdf)      
+        this._ss.delFile(result.image)
+        this._ss.delFile(result.pdf)      
         return x
       })
     }
   }
-  deleteFiles(filename: string){
-    console.log({filename});
-    return unlink('public/' + filename).catch(console.log);
-  }
+
 
 }
