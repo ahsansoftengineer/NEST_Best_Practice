@@ -15,13 +15,7 @@ export class RolesGuard implements CanActivate {
     if (!roles) {
       return true;
     }
-    const {role} = context.switchToHttp().getRequest();
-    console.log({role});
-    console.log({roles});
-    
-    const result  = roles?.some((a) => a == role);
-    console.log({result});
-    return result
-    
+    const request = context.switchToHttp().getRequest();
+    return roles?.some((a) => a == request.user?.role);// This User is being set by AT Strategy
   }
 }

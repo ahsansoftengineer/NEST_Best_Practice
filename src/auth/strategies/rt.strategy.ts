@@ -7,13 +7,13 @@ import { JwtPayload, JwtPayloadWithRt } from '../types';
 import { ENV } from 'core/constant';
 
 @Injectable()
-export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
+export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
   constructor(config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      passReqToCallback: true,
       secretOrKey: ENV.RT_SECRET,
       // secretOrKey: config.get<string>('RT_SECRET'),
-      passReqToCallback: true,
     });
   }
 
@@ -24,8 +24,6 @@ export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
       .trim();
 
     if (!refreshToken) throw new ForbiddenException('Refresh token malformed');
-    console.log({RT_Strategy: {...payload, refreshToken}});
-    
     return {
       ...payload,
       refreshToken,

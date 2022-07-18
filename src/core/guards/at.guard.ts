@@ -5,7 +5,7 @@ import { ROLES_KEY } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 
 @Injectable() // Access Token Guard
-export class AtGuard extends AuthGuard('jwt') {
+export class AtGuard extends AuthGuard('jwt-access-token') {
   constructor(private reflector: Reflector) {
     super();
   }
@@ -16,11 +16,6 @@ export class AtGuard extends AuthGuard('jwt') {
       context.getClass(),
     ]);
     if (isPublic) return true;
-    const requiredRoles = this.reflector.getAllAndOverride<ROLE[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-    if (requiredRoles) return true
     return super.canActivate(context);
   }
 }

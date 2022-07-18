@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Public } from 'core/decorators';
+import { GetCurrentUser, GetCurrentUserId, Public } from 'core/decorators';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { GlobalExceptionFilter } from 'core/error/GlobalExceptionFilter';
@@ -20,9 +20,8 @@ export class BookController extends BaseController{
   constructor(public _ss: BookService) {
     super()
   }
-  @Public()
   @Post()
-  @Roles(ROLE.LAWYER)
+  @Roles(ROLE.ADMIN)
   @UseInterceptors(Interceptor_Files_PDF_Image)
   uploadFile(
     @Body() body: CreateBookDto,
