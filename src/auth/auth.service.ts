@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
+import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 // import * as argon from 'argon2';
@@ -34,17 +35,14 @@ export class AuthService {
       throw new ForbiddenException('Credentials incorrect');
     })
     
-    const tokens = await this.getTokens(user.id, user.email);
-    await this.updateRtHash(user.id, tokens.refresh_token);
-
-    return tokens;
+    return this.returnGeneratedToken(user)
   }
   async updateUser(email: string, data: UpdateUser, oldData: User){
     const hashResult = await argon.hash(data.password);
     if(oldData.password != hashResult) data.password = hashResult
     else delete data.password
     delete data.email
-    return await this.repo.update({email}, {...data});
+    return this.repo.update({email}, {...data});
     
   }
   async signinLocal(dto: SignInDto): Promise<Tokens> {
@@ -56,10 +54,7 @@ export class AuthService {
     const passwordMatches = await argon.verify(user.password, dto.password);
     if (!passwordMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.email);
-    await this.updateRtHash(user.id, tokens.refresh_token);
-
-    return tokens;
+    return this.returnGeneratedToken(user)
   }
 
   async forgetPassword(email: string){
@@ -90,21 +85,19 @@ export class AuthService {
     const rtMatches = await argon.verify(user.hashedRt, rt);
     if (!rtMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.email);
+    return this.returnGeneratedToken(user)
+  }
+  async returnGeneratedToken(user: User){
+    const tokens = await this.getTokens(user.id, user.email, user.role);
     await this.updateRtHash(user.id, tokens.refresh_token);
-
+    tokens.user = this.returnedSearializedUser(user)
     return tokens;
   }
-
-  async updateRtHash(id: number, rt: string): Promise<void> {
-    const hash = await argon.hash(rt);
-    await this.repo.update(id, {hashedRt: hash})
-  }
-
-  async getTokens(userId: number, email: string): Promise<Tokens> {
+  async getTokens(id: number, email: string, role: ROLE): Promise<Tokens> {
     const jwtPayload: JwtPayload = {
-      sub: userId,
-      email: email,
+      sub: id,
+      email,
+      role
     };
 
     const [at, rt] = await Promise.all([
@@ -123,4 +116,12 @@ export class AuthService {
       refresh_token: rt,
     };
   }
+  async updateRtHash(id: number, rt: string): Promise<void> {
+    const hash = await argon.hash(rt);
+    await this.repo.update(id, {hashedRt: hash})
+  }
+  returnedSearializedUser({name, email, gender, mobile, address,city, court, image, role}: User){
+    return {name, email, gender, mobile, address, city, court, image, role}
+  }
+
 }

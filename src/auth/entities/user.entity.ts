@@ -22,19 +22,21 @@ export class User{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    type: 'enum',
-    enum: ROLE,
-    nullable: true,
-  })
-  role: ROLE;
-
+  @Column({length: 60})
+  name: string;
   // @Index("email-idx")
   @Column({
     length: 40,
     unique: true
   })
   email: string;
+
+  @Column({
+    type: 'enum',
+    enum: ROLE,
+    nullable: true,
+  })
+  role: ROLE;
 
   @Column({ length: 1000 })
   password: string;
@@ -62,7 +64,7 @@ export class User{
     type: 'enum',
     enum: COURT,
   })
-  court: string;
+  court: COURT;
 
   @Column()
   address: string;

@@ -1,11 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { COURT, GENDER, SPECIALIZATION } from 'auth/entities/user.entity';
-import { IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { ROLE } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
 
 export class SignUpDto extends SignInDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
   @ApiProperty({
     enum: ROLE,
     isArray: false,

@@ -14,6 +14,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'core/decorators/roles.decorator';
+import { ROLE } from 'core/enums';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
@@ -76,6 +77,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
+  @Roles(ROLE.ADMIN, ROLE.LAWYER)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
     return this._ss.logout(userId);
   }

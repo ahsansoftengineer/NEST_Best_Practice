@@ -2,6 +2,8 @@ import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, Up
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Public } from 'core/decorators';
+import { Roles } from 'core/decorators/roles.decorator';
+import { ROLE } from 'core/enums';
 import { GlobalExceptionFilter } from 'core/error/GlobalExceptionFilter';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage, Interceptor_Files_PDF_Image } from 'core/interceptor';
@@ -20,6 +22,7 @@ export class BookController extends BaseController{
   }
   @Public()
   @Post()
+  @Roles(ROLE.LAWYER)
   @UseInterceptors(Interceptor_Files_PDF_Image)
   uploadFile(
     @Body() body: CreateBookDto,
@@ -34,6 +37,7 @@ export class BookController extends BaseController{
   }
 
   @Patch(':id')
+  @Roles(ROLE.ADMIN)
   @UseInterceptors(Interceptor_Files_PDF_Image)
   async update(
     @Param('id', ParseIntPipe) id: number,
