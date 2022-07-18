@@ -1,13 +1,28 @@
 ## Basic Setup for NestJS
 ### Starting Appliication
+
+#### Difference among PNPM, NPM, YARN
+* PNPM: PNPM is 3 times faster and more efficient than NPM. With both cold and hot cache, PNPM is faster than Yarn. Pnpm simply links files from the global store, while yarn copies files from its cache. Package versions are never saved more than once on a disk.
 ```shell
-npm config set timeout 6000000
+npm install -g pnpm // Fast installation
 npm i -g @nestjs/cli
 npm i --location=global @nestjs/cli
-npm install -g pnpm // Fast installation
+
 npm cache clean --force
 rm package-lock.json
 nest new project-name
+```
+#### Global Configuration for NPM
+```shell
+npm config set timeout 6000000
+npm config set fetch-retries 3
+npm config set cache-min 3600
+npm config set fetch-retry-maxtimeout 600000
+```
+#### Git Global Configuration
+```shell
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
 ```
 ### POINTS
 * * Don't know the use case of dotenv cli
