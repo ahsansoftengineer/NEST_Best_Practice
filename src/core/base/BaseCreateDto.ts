@@ -29,7 +29,6 @@ export class CreateDto {
     },
   })
   @IsOptional()
-
   desc: string;
 
   // const model = new MyClass();

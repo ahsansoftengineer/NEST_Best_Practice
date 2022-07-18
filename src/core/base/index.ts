@@ -5,3 +5,4 @@ export * from './BaseModel';
 export * from './BaseService';
 export * from './BaseCreateDto';
 export * from '../validator/IsThisExsist';
+export * from './DefaultModel';

@@ -1,35 +1,22 @@
-import { ROLE } from "core/enums";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { DefaultModel } from "core/base";
+import { COURT, GENDER, ROLE, SPECIALIZATION, STATUS } from "core/enums";
+import { Column, Entity, Unique } from "typeorm";
 
-export enum GENDER {
-  MALE = 'male',
-  FEMALE = 'female',
-}
 
-export enum SPECIALIZATION {
-  CIVIL = 'Civil',
-  CRIMINAL = 'Criminal',
-  FAMILY = 'Family',
-}
-
-export enum COURT {
-  LOWER = 'Lower Court',
-  HIGH = 'High Court',
-  SUPREME = 'Supreme Court',
-}
 @Entity()
-export class User{
-  @PrimaryGeneratedColumn()
-  id: number;
-
+@Unique('email', ['email'] )
+export class User extends DefaultModel{
   @Column({length: 60})
   name: string;
   // @Index("email-idx")
-  @Column({
-    length: 40,
-    unique: true
-  })
+  @Column({length: 40})
   email: string;
+
+  @Column({
+    type: 'enum',
+    enum: STATUS,
+  })
+  status: STATUS;
 
   @Column({
     type: 'enum',
@@ -74,18 +61,5 @@ export class User{
 
   @Column({ length: 1000, nullable: true })
   hashedRt: string
-
-  @CreateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  public createdAt: Date;
-
-  @UpdateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  public updatedAt: Date;
 }
 
