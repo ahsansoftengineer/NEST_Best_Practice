@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch, Get, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { GetCurrentUser, GetCurrentUserId, Public } from 'core/decorators';
@@ -20,6 +20,8 @@ export class BookController extends BaseController{
   constructor(public _ss: BookService) {
     super()
   }
+
+
   @Post()
   @Roles(ROLE.ADMIN)
   @UseInterceptors(Interceptor_Files_PDF_Image)
@@ -47,13 +49,33 @@ export class BookController extends BaseController{
       id,
       body,
       async (fetchedRecord, updateRecord) => {
-        await unlink('public/' + fetchedRecord.image, )
-          .then()
-          .catch(console.log);
-          if(files?.image[0]) updateRecord.image = files.image[0].filename;
-          if(files?.pdf[0]) updateRecord.pdf = files.pdf[0].filename;
+        if(files?.image) {
+          this.deleteFiles(fetchedRecord.image)
+          updateRecord.image = files.image[0].filename;
+        }
+        if(files?.pdf) {
+          this.deleteFiles(fetchedRecord.pdf)
+          updateRecord.pdf = files.pdf[0].filename;
+        }
       },
     );
+  }
+
+  @Roles(ROLE.ADMIN)
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    const result = await this._ss.repo.findOneBy({id})
+    if(result){
+      return this._ss.remove(+id).then(x => {
+        this.deleteFiles(result.image)
+        this.deleteFiles(result.pdf)      
+        return x
+      })
+    }
+  }
+  deleteFiles(filename: string){
+    console.log({filename});
+    return unlink('public/' + filename).catch(console.log);
   }
 
 }

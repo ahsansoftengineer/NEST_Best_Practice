@@ -1,5 +1,5 @@
-import { Get, Param, Delete, ParseIntPipe, Post, Body, Patch } from '@nestjs/common';
-import { BaseService, CreateDto } from './index';
+import { Get, Param, ParseIntPipe } from '@nestjs/common';
+import { BaseService} from './index';
 
 export abstract class BaseController {
   _ss: BaseService;
@@ -11,10 +11,11 @@ export abstract class BaseController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this._ss.findOne(id);
   }
-  @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this._ss.remove(+id);
-  }
+  // @ApiTags()
+  // @Delete(':id')
+  // remove(@Param('id') id: number) {
+  //   return this._ss.remove(+id);
+  // }
   
   // @Post()
   // create(@Body() body: CreateDto) {

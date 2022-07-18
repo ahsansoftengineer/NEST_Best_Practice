@@ -46,6 +46,29 @@ export class AuthController {
       HandleUniqueError(e)
     }
   }
+
+
+
+  @Public()
+  @Post('local/sign-in')
+  @HttpCode(HttpStatus.OK)
+  signinLocal(@Body() body: SignInDto): Promise<Tokens> {
+    return this._ss.signinLocal(body);
+  }
+
+  @Public()
+  @Post('forget-password')
+  @HttpCode(HttpStatus.OK)
+  forgetPassword(@Body() body: {email: string}): Promise<Tokens> {
+    return this._ss.forgetPassword(body.email);
+  }
+
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  logout(@GetCurrentUserId() userId: number): Promise<boolean> {
+    return this._ss.logout(userId);
+  }
+
   @Patch('user/:email')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(InterceptorImage)
@@ -62,28 +85,7 @@ export class AuthController {
       }
       return this._ss.updateUser(email, body, result);
   }
-  @Public()
-  @Post('local/sign-in')
-  @HttpCode(HttpStatus.OK)
-  signinLocal(@Body() body: SignInDto): Promise<Tokens> {
-    return this._ss.signinLocal(body);
-  }
-  @Public()
-  @Post('forget-password')
-  @HttpCode(HttpStatus.OK)
-  forgetPassword(@Body() body: {email: string}): Promise<Tokens> {
-    return this._ss.forgetPassword(body.email);
-  }
 
-  @Post('logout')
-  @HttpCode(HttpStatus.OK)
-  @Roles(ROLE.ADMIN, ROLE.LAWYER)
-  logout(@GetCurrentUserId() userId: number): Promise<boolean> {
-    return this._ss.logout(userId);
-  }
-
-  @Public()
-  // @Roles()
   @UseGuards(RtGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)

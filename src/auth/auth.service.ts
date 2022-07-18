@@ -70,6 +70,7 @@ export class AuthService {
   }
 
   async logout(id: number): Promise<boolean> {
+    if(!id) return false
     const result = await this.repo.findOneBy({id});
     if (result && result.hashedRt != null){
       this.repo.update(id, {hashedRt: null})
