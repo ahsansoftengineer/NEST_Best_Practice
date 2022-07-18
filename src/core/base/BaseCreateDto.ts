@@ -19,6 +19,7 @@ export class CreateDto {
   @ApiProperty({
     example: 'Additional Info for this this row',
     description: 'Other usefull information',
+    default: ''
   })
   @MaxLength(100, {
     message: 'Your useful information cannot be greater than 100 charater',
@@ -28,7 +29,8 @@ export class CreateDto {
     },
   })
   @IsOptional()
-  desc?: string;
+
+  desc: string;
 
   // const model = new MyClass();
   // validate(model).then(errors => {

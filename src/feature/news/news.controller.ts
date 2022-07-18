@@ -4,8 +4,10 @@ import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { NewsService } from './news.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('news')
+@ApiTags('news')
 export class NewsController extends BaseController{
   constructor(public _ss: NewsService) {
     super()

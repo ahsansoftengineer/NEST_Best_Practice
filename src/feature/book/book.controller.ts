@@ -7,7 +7,7 @@ import { GlobalExceptionFilter } from 'core/error/GlobalExceptionFilter';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { Interceptor_Files_PDF_Image } from 'core/interceptor';
 import { BookService } from './book.service';
-import { CreateBookDto } from './dto/book.dto';
+import { CreateBookDto, UpdateBookDto } from './dto/book.dto';
 
 @Controller('book')
 @ApiTags('book')
@@ -39,7 +39,7 @@ export class BookController extends BaseController{
   @UseInterceptors(Interceptor_Files_PDF_Image)
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: CreateBookDto,
+    @Body() body: UpdateBookDto,
     @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
   ) {
     return this._ss.updateSimple(
