@@ -3,19 +3,15 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { ROLES_KEY } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
+import CheckPublic from './checkPublic';
 
 @Injectable() // Access Token Guard
 export class AtGuard extends AuthGuard('jwt-access-token') {
   constructor(private reflector: Reflector) {
     super();
   }
-
   canActivate(context: ExecutionContext) {
-    const isPublic = this.reflector.getAllAndOverride('isPublic', [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-    if (isPublic) return true;
+    if(CheckPublic(this.reflector, context)) return true
     return super.canActivate(context);
   }
 }
