@@ -14,9 +14,9 @@ import { Request } from 'express';
 //   }
 // }
 export const PDF_ImageInterceptor = (req: Request, file, callback) => {
-  if (file.fieldname == 'image' &&  !file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+  if (file?.fieldname == 'image' &&  !file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
     return callback(new HttpException('image must be jpg|jpeg|png|gif', HttpStatus.FORBIDDEN),false);
-  } else if( file.fieldname == 'pdf' &&  !file.originalname.match(/\.(pdf)$/)){
+  } else if( file?.fieldname == 'pdf' &&  !file.originalname.match(/\.(pdf)$/)){
     return callback(new HttpException('book must be of type pdf document', HttpStatus.FORBIDDEN),false);
   }
   callback(null, true);

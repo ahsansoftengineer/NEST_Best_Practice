@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param, ParseIntPipe, UseInterceptors, UploadedFiles, Catch, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, UseInterceptors, UploadedFiles, Catch, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -38,7 +38,7 @@ export class BookController extends BaseController{
   @Roles(ROLE.ADMIN)
   @UseInterceptors(Interceptor_Files_PDF_Image)
   async update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: number,
     @Body() body: UpdateBookDto,
     @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
   ) {

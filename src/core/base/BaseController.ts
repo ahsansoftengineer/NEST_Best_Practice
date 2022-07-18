@@ -1,4 +1,4 @@
-import { Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Get, Param } from '@nestjs/common';
 import { BaseService} from './index';
 
 export abstract class BaseController {
@@ -8,7 +8,7 @@ export abstract class BaseController {
     return this._ss.findAll();
   }
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: number) {
     return this._ss.findOne(id);
   }
   // @ApiTags()
@@ -23,7 +23,7 @@ export abstract class BaseController {
   // }
   // @Patch(':id')
   // update(
-  //   @Param('id', ParseIntPipe) id: number,
+  //   @Param('id') id: number,
   //   @Body() body: CreateDto,
   // ) {
   //   return this._ss.updateSimple(id, body);

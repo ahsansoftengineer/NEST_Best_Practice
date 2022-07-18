@@ -74,7 +74,7 @@ export class AuthController {
   @UseInterceptors(InterceptorImage)
   async updateUser(
     @Body() body: UpdateUser,
-    @Param('email', ParseIntPipe) email: string,
+    @Param('email') email: string,
     @UploadedFile() image: Express.Multer.File,
     ){
       const result = await this._ss.repo.findOneBy({email})

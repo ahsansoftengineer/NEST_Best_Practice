@@ -69,7 +69,7 @@ export class User{
   @Column()
   address: string;
 
-  @Column({nullable: true })
+  @Column({nullable: true, length: 200 })
   image: string;
 
   @Column({ length: 1000, nullable: true })

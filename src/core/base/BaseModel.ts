@@ -17,7 +17,7 @@ export class BaseModel extends BaseEntity {
   @Column({ length: 100 })
   title: string;
 
-  @Column({ nullable: true, length: 150, default: '' })
+  @Column({ nullable: true, length: 250, default: '' })
   desc: string;
 
   @CreateDateColumn({
