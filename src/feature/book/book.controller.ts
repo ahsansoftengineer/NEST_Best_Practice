@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param, UseInterceptors, UploadedFiles, Catch, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, UseInterceptors, UploadedFiles, Catch, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -26,12 +26,13 @@ export class BookController extends BaseController{
     @Body() body: CreateBookDto,
     @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
     ) {
-      body.image = files.image[0].filename
+      if(!files?.image || !files?.image[0]?.filename) throw new HttpException('book image is required', HttpStatus.BAD_REQUEST)
+        body.image = files.image[0].filename
+      if(!files?.pdf || !files?.pdf[0]?.filename) throw new HttpException('book pdf document is required', HttpStatus.BAD_REQUEST)
       body.pdf = files.pdf[0].filename
       return this._ss.createSimple(body).catch(e => {
         return HandleUniqueError(e)
       });
-        
   }
 
   @Patch(':id')

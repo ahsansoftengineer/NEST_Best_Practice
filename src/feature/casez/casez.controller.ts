@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -22,6 +22,7 @@ export class CasezController extends BaseController{
     @Body() body: CreateCasezDto,
     @UploadedFile() pdf: Express.Multer.File,
     ) {
+      if(!pdf?.filename) throw new HttpException('case reference file is required', HttpStatus.FORBIDDEN)
       body.pdf = pdf.filename
       return this._ss.createSimple(body).catch(console.log);
         

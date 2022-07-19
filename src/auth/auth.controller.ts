@@ -39,6 +39,7 @@ export class AuthController {
     @Body() body: SignUpDto,
     @UploadedFile() image: Express.Multer.File,
     ): Promise<Tokens> {
+    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
     body.image = image.filename
     try{
       return this._ss.signupLocal(body);
