@@ -1,11 +1,40 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { MulterModule } from '@nestjs/platform-express';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AtStrategy } from 'auth/strategies';
+import { configMailer, configStaticFiles, configTypeORM } from 'core/config';
+import { RolesGuard } from 'core/guards/role.guard';
+import { FeatureModule } from 'feature/feature.module';
+import { AuthModule } from './auth/auth.module';
+import { AtGuard } from './core/guards';
 
 @Module({
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MulterModule.register({
+      dest: '../public',
+    }),
+    configStaticFiles,
+    TypeOrmModule.forRoot(configTypeORM),
+    MailerModule.forRoot(configMailer),
+    AuthModule, 
+    FeatureModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AtGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
+  exports: [
+    MailerModule // Those modules has Services Must needs to be exported
+  ]
 })
-export class AppModule {
-
-}
+export class AppModule {}
