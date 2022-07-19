@@ -18,7 +18,7 @@ export class NewsController extends BaseController{
   uploadFile(
     @Body() body: CreateNewsDto,
     ) {
-      return this._ss.createSimple(body).catch(console.log);
+      return this._ss.createSimple(body);
   }
 
   @Patch(':id')

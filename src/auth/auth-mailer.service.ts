@@ -28,8 +28,7 @@ export class MailService {
       //   username: 'john doe',
       // },
     })
-    .then(() => {console.log('success')})
-    .catch(console.log);
+    .then(() => {console.log('success')}).catch(console.log);
 
     return {message: 'done'}
   }

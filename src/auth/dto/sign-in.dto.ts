@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Length, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
 
 export class SignInDto {
   @ApiProperty({
@@ -7,7 +7,8 @@ export class SignInDto {
       'email for the Token is required Length must be 7 to 20 charcter',
   })
   @IsNotEmpty()
-  @Length(7, 20)
+  @IsEmail()
+  @Length(3, 20)
   email: string;
 
   // @BeforeInsert()

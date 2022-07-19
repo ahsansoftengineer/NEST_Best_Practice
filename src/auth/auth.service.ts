@@ -73,7 +73,7 @@ export class AuthService {
     if(!id) return false
     const result = await this.repo.findOneBy({id});
     if (result && result.hashedRt != null){
-      this.repo.update(id, {hashedRt: null})
+      this.repo.update(id, { hashedRt: null })
     }
     return true;
   }
@@ -121,8 +121,8 @@ export class AuthService {
     const hash = await argon.hash(rt);
     await this.repo.update(id, {hashedRt: hash})
   }
-  returnedSearializedUser({name, email, gender, mobile, address,city, court, image, role}: User){
-    return {name, email, gender, mobile, address, city, court, image, role}
+  returnedSearializedUser({name, email, gender, mobile, address, city, court, image, role, status}: User){
+    return {name, email, gender, mobile, address, city, court, image, role, status}
   }
 
 }

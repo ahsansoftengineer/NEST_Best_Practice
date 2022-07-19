@@ -11,6 +11,7 @@ export class AtGuard extends AuthGuard('jwt-access-token') {
     super();
   }
   canActivate(context: ExecutionContext) {
+    console.log({check_guard:  CheckPublic(this.reflector, context)});
     if(CheckPublic(this.reflector, context)) return true
     return super.canActivate(context);
   }

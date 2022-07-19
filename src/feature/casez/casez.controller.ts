@@ -24,7 +24,7 @@ export class CasezController extends BaseController{
     ) {
       if(!pdf?.filename) throw new HttpException('case reference file is required', HttpStatus.FORBIDDEN)
       body.pdf = pdf.filename
-      return this._ss.createSimple(body).catch(console.log);
+      return this._ss.createSimple(body);
         
   }
 
