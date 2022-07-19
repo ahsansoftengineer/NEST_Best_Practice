@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -14,11 +14,10 @@ export class CasezController extends BaseController{
     super()
   }
 
-
   @Post()
-  @Roles(ROLE.ADMIN)
+  @Roles(ROLE.LAWYER)
   @UseInterceptors(InterceptorPDF)
-  uploadFile(
+  create(
     @Body() body: CreateCasezDto,
     @UploadedFile() pdf: Express.Multer.File,
     ) {
@@ -29,7 +28,7 @@ export class CasezController extends BaseController{
   }
 
   @Patch(':id')
-  @Roles(ROLE.ADMIN)
+  @Roles(ROLE.LAWYER)
   @UseInterceptors(InterceptorPDF)
   async update(
     @Param('id') id: number,
@@ -48,7 +47,7 @@ export class CasezController extends BaseController{
     );
   }
 
-  @Roles(ROLE.ADMIN)
+  @Roles(ROLE.LAWYER)
   @Delete(':id')
   async remove(@Param('id') id: number) {
     const result = await this._ss.repo.findOneBy({id})

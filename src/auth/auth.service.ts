@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
+import { User } from 'core/entities';
 import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
@@ -11,7 +12,6 @@ import { MailService } from './auth-mailer.service';
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { UpdateUser } from './dto/user-update.dto';
-import { User } from './entities/user.entity';
 import { JwtPayload, Tokens } from './types';
 
 @Injectable()
