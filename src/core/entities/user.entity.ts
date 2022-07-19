@@ -41,27 +41,6 @@ export class User extends DefaultModel{
   })
   gender: GENDER;
 
-  @Column()
-  city: string;
-
-  @Column({
-    type: 'enum',
-    enum: SPECIALIZATION,
-  })
-  specialization: SPECIALIZATION;
-
-  @Column({
-    type: 'enum',
-    enum: COURT,
-  })
-  court: COURT;
-
-  @Column()
-  address: string;
-
-  @Column({nullable: true, length: 200 })
-  image: string;
-
   @Column({ length: 1000, nullable: true })
   hashedRt: string
 }
