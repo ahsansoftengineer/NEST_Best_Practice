@@ -15,6 +15,8 @@ export class User extends DefaultModel{
   @Column({
     type: 'enum',
     enum: STATUS,
+    default:  STATUS.PENDING,
+    nullable: true
   })
   status: STATUS;
 
@@ -22,6 +24,7 @@ export class User extends DefaultModel{
     type: 'enum',
     enum: ROLE,
     nullable: true,
+    default: ROLE.LAWYER,
   })
   role: ROLE;
 

@@ -9,15 +9,28 @@ export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+  // Status and Role Must be comment out in Production
+  @ApiProperty({
+    enum: STATUS,
+    isArray: false,
+    example: STATUS.PENDING,
+    default: STATUS.PENDING
+  })
+  @IsOptional()
+  @IsEnum(STATUS, {
+    message: 'Status must be (Active, Pending, Block, Reject)',
+  })
+  status: STATUS;
 
   @ApiProperty({
     enum: ROLE,
     isArray: false,
-    example: ROLE.ADMIN,
+    example: ROLE.LAWYER,
+    default: ROLE.LAWYER
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(ROLE, {
-    message: 'Type must be (Admin, Lawyer, Client, User)',
+    message: 'Role must be (Admin, Lawyer, Client, User)',
   })
   role: ROLE;
 
@@ -36,15 +49,7 @@ export class SignUpDto extends SignInDto {
   @Length(11, 17)
   mobile: string;
 
-  @ApiProperty({
-    enum: STATUS,
-    isArray: false,
-    example: STATUS.ACTIVE,
-    default: STATUS.PENDING
-  })
-  @IsNotEmpty()
-  @IsEnum(STATUS)
-  status: STATUS;
+
 
   @ApiProperty({
     enum: GENDER,
