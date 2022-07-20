@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { SignUpLawyerDto } from 'auth/dto/sign-up-lawyer.dto';
 import { Lawyer, User } from 'core/entities';
 import { Repository } from 'typeorm';
 import { CreatePlayDto } from './dto/create-play.dto';
@@ -13,7 +14,8 @@ export class PlayService {
   ){
 
   }
- check11(data: any = {}){
+ check11(data: SignUpLawyerDto){
+  
   return this.user.create(data)
  }
 }
