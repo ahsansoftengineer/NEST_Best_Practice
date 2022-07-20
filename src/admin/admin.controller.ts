@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Get, Param, Patch} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Public } from 'core/decorators';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { AdminService } from './admin.service';
@@ -30,6 +31,4 @@ export class AdminController{
   getLawyer(@Param('id') id: number) {
       return this._ss.getLawyer(id);
   }
-
-
 }

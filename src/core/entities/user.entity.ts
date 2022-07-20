@@ -1,6 +1,7 @@
 import { GENDER, ROLE, STATUS } from "core/enums";
-import { Column, Entity, Unique } from "typeorm";
+import { Column, Entity, OneToOne, Unique } from "typeorm";
 import { AlphaModel } from "./alpha-model";
+import { Lawyer } from "./lawyer.entity";
 
 
 @Entity()
@@ -52,5 +53,9 @@ export class User extends AlphaModel{
 
   @Column({ length: 1000, nullable: true })
   hashedRt: string
+
+
+  @OneToOne(() => Lawyer, x => x.user)
+  lawyer: Lawyer;
 }
 

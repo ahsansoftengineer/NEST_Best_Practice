@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne} from "typeorm";
+import { Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import { Court } from "./court.entity";
 import { Specialization } from "./specialization.entity";
 import { User } from "./user.entity";
@@ -6,8 +6,16 @@ import { User } from "./user.entity";
 
 @Entity()
 export class Lawyer {
+  
+  @PrimaryGeneratedColumn()
+  id: number;
+
+
   @ManyToOne(() => Specialization, e => e.lawyers)
   specialization: Specialization;
+
+  @JoinColumn({ foreignKeyConstraintName: 'fk_specialization_user', referencedColumnName:'id' })
+  specializationId: number;
 
   @ManyToMany(() => Court, c => c.lawyer, {
     eager: true,
@@ -16,10 +24,10 @@ export class Lawyer {
   court: Court[];
 
 
-  @OneToOne(() => User, { eager: true, cascade: true })
+  @OneToOne(() => User, x => x.lawyer, { eager: true, cascade: true })
   user: User;
   
-  @JoinColumn({ name: 'userId', foreignKeyConstraintName: 'fk_user_lawyer' })
+  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
   userId: number;
 }
 

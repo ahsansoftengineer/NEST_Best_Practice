@@ -1,10 +1,14 @@
-import { Entity, JoinColumn, ManyToOne, OneToOne} from "typeorm";
+import { Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import { Lawyer } from "./lawyer.entity";
 import { User } from "./user.entity";
 
 
 @Entity()
 export class LawyerTeam {
+  
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @OneToOne(() => User, { eager: true, cascade: true })
   user: User;
   

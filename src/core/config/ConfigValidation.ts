@@ -12,7 +12,7 @@ export const configValidation = new ValidationPipe({
   // };
 
   // forbidUnknownValues?: boolean;
-  // stopAtFirstError?: boolean;
+  stopAtFirstError: true,
   // Below Settings Not Working
   // skipNullProperties: true,
   // skipUndefinedProperties: true,
