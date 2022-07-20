@@ -1,8 +1,8 @@
-import { BaseModel } from "core/base";
 import { Column, Entity } from "typeorm";
+import { BetaModel } from "./beta-model";
 
 @Entity()
-export class Casez extends BaseModel {
+export class Casez extends BetaModel {
   @Column({nullable: true, length: 200 })
   pdf: string;
 }

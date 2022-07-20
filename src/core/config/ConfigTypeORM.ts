@@ -2,7 +2,7 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { ENV } from 'core/constant';
-import { entities } from 'core/utils/entities';
+import { entities } from 'core/entities/entities';
 // STEP 1
 export const configTypeORM: TypeOrmModuleOptions = {
   type: ENV.DB_TYPE,

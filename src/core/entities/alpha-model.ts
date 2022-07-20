@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class DefaultModel extends BaseEntity {
+export class AlphaModel extends BaseEntity {
   // For MongoDB
   // @PrimaryGeneratedColumn("uuid")
   // id: string;

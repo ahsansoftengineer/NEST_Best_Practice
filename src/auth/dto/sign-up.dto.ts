@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
-import { COURT, GENDER, ROLE, SPECIALIZATION, STATUS } from 'core/enums';
+import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
 
@@ -9,15 +9,28 @@ export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+  // Status and Role Must be comment out in Production
+  @ApiProperty({
+    enum: STATUS,
+    isArray: false,
+    example: STATUS.PENDING,
+    default: STATUS.PENDING
+  })
+  @IsOptional()
+  @IsEnum(STATUS, {
+    message: 'Status must be (Active, Pending, Block, Reject)',
+  })
+  status: STATUS;
 
   @ApiProperty({
     enum: ROLE,
     isArray: false,
-    example: ROLE.ADMIN,
+    example: ROLE.LAWYER,
+    default: ROLE.LAWYER
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(ROLE, {
-    message: 'Type must be (Admin, Lawyer, Client, User)',
+    message: 'Role must be (Admin, Lawyer, Client, User)',
   })
   role: ROLE;
 
@@ -37,16 +50,6 @@ export class SignUpDto extends SignInDto {
   mobile: string;
 
   @ApiProperty({
-    enum: STATUS,
-    isArray: false,
-    example: STATUS.ACTIVE,
-    default: STATUS.PENDING
-  })
-  @IsNotEmpty()
-  @IsEnum(STATUS)
-  status: STATUS;
-
-  @ApiProperty({
     enum: GENDER,
     isArray: false,
     example: GENDER.MALE,
@@ -58,26 +61,6 @@ export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   city: string;
 
-  @ApiProperty({
-    enum: SPECIALIZATION,
-    isArray: false,
-    example: SPECIALIZATION.CIVIL,
-  })
-  @IsNotEmpty()
-  @IsEnum(SPECIALIZATION)
-  specialization: SPECIALIZATION;
-
-  @ApiProperty({
-    enum: COURT,
-    isArray: false,
-    example: COURT.HIGH,
-  })
-  @IsNotEmpty()
-  @IsEnum(COURT)
-  court: COURT;
-
-  // @IsNotEmpty()
-  // @Length(11, 17)
   @IsOptional()
   address: string;
 

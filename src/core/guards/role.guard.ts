@@ -11,12 +11,14 @@ export class RolesGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     if(CheckPublic(this.reflector, context)) return true
     
+    
     const roles = this.reflector.getAllAndOverride<ROLE[]>(ROLES_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
     if (!roles) return true;
     const request = context.switchToHttp().getRequest();
+    console.log({role_guard: request.user?.role});
     return roles?.some((a) => a == request.user?.role);// This User is being set by AT Strategy
   }
 }

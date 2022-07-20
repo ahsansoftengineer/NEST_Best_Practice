@@ -1,8 +1,8 @@
-import { BaseModel } from "core/base";
-import { Column, Entity, Index, Unique } from "typeorm";
+import { Column, Entity, Unique } from "typeorm";
+import { BetaModel } from "./beta-model";
 @Entity()
 @Unique('book-title-unique', ['title'])
-export class Book extends BaseModel{
+export class Book extends BetaModel{
   @Column({  length: 50 })
   title: string;
 

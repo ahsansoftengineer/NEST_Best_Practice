@@ -1,11 +1,12 @@
-import { DefaultModel } from "core/base";
-import { COURT, GENDER, ROLE, SPECIALIZATION, STATUS } from "core/enums";
-import { Column, Entity, Unique } from "typeorm";
+import { GENDER, ROLE, STATUS } from "core/enums";
+import { Column, Entity, OneToOne, Unique } from "typeorm";
+import { AlphaModel } from "./alpha-model";
+import { Lawyer } from "./lawyer.entity";
 
 
 @Entity()
 @Unique('email', ['email'] )
-export class User extends DefaultModel{
+export class User extends AlphaModel{
   @Column({length: 60})
   name: string;
   // @Index("email-idx")
@@ -15,6 +16,8 @@ export class User extends DefaultModel{
   @Column({
     type: 'enum',
     enum: STATUS,
+    default:  STATUS.PENDING,
+    nullable: true
   })
   status: STATUS;
 
@@ -22,6 +25,7 @@ export class User extends DefaultModel{
     type: 'enum',
     enum: ROLE,
     nullable: true,
+    default: ROLE.LAWYER,
   })
   role: ROLE;
 
@@ -41,18 +45,6 @@ export class User extends DefaultModel{
   @Column()
   city: string;
 
-  @Column({
-    type: 'enum',
-    enum: SPECIALIZATION,
-  })
-  specialization: SPECIALIZATION;
-
-  @Column({
-    type: 'enum',
-    enum: COURT,
-  })
-  court: COURT;
-
   @Column()
   address: string;
 
@@ -61,5 +53,9 @@ export class User extends DefaultModel{
 
   @Column({ length: 1000, nullable: true })
   hashedRt: string
+
+
+  @OneToOne(() => Lawyer, x => x.user)
+  lawyer: Lawyer;
 }
 

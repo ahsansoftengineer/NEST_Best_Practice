@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
+import { User } from 'core/entities';
 import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
@@ -11,7 +12,6 @@ import { MailService } from './auth-mailer.service';
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { UpdateUser } from './dto/user-update.dto';
-import { User } from './entities/user.entity';
 import { JwtPayload, Tokens } from './types';
 
 @Injectable()
@@ -20,7 +20,9 @@ export class AuthService {
     private _jwt: JwtService,
     private _config: ConfigService,
     private _mail: MailService ,
-    @InjectRepository(User) public repo: Repository<User>
+    @InjectRepository(User) public repo: Repository<User>,
+    // @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
+
   ) {}
  
   async signupLocal(data: SignUpDto): Promise<Tokens> {
@@ -73,7 +75,7 @@ export class AuthService {
     if(!id) return false
     const result = await this.repo.findOneBy({id});
     if (result && result.hashedRt != null){
-      this.repo.update(id, {hashedRt: null})
+      this.repo.update(id, { hashedRt: null })
     }
     return true;
   }
@@ -121,8 +123,8 @@ export class AuthService {
     const hash = await argon.hash(rt);
     await this.repo.update(id, {hashedRt: hash})
   }
-  returnedSearializedUser({name, email, gender, mobile, address,city, court, image, role}: User){
-    return {name, email, gender, mobile, address, city, court, image, role}
+  returnedSearializedUser({name, email, gender, mobile, role, status}: User){
+    return {name, email, gender, mobile,  role, status}
   }
 
 }

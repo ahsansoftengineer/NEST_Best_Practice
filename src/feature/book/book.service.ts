@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'core/base';
+import { Book } from 'core/entities';
 import { Repository } from 'typeorm';
-import { Book } from './entities/book.entity';
 
 @Injectable()
 export class BookService extends BaseService{

@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import { AuthService } from 'auth/auth.service';
-import { ROLE, User } from 'auth/entities/user.entity';
 import { Tokens } from 'auth/types';
+import { User } from 'core/entities';
+import { ROLE } from 'core/enums';
 import { decode } from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 
