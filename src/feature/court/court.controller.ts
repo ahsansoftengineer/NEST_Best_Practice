@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
+import { Public } from 'core/decorators';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { CourtService } from './court.service';
@@ -14,6 +15,7 @@ export class CourtController extends BaseController {
   }
 
   @Post()
+  // @Public()
   @Roles(ROLE.ADMIN)
   uploadFile(
     @Body() body: CreateCourtDto,
