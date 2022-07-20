@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
 import { User } from 'core/entities';
-import { Lawyer } from 'core/entities/lawyer.entity';
 import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
@@ -22,7 +21,7 @@ export class AuthService {
     private _config: ConfigService,
     private _mail: MailService ,
     @InjectRepository(User) public repo: Repository<User>,
-    @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
+    // @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
 
   ) {}
  

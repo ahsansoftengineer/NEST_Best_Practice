@@ -90,7 +90,7 @@ export class ParentModule {}
 * * 3 Adding to Entity array
 ```typescript
 export const entities = [
-  BaseModel, // Also the Base Entity Model is Required for defination
+  BetaModel, // Also the Base Entity Model is Required for defination
   Person, // Table Inheritance Entity Model is also Required
   Parent // The Entity
 ];

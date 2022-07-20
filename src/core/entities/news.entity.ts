@@ -1,4 +1,4 @@
-import { BaseModel } from "core/base";
 import { Entity } from "typeorm";
+import { BetaModel } from "./beta-model";
 @Entity()
-export class News extends BaseModel {}
+export class News extends BetaModel {}

@@ -1,30 +1,20 @@
-import { COURT, SPECIALIZATION } from "core/enums";
-import { Column, Entity, JoinColumn, OneToOne} from "typeorm";
+import { Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne} from "typeorm";
+import { Court } from "./court.entity";
+import { Specialization } from "./specialization.entity";
 import { User } from "./user.entity";
 
 
 @Entity()
 export class Lawyer {
-  @Column()
-  city: string;
+  @ManyToOne(() => Specialization, e => e.lawyers)
+  specialization: Specialization;
 
-  @Column({
-    type: 'enum',
-    enum: SPECIALIZATION,
+  @ManyToMany(() => Court, c => c.lawyer, {
+    eager: true,
   })
-  specialization: SPECIALIZATION;
+  @JoinTable({ name: 'court_lawyer' })
+  court: Court[];
 
-  @Column({
-    type: 'enum',
-    enum: COURT,
-  })
-  court: COURT;
-
-  @Column()
-  address: string;
-
-  @Column({nullable: true, length: 200 })
-  image: string;
 
   @OneToOne(() => User, { eager: true, cascade: true })
   user: User;

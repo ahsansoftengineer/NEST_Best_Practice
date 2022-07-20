@@ -1,9 +1,9 @@
+import { BetaModel } from 'core/entities';
 import { unlink } from 'fs/promises';
 import { Repository } from 'typeorm';
-import { BaseModel } from './BaseModel';
 
 export class BaseService {
-  public repo: Repository<BaseModel>;
+  public repo: Repository<BetaModel>;
   findAll() {
     return this.repo.find() || { message: `record does not exsist` };
   }

@@ -1,5 +1,4 @@
-import { COURT, SPECIALIZATION } from "core/enums";
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne} from "typeorm";
+import { Entity, JoinColumn, ManyToOne, OneToOne} from "typeorm";
 import { Lawyer } from "./lawyer.entity";
 import { User } from "./user.entity";
 

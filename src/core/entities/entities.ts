@@ -1,11 +1,18 @@
 import { User } from "core/entities/user.entity";
-import { BaseModel } from "core/base";
-import { Book, Casez, News } from "core/entities";
+import { 
+  AlphaModel, BetaModel,
+  Book, Casez, News, Court, Lawyer, LawyerTeam, Specialization, City } from "core/entities";
 
 export const entities = [
-  BaseModel,
-  Book, 
+  AlphaModel,
+  BetaModel,
+  Book,
   User,
   News,
-  Casez
+  Casez,
+  Court,
+  City,
+  Specialization,
+  Lawyer,
+  LawyerTeam
 ]

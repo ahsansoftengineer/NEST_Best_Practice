@@ -1,11 +1,11 @@
-import { DefaultModel } from "core/base";
-import { COURT, GENDER, ROLE, SPECIALIZATION, STATUS } from "core/enums";
+import { GENDER, ROLE, STATUS } from "core/enums";
 import { Column, Entity, Unique } from "typeorm";
+import { AlphaModel } from "./alpha-model";
 
 
 @Entity()
 @Unique('email', ['email'] )
-export class User extends DefaultModel{
+export class User extends AlphaModel{
   @Column({length: 60})
   name: string;
   // @Index("email-idx")
@@ -40,6 +40,15 @@ export class User extends DefaultModel{
     enum: GENDER,
   })
   gender: GENDER;
+
+  @Column()
+  city: string;
+
+  @Column()
+  address: string;
+
+  @Column({nullable: true, length: 200 })
+  image: string;
 
   @Column({ length: 1000, nullable: true })
   hashedRt: string

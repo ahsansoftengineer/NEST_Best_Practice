@@ -5,7 +5,6 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
   UploadedFile,
@@ -13,8 +12,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Roles } from 'core/decorators/roles.decorator';
-import { ROLE } from 'core/enums';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
