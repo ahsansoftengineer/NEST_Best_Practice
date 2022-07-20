@@ -1,5 +1,4 @@
-import { COURT, GENDER, SPECIALIZATION } from "auth/entities/user.entity";
-import { ROLE } from "core/enums";
+import { COURT, GENDER, ROLE, SPECIALIZATION } from "core/enums";
 
 export type UserInfo = {
   id: number;

@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Length, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
 
 export class SignInDto {
   @ApiProperty({
     description:
-      'email for the Token is required Length must be 7 to 20 charcter',
+      'email for the Token is required in Email formit',
   })
   @IsNotEmpty()
-  @Length(7, 20)
+  @IsEmail()
   email: string;
 
   // @BeforeInsert()
