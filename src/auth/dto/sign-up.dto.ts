@@ -47,6 +47,7 @@ export class SignUpDto extends SignInDto {
 
   @IsNotEmpty()
   @Length(11, 17)
+  @ApiProperty()
   mobile: string;
 
   @ApiProperty({
@@ -59,11 +60,14 @@ export class SignUpDto extends SignInDto {
   gender: GENDER;
 
   @IsNotEmpty()
+  @ApiProperty()
   city: string;
 
   @IsOptional()
+  @ApiProperty()
   address: string;
 
   @IsOptional()
+  @ApiProperty()
   image: string;
 }
