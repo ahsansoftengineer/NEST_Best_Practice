@@ -7,6 +7,7 @@ import { SpecializationModule } from './specialization/specialization.module';
 import { CityModule } from './city/city.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlphaModel, BetaModel } from 'core/entities';
+import { LawyerModule } from './lawyer/lawyer.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { AlphaModel, BetaModel } from 'core/entities';
     CasezModule, 
     CourtModule, 
     SpecializationModule, 
-    CityModule
+    CityModule, LawyerModule
 ]
 })
 export class FeatureModule {}

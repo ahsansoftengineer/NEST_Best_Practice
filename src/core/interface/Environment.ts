@@ -7,5 +7,8 @@ export interface Environment{
   DB_PASSWORD: string
   DB_SYNC: boolean
   DB_DROP: boolean
+  JWT_ACCESS_TOKEN: string
+  JWT_REFRESH_TOKEN: string
+
   [name: string]: any
 }

@@ -7,7 +7,7 @@ import { JwtPayload, JwtPayloadWithRt } from '../types';
 import { ENV } from 'core/constant';
 
 @Injectable()
-export class RtStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
+export class RtStrategy extends PassportStrategy(Strategy, ENV.JWT_REFRESH_TOKEN) {
   constructor(config: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
