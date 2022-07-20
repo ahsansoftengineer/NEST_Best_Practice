@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
+import { ENV } from 'core/constant';
 import { User } from 'core/entities';
 import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
@@ -11,6 +12,7 @@ import { MailService } from './auth-mailer.service';
 
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
+import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
 import { UpdateUser } from './dto/user-update.dto';
 import { JwtPayload, Tokens } from './types';
 
@@ -24,8 +26,37 @@ export class AuthService {
     // @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
 
   ) {}
- 
-  async signupLocal(data: SignUpDto): Promise<Tokens> {
+  async signUpAdmin(data: SignUpDto): Promise<Tokens> {
+    const hashResult = await argon.hash(data.password);
+
+    const existUser = await this.repo.findOneBy({email: data.email})
+
+    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.email);
+
+    const user =  this.repo.create({...data, password: hashResult});
+    await this.repo.save(user).catch((error) => {
+      throw new ForbiddenException('Credentials incorrect');
+    })
+    
+    return this.returnGeneratedToken(user)
+  }
+
+  async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
+    const hashResult = await argon.hash(data.password);
+
+    const existUser = await this.repo.findOneBy({email: data.email})
+
+    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.email);
+
+    const user =  this.repo.create({...data, password: hashResult});
+    await this.repo.save(user).catch((error) => {
+      throw new ForbiddenException('Credentials incorrect');
+    })
+    
+    return this.returnGeneratedToken(user)
+  }
+
+  async signUpLocal(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
     const existUser = await this.repo.findOneBy({email: data.email})
@@ -106,11 +137,11 @@ export class AuthService {
     const [at, rt] = await Promise.all([
       this._jwt.signAsync(jwtPayload, {
         secret: this._config.get<string>('AT_SECRET'),
-        expiresIn: '15m',
+        expiresIn: ENV.JWT_ACCESS_TOKEN_EXPIRE,
       }),
       this._jwt.signAsync(jwtPayload, {
         secret: this._config.get<string>('RT_SECRET'),
-        expiresIn: '7d',
+        expiresIn: ENV.JWT_REFRESH_TOKEN_EXPIRE,
       }),
     ]);
 

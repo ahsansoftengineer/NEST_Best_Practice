@@ -1,5 +1,5 @@
-import { BaseModel } from "core/base";
+import { BetaModel } from "core/entities";
 import { Entity } from "typeorm";
 
 @Entity()
-export class Specialization extends BaseModel{}
+export class Specialization extends BetaModel{}
