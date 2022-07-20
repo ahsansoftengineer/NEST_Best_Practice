@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
 import { User } from 'core/entities';
+import { Lawyer } from 'core/entities/lawyer.entity';
 import { ROLE } from 'core/enums';
 import { Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
@@ -20,7 +21,9 @@ export class AuthService {
     private _jwt: JwtService,
     private _config: ConfigService,
     private _mail: MailService ,
-    @InjectRepository(User) public repo: Repository<User>
+    @InjectRepository(User) public repo: Repository<User>,
+    @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
+
   ) {}
  
   async signupLocal(data: SignUpDto): Promise<Tokens> {
@@ -121,8 +124,8 @@ export class AuthService {
     const hash = await argon.hash(rt);
     await this.repo.update(id, {hashedRt: hash})
   }
-  returnedSearializedUser({name, email, gender, mobile, address, city, court, image, role, status}: User){
-    return {name, email, gender, mobile, address, city, court, image, role, status}
+  returnedSearializedUser({name, email, gender, mobile, role, status}: User){
+    return {name, email, gender, mobile,  role, status}
   }
 
 }

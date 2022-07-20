@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
-import { COURT, GENDER, ROLE, SPECIALIZATION, STATUS } from 'core/enums';
+import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
 
@@ -49,8 +49,6 @@ export class SignUpDto extends SignInDto {
   @Length(11, 17)
   mobile: string;
 
-
-
   @ApiProperty({
     enum: GENDER,
     isArray: false,
@@ -63,26 +61,6 @@ export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   city: string;
 
-  @ApiProperty({
-    enum: SPECIALIZATION,
-    isArray: false,
-    example: SPECIALIZATION.CIVIL,
-  })
-  @IsNotEmpty()
-  @IsEnum(SPECIALIZATION)
-  specialization: SPECIALIZATION;
-
-  @ApiProperty({
-    enum: COURT,
-    isArray: false,
-    example: COURT.HIGH,
-  })
-  @IsNotEmpty()
-  @IsEnum(COURT)
-  court: COURT;
-
-  // @IsNotEmpty()
-  // @Length(11, 17)
   @IsOptional()
   address: string;
 

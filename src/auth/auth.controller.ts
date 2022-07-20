@@ -32,7 +32,23 @@ export class AuthController {
   constructor(private _ss: AuthService) {}
 
   @Public()
-  @Post('local/sign-up')
+  @Post('lawyer/sign-up')
+  @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(InterceptorImage)
+  signupLawyer(
+    @Body() body: SignUpDto,
+    @UploadedFile() image: Express.Multer.File,
+    ): Promise<Tokens> {
+    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
+    body.image = image.filename
+    try{
+      return this._ss.signupLocal(body);
+    }catch(e){
+      HandleUniqueError(e)
+    }
+  }
+
+  @Post('lawyer/sign-up')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(InterceptorImage)
   signupLocal(
@@ -46,7 +62,7 @@ export class AuthController {
     }catch(e){
       HandleUniqueError(e)
     }
-  }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 
 

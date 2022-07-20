@@ -1,0 +1,1912 @@
+{
+  "canvas": {
+    "version": "2.2.11",
+    "width": 4000,
+    "height": 4000,
+    "scrollTop": -541.9999999999998,
+    "scrollLeft": -516.0000000000002,
+    "zoomLevel": 0.9,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": false,
+      "columnPrimaryKey": true,
+      "columnUnique": false,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "MySQL",
+    "databaseName": "KLP",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnDataType",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement",
+        "columnDefault",
+        "columnComment"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "User",
+        "comment": "Admin = User",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "fc6e5bac-9a49-4b76-a8e8-f692fca9e4f3"
+          },
+          {
+            "name": "email",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "PRIMARY KEY",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 90.61962890625
+            },
+            "id": "52c8bef6-6341-431b-a51a-dabf409efff4"
+          },
+          {
+            "name": "name",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "c6586ca8-f2a2-40cf-891b-a7daea989f78"
+          },
+          {
+            "name": "mobile",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "43f9b0da-7755-4bbe-a412-02bad61bf940"
+          },
+          {
+            "name": "gender",
+            "comment": "",
+            "dataType": "GENDER",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f8338b84-d86e-4762-b86b-11503fcd0ae6"
+          },
+          {
+            "name": "role",
+            "comment": "",
+            "dataType": "ROLE",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "621a2913-aed5-4e26-a739-4860e99d6f3f"
+          },
+          {
+            "name": "status",
+            "comment": "",
+            "dataType": "STATUS",
+            "default": "Pending",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "683952ec-8483-468e-bceb-828858b18111"
+          },
+          {
+            "name": "password",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "2edfb798-b73a-4cfe-b4f3-7b4e983f7bcf"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1422.8459,
+          "top": 407.3936,
+          "zIndex": 242,
+          "widthName": 60,
+          "widthComment": 81.11083984375,
+          "color": "#8BC34A"
+        },
+        "visible": true,
+        "id": "b8233cc8-8254-4e67-8cc6-f72c3446f6d6"
+      },
+      {
+        "name": "Lawyer",
+        "comment": "ADMIN & LAWYER",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f0025c09-9037-4294-b9fe-580516f26e04"
+          },
+          {
+            "name": "userID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7e284dc7-b215-4285-8b3a-226516b15bf1"
+          },
+          {
+            "name": "specializationID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 93.04443359375,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e98a4288-d1df-404d-82c1-9a5899e78375"
+          },
+          {
+            "name": "cityID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "8f936311-bb25-4310-880d-90c00d4a3b0a"
+          },
+          {
+            "name": "courtId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "8fd3547a-829d-460c-97b1-4d0a39d1299e"
+          },
+          {
+            "name": "address",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "8be28f69-bec9-49f6-95fa-eb729d244ba0"
+          },
+          {
+            "name": "image",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "3d7f9834-cf1f-427d-865d-6d922ce0ff1e"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1433.782,
+          "top": 792.3296,
+          "zIndex": 237,
+          "widthName": 60,
+          "widthComment": 114.201171875,
+          "color": "#00BCD4"
+        },
+        "visible": true,
+        "id": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4"
+      },
+      {
+        "name": "City",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "63f00a09-7ccf-4d67-92ee-d51c87476b15"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "5de437c3-ab08-4f6c-a94a-29d60006e16a"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "43dd16da-1665-41d4-9491-0c7fceece7aa"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 857.7346,
+          "top": 654.9083,
+          "zIndex": 199,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "17dbf046-07eb-4883-8a77-ec5d37460398"
+      },
+      {
+        "name": "Court",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "63f00a09-7ccf-4d67-92ee-d51c87476b18"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "816396ba-dd4e-4389-8d07-ffaeaeb358d0"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "abe90da5-c455-4d07-a28a-b8cb80f528a1"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 851.3857,
+          "top": 1209.7817,
+          "zIndex": 228,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "17dbf046-07eb-4883-8a77-ec5d37460399"
+      },
+      {
+        "name": "Specialization",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "63f00a09-7ccf-4d67-92ee-6"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "5de437c3-ab08-4f6c-a94a-29d60006e166"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "43dd16da-1665-41d4-9491-0c7fceece7a6"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 859.5,
+          "top": 826.6787,
+          "zIndex": 200,
+          "widthName": 82.21533203125,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "17dbf046-07eb-4883-8a77-ec5d37460396"
+      },
+      {
+        "name": "Book",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "8a7ece8e-161d-42c9-9c80-407f93748529"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "e0aaf9ed-fdb0-4a2b-a96a-bc342e580589"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "4dfb0f92-d337-4ba3-89c4-8cd5a436a672"
+          },
+          {
+            "name": "image",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "e2c5b7f3-6b3f-4353-ab2c-6407612995cf"
+          },
+          {
+            "name": "pdf",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "d68e6d09-5f9a-46bb-a340-6fe660fd739f"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 456.5848,
+          "top": 730.6676,
+          "zIndex": 254,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#FFEB3B"
+        },
+        "visible": true,
+        "id": "9ddb99bf-ee4c-4eca-a590-2668e344d756"
+      },
+      {
+        "name": "News",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "27d9a76f-a1a6-43d0-92d4-f58e79279a13"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "8ac8e8df-b483-4747-9ae0-bf5151ead085"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "97ddf191-86be-40b2-8c28-0abf7d6df75e"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 454.6108,
+          "top": 553.8338,
+          "zIndex": 239,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#FFEB3B"
+        },
+        "visible": true,
+        "id": "36654cc5-1b88-4be1-abc7-faa0d162bce6"
+      },
+      {
+        "name": "Cases",
+        "comment": "LAWYER",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "5f527a16-b972-46a1-85ad-38ef58e1c954"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "8ace72d1-f554-424b-942f-03e7a1557658"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "dd9fafe2-5101-46a7-8065-7bc6e165ad7b"
+          },
+          {
+            "name": "lawyerID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "df33aa7c-3213-4938-92b0-5cc1ce11d25e"
+          },
+          {
+            "name": "pdf",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "a9bee3d2-d2ff-45f6-b049-ab3d1049661a"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1901.3066,
+          "top": 880.9714,
+          "zIndex": 253,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "82048d38-e463-4624-abf5-9c9127c5499e"
+      },
+      {
+        "name": "Appointment",
+        "comment": "CLIENT",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b69618f2-dc0f-4373-be81-3065ce54841c"
+          },
+          {
+            "name": "date",
+            "comment": "",
+            "dataType": "DATE",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b2d350b2-f0d6-48f2-a72c-2d09d657938d"
+          },
+          {
+            "name": "time",
+            "comment": "",
+            "dataType": "TIME",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "ca5d7045-b0b9-4f51-a697-e59358bbdb91"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "7b17844d-2476-4a20-8ae5-82914690fd13"
+          },
+          {
+            "name": "user",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "22d6a675-7688-456d-a89a-ae50259b89ba"
+          },
+          {
+            "name": "userID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "41e58103-1098-4d19-8ffe-928406535b23"
+          },
+          {
+            "name": "lawyerID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "44a8d5dc-bbd1-499d-93cb-dfa6f30c0652"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 852.6945,
+          "top": 412.4445,
+          "zIndex": 195,
+          "widthName": 74.99169921875,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "3128c7f8-286c-4c86-a46a-8e28d2b6d83b"
+      },
+      {
+        "name": "Team",
+        "comment": "LAWYER",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e772f70b-1393-470a-b3b0-37d50ed48d00"
+          },
+          {
+            "name": "email",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "f5adcd45-765c-4d68-bfa4-70740792acb4"
+          },
+          {
+            "name": "password",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "b78121ae-e985-4ba0-bceb-aa8a3d629b86"
+          },
+          {
+            "name": "lawyerId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "44b86ec9-c791-4169-8910-a0373bad72a4"
+          },
+          {
+            "name": "userId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "95449fc2-450e-4932-9b75-eaa5165378d8"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1906.2784,
+          "top": 408.6109,
+          "zIndex": 251,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#00BCD4"
+        },
+        "visible": true,
+        "id": "ebec1c8b-2205-4fdc-964b-d2bc41017a9e"
+      },
+      {
+        "name": "Cause list",
+        "comment": "ADMIN",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "93a7aa17-ab68-464d-909c-533ef2acb7ad"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "ba6e8d25-615e-4d85-845a-f4fe193bcc4f"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 456.1953,
+          "top": 414.0273,
+          "zIndex": 238,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#FFEB3B"
+        },
+        "visible": true,
+        "id": "0a047759-d910-4b0d-b8db-888a9b0bdaf2"
+      },
+      {
+        "name": "Lawyer_Court",
+        "comment": "join table lawyer and court",
+        "columns": [
+          {
+            "name": "courtId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "00115422-cd56-4e7e-b2d5-016387fe1c11"
+          },
+          {
+            "name": "lawyerId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e97b1d5d-7dd7-45f8-9fb2-8b3f1fbaf232"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 857.6396,
+          "top": 1003.0276,
+          "zIndex": 227,
+          "widthName": 82.92626953125,
+          "widthComment": 120
+        },
+        "visible": true,
+        "id": "b089e4f1-9ddd-48cb-89cf-040dbc9eb9ad"
+      },
+      {
+        "name": "Task",
+        "comment": "LAWYER",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f7fc6d25-6a5d-4f4a-b8db-4d3c9e2c1dce"
+          },
+          {
+            "name": "title",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "b54ba36d-c66c-4baa-b51a-b04d99150baf"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.6005859375,
+              "widthDefault": 60
+            },
+            "id": "150ad3b3-d135-4564-8838-c87fdd529cd9"
+          },
+          {
+            "name": "status",
+            "comment": "",
+            "dataType": "TASK_STATUS",
+            "default": "pending",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 91.57177734375,
+              "widthDefault": 60
+            },
+            "id": "93b1ce49-93c8-4e5b-828a-e4ed58a575ef"
+          },
+          {
+            "name": "lawyerID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "ab183750-a16c-4a5e-bade-38ddea1d091c"
+          },
+          {
+            "name": "teamID",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "50ece0dd-70f0-4f1b-94b2-92b8a748c7f0"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1891.3617,
+          "top": 671.5826,
+          "zIndex": 252,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "7b1f1ce4-ce18-48ed-9821-039fca1b6560"
+      }
+    ],
+    "indexes": []
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": [
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "b8233cc8-8254-4e67-8cc6-f72c3446f6d6",
+          "columnIds": [
+            "fc6e5bac-9a49-4b76-a8e8-f692fca9e4f3"
+          ],
+          "x": 1613.956007421875,
+          "y": 640.3936,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "7e284dc7-b215-4285-8b3a-226516b15bf1"
+          ],
+          "x": 1626.104509765625,
+          "y": 792.3296,
+          "direction": "top"
+        },
+        "constraintName": "fk_user_to_lawyer",
+        "visible": true,
+        "id": "8128ba36-77dc-45af-867d-99b0cb194f70"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "17dbf046-07eb-4883-8a77-ec5d37460396",
+          "columnIds": [
+            "63f00a09-7ccf-4d67-92ee-6"
+          ],
+          "x": 1215.9677734375,
+          "y": 891.9287,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "e98a4288-d1df-404d-82c1-9a5899e78375"
+          ],
+          "x": 1433.782,
+          "y": 818.8921,
+          "direction": "left"
+        },
+        "constraintName": "fk_specialization_to_lawyer",
+        "visible": true,
+        "id": "cf490019-b7db-4393-ad96-ed5d2bad61ee"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "17dbf046-07eb-4883-8a77-ec5d37460398",
+          "columnIds": [
+            "63f00a09-7ccf-4d67-92ee-d51c87476b15"
+          ],
+          "x": 1214.2023734375,
+          "y": 720.1583,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "8f936311-bb25-4310-880d-90c00d4a3b0a"
+          ],
+          "x": 1433.782,
+          "y": 925.1421,
+          "direction": "left"
+        },
+        "constraintName": "fk_city_to_lawyer",
+        "visible": true,
+        "id": "b19850dc-2e68-42e1-9535-06f123f31643"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "b8233cc8-8254-4e67-8cc6-f72c3446f6d6",
+          "columnIds": [
+            "fc6e5bac-9a49-4b76-a8e8-f692fca9e4f3"
+          ],
+          "x": 1422.8459,
+          "y": 523.8936,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "3128c7f8-286c-4c86-a46a-8e28d2b6d83b",
+          "columnIds": [
+            "41e58103-1098-4d19-8ffe-928406535b23"
+          ],
+          "x": 1209.1622734375,
+          "y": 465.5695,
+          "direction": "right"
+        },
+        "constraintName": "fk_user_to_appointment",
+        "visible": true,
+        "id": "87a3a834-b9a5-4857-9d77-f7e9c7a9cf98"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "f0025c09-9037-4294-b9fe-580516f26e04"
+          ],
+          "x": 1433.782,
+          "y": 978.2671,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "3128c7f8-286c-4c86-a46a-8e28d2b6d83b",
+          "columnIds": [
+            "44a8d5dc-bbd1-499d-93cb-dfa6f30c0652"
+          ],
+          "x": 1209.1622734375,
+          "y": 571.8195000000001,
+          "direction": "right"
+        },
+        "constraintName": "fk_lawyer_to_appointment",
+        "visible": true,
+        "id": "f038d6a2-b3bb-4b28-94df-4d3c18dae96a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "f0025c09-9037-4294-b9fe-580516f26e04"
+          ],
+          "x": 1818.42701953125,
+          "y": 845.4546,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "82048d38-e463-4624-abf5-9c9127c5499e",
+          "columnIds": [
+            "df33aa7c-3213-4938-92b0-5cc1ce11d25e"
+          ],
+          "x": 1901.3066,
+          "y": 966.7214,
+          "direction": "left"
+        },
+        "constraintName": "fk_lawyer_to_cases",
+        "visible": true,
+        "id": "1bbc0f98-fe53-4e86-85b9-971ccc81b522"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "f0025c09-9037-4294-b9fe-580516f26e04"
+          ],
+          "x": 1818.42701953125,
+          "y": 951.7046,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "7b1f1ce4-ce18-48ed-9821-039fca1b6560",
+          "columnIds": [
+            "ab183750-a16c-4a5e-bade-38ddea1d091c"
+          ],
+          "x": 1891.3617,
+          "y": 767.5826,
+          "direction": "left"
+        },
+        "constraintName": "fk_lawyer_to_task",
+        "visible": true,
+        "id": "35e83288-022b-4540-ad30-5c418ddd7b8a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "ebec1c8b-2205-4fdc-964b-d2bc41017a9e",
+          "columnIds": [
+            "e772f70b-1393-470a-b3b0-37d50ed48d00"
+          ],
+          "x": 2082.07869296875,
+          "y": 580.1109,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "7b1f1ce4-ce18-48ed-9821-039fca1b6560",
+          "columnIds": [
+            "50ece0dd-70f0-4f1b-94b2-92b8a748c7f0"
+          ],
+          "x": 2083.081182421875,
+          "y": 671.5826,
+          "direction": "top"
+        },
+        "constraintName": "fk_team_to_task",
+        "visible": true,
+        "id": "d4cade37-2dde-480c-82bb-262aade1e82a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "b8233cc8-8254-4e67-8cc6-f72c3446f6d6",
+          "columnIds": [
+            "fc6e5bac-9a49-4b76-a8e8-f692fca9e4f3"
+          ],
+          "x": 1805.06611484375,
+          "y": 523.8936,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "ebec1c8b-2205-4fdc-964b-d2bc41017a9e",
+          "columnIds": [
+            "95449fc2-450e-4932-9b75-eaa5165378d8"
+          ],
+          "x": 1906.2784,
+          "y": 494.3609,
+          "direction": "left"
+        },
+        "constraintName": "fk_user_to_team",
+        "visible": true,
+        "id": "af129284-bd30-4351-8d3a-09ba0b83f947"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "17dbf046-07eb-4883-8a77-ec5d37460399",
+          "columnIds": [
+            "63f00a09-7ccf-4d67-92ee-d51c87476b18"
+          ],
+          "x": 1029.61958671875,
+          "y": 1209.7817,
+          "direction": "top"
+        },
+        "end": {
+          "tableId": "b089e4f1-9ddd-48cb-89cf-040dbc9eb9ad",
+          "columnIds": [
+            "00115422-cd56-4e7e-b2d5-016387fe1c11"
+          ],
+          "x": 1031.1396,
+          "y": 1113.0276,
+          "direction": "bottom"
+        },
+        "constraintName": "fk_court_to_lawyer_court",
+        "visible": true,
+        "id": "4e04999a-9313-4671-b2c1-7c0c91f9d20c"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneN",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "3e9d3927-aaca-46d9-9802-6cbecf6f96d4",
+          "columnIds": [
+            "f0025c09-9037-4294-b9fe-580516f26e04"
+          ],
+          "x": 1433.782,
+          "y": 872.0171,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "b089e4f1-9ddd-48cb-89cf-040dbc9eb9ad",
+          "columnIds": [
+            "e97b1d5d-7dd7-45f8-9fb2-8b3f1fbaf232"
+          ],
+          "x": 1204.6396,
+          "y": 1058.0276,
+          "direction": "right"
+        },
+        "constraintName": "fk_lawyer_to_lawyer_court",
+        "visible": true,
+        "id": "5180d25d-b659-475e-bbb9-1caf62d7bfef"
+      }
+    ]
+  }
+}

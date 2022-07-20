@@ -6,28 +6,40 @@ export enum GENDER {
 export enum ROLE {
   ADMIN = 'Admin',
   LAWYER = 'Lawyer',
-  USER = 'User',
-  CLIENT = 'Client',
+  TEAM = 'Team',
+  CLIENT_APPONITMENT = 'Client Appointment', // Clients that are approaching lawyer for cases
+  CLIENT_LAWYER = "Client Lawyer" // Personel Clients
+
+  // USER = 'User',
 }
 
+// export enum SPECIALIZATION {
+//   CIVIL = 'Civil',
+//   CRIMINAL = 'Criminal',
+//   FAMILY = 'Family',
+// }
+
+// export enum COURT {
+//   LOWER = 'Lower Court',
+//   HIGH = 'High Court',
+//   SUPREME = 'Supreme Court',
+// }
+
+
+// Lawyer Status
 export enum STATUS {
-  NONE = '',
+  NONE = 'NONE', // APPONTMENT_CLIENT, LAWYER_CLIENT, 
   ACTIVE = 'Active',
   REJECT = 'Reject',
-  PENDING = 'Pending',
+  PENDING = 'Pending', // LAWYER DEFAULT
   BLOCK = 'Block',
 }
 
-export enum SPECIALIZATION {
-  CIVIL = 'Civil',
-  CRIMINAL = 'Criminal',
-  FAMILY = 'Family',
+// Lawyer Team
+export enum STATUS_TASK {
+  COMPLETE = 'Complete',
+  PENDING = 'Pending',
+  PROCESS = 'Process',
+  QUEUE = 'Queue', // LAWYER DEFAULT
+  BLOCK = 'Block',
 }
-
-export enum COURT {
-  LOWER = 'Lower Court',
-  HIGH = 'High Court',
-  SUPREME = 'Supreme Court',
-
-}
-
