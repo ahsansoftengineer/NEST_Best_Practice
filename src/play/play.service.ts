@@ -13,7 +13,7 @@ export class PlayService {
     @InjectRepository(Lawyer) public lawyer: Repository<Lawyer>
   ){
 
-  }
+  } 
  check11(data: SignUpLawyerDto){
   
   return this.user.create(data)
