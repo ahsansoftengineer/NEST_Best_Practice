@@ -7,38 +7,35 @@ import { ChangeStatusDto } from './dto/admin.dto';
 
 @Injectable()
 export class AdminService {
-  constructor(
-    @InjectRepository(User) public repoUser: Repository<User>){
-  }
+  constructor(@InjectRepository(User) public repoUser: Repository<User>) {}
   private userSelectiveColumns = {
     name: true,
     email: true,
     gender: true,
-    city: true,
     mobile: true,
-    court: true,
     image: true,
     role: true,
     status: true,
-
+    cityId: true,
+  };
+  async changeStatusUser({ id, status }: ChangeStatusDto) {
+    const user = await this.repoUser.findOneBy({ id });
+    if (!user)
+      throw new HttpException('User does not Exsist', HttpStatus.NOT_FOUND);
+    return this.repoUser.update(id, { status });
   }
-  async changeStatusUser({id, status}: ChangeStatusDto){
-    const user =  await this.repoUser.findOneBy({id})
-    if(!user) throw new HttpException('User does not Exsist', HttpStatus.NOT_FOUND)
-    return this.repoUser.update(id, {status})
-  } 
 
-  async getLawyers(){
+  async getLawyers() {
     return this.repoUser.find({
-      where: {role: ROLE.LAWYER},
-      select: this.userSelectiveColumns
-    })
+      where: { role: ROLE.LAWYER },
+      select: this.userSelectiveColumns,
+    });
   }
 
-  async getLawyer(id: number){
+  async getLawyer(id: number) {
     return this.repoUser.findOne({
-      where: {id, role: ROLE.LAWYER}, 
-      select: this.userSelectiveColumns
-    })
-  } 
+      where: { id, role: ROLE.LAWYER },
+      select: this.userSelectiveColumns,
+    });
+  }
 }

@@ -1,26 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLawyerDto } from './dto/create-lawyer.dto';
-import { UpdateLawyerDto } from './dto/update-lawyer.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Lawyer } from 'core/entities';
+import { Repository } from 'typeorm';
+import { UpdateLawyerDto } from './dto/lawyer.dto';
+import * as argon from 'argon2';
 
 @Injectable()
 export class LawyerService {
-  create(createLawyerDto: CreateLawyerDto) {
-    return 'This action adds a new lawyer';
-  }
+  constructor(@InjectRepository(Lawyer) public repo: Repository<Lawyer>) {}
 
-  findAll() {
-    return `This action returns all lawyer`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} lawyer`;
-  }
-
-  update(id: number, updateLawyerDto: UpdateLawyerDto) {
-    return `This action updates a #${id} lawyer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} lawyer`;
+  async update(id: number, data: UpdateLawyerDto, oldData: Lawyer) {
+    const hashResult = await argon.hash(data.password);
+    if (oldData.user.password != hashResult) data.password = hashResult;
+    else delete data.password;
+    delete data.email;
+    // return this.repo.update({id}, {...data});
   }
 }

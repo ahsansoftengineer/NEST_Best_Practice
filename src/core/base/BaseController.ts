@@ -1,5 +1,5 @@
 import { Get, Param } from '@nestjs/common';
-import { BaseService} from './index';
+import { BaseService } from './index';
 
 export abstract class BaseController {
   _ss: BaseService;
@@ -16,7 +16,7 @@ export abstract class BaseController {
   // remove(@Param('id') id: number) {
   //   return this._ss.remove(+id);
   // }
-  
+
   // @Post()
   // create(@Body() body: CreateDto) {
   //   return this._ss.createSimple(body);

@@ -1,7 +1,18 @@
-import { User } from "core/entities/user.entity";
-import { 
-  AlphaModel, BetaModel,
-  Book, Casez, News, Court, Lawyer, LawyerTeam, Specialization, City } from "core/entities";
+import { User } from 'core/entities/user.entity';
+import {
+  AlphaModel,
+  BetaModel,
+  Book,
+  Casez,
+  News,
+  Court,
+  Lawyer,
+  LawyerTeam,
+  Specialization,
+  City,
+} from 'core/entities';
+import { Task } from './task.entity';
+import { Appoinment } from './appoinment.entity';
 
 export const entities = [
   AlphaModel,
@@ -14,5 +25,7 @@ export const entities = [
   City,
   Specialization,
   Lawyer,
-  LawyerTeam
-]
+  LawyerTeam,
+  Task,
+  Appoinment
+];

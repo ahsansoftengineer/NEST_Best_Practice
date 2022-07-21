@@ -1,1 +1,1 @@
-export * from './SetEnvironmentVariables'
+export * from './SetEnvironmentVariables';

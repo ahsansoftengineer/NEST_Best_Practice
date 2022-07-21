@@ -1,4 +1,4 @@
-import { Controller,  Post, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { SignUpLawyerDto } from 'auth/dto/sign-up-lawyer.dto';
 import { Public } from 'core/decorators';
 import { PlayService } from './play.service';
@@ -11,7 +11,7 @@ export class PlayController {
   @Public()
   create(@Body() dto: SignUpLawyerDto) {
     console.log(dto);
-    
+
     // return this.playService.create(createPlayDto);
   }
 }

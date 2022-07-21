@@ -1,4 +1,4 @@
-import {Column } from 'typeorm';
+import { Column } from 'typeorm';
 import { AlphaModel } from './alpha-model';
 
 export class BetaModel extends AlphaModel {

@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 4000,
     "height": 4000,
-    "scrollTop": -1088.9999999999998,
-    "scrollLeft": -832.0000000000002,
+    "scrollTop": -744.8333434330084,
+    "scrollLeft": -506.05555285127195,
     "zoomLevel": 0.7,
     "show": {
       "tableComment": true,
@@ -235,7 +235,7 @@
           "active": false,
           "left": 1033.1234,
           "top": 962.6716,
-          "zIndex": 15,
+          "zIndex": 9,
           "widthName": 60,
           "widthComment": 81.11083984375,
           "color": "#00BCD4"
@@ -271,7 +271,7 @@
             "id": "f0025c09-9037-4294-b9fe-580516f26e04"
           },
           {
-            "name": "userID",
+            "name": "userId",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -294,7 +294,7 @@
             "id": "7e284dc7-b215-4285-8b3a-226516b15bf1"
           },
           {
-            "name": "specializationID",
+            "name": "specializationId",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -309,7 +309,7 @@
               "pk": false,
               "fk": true,
               "pfk": false,
-              "widthName": 93.04443359375,
+              "widthName": 90.88623046875,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -317,7 +317,30 @@
             "id": "e98a4288-d1df-404d-82c1-9a5899e78375"
           },
           {
-            "name": "cityID",
+            "name": "courtId",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "ebe61396-c4ec-4f46-838b-dc8630c4ed8f"
+          },
+          {
+            "name": "cityId",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -338,52 +361,6 @@
               "widthDefault": 60
             },
             "id": "8f936311-bb25-4310-880d-90c00d4a3b0a"
-          },
-          {
-            "name": "specialityId",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 66.30810546875,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "efffddd0-821f-4b32-95c1-3346d279ad89"
-          },
-          {
-            "name": "courtId",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "8fd3547a-829d-460c-97b1-4d0a39d1299e"
           },
           {
             "name": "address",
@@ -430,36 +407,13 @@
               "widthDefault": 60
             },
             "id": "3d7f9834-cf1f-427d-865d-6d922ce0ff1e"
-          },
-          {
-            "name": "",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "ebe61396-c4ec-4f46-838b-dc8630c4ed8f"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1000.0318,
-          "top": 619.4123,
-          "zIndex": 12,
+          "left": 997.4276,
+          "top": 627.2247,
+          "zIndex": 14,
           "widthName": 60,
           "widthComment": 114.201171875,
           "color": "#FFEB3B"
@@ -545,7 +499,7 @@
           "active": false,
           "left": 1560.2346,
           "top": 348.6583,
-          "zIndex": 10,
+          "zIndex": 4,
           "widthName": 60,
           "widthComment": 60
         },
@@ -653,7 +607,7 @@
           "active": false,
           "left": 483.6357,
           "top": 351.0317,
-          "zIndex": 9,
+          "zIndex": 3,
           "widthName": 60,
           "widthComment": 60
         },
@@ -738,7 +692,7 @@
           "active": false,
           "left": 1012,
           "top": 355.4287,
-          "zIndex": 13,
+          "zIndex": 5,
           "widthName": 82.21533203125,
           "widthComment": 60
         },
@@ -869,7 +823,7 @@
           "active": false,
           "left": 485.4737,
           "top": 1018.7228,
-          "zIndex": 16,
+          "zIndex": 7,
           "widthName": 60,
           "widthComment": 60,
           "color": "#F44336"
@@ -955,7 +909,7 @@
           "active": false,
           "left": 493.3608,
           "top": 1248.8338,
-          "zIndex": 21,
+          "zIndex": 8,
           "widthName": 60,
           "widthComment": 60,
           "color": "#F44336"
@@ -1087,7 +1041,7 @@
           "active": false,
           "left": 1559.777,
           "top": 527.0831,
-          "zIndex": 5,
+          "zIndex": 2,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1264,7 +1218,7 @@
           "active": false,
           "left": 1566.4445,
           "top": 1226.1945,
-          "zIndex": 26,
+          "zIndex": 11,
           "widthName": 74.99169921875,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1373,7 +1327,7 @@
           "active": false,
           "left": 1566.1395,
           "top": 1036.9443,
-          "zIndex": 27,
+          "zIndex": 12,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1436,7 +1390,7 @@
           "active": false,
           "left": 486.1953,
           "top": 836.5273,
-          "zIndex": 15,
+          "zIndex": 6,
           "widthName": 60,
           "widthComment": 60,
           "color": "#F44336"
@@ -1499,9 +1453,10 @@
           "active": false,
           "left": 488.8896,
           "top": 651.7776,
-          "zIndex": 1,
+          "zIndex": 13,
           "widthName": 82.92626953125,
-          "widthComment": 120
+          "widthComment": 120,
+          "color": "#00FF06"
         },
         "visible": true,
         "id": "b089e4f1-9ddd-48cb-89cf-040dbc9eb9ad"
@@ -1653,7 +1608,7 @@
           "active": false,
           "left": 1559.8335,
           "top": 731.0281,
-          "zIndex": 4,
+          "zIndex": 1,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1876,7 +1831,7 @@
           "active": false,
           "left": 1035.25,
           "top": 1259.5,
-          "zIndex": 14,
+          "zIndex": 10,
           "widthName": 84.3671875,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1910,8 +1865,8 @@
           "columnIds": [
             "7e284dc7-b215-4285-8b3a-226516b15bf1"
           ],
-          "x": 1064.1393032552082,
-          "y": 872.9123,
+          "x": 1093.0493041015625,
+          "y": 839.7247,
           "direction": "bottom"
         },
         "constraintName": "fk_user_to_lawyer",
@@ -1936,8 +1891,8 @@
           "columnIds": [
             "e98a4288-d1df-404d-82c1-9a5899e78375"
           ],
-          "x": 1192.354309765625,
-          "y": 619.4123,
+          "x": 1188.671008203125,
+          "y": 627.2247,
           "direction": "top"
         },
         "constraintName": "fk_specialization_to_lawyer",
@@ -1962,8 +1917,8 @@
           "columnIds": [
             "8f936311-bb25-4310-880d-90c00d4a3b0a"
           ],
-          "x": 1384.67681953125,
-          "y": 830.6623,
+          "x": 1379.91441640625,
+          "y": 760.0372,
           "direction": "right"
         },
         "constraintName": "fk_city_to_lawyer",
@@ -1988,8 +1943,8 @@
           "columnIds": [
             "ebe61396-c4ec-4f46-838b-dc8630c4ed8f"
           ],
-          "x": 1000.0318,
-          "y": 746.1623,
+          "x": 997.4276,
+          "y": 733.4747,
           "direction": "left"
         },
         "constraintName": "fk_lawyer_court_to_lawyer",
@@ -2015,7 +1970,7 @@
             "41e58103-1098-4d19-8ffe-928406535b23"
           ],
           "x": 1566.4445,
-          "y": 1279.3195,
+          "y": 1332.4445,
           "direction": "left"
         },
         "constraintName": "fk_user_to_appointment",
@@ -2031,18 +1986,18 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1320.5693162760417,
-          "y": 872.9123,
-          "direction": "bottom"
+          "x": 1379.91441640625,
+          "y": 813.1622,
+          "direction": "right"
         },
         "end": {
           "tableId": "3128c7f8-286c-4c86-a46a-8e28d2b6d83b",
           "columnIds": [
             "44a8d5dc-bbd1-499d-93cb-dfa6f30c0652"
           ],
-          "x": 1566.4445,
-          "y": 1385.5695,
-          "direction": "left"
+          "x": 1744.67838671875,
+          "y": 1226.1945,
+          "direction": "top"
         },
         "constraintName": "fk_lawyer_to_appointment",
         "visible": true,
@@ -2057,8 +2012,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1384.67681953125,
-          "y": 746.1623,
+          "x": 1379.91441640625,
+          "y": 706.9122,
           "direction": "right"
         },
         "end": {
@@ -2109,8 +2064,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1384.67681953125,
-          "y": 661.6623,
+          "x": 1379.91441640625,
+          "y": 653.7872,
           "direction": "right"
         },
         "end": {
@@ -2161,8 +2116,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1192.354309765625,
-          "y": 872.9123,
+          "x": 1284.2927123046875,
+          "y": 839.7247,
           "direction": "bottom"
         },
         "end": {

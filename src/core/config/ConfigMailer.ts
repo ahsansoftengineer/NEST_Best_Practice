@@ -1,11 +1,10 @@
-
-export const  configMailer = {
+export const configMailer = {
   // transport: 'smtps://user@domain.com:pass@smtp.domain.com',
   transport: {
     host: 'smtp-mail.outlook.com',
     port: 587,
     tls: {
-      ciphers:'SSLv3'
+      ciphers: 'SSLv3',
     },
     // ignoreTLS: true,
     secureConnection: false,
@@ -17,4 +16,4 @@ export const  configMailer = {
   defaults: {
     from: '"No Reply" <no-reply@localhost>',
   },
-}
+};

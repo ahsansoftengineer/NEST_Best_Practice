@@ -1,6 +1,5 @@
-import { BetaModel } from "core/entities";
-import { Entity } from "typeorm";
-
+import { BetaModel } from 'core/entities';
+import { Entity } from 'typeorm';
 
 @Entity()
-export class Court extends BetaModel  {}
+export class Court extends BetaModel {}

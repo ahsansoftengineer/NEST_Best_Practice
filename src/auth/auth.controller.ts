@@ -30,7 +30,7 @@ import { Tokens } from './types';
 @ApiTags('auth')
 export class AuthController {
   constructor(private _ss: AuthService) {}
-
+  // Admin ka kia karna hai
   @Public()
   @Post('local/sign-up-admin')
   @HttpCode(HttpStatus.CREATED)
@@ -38,33 +38,41 @@ export class AuthController {
   signUpAdmin(
     @Body() body: SignUpDto,
     @UploadedFile() image: Express.Multer.File,
-    ): Promise<Tokens> {
-    body.role = ROLE.ADMIN
-    body.status = STATUS.ACTIVE
+  ): Promise<Tokens> {
+    body.role = ROLE.ADMIN;
+    body.status = STATUS.ACTIVE;
 
-    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
-    body.image = image.filename
-    try{
+    if (image?.filename) {
+      body.image = image.filename;
+      //  throw new HttpException('admin profile image is required', HttpStatus.FORBIDDEN)
+    }
+    try {
       return this._ss.signUpAdmin(body);
-    }catch(e){
-      HandleUniqueError(e)
+    } catch (e) {
+      HandleUniqueError(e);
     }
   }
 
   @Public()
-  @Post('local/sign-up')
+  @Post('local/sign-up-lawyer')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(InterceptorImage)
   signupLawyer(
     @Body() body: SignUpLawyerDto,
     @UploadedFile() image: Express.Multer.File,
-    ): Promise<Tokens> {
-    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
-    body.image = image.filename
-    try{
+  ): Promise<Tokens> {
+    body.courtIds = JSON.parse(body.courtIds.toString());
+
+    if (!image?.filename)
+      throw new HttpException(
+        'user profile image is required',
+        HttpStatus.FORBIDDEN,
+      );
+    body.image = image.filename;
+    try {
       return this._ss.signUpLawyer(body);
-    }catch(e){
-      HandleUniqueError(e)
+    } catch (e) {
+      HandleUniqueError(e);
     }
   }
 
@@ -78,7 +86,7 @@ export class AuthController {
   @Public()
   @Post('forget-password')
   @HttpCode(HttpStatus.OK)
-  forgetPassword(@Body() body: {email: string}): Promise<Tokens> {
+  forgetPassword(@Body() body: { email: string }): Promise<Tokens> {
     return this._ss.forgetPassword(body.email);
   }
 
@@ -86,23 +94,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
     return this._ss.logout(userId);
-  }
-
-  @Patch('user/:email')
-  @HttpCode(HttpStatus.OK)
-  @UseInterceptors(InterceptorImage)
-  async updateUser(
-    @Body() body: UpdateUser,
-    @Param('email') email: string,
-    @UploadedFile() image: Express.Multer.File,
-    ){
-      const result = await this._ss.repo.findOneBy({email})
-      if(!result) throw new HttpException(`email ${email} does not exsist`, HttpStatus.NOT_FOUND)
-      if(image){
-        await unlink('public/' + result.image)
-        body.image = image.filename
-      }
-      return this._ss.updateUser(email, body, result);
   }
 
   @UseGuards(RtGuard)
