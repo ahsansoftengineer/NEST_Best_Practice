@@ -54,6 +54,7 @@ export class SignUpDto extends SignInDto {
 
   @IsNotEmpty()
   @Length(11, 17)
+  @ApiProperty()
   mobile: string;
 
   @ApiProperty({
@@ -70,8 +71,10 @@ export class SignUpDto extends SignInDto {
   cityId: number;
 
   @IsOptional()
+  @ApiProperty()
   address: string;
 
   @IsOptional()
+  @ApiProperty()
   image: string;
 }

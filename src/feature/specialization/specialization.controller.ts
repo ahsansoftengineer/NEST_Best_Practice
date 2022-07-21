@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
+import { Public } from 'core/decorators';
 
 @Controller('specialization')
 @ApiTags('specialization')
@@ -25,6 +26,7 @@ export class SpecializationController extends BaseController {
   }
 
   @Post()
+  // @Public()
   @Roles(ROLE.ADMIN)
   uploadFile(@Body() body: CreateSpecializationDto) {
     return this._ss.createSimple(body).catch(console.log);

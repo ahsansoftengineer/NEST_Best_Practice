@@ -11,6 +11,8 @@ import {
   Specialization,
   City,
 } from 'core/entities';
+import { Task } from './task.entity';
+import { Appoinment } from './appoinment.entity';
 
 export const entities = [
   AlphaModel,
@@ -24,4 +26,6 @@ export const entities = [
   Specialization,
   Lawyer,
   LawyerTeam,
+  Task,
+  Appoinment
 ];

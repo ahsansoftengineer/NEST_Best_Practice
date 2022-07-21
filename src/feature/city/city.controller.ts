@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
+import { Public } from 'core/decorators';
 import { Roles } from 'core/decorators/roles.decorator';
 import { ROLE } from 'core/enums';
 import { CityService } from './city.service';
@@ -21,6 +22,7 @@ export class CityController extends BaseController {
     super();
   }
   @Post()
+  // @Public()
   @Roles(ROLE.ADMIN)
   uploadFile(@Body() body: CreateCityDto) {
     return this._ss.createSimple(body).catch(console.log);
