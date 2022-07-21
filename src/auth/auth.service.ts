@@ -46,7 +46,7 @@ export class AuthService {
 
     const existUser = await this.repo.findOneBy({email: data.email})
 
-    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.email);
+    if(existUser) throw new ForbiddenException('Lawyer already Exsist with the ' + data.email);
 
     const user =  this.repo.create({...data, password: hashResult});
     await this.repo.save(user).catch((error) => {

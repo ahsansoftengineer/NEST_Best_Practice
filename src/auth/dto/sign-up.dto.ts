@@ -58,7 +58,7 @@ export class SignUpDto extends SignInDto {
   @IsEnum(GENDER)
   gender: GENDER;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   cityId: number;
 

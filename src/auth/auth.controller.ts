@@ -29,8 +29,11 @@ import { Tokens } from './types';
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
-  constructor(private _ss: AuthService) {}
+  constructor(private _ss: AuthService) {
 
+
+  }
+  // Admin ka kia karna hai
   @Public()
   @Post('local/sign-up-admin')
   @HttpCode(HttpStatus.CREATED)
@@ -42,8 +45,10 @@ export class AuthController {
     body.role = ROLE.ADMIN
     body.status = STATUS.ACTIVE
 
-    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
-    body.image = image.filename
+    if(image?.filename){
+      body.image = image.filename
+      //  throw new HttpException('admin profile image is required', HttpStatus.FORBIDDEN)
+    }
     try{
       return this._ss.signUpAdmin(body);
     }catch(e){
