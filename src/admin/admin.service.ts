@@ -14,13 +14,11 @@ export class AdminService {
     name: true,
     email: true,
     gender: true,
-    city: true,
     mobile: true,
-    court: true,
     image: true,
     role: true,
     status: true,
-
+    cityId: true,
   }
   async changeStatusUser({id, status}: ChangeStatusDto){
     const user =  await this.repoUser.findOneBy({id})

@@ -16,6 +16,6 @@ export class PlayService {
   } 
  check11(data: SignUpLawyerDto){
   
-  return this.user.create(data)
+  // return this.user.create(data)
  }
 }

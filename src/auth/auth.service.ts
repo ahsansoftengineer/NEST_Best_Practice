@@ -46,7 +46,7 @@ export class AuthService {
 
     const existUser = await this.repo.findOneBy({email: data.email})
 
-    if(existUser) throw new ForbiddenException('User already Exsist with the ' + data.email);
+    if(existUser) throw new ForbiddenException('Lawyer already Exsist with the ' + data.email);
 
     const user =  this.repo.create({...data, password: hashResult});
     await this.repo.save(user).catch((error) => {
@@ -69,14 +69,6 @@ export class AuthService {
     })
     
     return this.returnGeneratedToken(user)
-  }
-  async updateUser(email: string, data: UpdateUser, oldData: User){
-    const hashResult = await argon.hash(data.password);
-    if(oldData.password != hashResult) data.password = hashResult
-    else delete data.password
-    delete data.email
-    return this.repo.update({email}, {...data});
-    
   }
   async signinLocal(dto: SignInDto): Promise<Tokens> {
 

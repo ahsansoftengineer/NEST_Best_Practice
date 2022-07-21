@@ -10,24 +10,25 @@ export class Lawyer {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @OneToOne(() => User, x => x.lawyer, { eager: true, cascade: true })
+  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
+  user: User;
+  
+  userId: number;
+
 
   @ManyToOne(() => Specialization, e => e.lawyers)
+  @JoinColumn({ foreignKeyConstraintName: 'fk_specialization_user', referencedColumnName:'id' })
   specialization: Specialization;
 
-  @JoinColumn({ foreignKeyConstraintName: 'fk_specialization_user', referencedColumnName:'id' })
   specializationId: number;
 
   @ManyToMany(() => Court, c => c.lawyer, {
     eager: true,
   })
-  @JoinTable({ name: 'court_lawyer' })
-  court: Court[];
+  @JoinTable({ name: 'court_lawyer'})
+  court?: Court[];
 
-
-  @OneToOne(() => User, x => x.lawyer, { eager: true, cascade: true })
-  user: User;
-  
-  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
-  userId: number;
+  courtIds?: number[]
 }
 
