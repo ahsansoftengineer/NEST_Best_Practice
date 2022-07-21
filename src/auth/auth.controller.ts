@@ -93,23 +93,6 @@ export class AuthController {
     return this._ss.logout(userId);
   }
 
-  @Patch('user/:email')
-  @HttpCode(HttpStatus.OK)
-  @UseInterceptors(InterceptorImage)
-  async updateUser(
-    @Body() body: UpdateUser,
-    @Param('email') email: string,
-    @UploadedFile() image: Express.Multer.File,
-    ){
-      const result = await this._ss.repo.findOneBy({email})
-      if(!result) throw new HttpException(`email ${email} does not exsist`, HttpStatus.NOT_FOUND)
-      if(image){
-        await unlink('public/' + result.image)
-        body.image = image.filename
-      }
-      return this._ss.updateUser(email, body, result);
-  }
-
   @UseGuards(RtGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
