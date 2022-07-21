@@ -12,5 +12,5 @@ export class SignUpLawyerDto extends SignUpDto {
     example: [1,2,3,4],
   })
   @IsNotEmpty()
-  courts: number[];
+  courtIds: number[];
 }
