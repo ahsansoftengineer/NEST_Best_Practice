@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
 import { PlayModule } from './play/play.module';
+import { SharedModule } from 'core/shared/shared.module';
+import { RepoService } from 'core/shared/service/repo.service';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { PlayModule } from './play/play.module';
     configStaticFiles,
     TypeOrmModule.forRoot(configTypeORM),
     MailerModule.forRoot(configMailer),
+    SharedModule,
     AuthModule,
     FeatureModule,
     AdminModule,
@@ -38,6 +41,7 @@ import { PlayModule } from './play/play.module';
   ],
   exports: [
     MailerModule, // Those modules has Services Must needs to be exported
+    SharedModule
   ],
 })
 export class AppModule {}

@@ -6,6 +6,7 @@ import * as argon from 'argon2';
 import { ENV } from 'core/constant';
 import { Court, Lawyer, Specialization, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
+import { RepoService } from 'core/shared/service/repo.service';
 import { Any, In, Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 // import * as argon from 'argon2';
@@ -22,23 +23,24 @@ export class AuthService {
     private _jwt: JwtService,
     private _config: ConfigService,
     private _mail: MailService,
-    @InjectRepository(User) public repo: Repository<User>,
-    @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>,
-    @InjectRepository(Court) public repoCourt: Repository<Court>,
-    @InjectRepository(Specialization) public repoSpecialization: Repository<Specialization>,
+    public repo: RepoService
+    // @InjectRepository(User) public repo: Repository<User>,
+    // @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>,
+    // @InjectRepository(Court) public repoCourt: Repository<Court>,
+    // @InjectRepository(Specialization) public repoSpecialization: Repository<Specialization>,
   ) {}
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
-    const existUser = await this.repo.findOneBy({ email: data.email });
+    const existUser = await this.repo.user.findOneBy({ email: data.email });
 
     if (existUser)
       throw new ForbiddenException(
         'User already Exsist with the ' + data.email,
       );
 
-    const user = this.repo.create({ ...data, password: hashResult });
-    await this.repo.save(user).catch((error) => {
+    const user = this.repo.user.create({ ...data, password: hashResult });
+    await this.repo.user.save(user).catch((error) => {
       throw new ForbiddenException('Credentials incorrect');
     });
 
@@ -48,7 +50,7 @@ export class AuthService {
   async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
-    const existUser = await this.repo.findOneBy({ email: data.email });
+    const existUser = await this.repo.user.findOneBy({ email: data.email });
 
     if (existUser)
       throw new ForbiddenException(
@@ -66,8 +68,8 @@ export class AuthService {
       image: data.image,
       address: data.address,
     };
-    const courts = await this.repoCourt.findBy({ id: In([...data.courtIds]) });
-    const specialization = await this.repoSpecialization.findOneBy({ id: data.specializationId});
+    const courts = await this.repo.court.findBy({ id: In([...data.courtIds]) });
+    const specialization = await this.repo.specialization.findOneBy({ id: data.specializationId});
     console.log(courts);
 
     const lawyerResult: Lawyer = {
@@ -77,8 +79,8 @@ export class AuthService {
     };
     console.log({ lawyerResult });
 
-    const lawyer = this.repoLawyer.create({ ...lawyerResult });
-    await this.repoLawyer.save(lawyer).catch((error) => {
+    const lawyer = this.repo.lawyer.create({ ...lawyerResult });
+    await this.repo.lawyer.save(lawyer).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
@@ -89,22 +91,22 @@ export class AuthService {
   async signUpLocal(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
-    const existUser = await this.repo.findOneBy({ email: data.email });
+    const existUser = await this.repo.user.findOneBy({ email: data.email });
 
     if (existUser)
       throw new ForbiddenException(
         'User already Exsist with the ' + data.email,
       );
 
-    const user = this.repo.create({ ...data, password: hashResult });
-    await this.repo.save(user).catch((error) => {
+    const user = this.repo.user.create({ ...data, password: hashResult });
+    await this.repo.user.save(user).catch((error) => {
       throw new ForbiddenException('Credentials incorrect');
     });
 
     return this.returnGeneratedToken(user);
   }
   async signinLocal(dto: SignInDto): Promise<Tokens> {
-    const user = await this.repo.findOneBy({ email: dto.email });
+    const user = await this.repo.user.findOneBy({ email: dto.email });
 
     if (!user) throw new ForbiddenException('Access Denied');
 
@@ -115,7 +117,7 @@ export class AuthService {
   }
 
   async forgetPassword(email: string) {
-    const user = await this.repo.findOneBy({ email });
+    const user = await this.repo.user.findOneBy({ email });
     if (!user) throw new ForbiddenException('Username is incorrect');
     return this._mail.forgetPassword(email);
   }
@@ -128,15 +130,15 @@ export class AuthService {
 
   async logout(id: number): Promise<boolean> {
     if (!id) return false;
-    const result = await this.repo.findOneBy({ id });
+    const result = await this.repo.user.findOneBy({ id });
     if (result && result.hashedRt != null) {
-      this.repo.update(id, { hashedRt: null });
+      this.repo.user.update(id, { hashedRt: null });
     }
     return true;
   }
 
   async refreshTokens(id: number, rt: string): Promise<Tokens> {
-    const user = await this.repo.findOneBy({ id });
+    const user = await this.repo.user.findOneBy({ id });
 
     if (!user || !user.hashedRt) throw new ForbiddenException('Access Denied');
 
@@ -176,7 +178,7 @@ export class AuthService {
   }
   async updateRtHash(id: number, rt: string): Promise<void> {
     const hash = await argon.hash(rt);
-    await this.repo.update(id, { hashedRt: hash });
+    await this.repo.user.update(id, { hashedRt: hash });
   }
   returnedSearializedUser({ name, email, gender, mobile, role, status }: User) {
     return { name, email, gender, mobile, role, status };
