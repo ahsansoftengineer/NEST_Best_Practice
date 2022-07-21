@@ -5,10 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Specialization } from 'core/entities';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Specialization])
-  ],
+  imports: [TypeOrmModule.forFeature([Specialization])],
   controllers: [SpecializationController],
-  providers: [SpecializationService]
+  providers: [SpecializationService],
 })
 export class SpecializationModule {}

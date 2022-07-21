@@ -29,10 +29,7 @@ import { Tokens } from './types';
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
-  constructor(private _ss: AuthService) {
-
-
-  }
+  constructor(private _ss: AuthService) {}
   // Admin ka kia karna hai
   @Public()
   @Post('local/sign-up-admin')
@@ -41,18 +38,18 @@ export class AuthController {
   signUpAdmin(
     @Body() body: SignUpDto,
     @UploadedFile() image: Express.Multer.File,
-    ): Promise<Tokens> {
-    body.role = ROLE.ADMIN
-    body.status = STATUS.ACTIVE
+  ): Promise<Tokens> {
+    body.role = ROLE.ADMIN;
+    body.status = STATUS.ACTIVE;
 
-    if(image?.filename){
-      body.image = image.filename
+    if (image?.filename) {
+      body.image = image.filename;
       //  throw new HttpException('admin profile image is required', HttpStatus.FORBIDDEN)
     }
-    try{
+    try {
       return this._ss.signUpAdmin(body);
-    }catch(e){
-      HandleUniqueError(e)
+    } catch (e) {
+      HandleUniqueError(e);
     }
   }
 
@@ -63,15 +60,19 @@ export class AuthController {
   signupLawyer(
     @Body() body: SignUpLawyerDto,
     @UploadedFile() image: Express.Multer.File,
-    ): Promise<Tokens> {   
-      body.courtIds = JSON.parse(body.courtIds.toString())
-      
-    if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
-    body.image = image.filename
-    try{
+  ): Promise<Tokens> {
+    body.courtIds = JSON.parse(body.courtIds.toString());
+
+    if (!image?.filename)
+      throw new HttpException(
+        'user profile image is required',
+        HttpStatus.FORBIDDEN,
+      );
+    body.image = image.filename;
+    try {
       return this._ss.signUpLawyer(body);
-    }catch(e){
-      HandleUniqueError(e)
+    } catch (e) {
+      HandleUniqueError(e);
     }
   }
 
@@ -85,7 +86,7 @@ export class AuthController {
   @Public()
   @Post('forget-password')
   @HttpCode(HttpStatus.OK)
-  forgetPassword(@Body() body: {email: string}): Promise<Tokens> {
+  forgetPassword(@Body() body: { email: string }): Promise<Tokens> {
     return this._ss.forgetPassword(body.email);
   }
 

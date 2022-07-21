@@ -1,5 +1,5 @@
-import { Court, Specialization } from "core/entities";
-import { GENDER, ROLE} from "core/enums";
+import { Court, Specialization } from 'core/entities';
+import { GENDER, ROLE } from 'core/enums';
 
 export type UserInfo = {
   id: number;
@@ -13,4 +13,4 @@ export type UserInfo = {
   court: Court[];
   address: string;
   image: string;
-}
+};

@@ -1,9 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, Length, Matches } from "class-validator";
-import { Match } from "core/validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, Length, Matches } from 'class-validator';
+import { Match } from 'core/validator';
 
-export class ForgetPassword{
-
+export class ForgetPassword {
   @ApiProperty({
     description:
       'password must has special character, alpha numeric and capital / small letters',
@@ -27,5 +26,5 @@ export class ForgetPassword{
   })
   confirmPassword: string;
 
-  changePasswordCode: string
+  changePasswordCode: string;
 }

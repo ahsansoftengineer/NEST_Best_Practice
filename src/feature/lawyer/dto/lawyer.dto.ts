@@ -6,6 +6,4 @@ export class CreateLawyerDto extends SignUpDto {
   specializationId: number;
   courtIds: number[];
 }
-export class UpdateLawyerDto extends PartialType(CreateLawyerDto) {
-  
-}
+export class UpdateLawyerDto extends PartialType(CreateLawyerDto) {}

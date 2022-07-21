@@ -12,8 +12,8 @@ export class AtGuard extends AuthGuard(ENV.JWT_ACCESS_TOKEN) {
     super();
   }
   canActivate(context: ExecutionContext) {
-    console.log({public_guard:  CheckPublic(this.reflector, context)});
-    if(CheckPublic(this.reflector, context)) return true
+    console.log({ public_guard: CheckPublic(this.reflector, context) });
+    if (CheckPublic(this.reflector, context)) return true;
     return super.canActivate(context);
   }
 }

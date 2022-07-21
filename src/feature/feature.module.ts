@@ -11,12 +11,13 @@ import { LawyerModule } from './lawyer/lawyer.module';
 
 @Module({
   imports: [
-    BookModule, 
-    NewsModule, 
-    CasezModule, 
-    CourtModule, 
-    SpecializationModule, 
-    CityModule, LawyerModule
-]
+    BookModule,
+    NewsModule,
+    CasezModule,
+    CourtModule,
+    SpecializationModule,
+    CityModule,
+    LawyerModule,
+  ],
 })
 export class FeatureModule {}

@@ -3,5 +3,5 @@ export default function CheckPublic(reflector, context) {
     context.getHandler(),
     context.getClass(),
   ]);
-  return isPublic
+  return isPublic;
 }

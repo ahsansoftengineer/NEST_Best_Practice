@@ -1,6 +1,4 @@
-import {
-  TypeOrmModuleOptions,
-} from '@nestjs/typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ENV } from 'core/constant';
 import { entities } from 'core/entities/entities';
 // STEP 1

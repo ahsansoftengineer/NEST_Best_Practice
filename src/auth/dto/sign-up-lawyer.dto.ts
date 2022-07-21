@@ -9,7 +9,7 @@ export class SignUpLawyerDto extends SignUpDto {
 
   @ApiProperty({
     isArray: true,
-    example: [1,2,3,4],
+    example: [1, 2, 3, 4],
   })
   @IsNotEmpty()
   courtIds: number[];
