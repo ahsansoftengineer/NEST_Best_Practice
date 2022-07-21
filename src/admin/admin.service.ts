@@ -31,14 +31,14 @@ export class AdminService {
   async getLawyers(){
     return this.repoUser.find({
       where: {role: ROLE.LAWYER},
-      select: this.userSelectiveColumns
+      // select: this.userSelectiveColumns
     })
   }
 
   async getLawyer(id: number){
     return this.repoUser.findOne({
       where: {id, role: ROLE.LAWYER}, 
-      select: this.userSelectiveColumns
+      // select: this.userSelectiveColumns
     })
   } 
 }

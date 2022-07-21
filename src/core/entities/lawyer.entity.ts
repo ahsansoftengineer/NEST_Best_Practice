@@ -25,6 +25,7 @@ export class Lawyer {
 
 
   @OneToOne(() => User, x => x.lawyer, { eager: true, cascade: true })
+  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
   user: User;
   
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })

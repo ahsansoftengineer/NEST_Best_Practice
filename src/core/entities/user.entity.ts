@@ -1,6 +1,7 @@
 import { GENDER, ROLE, STATUS } from "core/enums";
-import { Column, Entity, OneToOne, Unique } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, Unique } from "typeorm";
 import { AlphaModel } from "./alpha-model";
+import { City } from "./city.entity";
 import { Lawyer } from "./lawyer.entity";
 
 
@@ -43,9 +44,6 @@ export class User extends AlphaModel{
   gender: GENDER;
 
   @Column()
-  city: string;
-
-  @Column()
   address: string;
 
   @Column({nullable: true, length: 200 })
@@ -56,6 +54,12 @@ export class User extends AlphaModel{
 
 
   @OneToOne(() => Lawyer, x => x.user)
-  lawyer: Lawyer;
+  lawyer?: Lawyer;
+
+  @ManyToOne(() => City, e => e.user)
+  city?: City;
+
+  @JoinColumn({ foreignKeyConstraintName: 'fk_city_user'})
+  cityId: number;
 }
 

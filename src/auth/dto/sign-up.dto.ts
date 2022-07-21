@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator';
 import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
@@ -59,7 +59,8 @@ export class SignUpDto extends SignInDto {
   gender: GENDER;
 
   @IsNotEmpty()
-  city: string;
+  @IsNumber()
+  cityId: number;
 
   @IsOptional()
   address: string;
