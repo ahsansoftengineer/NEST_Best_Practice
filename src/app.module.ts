@@ -21,7 +21,7 @@ import { PlayModule } from './play/play.module';
     configStaticFiles,
     TypeOrmModule.forRoot(configTypeORM),
     MailerModule.forRoot(configMailer),
-    AuthModule, 
+    AuthModule,
     FeatureModule,
     AdminModule,
     PlayModule,
@@ -37,7 +37,7 @@ import { PlayModule } from './play/play.module';
     },
   ],
   exports: [
-    MailerModule // Those modules has Services Must needs to be exported
-  ]
+    MailerModule, // Those modules has Services Must needs to be exported
+  ],
 })
 export class AppModule {}

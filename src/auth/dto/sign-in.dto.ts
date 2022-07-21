@@ -3,12 +3,11 @@ import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
 
 export class SignInDto {
   @ApiProperty({
-    description:
-      'email for the Token is required in Email formit',
+    description: 'email for the Token is required in Email formit',
   })
   @IsNotEmpty()
   @IsEmail()
-  @Length(3, 20)
+  @Length(7, 50)
   email: string;
 
   // @BeforeInsert()

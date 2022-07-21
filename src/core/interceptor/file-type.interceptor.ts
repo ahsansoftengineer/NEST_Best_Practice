@@ -1,7 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { Request } from 'express';
 
 // @Injectable()
@@ -14,20 +11,32 @@ import { Request } from 'express';
 //   }
 // }
 export const PDF_ImageInterceptor = (req: Request, file, callback) => {
-  if (file?.fieldname == 'image' &&  !file.originalname.match(/\.(jpg|jpeg|png|jfif)$/)) {
-    return callback(new HttpException('image must be jpg|jpeg|png|gif', HttpStatus.FORBIDDEN),false);
-  } else if( file?.fieldname == 'pdf' &&  !file.originalname.match(/\.(pdf)$/)){
-    return callback(new HttpException('book must be of type pdf document', HttpStatus.FORBIDDEN),false);
+  if (
+    file?.fieldname == 'image' &&
+    !file.originalname.match(/\.(jpg|jpeg|png|jfif)$/)
+  ) {
+    return callback(
+      new HttpException('image must be jpg|jpeg|png|gif', HttpStatus.FORBIDDEN),
+      false,
+    );
+  } else if (file?.fieldname == 'pdf' && !file.originalname.match(/\.(pdf)$/)) {
+    return callback(
+      new HttpException(
+        'book must be of type pdf document',
+        HttpStatus.FORBIDDEN,
+      ),
+      false,
+    );
   }
   callback(null, true);
 };
 
 export const FileImageTypeInterceptor = (req: Request, file, callback) => {
-  if(!file.originalname.match(/\.(pdf)$/)) callback(null, true)
+  if (!file.originalname.match(/\.(pdf)$/)) callback(null, true);
   if (!file.originalname.match(/\.(jpg|jpeg|png|jfif)$/)) {
     return callback(
       new HttpException('Only image files are allowed!', HttpStatus.FORBIDDEN),
-      false, 
+      false,
     );
   }
   callback(null, true);

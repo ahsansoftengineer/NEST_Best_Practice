@@ -1,4 +1,16 @@
-import { Controller, Post, Body, Patch, Param, UseInterceptors, UploadedFiles, Catch, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Patch,
+  Param,
+  UseInterceptors,
+  UploadedFiles,
+  Catch,
+  Delete,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -13,26 +25,31 @@ import { CreateBookDto, UpdateBookDto } from './dto/book.dto';
 @ApiTags('book')
 @Catch(GlobalExceptionFilter)
 //QueryFailedError, EntityNotFoundError
-export class BookController extends BaseController{
+export class BookController extends BaseController {
   constructor(public _ss: BookService) {
-    super()
+    super();
   }
-
 
   @Post()
   @Roles(ROLE.ADMIN)
   @UseInterceptors(Interceptor_Files_PDF_Image)
   uploadFile(
     @Body() body: CreateBookDto,
-    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
-    ) {
-      if(!files?.image || !files?.image[0]?.filename) throw new HttpException('book image is required', HttpStatus.BAD_REQUEST)
-        body.image = files.image[0].filename
-      if(!files?.pdf || !files?.pdf[0]?.filename) throw new HttpException('book pdf document is required', HttpStatus.BAD_REQUEST)
-      body.pdf = files.pdf[0].filename
-      return this._ss.createSimple(body).catch(e => {
-        return HandleUniqueError(e)
-      });
+    @UploadedFiles()
+    files: { image?: Express.Multer.File[]; pdf?: Express.Multer.File[] },
+  ) {
+    if (!files?.image || !files?.image[0]?.filename)
+      throw new HttpException('book image is required', HttpStatus.BAD_REQUEST);
+    body.image = files.image[0].filename;
+    if (!files?.pdf || !files?.pdf[0]?.filename)
+      throw new HttpException(
+        'book pdf document is required',
+        HttpStatus.BAD_REQUEST,
+      );
+    body.pdf = files.pdf[0].filename;
+    return this._ss.createSimple(body).catch((e) => {
+      return HandleUniqueError(e);
+    });
   }
 
   @Patch(':id')
@@ -41,18 +58,19 @@ export class BookController extends BaseController{
   async update(
     @Param('id') id: number,
     @Body() body: UpdateBookDto,
-    @UploadedFiles() files: { image?: Express.Multer.File[], pdf?: Express.Multer.File[] },
+    @UploadedFiles()
+    files: { image?: Express.Multer.File[]; pdf?: Express.Multer.File[] },
   ) {
     return this._ss.updateSimple(
       id,
       body,
       async (fetchedRecord, updateRecord) => {
-        if(files?.image) {
-          this._ss.delFile(fetchedRecord.image)
+        if (files?.image) {
+          this._ss.delFile(fetchedRecord.image);
           updateRecord.image = files.image[0].filename;
         }
-        if(files?.pdf) {
-          this._ss.delFile(fetchedRecord.pdf)
+        if (files?.pdf) {
+          this._ss.delFile(fetchedRecord.pdf);
           updateRecord.pdf = files.pdf[0].filename;
         }
       },
@@ -62,15 +80,13 @@ export class BookController extends BaseController{
   @Roles(ROLE.ADMIN)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    const result = await this._ss.repo.findOneBy({id})
-    if(result){
-      return this._ss.remove(+id).then(x => {
-        this._ss.delFile(result.image)
-        this._ss.delFile(result.pdf)      
-        return x
-      })
+    const result = await this._ss.repo.findOneBy({ id });
+    if (result) {
+      return this._ss.remove(+id).then((x) => {
+        this._ss.delFile(result.image);
+        this._ss.delFile(result.pdf);
+        return x;
+      });
     }
   }
-
-
 }

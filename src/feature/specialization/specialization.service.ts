@@ -5,8 +5,10 @@ import { Specialization } from 'core/entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class SpecializationService extends BaseService{
-  constructor(@InjectRepository(Specialization) public repo: Repository<Specialization>){
-    super()
+export class SpecializationService extends BaseService {
+  constructor(
+    @InjectRepository(Specialization) public repo: Repository<Specialization>,
+  ) {
+    super();
   }
 }

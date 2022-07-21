@@ -19,7 +19,7 @@ export class CreateDto {
   @ApiProperty({
     example: 'Additional Info for this this row',
     description: 'Other usefull information',
-    default: ''
+    default: '',
   })
   @MaxLength(100, {
     message: 'Your useful information cannot be greater than 100 charater',

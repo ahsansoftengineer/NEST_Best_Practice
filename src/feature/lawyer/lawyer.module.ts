@@ -5,10 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Lawyer } from 'core/entities';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Lawyer])
-  ],
+  imports: [TypeOrmModule.forFeature([Lawyer])],
   controllers: [LawyerController],
-  providers: [LawyerService]
+  providers: [LawyerService],
 })
 export class LawyerModule {}

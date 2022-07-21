@@ -11,13 +11,13 @@ const user = {
   email: 'test@gmail.com',
   password: 'aBc@123',
   confirmPassword: 'aBc@123',
-  role: ROLE.ADMIN
+  role: ROLE.ADMIN,
 };
 
 describe('Auth Flow', () => {
   let authService: AuthService;
   let moduleRef: TestingModule;
-  let repo: Repository<User>
+  let repo: Repository<User>;
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -187,7 +187,7 @@ describe('Auth Flow', () => {
     });
 
     it('should refresh tokens', async () => {
-      await repo.clear()
+      await repo.clear();
       // log in the user again and save rt + at
       const _tokens = await authService.signupLocal(user);
 

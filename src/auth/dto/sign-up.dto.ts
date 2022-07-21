@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
@@ -14,7 +21,7 @@ export class SignUpDto extends SignInDto {
     enum: STATUS,
     isArray: false,
     example: STATUS.PENDING,
-    default: STATUS.PENDING
+    default: STATUS.PENDING,
   })
   @IsOptional()
   @IsEnum(STATUS, {
@@ -26,7 +33,7 @@ export class SignUpDto extends SignInDto {
     enum: ROLE,
     isArray: false,
     example: ROLE.LAWYER,
-    default: ROLE.LAWYER
+    default: ROLE.LAWYER,
   })
   @IsOptional()
   @IsEnum(ROLE, {
@@ -60,7 +67,7 @@ export class SignUpDto extends SignInDto {
   gender: GENDER;
 
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   cityId: number;
 
   @IsOptional()

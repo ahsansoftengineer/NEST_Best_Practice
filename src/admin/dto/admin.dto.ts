@@ -1,10 +1,8 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsEnum, IsNotEmpty, IsNumber } from "class-validator";
-import { STATUS } from "core/enums";
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { STATUS } from 'core/enums';
 
-
-export class ChangeStatusDto{
-  
+export class ChangeStatusDto {
   @ApiProperty()
   @IsNumber()
   id: number;
@@ -13,13 +11,10 @@ export class ChangeStatusDto{
     enum: STATUS,
     isArray: false,
     example: STATUS.PENDING,
-    default: STATUS.PENDING
+    default: STATUS.PENDING,
   })
   @IsEnum(STATUS, {
     message: 'Status must be (Active, Pending, Block, Reject)',
   })
   status: STATUS;
-
-
 }
-

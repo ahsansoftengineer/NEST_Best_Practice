@@ -5,8 +5,8 @@ import { Book } from 'core/entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class BookService extends BaseService{
-  constructor(@InjectRepository(Book) public repo: Repository<Book>){
-    super()
+export class BookService extends BaseService {
+  constructor(@InjectRepository(Book) public repo: Repository<Book>) {
+    super();
   }
 }

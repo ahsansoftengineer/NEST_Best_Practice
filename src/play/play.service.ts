@@ -10,12 +10,9 @@ import { UpdatePlayDto } from './dto/update-play.dto';
 export class PlayService {
   constructor(
     @InjectRepository(User) public user: Repository<User>,
-    @InjectRepository(Lawyer) public lawyer: Repository<Lawyer>
-  ){
-
-  } 
- check11(data: SignUpLawyerDto){
-  
-  // return this.user.create(data)
- }
+    @InjectRepository(Lawyer) public lawyer: Repository<Lawyer>,
+  ) {}
+  check11(data: SignUpLawyerDto) {
+    // return this.user.create(data)
+  }
 }

@@ -26,7 +26,7 @@ export class BaseService {
     // return this.repo.delete(id);
     return this.repo.delete({ id });
   }
-  delFile(filename: string){
+  delFile(filename: string) {
     return unlink('public/' + filename).catch(console.log);
   }
 }

@@ -1,4 +1,15 @@
-import { Controller, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators/roles.decorator';
@@ -9,9 +20,9 @@ import { CreateCasezDto, UpdateCasezDto } from './dto/create-casez.dto';
 
 @Controller('case')
 @ApiTags('case')
-export class CasezController extends BaseController{
+export class CasezController extends BaseController {
   constructor(public _ss: CasezService) {
-    super()
+    super();
   }
 
   @Post()
@@ -20,11 +31,14 @@ export class CasezController extends BaseController{
   create(
     @Body() body: CreateCasezDto,
     @UploadedFile() pdf: Express.Multer.File,
-    ) {
-      if(!pdf?.filename) throw new HttpException('case reference file is required', HttpStatus.FORBIDDEN)
-      body.pdf = pdf.filename
-      return this._ss.createSimple(body);
-        
+  ) {
+    if (!pdf?.filename)
+      throw new HttpException(
+        'case reference file is required',
+        HttpStatus.FORBIDDEN,
+      );
+    body.pdf = pdf.filename;
+    return this._ss.createSimple(body);
   }
 
   @Patch(':id')
@@ -39,8 +53,8 @@ export class CasezController extends BaseController{
       id,
       body,
       async (fetchedRecord, updateRecord) => {
-        if(pdf) {
-          this._ss.delFile(fetchedRecord.pdf)
+        if (pdf) {
+          this._ss.delFile(fetchedRecord.pdf);
           updateRecord.pdf = pdf.filename;
         }
       },
@@ -50,14 +64,12 @@ export class CasezController extends BaseController{
   @Roles(ROLE.LAWYER)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    const result = await this._ss.repo.findOneBy({id})
-    if(result){
-      return this._ss.remove(+id).then(x => {
-        this._ss.delFile(result.pdf)
-        return x
-      })
+    const result = await this._ss.repo.findOneBy({ id });
+    if (result) {
+      return this._ss.remove(+id).then((x) => {
+        this._ss.delFile(result.pdf);
+        return x;
+      });
     }
   }
-
-
 }

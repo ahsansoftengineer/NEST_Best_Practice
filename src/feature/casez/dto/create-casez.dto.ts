@@ -1,8 +1,8 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsOptional, Length } from "class-validator";
-import { CreateDto } from "core/base";
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { IsOptional, Length } from 'class-validator';
+import { CreateDto } from 'core/base';
 
-export class CreateCasezDto extends CreateDto{
+export class CreateCasezDto extends CreateDto {
   @ApiProperty()
   @IsOptional()
   @Length(3, 200)

@@ -13,15 +13,15 @@ import { AppoinmentModule } from './appoinment/appoinment.module';
 
 @Module({
   imports: [
-    BookModule, 
-    NewsModule, 
-    CasezModule, 
-    CourtModule, 
-    SpecializationModule, 
+    BookModule,
+    NewsModule,
+    CasezModule,
+    CourtModule,
+    SpecializationModule,
     CityModule,
-    LawyerModule, 
-    TaskModule, 
+    LawyerModule,
+    TaskModule,
     AppoinmentModule
-]
+  ],
 })
 export class FeatureModule {}
