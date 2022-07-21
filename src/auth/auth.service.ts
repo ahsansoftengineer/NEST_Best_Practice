@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as argon from 'argon2';
 import { ENV } from 'core/constant';
-import { Court, Lawyer, User } from 'core/entities';
+import { Court, Lawyer, Specialization, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { Any, In, Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
@@ -25,6 +25,7 @@ export class AuthService {
     @InjectRepository(User) public repo: Repository<User>,
     @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>,
     @InjectRepository(Court) public repoCourt: Repository<Court>,
+    @InjectRepository(Specialization) public repoSpecialization: Repository<Specialization>,
   ) {}
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
@@ -66,10 +67,11 @@ export class AuthService {
       address: data.address,
     };
     const courts = await this.repoCourt.findBy({ id: In([...data.courtIds]) });
+    const specialization = await this.repoSpecialization.findOneBy({ id: data.specializationId});
     console.log(courts);
 
     const lawyerResult: Lawyer = {
-      specializationId: +data.specializationId,
+      specialization,
       court: courts,
       user,
     };

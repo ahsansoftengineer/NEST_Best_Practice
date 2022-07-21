@@ -16,4 +16,12 @@ export class LawyerService {
     delete data.email;
     // return this.repo.update({id}, {...data});
   }
+  getAll(){
+    return this.repo.find()
+  }
+  lawyerByCity_Speciality(cityId: number, specializationId: number) {
+    console.log({cityId, specializationId});
+    
+    return this.repo.findBy({ user: {city: {id: cityId}}, specialization: {id: specializationId}}) || { message: `record does not exsist` };
+  }
 }

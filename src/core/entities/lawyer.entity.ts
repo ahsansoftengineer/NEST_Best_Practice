@@ -22,14 +22,16 @@ export class Lawyer {
 
   userId?: number;
 
-  @ManyToOne(() => Specialization, (e) => e.lawyers)
+  @ManyToOne(() => Specialization, (e) => e.lawyers, {eager: true})
   @JoinColumn({
     foreignKeyConstraintName: 'fk_specialization_user',
-    referencedColumnName: 'id',
   })
   specialization?: Specialization;
 
-  specializationId: number;
+  @JoinColumn({
+    foreignKeyConstraintName: 'fk_specialization_user',
+  })
+  specializationId?: number;
 
   @ManyToMany(() => Court, (c) => c.lawyer, {
     eager: true,
