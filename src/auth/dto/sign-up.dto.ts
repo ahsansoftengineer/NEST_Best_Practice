@@ -59,7 +59,7 @@ export class SignUpDto extends SignInDto {
   gender: GENDER;
 
   @IsOptional()
-  @IsNumber()
+  // @IsNumber()
   cityId: number;
 
   @IsOptional()

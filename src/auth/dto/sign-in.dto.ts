@@ -8,7 +8,7 @@ export class SignInDto {
   })
   @IsNotEmpty()
   @IsEmail()
-  @Length(3, 20)
+  @Length(7, 50)
   email: string;
 
   // @BeforeInsert()

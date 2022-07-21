@@ -57,13 +57,15 @@ export class AuthController {
   }
 
   @Public()
-  @Post('local/sign-up')
+  @Post('local/sign-up-lawyer')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(InterceptorImage)
   signupLawyer(
     @Body() body: SignUpLawyerDto,
     @UploadedFile() image: Express.Multer.File,
-    ): Promise<Tokens> {
+    ): Promise<Tokens> {   
+      body.courtIds = JSON.parse(body.courtIds.toString())
+      
     if(!image?.filename) throw new HttpException('user profile image is required', HttpStatus.FORBIDDEN)
     body.image = image.filename
     try{

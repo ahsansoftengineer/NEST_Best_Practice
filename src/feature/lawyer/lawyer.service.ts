@@ -17,7 +17,7 @@ export class LawyerService{
     if(oldData.user.password != hashResult) data.password = hashResult
     else delete data.password
     delete data.email
-    return this.repo.update({id}, {...data});
+    // return this.repo.update({id}, {...data});
   }
  
 }

@@ -6,29 +6,29 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class AlphaModel extends BaseEntity {
+export class AlphaModel{
   // For MongoDB
   // @PrimaryGeneratedColumn("uuid")
   // id: string;
 
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column({ nullable: true, length: 250, default: '' })
-  desc: string;
+  desc?: string;
 
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
-  public createdAt: Date;
+  public createdAt?: Date;
 
   @UpdateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
-  public updatedAt: Date;
+  public updatedAt?: Date;
 
   // @DeleteDateColumn({
   //   type: "timestamp",

@@ -4,9 +4,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import  * as argon from 'argon2';
 import { ENV } from 'core/constant';
-import { User } from 'core/entities';
-import { ROLE } from 'core/enums';
-import { Repository } from 'typeorm';
+import { Court, Lawyer, User } from 'core/entities';
+import { ROLE, STATUS } from 'core/enums';
+import { Any, In, Repository } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 // import * as argon from 'argon2';
 
@@ -23,7 +23,8 @@ export class AuthService {
     private _config: ConfigService,
     private _mail: MailService ,
     @InjectRepository(User) public repo: Repository<User>,
-    // @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>
+    @InjectRepository(Lawyer) public repoLawyer: Repository<Lawyer>,
+    @InjectRepository(Court) public repoCourt: Repository<Court>,
 
   ) {}
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
@@ -47,13 +48,35 @@ export class AuthService {
     const existUser = await this.repo.findOneBy({email: data.email})
 
     if(existUser) throw new ForbiddenException('Lawyer already Exsist with the ' + data.email);
-
-    const user =  this.repo.create({...data, password: hashResult});
-    await this.repo.save(user).catch((error) => {
+    const user: User = {
+      email: data.email,
+      name: data.name,
+      gender: data.gender,
+      mobile: data.mobile,
+      role: ROLE.LAWYER,
+      status: STATUS.PENDING,
+      password: hashResult,
+      cityId: data.cityId,
+      image: data.image,
+      address: data.address,
+    }
+    const courts = await this.repoCourt.findBy({id: In([...data.courtIds])}) 
+    console.log(courts);
+    
+    const lawyerResult: Lawyer = {
+      specializationId: +data.specializationId,
+      court: courts,
+      user,
+    }
+    console.log({lawyerResult});
+    
+    const lawyer =  this.repoLawyer.create({...lawyerResult});
+    await this.repoLawyer.save(lawyer).catch((error) => {
+      console.log({db_error: error});
       throw new ForbiddenException('Credentials incorrect');
     })
     
-    return this.returnGeneratedToken(user)
+    return this.returnGeneratedToken(lawyer.user)
   }
 
   async signUpLocal(data: SignUpDto): Promise<Tokens> {

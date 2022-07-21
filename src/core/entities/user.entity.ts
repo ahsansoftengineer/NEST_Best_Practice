@@ -47,10 +47,10 @@ export class User extends AlphaModel{
   address: string;
 
   @Column({nullable: true, length: 200 })
-  image: string;
+  image?: string;
 
   @Column({ length: 1000, nullable: true })
-  hashedRt: string
+  hashedRt?: string
 
 
   @OneToOne(() => Lawyer, x => x.user)

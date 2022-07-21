@@ -8,5 +8,5 @@ export class Court extends BetaModel  {
 
   @ManyToMany(() => Lawyer, e => e.court)
   @JoinTable({ name: 'court_lawyer' })
-  lawyer: Lawyer[];
+  lawyer?: Lawyer[];
 }

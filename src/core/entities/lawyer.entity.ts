@@ -8,18 +8,18 @@ import { User } from "./user.entity";
 export class Lawyer {
   
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @OneToOne(() => User, x => x.lawyer, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
-  user: User;
+  user?: User;
   
-  userId: number;
+  userId?: number;
 
 
   @ManyToOne(() => Specialization, e => e.lawyers)
   @JoinColumn({ foreignKeyConstraintName: 'fk_specialization_user', referencedColumnName:'id' })
-  specialization: Specialization;
+  specialization?: Specialization;
 
   specializationId: number;
 
