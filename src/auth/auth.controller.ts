@@ -33,7 +33,6 @@ export class AuthController {
   // Admin ka kia karna hai
   @Public()
   @Post('local/sign-up-admin')
-  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(InterceptorImage)
   signUpAdmin(
     @Body() body: SignUpDto,
@@ -55,7 +54,6 @@ export class AuthController {
 
   @Public()
   @Post('local/sign-up-lawyer')
-  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(InterceptorImage)
   signupLawyer(
     @Body() body: SignUpLawyerDto,
@@ -78,27 +76,23 @@ export class AuthController {
 
   @Public()
   @Post('local/sign-in')
-  @HttpCode(HttpStatus.OK)
   signinLocal(@Body() body: SignInDto): Promise<Tokens> {
     return this._ss.signinLocal(body);
   }
 
   @Public()
   @Post('forget-password')
-  @HttpCode(HttpStatus.OK)
   forgetPassword(@Body() body: { email: string }): Promise<Tokens> {
     return this._ss.forgetPassword(body.email);
   }
 
   @Post('logout')
-  @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: number): Promise<boolean> {
     return this._ss.logout(userId);
   }
 
   @UseGuards(RtGuard)
   @Post('refresh')
-  @HttpCode(HttpStatus.OK)
   refreshTokens(
     @GetCurrentUserId() userId: number,
     @GetCurrentUser('refreshToken') refreshToken: string,

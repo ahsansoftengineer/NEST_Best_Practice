@@ -11,6 +11,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'core/decorators';
 import { InterceptorImage } from 'core/interceptor';
 import { unlink } from 'fs/promises';
@@ -18,10 +19,10 @@ import { UpdateLawyerDto } from './dto/lawyer.dto';
 import { LawyerService } from './lawyer.service';
 
 @Controller('lawyer')
+@ApiTags('lawyer')
 export class LawyerController {
   constructor(private readonly _ss: LawyerService) {}
   @Patch()
-  @HttpCode(HttpStatus.OK)
   @UseInterceptors(InterceptorImage)
   async update(
     @Body() body: UpdateLawyerDto,
@@ -44,14 +45,13 @@ export class LawyerController {
 
   @Public()
   @Get()
-  @HttpCode(HttpStatus.OK)
   getAll(){
     return this._ss.getAll()
   }
 
   @Public()
   @Get('city_specialization')
-  @HttpCode(HttpStatus.OK)
+  
   lawyerByCity_Speciality(@Query() {cityId, specializationId}){
     return this._ss.lawyerByCity_Speciality(cityId, specializationId)
   }
