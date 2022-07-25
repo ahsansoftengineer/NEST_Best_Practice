@@ -45,14 +45,13 @@ export class LawyerController {
 
   @Public()
   @Get()
-  getAll(){
-    return this._ss.getAll()
+  getAll() {
+    return this._ss.getAll();
   }
 
   @Public()
   @Get('city_specialization')
-  
-  lawyerByCity_Speciality(@Query() {cityId, specializationId}){
-    return this._ss.lawyerByCity_Speciality(cityId, specializationId)
+  lawyerByCity_Speciality(@Query() { cityId, specializationId }) {
+    return this._ss.lawyerByCity_Speciality(cityId, specializationId);
   }
 }

@@ -21,7 +21,7 @@ import { AppoinmentModule } from './appoinment/appoinment.module';
     CityModule,
     LawyerModule,
     TaskModule,
-    AppoinmentModule
+    AppoinmentModule,
   ],
 })
 export class FeatureModule {}

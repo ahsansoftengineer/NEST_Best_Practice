@@ -31,7 +31,7 @@ export class User extends AlphaModel {
   @Column({
     type: 'enum',
     enum: ROLE,
-    nullable: true, 
+    nullable: true,
     default: ROLE.LAWYER,
   })
   role: ROLE;
@@ -61,7 +61,7 @@ export class User extends AlphaModel {
   @OneToOne(() => Lawyer, (x) => x.user)
   lawyer?: Lawyer;
 
-  @ManyToOne(() => City, (e) => e.user, {eager: true})
+  @ManyToOne(() => City, (e) => e.user, { eager: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 

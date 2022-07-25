@@ -17,4 +17,4 @@ export const configTypeORM: TypeOrmModuleOptions = {
   dropSchema: ENV.DB_DROP,
 };
 
-export const TypeOrmModuleRoot = TypeOrmModule.forRoot(configTypeORM)
+export const TypeOrmModuleRoot = TypeOrmModule.forRoot(configTypeORM);

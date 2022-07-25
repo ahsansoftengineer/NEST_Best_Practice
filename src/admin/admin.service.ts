@@ -5,9 +5,7 @@ import { ChangeStatusDto } from './dto/admin.dto';
 
 @Injectable()
 export class AdminService {
-  constructor(
-    public repos: RepoService
-  ) {}
+  constructor(public repos: RepoService) {}
   private userSelectiveColumns = {
     name: true,
     email: true,

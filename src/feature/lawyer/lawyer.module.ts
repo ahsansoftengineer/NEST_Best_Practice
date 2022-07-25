@@ -5,9 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { City, Lawyer, Specialization, User } from 'core/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([
-    Lawyer, User, City, Specialization
-  ])],
+  imports: [TypeOrmModule.forFeature([Lawyer, User, City, Specialization])],
   controllers: [LawyerController],
   providers: [LawyerService],
 })

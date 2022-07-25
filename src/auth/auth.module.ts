@@ -11,11 +11,8 @@ import { AuthService } from './auth.service';
 import { AtStrategy, RtStrategy } from './strategies';
 
 @Module({
-  imports: [
-    JwtModule.register({}),
-  ],
+  imports: [JwtModule.register({})],
   controllers: [AuthController],
-  providers: [MailService, AuthService, AtStrategy, RtStrategy, ],
-
+  providers: [MailService, AuthService, AtStrategy, RtStrategy],
 })
 export class AuthModule {}

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { BaseController } from 'core/base';
@@ -10,31 +18,26 @@ import { TaskService } from './task.service';
 
 @Controller('task')
 @ApiTags('task')
-export class TaskController extends BaseController{
+export class TaskController extends BaseController {
   constructor(public _ss: TaskService) {
-    super()
+    super();
   }
 
   @Post()
   @Roles(ROLE.LAWYER)
-  uploadFile(
-    @Body() body: CreateTaskDto,
-    ) {
-      return this._ss.createSimple(body);
+  uploadFile(@Body() body: CreateTaskDto) {
+    return this._ss.createSimple(body);
   }
 
   @Patch(':id')
   @Roles(ROLE.LAWYER)
-  async update(
-    @Param('id') id: number,
-    @Body() body: UpdateTaskDto,
-  ) {
-    return this._ss.updateSimple(id,body);
+  async update(@Param('id') id: number, @Body() body: UpdateTaskDto) {
+    return this._ss.updateSimple(id, body);
   }
 
   @Roles(ROLE.LAWYER)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return this._ss.remove(+id)
+    return this._ss.remove(+id);
   }
 }

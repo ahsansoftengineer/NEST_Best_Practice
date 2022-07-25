@@ -22,7 +22,7 @@ export class Lawyer {
 
   userId?: number;
 
-  @ManyToOne(() => Specialization, (e) => e.lawyers, {eager: true})
+  @ManyToOne(() => Specialization, (e) => e.lawyers, { eager: true })
   @JoinColumn({
     foreignKeyConstraintName: 'fk_specialization_user',
   })

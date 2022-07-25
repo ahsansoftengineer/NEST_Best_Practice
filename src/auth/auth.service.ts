@@ -6,7 +6,7 @@ import { ENV } from 'core/constant';
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
-import {  In } from 'typeorm';
+import { In } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 // import * as argon from 'argon2';
 
@@ -21,7 +21,7 @@ export class AuthService {
     private _jwt: JwtService,
     private _config: ConfigService,
     private _mail: MailService,
-    public repos: RepoService
+    public repos: RepoService,
   ) {}
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
@@ -62,8 +62,12 @@ export class AuthService {
       image: data.image,
       address: data.address,
     };
-    const courts = await this.repos.court.findBy({ id: In([...data.courtIds]) });
-    const specialization = await this.repos.specialization.findOneBy({ id: data.specializationId});
+    const courts = await this.repos.court.findBy({
+      id: In([...data.courtIds]),
+    });
+    const specialization = await this.repos.specialization.findOneBy({
+      id: data.specializationId,
+    });
     console.log(courts);
 
     const lawyerResult: Lawyer = {

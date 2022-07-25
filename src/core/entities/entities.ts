@@ -15,7 +15,6 @@ import { Task } from './task.entity';
 import { Appoinment } from './appoinment.entity';
 
 export const entities = [
-
   Book,
   User,
   News,
@@ -26,10 +25,7 @@ export const entities = [
   Lawyer,
   LawyerTeam,
   Task,
-  Appoinment
+  Appoinment,
 ];
 
-export const baseEntities = [
-  AlphaModel,
-  BetaModel,
-]
+export const baseEntities = [AlphaModel, BetaModel];

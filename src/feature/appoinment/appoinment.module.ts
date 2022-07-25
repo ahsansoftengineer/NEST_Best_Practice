@@ -5,10 +5,8 @@ import { Appoinment } from 'core/entities/appoinment.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Appoinment])
-  ],
+  imports: [TypeOrmModule.forFeature([Appoinment])],
   controllers: [AppoinmentController],
-  providers: [AppoinmentService]
+  providers: [AppoinmentService],
 })
 export class AppoinmentModule {}

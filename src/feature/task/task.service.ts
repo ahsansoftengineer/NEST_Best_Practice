@@ -7,8 +7,8 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()
-export class TaskService extends BaseService{
-  constructor(@InjectRepository(Task) public repo: Repository<Task>){
-    super()
+export class TaskService extends BaseService {
+  constructor(@InjectRepository(Task) public repo: Repository<Task>) {
+    super();
   }
 }
