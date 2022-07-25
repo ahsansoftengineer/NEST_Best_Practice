@@ -17,7 +17,7 @@ export class AppoinmentController extends BaseController{
 
   @Post()
   @Roles(ROLE.LAWYER)
-  uploadFile(
+  create(
     @Body() body: CreateAppoinmentDto,
     ) {
       return this._ss.createSimple(body);

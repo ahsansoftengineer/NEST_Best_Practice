@@ -13,11 +13,9 @@ import { AtStrategy, RtStrategy } from './strategies';
 @Module({
   imports: [
     JwtModule.register({}),
-    TypeOrmModule.forFeature([User, Lawyer, Court, Specialization, City]),
-    
   ],
   controllers: [AuthController],
-  providers: [MailService, RepoService, AuthService, AtStrategy, RtStrategy, ],
+  providers: [MailService, AuthService, AtStrategy, RtStrategy, ],
 
 })
 export class AuthModule {}

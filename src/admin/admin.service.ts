@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'core/entities';
-import { ROLE, STATUS } from 'core/enums';
-import { Repository } from 'typeorm';
+import { ROLE } from 'core/enums';
+import { RepoService } from 'core/shared/service/repo.service';
 import { ChangeStatusDto } from './dto/admin.dto';
 
 @Injectable()
 export class AdminService {
-  constructor(@InjectRepository(User) public repoUser: Repository<User>) {}
+  constructor(
+    public repos: RepoService
+  ) {}
   private userSelectiveColumns = {
     name: true,
     email: true,
@@ -19,21 +19,21 @@ export class AdminService {
     cityId: true,
   };
   async changeStatusUser({ id, status }: ChangeStatusDto) {
-    const user = await this.repoUser.findOneBy({ id });
+    const user = await this.repos.user.findOneBy({ id });
     if (!user)
       throw new HttpException('User does not Exsist', HttpStatus.NOT_FOUND);
-    return this.repoUser.update(id, { status });
+    return this.repos.user.update(id, { status });
   }
 
   async getLawyers() {
-    return this.repoUser.find({
+    return this.repos.user.find({
       where: { role: ROLE.LAWYER },
       select: this.userSelectiveColumns,
     });
   }
 
   async getLawyer(id: number) {
-    return this.repoUser.findOne({
+    return this.repos.user.findOne({
       where: { id, role: ROLE.LAWYER },
       select: this.userSelectiveColumns,
     });
