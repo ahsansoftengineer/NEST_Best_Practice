@@ -12,7 +12,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Roles } from 'core/decorators/roles.decorator';
+import { Roles } from 'core/decorators';
+
 import { ROLE } from 'core/enums';
 import { InterceptorPDF } from 'core/interceptor';
 import { CasezService } from './casez.service';

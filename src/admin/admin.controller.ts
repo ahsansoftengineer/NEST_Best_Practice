@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get, Param, Patch } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Public } from 'core/decorators';
-import { Roles } from 'core/decorators/roles.decorator';
+import { Public, Roles } from 'core/decorators';
+
 import { ROLE } from 'core/enums';
 import { AdminService } from './admin.service';
 import { ChangeStatusDto } from './dto';

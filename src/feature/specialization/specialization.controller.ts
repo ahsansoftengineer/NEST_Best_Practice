@@ -14,9 +14,9 @@ import {
 } from './dto/create-specialization.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Roles } from 'core/decorators/roles.decorator';
+
 import { ROLE } from 'core/enums';
-import { Public } from 'core/decorators';
+import { Roles } from 'core/decorators';
 
 @Controller('specialization')
 @ApiTags('specialization')

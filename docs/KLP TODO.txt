@@ -1,0 +1,70 @@
+ADMIN (CRUD) 
+	CITY 
+	COURT
+	SPECIALIZATION
+	BOOK
+	NEW
+
+
+LAWYER ACCESS ROUTES (CRUD)
+	CASES
+	LAWYER CLIENT
+	TASK
+	TEAM MEMBER
+
+
+LAWYER + ADMIN
+APPOINTMENT
+
+LAWYER + TEAM MEMBER
+TASK
+
+ 
+SIGN IN / SIGN UP
+ADMIN, LAWYER, TEAM MEMBER
+
+
+ALL ROUTE ACCESSIBLE AS PER ROLE
+
+
+
+
+Lawyer Team Member CRUD
+Lawyer Client CRUD
+
+
+
+
+
+
+
+
+// PENDING WORK
+
+Team Member Sign In
+Team Member Sending Message
+
+Lawyer Assigning Team member Task
+
+Lawyer Task List and Status
+
+Lawyer Team member Task List
+
+Team Member Task List
+
+Admin Appointment List
+
+Admin Redirect Appointment to Lawyer
+
+
+Warning 
+1. first of all we have to make 
+    const task: Task = {
+      ...data,
+      lawyerId //
+    };
+2. then we have to pass the lawyer object it self
+3. otherwise we have to use queryBuilder to create, update
+
+same is the case for this
+    return this.repos.lawyerClient.findBy({lawyer: {id}})
