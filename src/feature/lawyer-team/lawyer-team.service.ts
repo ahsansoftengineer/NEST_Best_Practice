@@ -1,28 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { RepoService } from 'core/shared/service/repo.service';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import { SignUpLawyerDto } from 'auth/dto/sign-up-lawyer.dto';
+import { BaseService } from 'core/base';
+import { argon } from 'core/constant';
+import { In } from 'typeorm';
+import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
-export class LawyerTeamService {
-  constructor(public repos: RepoService){
+export class LawyerTeamService extends BaseService {
 
-  }
-
-  async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
+  async create(data: CreateLawyerTeamDto) {
     const hashResult = await argon.hash(data.password);
 
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 
     if (existUser)
-      throw new ForbiddenException(
-        'Lawyer already Exsist with the ' + data.email,
-      );
-// searialization
-    const courts = await this.repos.court.findBy({
-      id: In([...data.courtIds]),
-    });
-    const specialization = await this.repos.specialization.findOneBy({
-      id: data.specializationId,
-    });
+      throw new ForbiddenException('Lawyer already Exsist with the ' + data.email);
+    // searialization
     console.log(courts);
 
     const lawyerResult: Lawyer = {
@@ -41,19 +34,7 @@ export class LawyerTeamService {
     return this.returnGeneratedToken(lawyer.user);
   }
 
-  findAll() {
-    return `This action returns all lawyerTeam`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} lawyerTeam`;
-  }
-
   update(id: number, data) {
     return `This action updates a #${id} lawyerTeam`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} lawyerTeam`;
   }
 }

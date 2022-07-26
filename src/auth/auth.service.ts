@@ -1,14 +1,12 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import * as argon from 'argon2';
-import { ENV } from 'core/constant';
+import { argon, ENV, searalizeUser } from 'core/constant';
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
 import { In } from 'typeorm';
 import { MailService } from './auth-mailer.service';
-// import * as argon from 'argon2';
 
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
@@ -42,40 +40,25 @@ export class AuthService {
   }
 
   async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
-    const hashResult = await argon.hash(data.password);
-
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 
     if (existUser)
       throw new ForbiddenException(
         'Lawyer already Exsist with the ' + data.email,
       );
-    const user: User = {
-      email: data.email,
-      name: data.name,
-      gender: data.gender,
-      mobile: data.mobile,
-      role: ROLE.LAWYER,
-      status: STATUS.PENDING,
-      password: hashResult,
-      cityId: data.cityId,
-      image: data.image,
-      address: data.address,
-    };
+    const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING)
+    user.password =  await argon.hash(data.password);
     const courts = await this.repos.court.findBy({
       id: In([...data.courtIds]),
     });
     const specialization = await this.repos.specialization.findOneBy({
       id: data.specializationId,
     });
-    console.log(courts);
-
     const lawyerResult: Lawyer = {
       specialization,
       court: courts,
       user,
     };
-    console.log({ lawyerResult });
 
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });
     await this.repos.lawyer.save(lawyer).catch((error) => {
@@ -103,6 +86,7 @@ export class AuthService {
 
     return this.returnGeneratedToken(user);
   }
+  
   async signinLocal(dto: SignInDto): Promise<Tokens> {
     const user = await this.repos.user.findOneBy({ email: dto.email });
 
