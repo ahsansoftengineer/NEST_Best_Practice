@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { BaseService } from 'core/base';
-import { argon, deSearalizeUser, deSearalizeUsers, searalizeUser, throwForbiddenException } from 'core/constant';
+import { deSearalizeUser, deSearalizeUsers, searalizeUser, throwForbiddenException } from 'core/constant';
 import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
