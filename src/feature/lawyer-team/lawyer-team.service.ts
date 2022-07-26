@@ -33,15 +33,22 @@ export class LawyerTeamService extends BaseService {
     return save;
   }
 
-  getLawyerMembers(lawyerId){
-    return this.repos.lawyerTeam.findBy({lawyerId}).then(x => deSearalizeUsers(x))
+  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
+  getLawyerMembers(id){
+    return this.repos.lawyerTeam.findBy({lawyer: {id}}).then(x => deSearalizeUsers(x))
   }
 
+  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.findOneBy({lawyerId, id}).then(x => deSearalizeUser(x))
+    return this.repos.lawyerTeam.createQueryBuilder('l').where({
+      lawyerId, id
+    }).getOne().then(x => deSearalizeUser(x))
   }
-
+  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   deleteLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.delete({lawyerId, id})
+    return this.repos.lawyerTeam.createQueryBuilder('l').delete().where(
+      "id = :id AND lawyerId = :lawyerId",
+      {id, lawyerId}
+    )
   }
 }

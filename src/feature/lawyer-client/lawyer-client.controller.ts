@@ -35,21 +35,21 @@ export class LawyerClientController {
 
   @Roles(ROLE.LAWYER)
   @Get('members')
-  getLawyerMembers(
+  getLawyerClients(
     @GetCurrentUserId() userId: number
   ){
     console.log({userId});
-    return this._ss.getLawyerMembers(userId)
+    return this._ss.getLawyerClients(userId)
   }
 
   @Roles(ROLE.LAWYER)
   @Get('members/:id')
-  getLawyerMember(
+  getLawyerClient(
     @GetCurrentUserId() userId: number,
     @Param('id') id: number
   ){
     console.log({userId});
-    return this._ss.getLawyerMember(userId, id)
+    return this._ss.getLawyerClient(userId, id)
   }
 
   @Roles(ROLE.LAWYER)

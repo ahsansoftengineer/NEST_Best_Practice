@@ -31,15 +31,15 @@ export class LawyerClientService extends BaseService {
     return save;
   }
 
-  getLawyerMembers(lawyerId){
-    return this.repos.lawyerTeam.findBy({lawyerId}).then(x => deSearalizeUsers(x))
+  getLawyerClients(id){
+    return this.repos.lawyerClient.findBy({lawyer: {id}}).then(x => deSearalizeUsers(x))
   }
 
-  getLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.findOneBy({lawyerId, id}).then(x => deSearalizeUser(x))
+  getLawyerClient(lawyerId, id){
+    return this.repos.lawyerClient.findOneBy({lawyer: {id: lawyerId}, id}).then(x => deSearalizeUser(x))
   }
 
   deleteLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.delete({lawyerId, id})
+    return this.repos.lawyerClient.delete({lawyer: {id: lawyerId}, id})
   }
 }
