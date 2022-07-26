@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
 import { City } from './city.entity';
+import { LawyerClient } from './lawyer-client.entity';
+import { LawyerTeam } from './lawyer-team.entity';
 import { Lawyer } from './lawyer.entity';
 
 @Entity()
@@ -58,12 +60,18 @@ export class User extends AlphaModel {
   @Column({ length: 1000, nullable: true })
   hashedRt?: string;
 
-  @OneToOne(() => Lawyer, (x) => x.user)
-  lawyer?: Lawyer;
-
   @ManyToOne(() => City, (e) => e.user, { eager: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
   cityId: number;
+
+  @OneToOne(() => Lawyer, (x) => x.user)
+  lawyer?: Lawyer;
+
+  @OneToOne(() => LawyerClient, (x) => x.user)
+  lawyerClient?: LawyerClient;
+
+  @OneToOne(() => LawyerTeam, (x) => x.user)
+  lawyerTeam?: LawyerTeam;
 }

@@ -13,11 +13,11 @@ export class LawyerTeam {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => User, { eager: true, cascade: true })
-  user: User;
+  @OneToOne(() => User, (x) => x.lawyerTeam, { eager: true, cascade: true })
+  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerTeam' })
+  user?: User;
 
-  @JoinColumn({ name: 'userId', foreignKeyConstraintName: 'fk_user_lawyer' })
-  userId: number;
+  userId?: number;
 
   @ManyToOne(() => User, { eager: true, cascade: true })
   lawyer: Lawyer;

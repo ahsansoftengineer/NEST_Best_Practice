@@ -1,33 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto, UpdateLawyerTeamDto } from './dto/lawyer-team.dto';
+import { Roles } from 'core/decorators/roles.decorator';
+import { ROLE } from 'core/enums';
+import { InterceptorImage } from 'core/interceptor';
+import { HandleUniqueError } from 'core/error/HandleUniqueError';
 
 @Controller('lawyer-team')
 export class LawyerTeamController {
-  constructor(private readonly lawyerTeamService: LawyerTeamService) {}
+  constructor(private readonly _ss: LawyerTeamService) {}
 
+  @Roles(ROLE.LAWYER)
   @Post()
-  create(@Body() createLawyerTeamDto: CreateLawyerTeamDto) {
-    return this.lawyerTeamService.create(createLawyerTeamDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.lawyerTeamService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.lawyerTeamService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLawyerTeamDto: UpdateLawyerTeamDto) {
-    return this.lawyerTeamService.update(+id, updateLawyerTeamDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lawyerTeamService.remove(+id);
+  @UseInterceptors(InterceptorImage)
+  create(
+    @Body() body: CreateLawyerTeamDto,
+    @UploadedFile() image: Express.Multer.File,
+  ){
+    if (!image?.filename)
+      throw new HttpException(
+        'user profile image is required',
+        HttpStatus.FORBIDDEN,
+      );
+    body.image = image.filename;
+    try {
+      return this._ss.create(body);
+    } catch (e) {
+      HandleUniqueError(e);
+    }
   }
 }
