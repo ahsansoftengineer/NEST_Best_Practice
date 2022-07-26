@@ -2,9 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Upl
 import { LawyerClientService } from './lawyer-client.service';
 import { CreateLawyerClientDto } from './dto/create-lawyer-client.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Roles } from 'core/decorators/roles.decorator';
+
 import { ROLE } from 'core/enums';
 import { InterceptorImage } from 'core/interceptor';
+import { Roles } from 'core/decorators';
 
 @Controller('lawyer-client')
 @ApiTags('lawyer-client')

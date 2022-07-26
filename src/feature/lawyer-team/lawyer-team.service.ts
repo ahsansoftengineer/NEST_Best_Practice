@@ -1,10 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { SignUpLawyerDto } from 'auth/dto/sign-up-lawyer.dto';
 import { BaseService } from 'core/base';
-import { argon, searalizeUser } from 'core/constant';
+import { argon, deSearalizeUsers, searalizeUser } from 'core/constant';
 import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
-import { In } from 'typeorm';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
@@ -37,5 +35,13 @@ export class LawyerTeamService extends BaseService {
     });
 
     return save;
+  }
+
+  getLawyerMembers(lawyerId){
+    return this.repos.lawyerTeam.findBy({lawyerId}).then(x => deSearalizeUsers(x))
+  }
+
+  deleteLawyerMember(lawyerId, id){
+    return this.repos.lawyerTeam.delete({lawyerId, id})
   }
 }

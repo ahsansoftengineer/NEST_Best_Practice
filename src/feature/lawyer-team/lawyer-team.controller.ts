@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, HttpException, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseInterceptors, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
-import { CreateLawyerTeamDto, UpdateLawyerTeamDto } from './dto/lawyer-team.dto';
-import { Roles } from 'core/decorators/roles.decorator';
+import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
+
 import { ROLE } from 'core/enums';
 import { InterceptorImage } from 'core/interceptor';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
-import { GetCurrentUserId } from 'core/decorators';
+import { GetCurrentUserId, Roles } from 'core/decorators';
 
 @Controller('lawyer-team')
 export class LawyerTeamController {
@@ -33,10 +33,30 @@ export class LawyerTeamController {
 
   @Roles(ROLE.LAWYER)
   @Get('members')
-  getLawyerTeam(
+  getLawyerMembers(
     @GetCurrentUserId() userId: number
   ){
     console.log({userId});
-    return this._ss.repos.lawyerTeam.findBy({lawyerId: userId})
+    return this._ss.getLawyerMembers(userId)
+  }
+
+  @Roles(ROLE.LAWYER)
+  @Get('members')
+  getLawyerMember(
+    @GetCurrentUserId() userId: number,
+    @Param('id') id: number
+  ){
+    console.log({userId});
+    return this._ss.getLawyerMembers(userId)
+  }
+
+  @Roles(ROLE.LAWYER)
+  @Get('members/:id')
+  deleteMember(
+    @GetCurrentUserId() userId: number,
+    @Param('id') id: number
+  ){
+    console.log({userId});
+    return this._ss.deleteLawyerMember(userId, id)
   }
 }

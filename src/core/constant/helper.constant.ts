@@ -16,3 +16,17 @@ export const searalizeUser = (d: any, role: ROLE, status: STATUS) => {
   };
   return user;
 }
+
+export const deSearalizeUser = (d: any) => {
+ return {
+  ...d,
+  ...d.user
+ }
+}
+
+export const deSearalizeUsers = (d: any[]) => {(
+  d.map(y => ({
+    ...y,
+    ...y.user
+  })
+))}

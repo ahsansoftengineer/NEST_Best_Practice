@@ -10,7 +10,8 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 
 import { BaseController } from 'core/base';
-import { Roles } from 'core/decorators/roles.decorator';
+import { Roles } from 'core/decorators';
+
 import { ROLE } from 'core/enums';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';

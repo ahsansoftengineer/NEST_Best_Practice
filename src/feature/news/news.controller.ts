@@ -1,10 +1,11 @@
 import { Controller, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto';
 import { BaseController } from 'core/base';
-import { Roles } from 'core/decorators/roles.decorator';
+
 import { ROLE } from 'core/enums';
 import { NewsService } from './news.service';
 import { ApiTags } from '@nestjs/swagger';
+import { Roles } from 'core/decorators';
 
 @Controller('news')
 @ApiTags('news')
