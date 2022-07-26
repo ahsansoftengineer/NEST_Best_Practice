@@ -10,6 +10,8 @@ import { AlphaModel, BetaModel } from 'core/entities';
 import { LawyerModule } from './lawyer/lawyer.module';
 import { TaskModule } from './task/task.module';
 import { AppoinmentModule } from './appoinment/appoinment.module';
+import { LawyerClientModule } from './lawyer-client/lawyer-client.module';
+import { LawyerTeamModule } from './lawyer-team/lawyer-team.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { AppoinmentModule } from './appoinment/appoinment.module';
     LawyerModule,
     TaskModule,
     AppoinmentModule,
+    LawyerClientModule,
+    LawyerTeamModule,
   ],
 })
 export class FeatureModule {}

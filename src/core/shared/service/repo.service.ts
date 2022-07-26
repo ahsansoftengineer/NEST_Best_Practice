@@ -12,6 +12,7 @@ import {
   News,
   Task,
   Casez,
+  LawyerClient,
 } from 'core/entities';
 import { Repository } from 'typeorm';
 
@@ -24,12 +25,12 @@ export class RepoService {
     @InjectRepository(City) public city: Repository<City>,
     @InjectRepository(Court) public court: Repository<Court>,
     @InjectRepository(News) public news: Repository<News>,
-    @InjectRepository(Specialization)
-    public specialization: Repository<Specialization>,
+    @InjectRepository(Specialization) public specialization: Repository<Specialization>,
     @InjectRepository(Task) public task: Repository<Task>,
 
     @InjectRepository(User) public user: Repository<User>,
     @InjectRepository(Lawyer) public lawyer: Repository<Lawyer>,
     @InjectRepository(LawyerTeam) public lawyerTeam: Repository<LawyerTeam>,
+    @InjectRepository(LawyerClient) public lawyerClient: Repository<LawyerClient>,
   ) {}
 }

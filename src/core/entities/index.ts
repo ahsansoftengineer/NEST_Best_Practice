@@ -13,3 +13,4 @@ export * from './task.entity';
 export * from './user.entity';
 export * from './lawyer.entity';
 export * from './lawyer-team.entity';
+export * from './lawyer-client.entity';
