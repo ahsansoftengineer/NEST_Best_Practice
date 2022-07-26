@@ -1,3 +1,4 @@
+import { ForbiddenException } from "@nestjs/common";
 import { User } from "core/entities";
 import { ROLE, STATUS } from "core/enums";
 
@@ -30,3 +31,7 @@ export const deSearalizeUsers = (d: any[]) => {(
     ...y.user
   })
 ))}
+
+export const throwForbiddenException = (data) => {
+  if(data) throw new ForbiddenException('Email Address already exsit');
+}

@@ -7,12 +7,13 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { AlphaModel } from './alpha-model';
 import { Court } from './court.entity';
 import { Specialization } from './specialization.entity';
-import { User } from './user.entity';
+import { User } from "./index";
 
 @Entity()
-export class Lawyer {
+export class Lawyer extends AlphaModel {
   @PrimaryGeneratedColumn()
   id?: number;
 

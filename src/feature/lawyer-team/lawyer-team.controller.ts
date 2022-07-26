@@ -41,13 +41,13 @@ export class LawyerTeamController {
   }
 
   @Roles(ROLE.LAWYER)
-  @Get('members')
+  @Get('members/:id')
   getLawyerMember(
     @GetCurrentUserId() userId: number,
     @Param('id') id: number
   ){
     console.log({userId});
-    return this._ss.getLawyerMembers(userId)
+    return this._ss.getLawyerMember(userId, id)
   }
 
   @Roles(ROLE.LAWYER)

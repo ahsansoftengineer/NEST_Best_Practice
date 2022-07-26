@@ -1,15 +1,12 @@
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToOne,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
-import { Lawyer } from './lawyer.entity';
-import { User } from './user.entity';
+import { Lawyer, User,  } from "./index";
 
 @Entity()
 export class LawyerTeam extends AlphaModel {
@@ -31,6 +28,6 @@ export class LawyerTeam extends AlphaModel {
   @ManyToOne(() => User, { eager: true, cascade: true })
   lawyer?: Lawyer;
 
-  @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyer_team' })
+  @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerTeam' })
   lawyerId: number;
 }

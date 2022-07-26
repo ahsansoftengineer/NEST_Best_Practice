@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { argon, ENV, searalizeUser } from 'core/constant';
+import { argon, ENV, searalizeUser, throwForbiddenException } from 'core/constant';
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
@@ -25,11 +25,7 @@ export class AuthService {
     const hashResult = await argon.hash(data.password);
 
     const existUser = await this.repos.user.findOneBy({ email: data.email });
-
-    if (existUser)
-      throw new ForbiddenException(
-        'User already Exsist with the ' + data.email,
-      );
+    throwForbiddenException(existUser)
 
     const user = this.repos.user.create({ ...data, password: hashResult });
     await this.repos.user.save(user).catch((error) => {
@@ -42,10 +38,8 @@ export class AuthService {
   async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 
-    if (existUser)
-      throw new ForbiddenException(
-        'Lawyer already Exsist with the ' + data.email,
-      );
+    throwForbiddenException(existUser)
+    
     const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING)
     user.password =  await argon.hash(data.password);
     const courts = await this.repos.court.findBy({

@@ -5,12 +5,13 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { ROLE } from 'core/enums';
 import { InterceptorImage } from 'core/interceptor';
-import { Roles } from 'core/decorators';
+import { GetCurrentUserId, Roles } from 'core/decorators';
+import { HandleUniqueError } from 'core/error/HandleUniqueError';
 
 @Controller('lawyer-client')
 @ApiTags('lawyer-client')
 export class LawyerClientController {
-  constructor(private readonly lawyerClientService: LawyerClientService) {}
+  constructor(public _ss: LawyerClientService) {}
 
   @Roles(ROLE.LAWYER)
   @Post()
@@ -26,29 +27,38 @@ export class LawyerClientController {
       );
     body.image = image.filename;
     try {
-      return this._ss.signUpLawyer(body);
+      return this._ss.create(body);
     } catch (e) {
       HandleUniqueError(e);
     }
   }
 
-  @Get()
-  findAll() {
-    return this.lawyerClientService.findAll();
+  @Roles(ROLE.LAWYER)
+  @Get('members')
+  getLawyerMembers(
+    @GetCurrentUserId() userId: number
+  ){
+    console.log({userId});
+    return this._ss.getLawyerMembers(userId)
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.lawyerClientService.findOne(+id);
+  @Roles(ROLE.LAWYER)
+  @Get('members/:id')
+  getLawyerMember(
+    @GetCurrentUserId() userId: number,
+    @Param('id') id: number
+  ){
+    console.log({userId});
+    return this._ss.getLawyerMember(userId, id)
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLawyerClientDto: UpdateLawyerClientDto) {
-    return this.lawyerClientService.update(+id, updateLawyerClientDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lawyerClientService.remove(+id);
+  @Roles(ROLE.LAWYER)
+  @Get('members/:id')
+  deleteMember(
+    @GetCurrentUserId() userId: number,
+    @Param('id') id: number
+  ){
+    console.log({userId});
+    return this._ss.deleteLawyerMember(userId, id)
   }
 }

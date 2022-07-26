@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 4000,
     "height": 4000,
-    "scrollTop": -1077.4722191039987,
-    "scrollLeft": -1536.611067456201,
+    "scrollTop": -732.333343929695,
+    "scrollLeft": -1553.972177877444,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -1189,36 +1189,13 @@
               "widthDefault": 60
             },
             "id": "7b17844d-2476-4a20-8ae5-82914690fd13"
-          },
-          {
-            "name": "user",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "22d6a675-7688-456d-a89a-ae50259b89ba"
           }
         ],
         "ui": {
           "active": false,
           "left": 1712.8951,
           "top": 1295.7933,
-          "zIndex": 10,
+          "zIndex": 15,
           "widthName": 74.99169921875,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1733,36 +1710,13 @@
               "widthDefault": 60
             },
             "id": "63b1eb6d-f084-4861-a40e-3f92c98b6460"
-          },
-          {
-            "name": "cityId",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "c2a2480f-cba2-45ce-b7dc-782b235747b3"
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 1703.9024,
           "top": 660.4647,
-          "zIndex": 14,
+          "zIndex": 16,
           "widthName": 84.3671875,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1875,7 +1829,7 @@
             "41e58103-1098-4d19-8ffe-928406535b23"
           ],
           "x": 1712.8951,
-          "y": 1455.1683,
+          "y": 1439.7933,
           "direction": "left"
         },
         "constraintName": "fk_user_to_appointment",
@@ -1901,7 +1855,7 @@
             "44a8d5dc-bbd1-499d-93cb-dfa6f30c0652"
           ],
           "x": 1712.8951,
-          "y": 1348.9183,
+          "y": 1343.7933,
           "direction": "left"
         },
         "constraintName": "fk_lawyer_to_appointment",
@@ -1979,7 +1933,7 @@
             "6c82acf4-4c2b-4af3-ba62-f10ab1d356d3"
           ],
           "x": 1703.9024,
-          "y": 746.2147,
+          "y": 735.9647,
           "direction": "left"
         },
         "constraintName": "fk_lawyer_to_lawyer client ",
