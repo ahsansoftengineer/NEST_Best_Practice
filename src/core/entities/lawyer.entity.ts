@@ -4,13 +4,12 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
-import { Court } from './court.entity';
-import { Specialization } from './specialization.entity';
-import { User } from "./index";
+import { User, Court, Specialization, LawyerTeam, LawyerClient, Task } from "./index";
 
 @Entity()
 export class Lawyer extends AlphaModel {
@@ -41,4 +40,14 @@ export class Lawyer extends AlphaModel {
   court?: Court[];
 
   courtIds?: number[];
+
+  
+  @OneToMany(() => LawyerTeam, x => x.lawyer)
+  lawyerTeam?: LawyerTeam[];
+
+  @OneToMany(() => LawyerClient, x => x.lawyer)
+  lawyerClient?: LawyerClient[];
+
+  @OneToMany(() => Task, x => x.lawyer)
+  task?: Task[];
 }

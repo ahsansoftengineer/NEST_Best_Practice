@@ -23,11 +23,13 @@ export class LawyerTeam extends AlphaModel {
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerTeam' })
   user?: User;
 
+  @Column({ nullable: true,  })
   userId?: number;
 
-  @ManyToOne(() => User, { eager: true, cascade: true })
+  @ManyToOne(() => Lawyer, x => x.lawyerTeam, { eager: true, cascade: true })
+  @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerTeam' })
   lawyer?: Lawyer;
 
-  @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerTeam' })
-  lawyerId: number;
+  @Column({ nullable: true,  })
+  lawyerId?: number;
 }
