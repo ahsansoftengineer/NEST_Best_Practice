@@ -12,7 +12,7 @@ export class LawyerClientService extends BaseService {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser)
     const user = searalizeUser(data, ROLE.CLIENT_LAWYER, STATUS.NONE)
-    const lawyerTeam: LawyerClient = {
+    const lawyerClient: LawyerClient = {
       lawyerId: data.lawyerId,
       type: data.type,
       suite: data.suite,
@@ -20,11 +20,11 @@ export class LawyerClientService extends BaseService {
     };
     // TODO: WORK HERE SET RANDOM PASSWORD
     // const hashResult = await argon.hash(data.password);
-    // lawyerTeam.user.password = hashResult
-    console.log({ lawyerTeam });
+    // lawyerClient.user.password = hashResult
+    console.log({ lawyerClient });
 
-    const create = this.repos.lawyerTeam.create({ ...lawyerTeam });
-    const save = await this.repos.lawyerTeam.save(create).catch((error) => {
+    const create = this.repos.lawyerClient.create({ ...lawyerClient });
+    const save = await this.repos.lawyerClient.save(create).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
