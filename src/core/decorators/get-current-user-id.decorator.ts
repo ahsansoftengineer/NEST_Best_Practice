@@ -8,3 +8,11 @@ export const GetCurrentUserId = createParamDecorator(
     return user.sub; // For Getting User Id
   },
 );
+
+export const GetCurrentUserData = createParamDecorator(
+  (_: undefined, context: ExecutionContext): number => {
+    const request = context.switchToHttp().getRequest();
+    const user = request.user as JwtPayload;
+    return user; // For Getting User Id
+  },
+);

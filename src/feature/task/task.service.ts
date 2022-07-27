@@ -45,7 +45,7 @@ export class TaskService extends BaseService {
   // }
 
   gets(lawyerId){
-    return this.repos.task.findBy({lawyerId})
+    return 
   }
   get(lawyerId, id){
     return this.repos.task.findOneBy({lawyerId, id})

@@ -138,11 +138,11 @@ export class AuthService {
 
     const [at, rt] = await Promise.all([
       this._jwt.signAsync(jwtPayload, {
-        secret: this._config.get<string>('AT_SECRET'),
+        secret: this._config.get<string>(ENV.JWT_AT_SECRET),
         expiresIn: ENV.JWT_ACCESS_TOKEN_EXPIRE,
       }),
       this._jwt.signAsync(jwtPayload, {
-        secret: this._config.get<string>('RT_SECRET'),
+        secret: this._config.get<string>(ENV.JWT_RT_SECRET),
         expiresIn: ENV.JWT_REFRESH_TOKEN_EXPIRE,
       }),
     ]);
@@ -156,7 +156,7 @@ export class AuthService {
     const hash = await argon.hash(rt);
     await this.repos.user.update(id, { hashedRt: hash });
   }
-  returnedSearializedUser({ name, email, gender, mobile, role, status }: User) {
-    return { name, email, gender, mobile, role, status };
+  returnedSearializedUser({id, name, email, gender, mobile, role, status }: User) {
+    return { id, name, email, gender, mobile, role, status };
   }
 }

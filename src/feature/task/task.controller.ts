@@ -7,7 +7,7 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { GetCurrentUserId, Roles } from 'core/decorators';
+import { GetCurrentUser, GetCurrentUserId, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
 import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
 import { TaskService } from './task.service';
@@ -19,9 +19,13 @@ export class TaskController {
   }
 
   @Get()
-  @Roles(ROLE.LAWYER)
-  gets(@GetCurrentUserId() userId: number) {
-    return this._ss.gets(userId);
+  @Roles(ROLE.LAWYER, ROLE.TEAM)
+  gets(
+    @GetCurrentUserId() userId: number,
+    @GetCurrentUser()
+    ) {
+    const search = 
+    return this._ss.repos.task.findBy({lawyerId})
   }
 
   @Get(':id')
