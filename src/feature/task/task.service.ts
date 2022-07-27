@@ -1,14 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'core/base';
-import { BetaModel } from 'core/entities';
 import { Task } from 'core/entities/task.entity';
-import { Repository } from 'typeorm';
-import { CreateTaskDto, UpdateTaskDto } from './dto/create-task.dto';
+import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TaskService extends BaseService {
-  async create(data: CreateTaskDto, lawyerId: number) {
+  async createTeamTask(data: CreateTeamTaskDto, lawyerId: number) {
     const task: Task = {
       ...data,
       lawyerId //
@@ -19,14 +16,33 @@ export class TaskService extends BaseService {
     return save;
   }
 
-  async update(lawyerId: number, id, data: UpdateTaskDto,) {
-    const task = {
+  async createLawyerTask(data: CreateLawyerTaskDto, lawyerId: number) {
+    const task: Task = {
       ...data,
-      lawyerId
+      lawyerId //
     };
     console.log({ task });
-    return this.repos.task.update({id}, task);
+    const create = this.repos.task.create({ ...task });
+    const save = await this.repos.task.save(create)
+    return save;
   }
+
+  async statusLawyerTask({id, status}, lawyerId: number) {
+    return  this.repos.task.update({id, lawyerId}, {status});
+  }
+
+  async statusTeamTask({id, status}, lawyerTeamId: number) {
+    return  this.repos.task.update({id, lawyerTeamId}, {status});
+  }
+
+  // async update(lawyerId: number, id, data: UpdateTaskDto,) {
+  //   const task = {
+  //     ...data,
+  //     lawyerId
+  //   };
+  //   console.log({ task });
+  //   return this.repos.task.update({id}, task);
+  // }
 
   gets(lawyerId){
     return this.repos.task.findBy({lawyerId})

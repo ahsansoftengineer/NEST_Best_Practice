@@ -2,7 +2,6 @@ import {
   Controller,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Get,
@@ -10,7 +9,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { GetCurrentUserId, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
-import { CreateTaskDto, UpdateTaskDto } from './dto/create-task.dto';
+import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
 import { TaskService } from './task.service';
 
 @Controller('task')
@@ -34,24 +33,53 @@ export class TaskController {
     return this._ss.get(userId, id);
   }
 
-  @Post()
+  @Post('team')
   @Roles(ROLE.LAWYER)
   createTeamTask(
-    @Body() body: CreateTaskDto,
+    @Body() body: CreateTeamTaskDto,
     @GetCurrentUserId() userId: number,
     ) {
-    return this._ss.create(body, userId);
+    return this._ss.createTeamTask(body, userId);
   }
 
+  @Post('lawyer')
   @Roles(ROLE.LAWYER)
-  @Patch(':id')
-  async update(
-    @Param('id') id: number,
+  createLawyerTask(
+    @Body() body: CreateLawyerTaskDto,
     @GetCurrentUserId() userId: number,
-    @Body() body: UpdateTaskDto,
     ) {
-    return this._ss.update(userId, +id, body);
+    return this._ss.createLawyerTask(body, userId);
   }
+
+  @Post('lawyer-status')
+  @Roles(ROLE.LAWYER)
+  statusLawyerTask(
+    @Body() {id, status},
+    @GetCurrentUserId() userId: number,
+    ) {
+    return this._ss.statusLawyerTask({id, status}, userId);
+  }
+
+  @Post('team-status')
+  @Roles(ROLE.LAWYER)
+  statusTeamTask(
+    @Body()  {id, status},
+    @GetCurrentUserId() userId: number,
+    ) {
+    return this._ss.statusTeamTask({id, status}, userId);
+  }
+
+
+
+  // @Roles(ROLE.LAWYER)
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: number,
+  //   @GetCurrentUserId() userId: number,
+  //   @Body() body: UpdateTaskDto,
+  //   ) {
+  //   return this._ss.update(userId, +id, body);
+  // }
 
   @Roles(ROLE.LAWYER)
   @Delete(':id')
