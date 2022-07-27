@@ -21,8 +21,8 @@ export class Task extends BetaModel {
   @Column({ nullable: true,  })
   lawyerId?: number;
 
-  @ManyToOne(() => LawyerTeam, x => x.task)
-  @JoinColumn({ name: 'lawyerTeamId', foreignKeyConstraintName: 'fk_lawyerTeam_task' })
+  @ManyToOne(() => LawyerTeam, x => x.task, {nullable: true})
+  @JoinColumn({ name: 'lawyerTeamId', nullable: true, foreignKeyConstraintName: 'fk_lawyerTeam_task' })
   lawyerTeam?: Lawyer;
 
   @Column({ nullable: true,  })
