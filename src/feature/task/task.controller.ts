@@ -36,7 +36,7 @@ export class TaskController {
 
   @Post()
   @Roles(ROLE.LAWYER)
-  create(
+  createTeamTask(
     @Body() body: CreateTaskDto,
     @GetCurrentUserId() userId: number,
     ) {

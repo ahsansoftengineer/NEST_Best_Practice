@@ -3,10 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
-import { Lawyer, User,  } from "./index";
+import { Lawyer, User, Task  } from "./index";
 
 @Entity()
 export class LawyerTeam extends AlphaModel {
@@ -32,4 +33,7 @@ export class LawyerTeam extends AlphaModel {
 
   @Column({ nullable: true,  })
   lawyerId?: number;
+
+  @OneToMany(() => Task, x => x.lawyerTeam)
+  task?: Task[];
 }

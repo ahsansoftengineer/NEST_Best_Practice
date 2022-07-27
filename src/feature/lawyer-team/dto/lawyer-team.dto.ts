@@ -14,6 +14,7 @@ export class CreateLawyerTeamDto extends SignUpDto {
   amount: number;
 
   @IsNumber()
+  @IsNotEmpty()
   lawyerId: number 
 
 
