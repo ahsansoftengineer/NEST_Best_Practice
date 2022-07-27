@@ -1,22 +1,26 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { BaseService } from 'core/base';
-import { deSearalizeUser, deSearalizeUsers, searalizeUser, throwForbiddenException } from 'core/constant';
+import {
+  deSearalizeUser,
+  deSearalizeUsers,
+  searalizeUser,
+  throwForbiddenException,
+} from 'core/constant';
 import { LawyerClient } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { CreateLawyerClientDto } from './dto/create-lawyer-client.dto';
 
 @Injectable()
 export class LawyerClientService extends BaseService {
-  
   async create(data: CreateLawyerClientDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
-    throwForbiddenException(existUser)
-    const user = searalizeUser(data, ROLE.CLIENT_LAWYER, STATUS.NONE)
+    throwForbiddenException(existUser);
+    const user = searalizeUser(data, ROLE.CLIENT_LAWYER, STATUS.NONE);
     const lawyerClient: LawyerClient = {
       lawyerId: data.lawyerId,
       type: data.type,
       suite: data.suite,
-      user
+      user,
     };
     // TODO: WORK HERE SET RANDOM PASSWORD
     // const hashResult = await argon.hash(data.password);
@@ -31,15 +35,19 @@ export class LawyerClientService extends BaseService {
     return save;
   }
 
-  getLawyerClients(id){
-    return this.repos.lawyerClient.findBy({lawyer: {id}}).then(x => deSearalizeUsers(x))
+  getLawyerClients(id) {
+    return this.repos.lawyerClient
+      .findBy({ lawyer: { id } })
+      .then((x) => deSearalizeUsers(x));
   }
 
-  getLawyerClient(lawyerId, id){
-    return this.repos.lawyerClient.findOneBy({lawyer: {id: lawyerId}, id}).then(x => deSearalizeUser(x))
+  getLawyerClient(lawyerId, id) {
+    return this.repos.lawyerClient
+      .findOneBy({ lawyer: { id: lawyerId }, id })
+      .then((x) => deSearalizeUser(x));
   }
 
-  deleteLawyerMember(lawyerId, id){
-    return this.repos.lawyerClient.delete({lawyer: {id: lawyerId}, id})
+  deleteLawyerMember(lawyerId, id) {
+    return this.repos.lawyerClient.delete({ lawyer: { id: lawyerId }, id });
   }
 }

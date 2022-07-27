@@ -9,7 +9,14 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
-import { User, Court, Specialization, LawyerTeam, LawyerClient, Task } from "./index";
+import {
+  User,
+  Court,
+  Specialization,
+  LawyerTeam,
+  LawyerClient,
+  Task,
+} from './index';
 
 @Entity()
 export class Lawyer extends AlphaModel {
@@ -41,13 +48,12 @@ export class Lawyer extends AlphaModel {
 
   courtIds?: number[];
 
-  
-  @OneToMany(() => LawyerTeam, x => x.lawyer)
+  @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
 
-  @OneToMany(() => LawyerClient, x => x.lawyer)
+  @OneToMany(() => LawyerClient, (x) => x.lawyer)
   lawyerClient?: LawyerClient[];
 
-  @OneToMany(() => Task, x => x.lawyer)
+  @OneToMany(() => Task, (x) => x.lawyer)
   task?: Task[];
 }

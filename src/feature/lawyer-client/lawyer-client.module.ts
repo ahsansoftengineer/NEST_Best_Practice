@@ -4,6 +4,6 @@ import { LawyerClientController } from './lawyer-client.controller';
 
 @Module({
   controllers: [LawyerClientController],
-  providers: [LawyerClientService]
+  providers: [LawyerClientService],
 })
 export class LawyerClientModule {}

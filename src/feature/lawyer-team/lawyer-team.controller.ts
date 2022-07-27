@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Param, UseInterceptors, UploadedFile, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseInterceptors,
+  UploadedFile,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
@@ -17,7 +27,7 @@ export class LawyerTeamController {
   create(
     @Body() body: CreateLawyerTeamDto,
     @UploadedFile() image: Express.Multer.File,
-  ){
+  ) {
     if (!image?.filename)
       throw new HttpException(
         'user profile image is required',
@@ -33,30 +43,22 @@ export class LawyerTeamController {
 
   @Roles(ROLE.LAWYER)
   @Get('members')
-  getLawyerMembers(
-    @GetCurrentUserId() userId: number
-  ){
-    console.log({userId});
-    return this._ss.getLawyerMembers(userId)
+  getLawyerMembers(@GetCurrentUserId() userId: number) {
+    console.log({ userId });
+    return this._ss.getLawyerMembers(userId);
   }
 
   @Roles(ROLE.LAWYER)
   @Get('members/:id')
-  getLawyerMember(
-    @GetCurrentUserId() userId: number,
-    @Param('id') id: number
-  ){
-    console.log({userId});
-    return this._ss.getLawyerMember(userId, id)
+  getLawyerMember(@GetCurrentUserId() userId: number, @Param('id') id: number) {
+    console.log({ userId });
+    return this._ss.getLawyerMember(userId, id);
   }
 
   @Roles(ROLE.LAWYER)
   @Get('members/:id')
-  deleteMember(
-    @GetCurrentUserId() userId: number,
-    @Param('id') id: number
-  ){
-    console.log({userId});
-    return this._ss.deleteLawyerMember(userId, id)
+  deleteMember(@GetCurrentUserId() userId: number, @Param('id') id: number) {
+    console.log({ userId });
+    return this._ss.deleteLawyerMember(userId, id);
   }
 }

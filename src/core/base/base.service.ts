@@ -4,9 +4,8 @@ import { unlink } from 'fs/promises';
 import { Repository } from 'typeorm';
 import { CoreService } from './core.service';
 
-
 @Injectable()
-export class BaseService extends CoreService{
+export class BaseService extends CoreService {
   public repo: Repository<BetaModel>;
   findAll() {
     return this.repo.find() || { message: `record does not exsist` };

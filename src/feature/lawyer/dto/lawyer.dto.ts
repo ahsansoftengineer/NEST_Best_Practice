@@ -10,7 +10,7 @@ export class CreateLawyerDto extends SignUpDto {
   @IsNumberString()
   specializationId: number;
 
-  @IsNumber({},{each: true})
+  @IsNumber({}, { each: true })
   courtIds: number[];
 }
 export class UpdateLawyerDto extends PartialType(CreateLawyerDto) {}

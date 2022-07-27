@@ -1,23 +1,27 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { BaseService } from 'core/base';
-import { deSearalizeUser, deSearalizeUsers, searalizeUser, throwForbiddenException } from 'core/constant';
+import {
+  deSearalizeUser,
+  deSearalizeUsers,
+  searalizeUser,
+  throwForbiddenException,
+} from 'core/constant';
 import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
 export class LawyerTeamService extends BaseService {
-
   async create(data: CreateLawyerTeamDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
-    throwForbiddenException(existUser)
-    const user = searalizeUser(data, ROLE.TEAM, STATUS.NONE)
+    throwForbiddenException(existUser);
+    const user = searalizeUser(data, ROLE.TEAM, STATUS.NONE);
     const lawyerTeam: LawyerTeam = {
       lawyerId: data.lawyerId,
       responsibility: data.responsibility,
       timing: data.timing,
       amount: data.amount,
-      user
+      user,
     };
     // TODO: WORK HERE SET RANDOM PASSWORD
     // const hashResult = await argon.hash(data.password);
@@ -34,21 +38,28 @@ export class LawyerTeamService extends BaseService {
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
-  getLawyerMembers(id){
-    return this.repos.lawyerTeam.findBy({lawyer: {id}}).then(x => deSearalizeUsers(x))
+  getLawyerMembers(id) {
+    return this.repos.lawyerTeam
+      .findBy({ lawyer: { id } })
+      .then((x) => deSearalizeUsers(x));
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
-  getLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.createQueryBuilder('l').where({
-      lawyerId, id
-    }).getOne().then(x => deSearalizeUser(x))
+  getLawyerMember(lawyerId, id) {
+    return this.repos.lawyerTeam
+      .createQueryBuilder('l')
+      .where({
+        lawyerId,
+        id,
+      })
+      .getOne()
+      .then((x) => deSearalizeUser(x));
   }
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
-  deleteLawyerMember(lawyerId, id){
-    return this.repos.lawyerTeam.createQueryBuilder('l').delete().where(
-      "id = :id AND lawyerId = :lawyerId",
-      {id, lawyerId}
-    )
+  deleteLawyerMember(lawyerId, id) {
+    return this.repos.lawyerTeam
+      .createQueryBuilder('l')
+      .delete()
+      .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
   }
 }

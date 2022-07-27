@@ -14,17 +14,23 @@ export class Task extends BetaModel {
   })
   status: STATUS_TASK;
 
-  @ManyToOne(() => Lawyer, x => x.task)
+  @ManyToOne(() => Lawyer, (x) => x.task)
   @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyer_task' })
   lawyer?: Lawyer;
 
-  @Column({ nullable: true,  })
+  @Column({ nullable: true })
   lawyerId?: number;
 
-  @ManyToOne(() => LawyerTeam, x => x.task, {nullable: true})
-  @JoinColumn({ name: 'lawyerTeamId', nullable: true, foreignKeyConstraintName: 'fk_lawyerTeam_task' })
+  @ManyToOne(() => LawyerTeam, (x) => x.task, { nullable: true })
+  @JoinColumn({
+    name: 'lawyerTeamId',
+    foreignKeyConstraintName: 'fk_lawyerTeam_task',
+  })
   lawyerTeam?: Lawyer;
 
-  @Column({ nullable: true,  })
+  @Column({ nullable: true })
   lawyerTeamId?: number;
+
+  @Column({ nullable: true, default: '' })
+  pdf: string;
 }
