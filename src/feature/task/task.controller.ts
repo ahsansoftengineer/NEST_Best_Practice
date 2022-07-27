@@ -7,7 +7,8 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { GetCurrentUser, GetCurrentUserId, Roles } from 'core/decorators';
+import { JwtPayload } from 'auth/types';
+import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
 import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
 import { TaskService } from './task.service';
@@ -20,12 +21,12 @@ export class TaskController {
 
   @Get()
   @Roles(ROLE.LAWYER, ROLE.TEAM)
-  gets(
-    @GetCurrentUserId() userId: number,
-    @GetCurrentUser()
-    ) {
-    const search = 
-    return this._ss.repos.task.findBy({lawyerId})
+  gets(@GetJwtPayload() p: JwtPayload) {
+    // TODO CHECK IF IT IS GOING TO WORK
+    const search: any = {}
+    const key = p.role == ROLE.LAWYER ? 'lawyerId' : 'lawyerTeamId'
+    search[key] =  p.sub
+    return this._ss.repos.task.findBy(search)
   }
 
   @Get(':id')
