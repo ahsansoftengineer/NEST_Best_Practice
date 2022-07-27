@@ -8,4 +8,11 @@ export class AppoinmentService extends BaseService {
     super();
     super.repo = this.repos.appointment;
   }
+  adminList(){
+    return this.repos.appointment.findBy({})
+  }
+  lawyerList(){
+    return this.repos.appointment.findBy({})
+  }
+
 }
