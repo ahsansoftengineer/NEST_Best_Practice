@@ -3,14 +3,18 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { configMailer, configStaticFiles, configTypeORM } from 'core/config';
+import {
+  configMailer,
+  configStaticFiles,
+  TypeOrmModuleRoot,
+} from 'core/config';
 import { RolesGuard } from 'core/guards/role.guard';
 import { FeatureModule } from 'feature/feature.module';
 import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
 import { PlayModule } from './play/play.module';
+import { SharedModule } from 'core/shared/shared.module';
 
 @Module({
   imports: [
@@ -19,8 +23,9 @@ import { PlayModule } from './play/play.module';
       dest: '../public',
     }),
     configStaticFiles,
-    TypeOrmModule.forRoot(configTypeORM),
+    TypeOrmModuleRoot,
     MailerModule.forRoot(configMailer),
+    SharedModule,
     AuthModule,
     FeatureModule,
     AdminModule,
@@ -38,6 +43,7 @@ import { PlayModule } from './play/play.module';
   ],
   exports: [
     MailerModule, // Those modules has Services Must needs to be exported
+    SharedModule,
   ],
 })
 export class AppModule {}

@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Public } from 'core/decorators';
-import { Roles } from 'core/decorators/roles.decorator';
+import { Public, Roles } from 'core/decorators';
+
 import { ROLE } from 'core/enums';
 import { CourtService } from './court.service';
 import { CreateCourtDto, UpdateCourtDto } from './dto/create-court.dto';

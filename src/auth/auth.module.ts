@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Court, Lawyer, User } from 'core/entities';
+import { City, Court, Lawyer, Specialization, User } from 'core/entities';
+import { RepoService } from 'core/shared/service/repo.service';
+import { SharedModule } from 'core/shared/shared.module';
 import { MailService } from './auth-mailer.service';
 
 import { AuthController } from './auth.controller';
@@ -9,10 +11,7 @@ import { AuthService } from './auth.service';
 import { AtStrategy, RtStrategy } from './strategies';
 
 @Module({
-  imports: [
-    JwtModule.register({}),
-    TypeOrmModule.forFeature([User, Lawyer, Court]),
-  ],
+  imports: [JwtModule.register({})],
   controllers: [AuthController],
   providers: [MailService, AuthService, AtStrategy, RtStrategy],
 })

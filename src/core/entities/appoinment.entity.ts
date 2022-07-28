@@ -1,6 +1,6 @@
-import { Column, Entity } from "typeorm";
-import { AlphaModel } from "./alpha-model";
-import { BetaModel } from "./beta-model";
+import { Column, Entity } from 'typeorm';
+import { AlphaModel } from './alpha-model';
+import { BetaModel } from './beta-model';
 
 @Entity()
 export class Appoinment extends BetaModel{
@@ -10,15 +10,6 @@ export class Appoinment extends BetaModel{
 
   @Column()
   mobile: number;
-
-  @Column()
-  date: string;
-
-  @Column()
-  time: string;
-
-  @Column()
-  lawyerId?: number;
 
 
 }
