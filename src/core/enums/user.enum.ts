@@ -27,11 +27,20 @@ export enum ROLE {
 
 // Lawyer Status
 export enum STATUS {
-  NONE = 'NONE', // APPONTMENT_CLIENT, LAWYER_CLIENT,
+  NONE = 'None', // APPONTMENT_CLIENT, LAWYER_CLIENT,
   ACTIVE = 'Active',
   REJECT = 'Reject',
   PENDING = 'Pending', // LAWYER DEFAULT
   BLOCK = 'Block',
+}
+
+// Appointment Status
+export enum STATUS_APPOINT {
+  PENDING = 'Pending',
+  DIRECT = 'Direct',
+  QUEUE = 'Queue',
+  CANCEL = 'Cancel'
+
 }
 
 // Lawyer Team

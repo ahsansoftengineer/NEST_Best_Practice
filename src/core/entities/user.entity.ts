@@ -8,6 +8,7 @@ import {
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
+import { Appoinment } from './appoinment.entity';
 import { City } from './city.entity';
 import { LawyerClient } from './lawyer-client.entity';
 import { LawyerTeam } from './lawyer-team.entity';
@@ -68,6 +69,9 @@ export class User extends AlphaModel {
 
   @OneToOne(() => Lawyer, (x) => x.user)
   lawyer?: Lawyer;
+
+  @OneToOne(() => Appoinment, (x) => x.user)
+  appointment?: Appoinment;
 
   @OneToOne(() => LawyerClient, (x) => x.user)
   lawyerClient?: LawyerClient;
