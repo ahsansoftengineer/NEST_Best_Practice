@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { argon, searalizeUser, throwForbiddenException } from 'core/constant';
+import { searalizeUser, throwForbiddenException } from 'core/constant';
 import { Appoinment, User } from 'core/entities';
-import { ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
+import { GENDER, ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
 import { Not } from 'typeorm';
@@ -24,15 +24,17 @@ export class AppoinmentService extends BaseService {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
 
-    const user: User = searalizeUser(data, ROLE.CLIENT_APPONITMENT, STATUS.PENDING);
+    const user: User = searalizeUser(data, ROLE.CLIENT_APPONITMENT, STATUS.NONE);
     user.password = 'No Password for this User'
     const lawyer = await this.repos.lawyer.findOneBy({
-      id: data.lawyerId,
+      id: data.lawyerId, user: { status: STATUS.ACTIVE}
     });
-    
-    throwForbiddenException(lawyer)
-
-    const appointmentResult: Appoinment = {
+    if(!lawyer) throw new ForbiddenException('invalid Lawyer provided')
+    // user.address = 'address'
+    // user.gender = GENDER.NONE
+    // user.cityId = 1
+    // user.image = 'No Image'
+    const appointmentResult: Appoinment = { 
       user,
       lawyerId: data.lawyerId,
       date: data.date,
@@ -41,12 +43,11 @@ export class AppoinmentService extends BaseService {
       title: data.title,
       desc: data.desc
     };
-
-    const appoint = this.repos.lawyer.create({ ...appointmentResult });
-    await this.repos.lawyer.save(appoint).catch((error) => {
+    
+    const appoint = await this.repos.appointment.create({ ...appointmentResult });
+    return this.repos.appointment.save(appoint).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
-
   }
 }

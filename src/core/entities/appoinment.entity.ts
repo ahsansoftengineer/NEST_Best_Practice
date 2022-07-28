@@ -9,15 +9,15 @@ import { User } from './user.entity';
 export class Appoinment extends BetaModel{
 
     
-  @ManyToOne(() => User, (x) => x.appointment, { eager: true, cascade: true })
+  @ManyToOne(() => User, (x) => x.appointment, { cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_appointment' })
   user?: User;
 
-  @Column()
+  @Column({})
   userId?: number;
 
-  @ManyToOne(() => Lawyer, (x) => x.appointment, { eager: true, cascade: true })
-  @JoinColumn({ foreignKeyConstraintName: 'fk_user_appointment' })
+  @ManyToOne(() => Lawyer, (x) => x.appointment)
+  @JoinColumn({ foreignKeyConstraintName: 'fk_lawyer_appointment' })
   lawyer?: Lawyer;
 
   @Column()
