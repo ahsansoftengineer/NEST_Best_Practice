@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Roles } from 'core/decorators/roles.decorator';
-import { ROLE } from 'core/enums';
+import { Public } from 'core/decorators';
 import { AppoinmentService } from './appoinment.service';
 import { CreateAppoinmentDto } from './dto/create-appoinment.dto';
 import { UpdateAppoinmentDto } from './dto/update-appoinment.dto';
@@ -16,7 +15,7 @@ export class AppoinmentController extends BaseController{
   }
 
   @Post()
-  @Roles(ROLE.LAWYER)
+  @Public()
   uploadFile(
     @Body() body: CreateAppoinmentDto,
     ) {
@@ -24,7 +23,7 @@ export class AppoinmentController extends BaseController{
   }
 
   @Patch(':id')
-  @Roles(ROLE.LAWYER)
+  @Public()
   async update(
     @Param('id') id: number,
     @Body() body: UpdateAppoinmentDto,
@@ -32,9 +31,4 @@ export class AppoinmentController extends BaseController{
     return this._ss.updateSimple(id,body);
   }
 
-  @Roles(ROLE.LAWYER)
-  @Delete(':id')
-  async remove(@Param('id') id: number) {
-    return this._ss.remove(+id)
-  }
 }
