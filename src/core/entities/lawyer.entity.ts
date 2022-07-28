@@ -1,14 +1,12 @@
 import {
+  Column,
   Entity,
   JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AlphaModel } from './alpha-model';
 import {
   User,
   Court,
@@ -16,17 +14,17 @@ import {
   LawyerTeam,
   LawyerClient,
   Task,
+  AlphaModel
 } from './index';
 
 @Entity()
 export class Lawyer extends AlphaModel {
-  @PrimaryGeneratedColumn()
-  id?: number;
-
-  @OneToOne(() => User, (x) => x.lawyer, { eager: true, cascade: true })
+  
+  @ManyToOne(() => User, (x) => x.lawyer, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
   user?: User;
 
+  @Column()
   userId?: number;
 
   @ManyToOne(() => Specialization, (e) => e.lawyers, { eager: true })
@@ -35,18 +33,19 @@ export class Lawyer extends AlphaModel {
   })
   specialization?: Specialization;
 
-  @JoinColumn({
-    foreignKeyConstraintName: 'fk_specialization_user',
-  })
+  @Column()
   specializationId?: number;
 
   @ManyToMany(() => Court, (c) => c.lawyer, {
     eager: true,
   })
-  @JoinTable({ name: 'court_lawyer' })
+  @JoinTable({ 
+    name: 'court_lawyer', 
+    joinColumn: {foreignKeyConstraintName: 'fk_lawyer_court'} 
+  })
   court?: Court[];
 
-  courtIds?: number[];
+  // courtIds?: number[]; // It cannot be used in any case
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
