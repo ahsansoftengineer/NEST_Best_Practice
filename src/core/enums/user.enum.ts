@@ -37,10 +37,13 @@ export enum STATUS {
 
 // Appointment Status
 export enum STATUS_APPOINT {
+  // Admin
   PENDING = 'Pending',
   DIRECT = 'Direct',
-  QUEUE = 'Queue',
-  CANCEL = 'Cancel'
+  CANCEL = 'Cancel',
+  // Lawyer
+  ACCEPT = 'Accept', 
+  REJECT = 'Reject'
 
 }
 
