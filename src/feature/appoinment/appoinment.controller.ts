@@ -8,21 +8,32 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'core/base';
 import { Roles } from 'core/decorators';
 
 import { ROLE } from 'core/enums';
 import { AppoinmentService } from './appoinment.service';
-import { CreateAppoinmentDto } from './dto/create-appoinment.dto';
-import { UpdateAppoinmentDto } from './dto/update-appoinment.dto';
+import { CreateAppoinmentDto, UpdateAppoinmentDto } from './dto/create-appoinment.dto';
 
 @Controller('appoinment')
 @ApiTags('appoinment')
-export class AppoinmentController extends BaseController {
+export class AppoinmentController {
   constructor(public _ss: AppoinmentService) {
-    super();
   }
 
+  @Get('admin-list')
+  @Roles(ROLE.ADMIN)
+  adminList(
+    @Body() body: CreateAppoinmentDto
+
+    ) {
+    // return this._ss.adminList(body);
+  }
+
+  @Get('lawyer-list')
+  @Roles(ROLE.LAWYER)
+  lawyerList(@Body() body: CreateAppoinmentDto) {
+    // return this._ss.lawyerList(body);
+  }
   @Post()
   @Roles(ROLE.LAWYER)
   create(@Body() body: CreateAppoinmentDto) {

@@ -9,6 +9,8 @@ export interface Environment {
   DB_DROP: boolean;
   JWT_ACCESS_TOKEN: string;
   JWT_REFRESH_TOKEN: string;
+  JWT_AT_SECRET: string;
+  JWT_RT_SECRET: string;
 
   [name: string]: any;
 }

@@ -1,6 +1,6 @@
-import { PartialType } from "@nestjs/swagger";
-import { SignUpDto } from "auth/dto";
-import { IsNotEmpty, IsNumber, IsNumberString } from "class-validator";
+import { PartialType } from '@nestjs/swagger';
+import { SignUpDto } from 'auth/dto';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateLawyerTeamDto extends SignUpDto {
   @IsNotEmpty()
@@ -14,11 +14,8 @@ export class CreateLawyerTeamDto extends SignUpDto {
   amount: number;
 
   @IsNumber()
-  lawyerId: number 
-
-
-
+  @IsNotEmpty()
+  lawyerId: number;
 }
 
 export class UpdateLawyerTeamDto extends PartialType(CreateLawyerTeamDto) {}
-

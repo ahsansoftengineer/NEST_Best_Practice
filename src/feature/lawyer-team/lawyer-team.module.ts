@@ -4,6 +4,6 @@ import { LawyerTeamController } from './lawyer-team.controller';
 
 @Module({
   controllers: [LawyerTeamController],
-  providers: [LawyerTeamService]
+  providers: [LawyerTeamService],
 })
 export class LawyerTeamModule {}

@@ -1,6 +1,5 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
   Patch,
@@ -9,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'core/base';
-import { Public, Roles } from 'core/decorators';
+import { Roles } from 'core/decorators';
 
 import { ROLE } from 'core/enums';
 import { CourtService } from './court.service';

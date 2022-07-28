@@ -1,5 +1,5 @@
 import { MailerModule } from '@nestjs-modules/mailer';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
@@ -15,6 +15,7 @@ import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
 import { PlayModule } from './play/play.module';
 import { SharedModule } from 'core/shared/shared.module';
+import { LoggerMiddleware } from 'core/middleware';
 
 @Module({
   imports: [
@@ -43,7 +44,11 @@ import { SharedModule } from 'core/shared/shared.module';
   ],
   exports: [
     MailerModule, // Those modules has Services Must needs to be exported
-    SharedModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
