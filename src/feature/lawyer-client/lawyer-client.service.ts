@@ -1,5 +1,4 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { BaseService } from 'core/base';
 import {
   deSearalizeUser,
   deSearalizeUsers,
@@ -8,10 +7,13 @@ import {
 } from 'core/constant';
 import { LawyerClient } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
+import { BaseService } from 'core/service';
 import { CreateLawyerClientDto } from './dto/create-lawyer-client.dto';
 
 @Injectable()
 export class LawyerClientService extends BaseService {
+  // constructor(public repos: RepoService){}
+
   async create(data: CreateLawyerClientDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);

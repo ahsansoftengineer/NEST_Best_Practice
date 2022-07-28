@@ -7,6 +7,6 @@ import { RepoService } from './service/repo.service';
 @Module({
   imports: [TypeOrmModule.forFeature(entities)],
   providers: [RepoService],
-  exports: [RepoService],
+  exports: [RepoService, TypeOrmModule]
 })
 export class SharedModule {}

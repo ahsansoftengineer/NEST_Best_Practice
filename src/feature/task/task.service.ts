@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { BaseService } from 'core/base';
 import { Task } from 'core/entities/task.entity';
+import { BaseService } from 'core/service';
 import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
 
 @Injectable()

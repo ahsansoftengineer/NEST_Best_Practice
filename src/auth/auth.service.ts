@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import {
@@ -20,13 +20,17 @@ import { JwtPayload, Tokens } from './types';
 
 @Injectable()
 export class AuthService {
+  logger: Logger;
   constructor(
     private _jwt: JwtService,
     private _config: ConfigService,
     private _mail: MailService,
     public repos: RepoService,
-  ) {}
+  ) {
+    this.logger = new Logger();
+  }
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
+    this.logger.warn('Sign Up Admin is triggered!');
     const hashResult = await argon.hash(data.password);
 
     const existUser = await this.repos.user.findOneBy({ email: data.email });

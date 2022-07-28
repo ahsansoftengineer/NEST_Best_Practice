@@ -1,5 +1,4 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { BaseService } from 'core/base';
 import {
   deSearalizeUser,
   deSearalizeUsers,
@@ -8,6 +7,7 @@ import {
 } from 'core/constant';
 import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
+import { BaseService } from 'core/service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()

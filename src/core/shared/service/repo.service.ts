@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   Court,
@@ -16,7 +16,7 @@ import {
 } from 'core/entities';
 import { Repository } from 'typeorm';
 
-@Injectable()
+@Injectable({})
 export class RepoService {
   constructor(
     @InjectRepository(Appoinment) public appointment: Repository<Appoinment>,

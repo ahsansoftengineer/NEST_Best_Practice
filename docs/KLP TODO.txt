@@ -31,29 +31,20 @@ ALL ROUTE ACCESSIBLE AS PER ROLE
 
 Lawyer Team Member CRUD
 Lawyer Client CRUD
+Team Member Sign In
+Lawyer Assigning Team member Task
+Lawyer & Lawyer Team can change task Status
+Lawyer Task List
+Team Member Task List
 
-
-
-
-
-
+ 
 
 
 // PENDING WORK
 
-Team Member Sign In
 Team Member Sending Message
 
-Lawyer Assigning Team member Task
-
-Lawyer Task List and Status
-
-Lawyer Team member Task List
-
-Team Member Task List
-
 Admin Appointment List
-
 Admin Redirect Appointment to Lawyer
 
 

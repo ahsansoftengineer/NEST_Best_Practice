@@ -14,10 +14,10 @@ export class LawyerTeam extends AlphaModel {
   @Column({ nullable: true, length: 250, default: '' })
   responsibility: string;
 
-  @Column({ nullable: true, length: 250, default: '' })
+  @Column({ nullable: true, default: '' })
   timing: string;
 
-  @Column({ nullable: true, length: 250, type: 'number' })
+  @Column({ nullable: true })
   amount: number;
 
   @OneToOne(() => User, (x) => x.lawyerTeam, { eager: true, cascade: true })
