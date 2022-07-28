@@ -1,9 +1,5 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { City, Court, Lawyer, Specialization, User } from 'core/entities';
-import { RepoService } from 'core/shared/service/repo.service';
-import { SharedModule } from 'core/shared/shared.module';
 import { MailService } from './auth-mailer.service';
 
 import { AuthController } from './auth.controller';

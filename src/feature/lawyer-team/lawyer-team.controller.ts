@@ -37,12 +37,7 @@ export class LawyerTeamController {
     // body.image = image.filename;
     body.lawyerId = userId;
 
-    try {
-      return this._ss.create(body);
-    } catch (e) {
-      HandleUniqueError(e);
-      return e;
-    }
+    return this._ss.create(body);
   }
 
   @Roles(ROLE.LAWYER)

@@ -11,7 +11,7 @@ import { Lawyer, User, Task } from './index';
 
 @Entity()
 export class LawyerTeam extends AlphaModel {
-  @Column({ nullable: true, length: 250, default: '' })
+  @Column({ length: 250 })
   responsibility: string;
 
   @Column({ nullable: true, default: '' })
