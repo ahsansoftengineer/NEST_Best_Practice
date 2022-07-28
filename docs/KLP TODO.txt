@@ -36,16 +36,12 @@ Lawyer Assigning Team member Task
 Lawyer & Lawyer Team can change task Status
 Lawyer Task List
 Team Member Task List
-
- 
-
+Admin Appointment List
+Admin Redirect Appointment to Lawyer
 
 // PENDING WORK
 
 Team Member Sending Message
-
-Admin Appointment List
-Admin Redirect Appointment to Lawyer
 
 
 Warning 

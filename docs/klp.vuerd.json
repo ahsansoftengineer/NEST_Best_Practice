@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 4000,
     "height": 4000,
-    "scrollTop": -977.8888972776635,
-    "scrollLeft": -958.361070684791,
+    "scrollTop": -864.0000129143133,
+    "scrollLeft": -1019.4721793675612,
     "zoomLevel": 1,
     "show": {
       "tableComment": true,
@@ -411,9 +411,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 997.4276,
-          "top": 627.2247,
-          "zIndex": 14,
+          "left": 999.4118,
+          "top": 621.2718,
+          "zIndex": 26,
           "widthName": 60,
           "widthComment": 114.201171875,
           "color": "#FFEB3B"
@@ -1041,7 +1041,7 @@
           "active": false,
           "left": 1559.777,
           "top": 527.0831,
-          "zIndex": 2,
+          "zIndex": 33,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1865,8 +1865,8 @@
           "columnIds": [
             "7e284dc7-b215-4285-8b3a-226516b15bf1"
           ],
-          "x": 1093.0493041015625,
-          "y": 839.7247,
+          "x": 1095.0335041015624,
+          "y": 833.7718,
           "direction": "bottom"
         },
         "constraintName": "fk_user_to_lawyer",
@@ -1891,8 +1891,8 @@
           "columnIds": [
             "e98a4288-d1df-404d-82c1-9a5899e78375"
           ],
-          "x": 1188.671008203125,
-          "y": 627.2247,
+          "x": 1190.6552082031249,
+          "y": 621.2718,
           "direction": "top"
         },
         "constraintName": "fk_specialization_to_lawyer",
@@ -1917,8 +1917,8 @@
           "columnIds": [
             "8f936311-bb25-4310-880d-90c00d4a3b0a"
           ],
-          "x": 1379.91441640625,
-          "y": 760.0372,
+          "x": 1381.8986164062499,
+          "y": 754.0843,
           "direction": "right"
         },
         "constraintName": "fk_city_to_lawyer",
@@ -1943,8 +1943,8 @@
           "columnIds": [
             "ebe61396-c4ec-4f46-838b-dc8630c4ed8f"
           ],
-          "x": 997.4276,
-          "y": 733.4747,
+          "x": 999.4118,
+          "y": 727.5218,
           "direction": "left"
         },
         "constraintName": "fk_lawyer_court_to_lawyer",
@@ -1986,8 +1986,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1379.91441640625,
-          "y": 813.1622,
+          "x": 1381.8986164062499,
+          "y": 807.2093,
           "direction": "right"
         },
         "end": {
@@ -2012,8 +2012,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1379.91441640625,
-          "y": 706.9122,
+          "x": 1381.8986164062499,
+          "y": 700.9593,
           "direction": "right"
         },
         "end": {
@@ -2064,8 +2064,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1379.91441640625,
-          "y": 653.7872,
+          "x": 1381.8986164062499,
+          "y": 647.8343,
           "direction": "right"
         },
         "end": {
@@ -2116,8 +2116,8 @@
           "columnIds": [
             "f0025c09-9037-4294-b9fe-580516f26e04"
           ],
-          "x": 1284.2927123046875,
-          "y": 839.7247,
+          "x": 1286.2769123046874,
+          "y": 833.7718,
           "direction": "bottom"
         },
         "end": {

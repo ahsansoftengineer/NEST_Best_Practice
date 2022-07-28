@@ -23,17 +23,20 @@ export class LawyerTeamController {
 
   @Roles(ROLE.LAWYER)
   @Post()
-  @UseInterceptors(InterceptorImage)
+  // @UseInterceptors(InterceptorImage)
   create(
     @Body() body: CreateLawyerTeamDto,
-    @UploadedFile() image: Express.Multer.File,
+    @GetCurrentUserId() userId: number
+    // @UploadedFile() image: Express.Multer.File,
   ) {
-    if (!image?.filename)
-      throw new HttpException(
-        'user profile image is required',
-        HttpStatus.FORBIDDEN,
-      );
-    body.image = image.filename;
+    // if (!image?.filename)
+    //   throw new HttpException(
+    //     'user profile image is required',
+    //     HttpStatus.FORBIDDEN,
+    //   );
+    // body.image = image.filename;
+    body.lawyerId = userId
+
     try {
       return this._ss.create(body);
     } catch (e) {
@@ -44,7 +47,6 @@ export class LawyerTeamController {
   @Roles(ROLE.LAWYER)
   @Get('members')
   getLawyerMembers(@GetCurrentUserId() userId: number) {
-    console.log({ userId });
     return this._ss.getLawyerMembers(userId);
   }
 

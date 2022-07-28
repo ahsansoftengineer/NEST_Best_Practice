@@ -1,7 +1,9 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import {
+  argon,
   deSearalizeUser,
   deSearalizeUsers,
+  generatePassword,
   searalizeUser,
   throwForbiddenException,
 } from 'core/constant';
@@ -23,9 +25,11 @@ export class LawyerTeamService extends BaseService {
       amount: data.amount,
       user,
     };
+
     // TODO: WORK HERE SET RANDOM PASSWORD
-    // const hashResult = await argon.hash(data.password);
-    // lawyerTeam.user.password = hashResult
+    const password = await generatePassword()
+    const hashResult = await argon.hash(password);
+    lawyerTeam.user.password = hashResult
     console.log({ lawyerTeam });
 
     const create = this.repos.lawyerTeam.create({ ...lawyerTeam });
@@ -34,13 +38,16 @@ export class LawyerTeamService extends BaseService {
       throw new ForbiddenException('Credentials incorrect');
     });
     // TODO: SENT TEAM MEMBER MESSAGE
+    // Email this password
     return save;
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
-  getLawyerMembers(id) {
+  getLawyerMembers(lawyerId) {
+    console.log({lawyerId});
+    
     return this.repos.lawyerTeam
-      .findBy({ lawyer: { id } })
+      .findBy({ lawyerId})
       .then((x) => deSearalizeUsers(x));
   }
 
