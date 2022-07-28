@@ -5,7 +5,7 @@ import { IsNumber, IsNumberString, IsOptional } from 'class-validator';
 export class CreateLawyerDto extends SignUpDto {
   @IsOptional()
   @IsNumberString()
-  id: number;
+  id: number; 
 
   @IsNumberString()
   specializationId: number;

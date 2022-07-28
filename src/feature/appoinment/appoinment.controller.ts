@@ -6,30 +6,40 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Public, Roles } from 'core/decorators';
 
-import { ROLE } from 'core/enums';
+import { ROLE, STATUS_APPOINT } from 'core/enums';
 import { AppoinmentService } from './appoinment.service';
 import { CreateAppoinmentDto, UpdateAppoinmentDto } from './dto/create-appoinment.dto';
 
-@Controller('appoinment')
-@ApiTags('appoinment')
+@Controller('appointment')
+@ApiTags('appointment')
 export class AppoinmentController {
   constructor(public _ss: AppoinmentService) {
   }
 
   @Get('admin-list')
   @Roles(ROLE.ADMIN)
-  adminList() {
-    return this._ss.adminList();
+  adminList(@Query('status') status: STATUS_APPOINT) {
+    return this._ss.adminList(status);
   }
 
   @Get('lawyer-list')
   @Roles(ROLE.LAWYER)
-  lawyerList() {
-    return this._ss.lawyerList();
+  lawyerList(@Query('status') status: STATUS_APPOINT) {
+    console.log({status});
+    
+    if(!status || 'Accept,Reject,Direct'.indexOf(status) != -1)
+      return this._ss.lawyerList(status);
+    throw new HttpException(
+      'you are only authorized for Accept & Reject',
+      HttpStatus.FORBIDDEN
+    )
   }
   @Public()
   @Post()
@@ -37,10 +47,21 @@ export class AppoinmentController {
     return this._ss.create(body);
   }
 
-  @Patch(':id')
+  @Patch('admin-status')
+  @Roles(ROLE.ADMIN)
+  async statusAdmin(@Body() {id, status}) {
+    return this._ss.statusAdmin({id, status});
+  }
+
+  @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
-  async update(@Param('id') id: number, @Body() body: UpdateAppoinmentDto) {
-    return this._ss.updateSimple(id, body);
+  async statusLawyer(@Body() {id, status}) {
+    if(STATUS_APPOINT.ACCEPT == status ||  STATUS_APPOINT.REJECT == status)
+      return this._ss.statusAdmin({id, status});
+    throw new HttpException(
+      'you are only authorized for Accept & Reject',
+      HttpStatus.FORBIDDEN
+    )
   }
 
   @Roles(ROLE.LAWYER)
