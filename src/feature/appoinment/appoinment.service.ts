@@ -30,10 +30,6 @@ export class AppoinmentService extends BaseService {
       id: data.lawyerId, user: { status: STATUS.ACTIVE}
     });
     if(!lawyer) throw new ForbiddenException('invalid Lawyer provided')
-    // user.address = 'address'
-    // user.gender = GENDER.NONE
-    // user.cityId = 1
-    // user.image = 'No Image'
     const appointmentResult: Appoinment = { 
       user,
       lawyerId: data.lawyerId,
@@ -45,9 +41,14 @@ export class AppoinmentService extends BaseService {
     };
     
     const appoint = await this.repos.appointment.create({ ...appointmentResult });
-    return this.repos.appointment.save(appoint).catch((error) => {
+    const result = await this.repos.appointment.save(appoint).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
+    if(result){
+      // send Email to Client of Pending State of Case Registration
+    }
+    return result
+
   }
 }
