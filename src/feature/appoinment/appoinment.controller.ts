@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Roles } from 'core/decorators';
+import { Public, Roles } from 'core/decorators';
 
 import { ROLE } from 'core/enums';
 import { AppoinmentService } from './appoinment.service';
@@ -22,22 +22,19 @@ export class AppoinmentController {
 
   @Get('admin-list')
   @Roles(ROLE.ADMIN)
-  adminList(
-    @Body() body: CreateAppoinmentDto
-
-    ) {
-    // return this._ss.adminList(body);
+  adminList() {
+    return this._ss.adminList();
   }
 
   @Get('lawyer-list')
   @Roles(ROLE.LAWYER)
-  lawyerList(@Body() body: CreateAppoinmentDto) {
-    // return this._ss.lawyerList(body);
+  lawyerList() {
+    return this._ss.lawyerList();
   }
+  @Public()
   @Post()
-  @Roles(ROLE.LAWYER)
   create(@Body() body: CreateAppoinmentDto) {
-    return this._ss.createSimple(body);
+    return this._ss.create(body);
   }
 
   @Patch(':id')

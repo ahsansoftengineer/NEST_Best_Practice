@@ -8,6 +8,7 @@ import {
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
+import { Appoinment } from './appoinment.entity';
 import { City } from './city.entity';
 import { LawyerClient } from './lawyer-client.entity';
 import { LawyerTeam } from './lawyer-team.entity';
@@ -38,36 +39,41 @@ export class User extends AlphaModel {
   })
   role: ROLE;
 
-  @Column({ length: 1000 })
+  @Column({ length: 1000, default: '' })
   password: string;
 
   @Column({ length: 20 })
   mobile: string;
 
   @Column({
-    default: 'male',
+    default: GENDER.NONE,
     type: 'enum',
     enum: GENDER,
+
   })
   gender: GENDER;
 
-  @Column()
+  @Column({ nullable: true})
   address: string;
 
-  @Column({ nullable: true, length: 200 })
+  @Column({ nullable: true, default:'No Image provided', length: 200 })
   image?: string;
 
   @Column({ length: 1000, nullable: true })
   hashedRt?: string;
 
-  @ManyToOne(() => City, (e) => e.user, { eager: true })
+  @ManyToOne(() => City, (e) => e.user, { eager: true, nullable: true})
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
-  cityId: number;
+  @Column({nullable: true})
+  cityId?: number;
 
   @OneToOne(() => Lawyer, (x) => x.user)
   lawyer?: Lawyer;
+
+  @OneToOne(() => Appoinment, (x) => x.user)
+  appointment?: Appoinment;
 
   @OneToOne(() => LawyerClient, (x) => x.user)
   lawyerClient?: LawyerClient;

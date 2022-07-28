@@ -6,6 +6,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import {
   User,
@@ -14,6 +15,7 @@ import {
   LawyerTeam,
   LawyerClient,
   Task,
+  Appoinment,
   AlphaModel
 } from './index';
 
@@ -55,4 +57,7 @@ export class Lawyer extends AlphaModel {
 
   @OneToMany(() => Task, (x) => x.lawyer)
   task?: Task[];
+
+  @OneToOne(() => Appoinment, (x) => x.lawyer)
+  appointment?: Appoinment;
 }
