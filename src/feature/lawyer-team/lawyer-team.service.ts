@@ -27,9 +27,9 @@ export class LawyerTeamService extends BaseService {
     };
 
     // TODO: WORK HERE SET RANDOM PASSWORD
-    const password = await generatePassword()
+    const password = await generatePassword();
     const hashResult = await argon.hash(password);
-    lawyerTeam.user.password = hashResult
+    lawyerTeam.user.password = hashResult;
     console.log({ lawyerTeam });
 
     const create = this.repos.lawyerTeam.create({ ...lawyerTeam });
@@ -44,10 +44,10 @@ export class LawyerTeamService extends BaseService {
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMembers(lawyerId) {
-    console.log({lawyerId});
-    
+    console.log({ lawyerId });
+
     return this.repos.lawyerTeam
-      .findBy({ lawyerId})
+      .findBy({ lawyerId })
       .then((x) => deSearalizeUsers(x));
   }
 

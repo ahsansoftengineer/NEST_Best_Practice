@@ -1,5 +1,12 @@
-import { ApiProperty} from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { GENDER, ROLE, STATUS } from 'core/enums';
 
 export class UserReqFieldDto {

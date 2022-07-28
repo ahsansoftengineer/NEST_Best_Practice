@@ -1,7 +1,7 @@
 export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
-  NONE = 'None'
+  NONE = 'None',
 }
 
 export enum ROLE {
@@ -42,9 +42,8 @@ export enum STATUS_APPOINT {
   DIRECT = 'Direct',
   CANCEL = 'Cancel',
   // Lawyer
-  ACCEPT = 'Accept', 
-  REJECT = 'Reject'
-
+  ACCEPT = 'Accept',
+  REJECT = 'Reject',
 }
 
 // Lawyer Team

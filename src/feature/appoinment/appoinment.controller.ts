@@ -15,13 +15,15 @@ import { Public, Roles } from 'core/decorators';
 
 import { ROLE, STATUS_APPOINT } from 'core/enums';
 import { AppoinmentService } from './appoinment.service';
-import { CreateAppoinmentDto, UpdateAppoinmentDto } from './dto/create-appoinment.dto';
+import {
+  CreateAppoinmentDto,
+  UpdateAppoinmentDto,
+} from './dto/create-appoinment.dto';
 
 @Controller('appointment')
 @ApiTags('appointment')
 export class AppoinmentController {
-  constructor(public _ss: AppoinmentService) {
-  }
+  constructor(public _ss: AppoinmentService) {}
 
   @Get('admin-list')
   @Roles(ROLE.ADMIN)
@@ -32,14 +34,14 @@ export class AppoinmentController {
   @Get('lawyer-list')
   @Roles(ROLE.LAWYER)
   lawyerList(@Query('status') status: STATUS_APPOINT) {
-    console.log({status});
-    
-    if(!status || 'Accept,Reject,Direct'.indexOf(status) != -1)
+    console.log({ status });
+
+    if (!status || 'Accept,Reject,Direct'.indexOf(status) != -1)
       return this._ss.lawyerList(status);
     throw new HttpException(
       'you are only authorized for Accept & Reject',
-      HttpStatus.FORBIDDEN
-    )
+      HttpStatus.FORBIDDEN,
+    );
   }
   @Public()
   @Post()
@@ -49,19 +51,19 @@ export class AppoinmentController {
 
   @Patch('admin-status')
   @Roles(ROLE.ADMIN)
-  async statusAdmin(@Body() {id, status}) {
-    return this._ss.statusAdmin({id, status});
+  async statusAdmin(@Body() { id, status }) {
+    return this._ss.statusAdmin({ id, status });
   }
 
   @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
-  async statusLawyer(@Body() {id, status}) {
-    if(STATUS_APPOINT.ACCEPT == status ||  STATUS_APPOINT.REJECT == status)
-      return this._ss.statusAdmin({id, status});
+  async statusLawyer(@Body() { id, status }) {
+    if (STATUS_APPOINT.ACCEPT == status || STATUS_APPOINT.REJECT == status)
+      return this._ss.statusAdmin({ id, status });
     throw new HttpException(
       'you are only authorized for Accept & Reject',
-      HttpStatus.FORBIDDEN
-    )
+      HttpStatus.FORBIDDEN,
+    );
   }
 
   @Roles(ROLE.LAWYER)

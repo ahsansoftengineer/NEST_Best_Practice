@@ -13,60 +13,67 @@ export class AppoinmentService extends BaseService {
     super();
     super.repo = this.repos.appointment;
   }
-  adminList(status: STATUS_APPOINT){
-    const result = this.repos.appointment
-    if(!status) return result.find()
-    else return result.find({where:{status}})
+  adminList(status: STATUS_APPOINT) {
+    const result = this.repos.appointment;
+    if (!status) return result.find();
+    else return result.find({ where: { status } });
   }
-  lawyerList(status: STATUS_APPOINT){
-    const result = this.repos.appointment
-    if(!status) return result.find({
-      where:[
-        { status:STATUS_APPOINT.DIRECT },
-        { status:STATUS_APPOINT.ACCEPT },
-        { status:STATUS_APPOINT.REJECT },
-      ]
-    })
-    else return result.find({where:{status}})
+  lawyerList(status: STATUS_APPOINT) {
+    const result = this.repos.appointment;
+    if (!status)
+      return result.find({
+        where: [
+          { status: STATUS_APPOINT.DIRECT },
+          { status: STATUS_APPOINT.ACCEPT },
+          { status: STATUS_APPOINT.REJECT },
+        ],
+      });
+    else return result.find({ where: { status } });
   }
 
   async create(data: CreateAppoinmentDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
 
-    const user: User = searalizeUser(data, ROLE.CLIENT_APPONITMENT, STATUS.NONE);
-    user.password = 'No Password for this User'
+    const user: User = searalizeUser(
+      data,
+      ROLE.CLIENT_APPONITMENT,
+      STATUS.NONE,
+    );
+    user.password = 'No Password for this User';
     const lawyer = await this.repos.lawyer.findOneBy({
-      id: data.lawyerId, user: { status: STATUS.ACTIVE}
+      id: data.lawyerId,
+      user: { status: STATUS.ACTIVE },
     });
-    if(!lawyer) throw new ForbiddenException('invalid Lawyer provided')
-    const appointmentResult: Appoinment = { 
+    if (!lawyer) throw new ForbiddenException('invalid Lawyer provided');
+    const appointmentResult: Appoinment = {
       user,
       lawyerId: data.lawyerId,
       date: data.date,
       time: data.time,
       status: STATUS_APPOINT.PENDING,
       title: data.title,
-      desc: data.desc
+      desc: data.desc,
     };
-    
-    const appoint = await this.repos.appointment.create({ ...appointmentResult });
+
+    const appoint = await this.repos.appointment.create({
+      ...appointmentResult,
+    });
     const result = await this.repos.appointment.save(appoint).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
-    if(result){
+    if (result) {
       // send Email to Client of Pending State of Case Registration
     }
-    return result
-
+    return result;
   }
 
-  statusAdmin({status, id}){
-    return this.repos.appointment.update({id}, {status})
+  statusAdmin({ status, id }) {
+    return this.repos.appointment.update({ id }, { status });
   }
 
-  statusLawyer({status, id}){
-    return this.repos.appointment.update({id}, {status})
+  statusLawyer({ status, id }) {
+    return this.repos.appointment.update({ id }, { status });
   }
 }

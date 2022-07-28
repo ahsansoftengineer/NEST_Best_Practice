@@ -14,7 +14,6 @@ import { UserReqFieldDto } from './user-req-field.dto';
 export class SignUpDto extends IntersectionType(SignInDto, UserReqFieldDto) {
   // Status and Role Must be comment out in Production
 
-
   @ApiProperty({
     description:
       'password must has special character, alpha numeric and capital / small letters',
@@ -29,6 +28,4 @@ export class SignUpDto extends IntersectionType(SignInDto, UserReqFieldDto) {
   @IsOptional()
   // @IsNumber()
   cityId: number;
-
-  
 }

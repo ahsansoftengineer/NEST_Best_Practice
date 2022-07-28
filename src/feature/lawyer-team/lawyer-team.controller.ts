@@ -26,7 +26,7 @@ export class LawyerTeamController {
   // @UseInterceptors(InterceptorImage)
   create(
     @Body() body: CreateLawyerTeamDto,
-    @GetCurrentUserId() userId: number
+    @GetCurrentUserId() userId: number,
     // @UploadedFile() image: Express.Multer.File,
   ) {
     // if (!image?.filename)
@@ -35,12 +35,13 @@ export class LawyerTeamController {
     //     HttpStatus.FORBIDDEN,
     //   );
     // body.image = image.filename;
-    body.lawyerId = userId
+    body.lawyerId = userId;
 
     try {
       return this._ss.create(body);
     } catch (e) {
       HandleUniqueError(e);
+      return e;
     }
   }
 
