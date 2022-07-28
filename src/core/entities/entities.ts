@@ -19,7 +19,7 @@ export const entities = [
   Appoinment,
   Book,
   Casez,
-  City, 
+  City,
   Court,
   News,
   User,
