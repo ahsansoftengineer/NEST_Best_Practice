@@ -4,7 +4,7 @@ import { Appoinment, User } from 'core/entities';
 import { GENDER, ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
-import { Not } from 'typeorm';
+import { In, Not } from 'typeorm';
 import { CreateAppoinmentDto } from './dto/create-appoinment.dto';
 
 @Injectable()
@@ -13,11 +13,21 @@ export class AppoinmentService extends BaseService {
     super();
     super.repo = this.repos.appointment;
   }
-  adminList(){
-    return this.repos.appointment.find({where:{status:Not(STATUS_APPOINT.DIRECT)}})
+  adminList(status: STATUS_APPOINT){
+    const result = this.repos.appointment
+    if(!status) return result.find()
+    else return result.find({where:{status}})
   }
-  lawyerList(){
-    return this.repos.appointment.findBy({status:STATUS_APPOINT.DIRECT})
+  lawyerList(status: STATUS_APPOINT){
+    const result = this.repos.appointment
+    if(!status) return result.find({
+      where:[
+        { status:STATUS_APPOINT.DIRECT },
+        { status:STATUS_APPOINT.ACCEPT },
+        { status:STATUS_APPOINT.REJECT },
+      ]
+    })
+    else return result.find({where:{status}})
   }
 
   async create(data: CreateAppoinmentDto) {
@@ -50,5 +60,13 @@ export class AppoinmentService extends BaseService {
     }
     return result
 
+  }
+
+  statusAdmin({status, id}){
+    return this.repos.appointment.update({id}, {status})
+  }
+
+  statusLawyer({status, id}){
+    return this.repos.appointment.update({id}, {status})
   }
 }
