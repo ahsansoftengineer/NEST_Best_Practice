@@ -38,7 +38,7 @@ export class Lawyer extends AlphaModel {
   @Column()
   specializationId?: number;
 
-  @ManyToMany(() => Court, (c) => c.lawyers, {
+  @ManyToMany(() => Court, {
     eager: true,
     // cascade: true// if it work with that then remove it
   })
@@ -57,8 +57,8 @@ export class Lawyer extends AlphaModel {
   })
   courts?: Court[];
 
-  @RelationId((d: Lawyer) => d.courts)
-  courtIds?: number[]; // It cannot be used in any case
+  // @RelationId((d: Lawyer) => d.courts)
+  // courtIds?: number[]; // It cannot be used in any case
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
