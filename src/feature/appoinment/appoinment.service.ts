@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { searalizeUser, throwForbiddenException } from 'core/constant';
+import { deSearalizeUser, searalizeUser, throwForbiddenException } from 'core/constant';
 import { Appoinment, User } from 'core/entities';
 import { GENDER, ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
 import { BaseService } from 'core/service';
@@ -24,7 +24,7 @@ export class AppoinmentService extends BaseService {
       return result.find({
         where: [
           { status: STATUS_APPOINT.DIRECT },
-          { status: STATUS_APPOINT.ACCEPT },
+          { status: STATUS_APPOINT.ACCEPT }, 
           { status: STATUS_APPOINT.REJECT },
         ],
       });
@@ -59,10 +59,11 @@ export class AppoinmentService extends BaseService {
     const appoint = await this.repos.appointment.create({
       ...appointmentResult,
     });
-    const result = await this.repos.appointment.save(appoint).catch((error) => {
+    let result: any = await this.repos.appointment.save(appoint).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
+    result = deSearalizeUser(result)
     if (result) {
       // send Email to Client of Pending State of Case Registration
     }
