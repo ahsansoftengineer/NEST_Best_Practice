@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, RelationId } from 'typeorm';
 import { AlphaModel } from './alpha-model';
 import { Lawyer, User } from './index';
 
@@ -24,6 +24,6 @@ export class LawyerClient extends AlphaModel {
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerClient' })
   user?: User;
 
-  @Column()
+  @RelationId((d: LawyerClient) => d.user)
   userId?: number;
 }
