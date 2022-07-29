@@ -7,7 +7,7 @@ import {
   searalizeUser,
   throwForbiddenException,
 } from 'core/constant';
-import { Lawyer, User } from 'core/entities';
+import { Court, Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
 import { In } from 'typeorm';
@@ -51,16 +51,23 @@ export class AuthService {
 
     const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING);
     user.password = await argon.hash(data.password);
-    const courts = await this.repos.court.findBy({
-      id: In([...data.courtIds]),
-    });
-    const specialization = await this.repos.specialization.findOneBy({
-      id: data.specializationId,
-    });
+    // const specialization = await this.repos.specialization.findOneBy({
+    //   id: data.specializationId,
+    // });
+    // const courts = await this.repos.court.findBy({
+    //   id: In([...data.courtIds]),
+    // }); 
+    // const courts = await this.repos.court.find({where : {id: In(data.courtIds)}})
+    // const courts = await this.repos.court.findBy({id: In(data.courtIds)})
+    // NOTE: Make Courts Ids Object [{id: 1}, {id: 2}]
+    // const courts = data.courtIds.map(id => ({...new Court(), id}))
+    const courts = data.courtIds.map(id => {id}) as any
     const lawyerResult: Lawyer = {
-      specialization,
-      court: courts,
       user,
+      specializationId: data.specializationId,
+      // courts: courts, // when reteriving data before
+      // courtIds: data.courtIds // This doesn't work in any way
+      courts: courts, 
     };
 
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });
@@ -105,12 +112,6 @@ export class AuthService {
     const user = await this.repos.user.findOneBy({ email });
     if (!user) throw new ForbiddenException('Username is incorrect');
     return this._mail.forgetPassword(email);
-  }
-
-  async changePassword(changePasswordCode: string) {
-    // const user = await this.repos.findOneBy({email})
-    // if (!user) throw new ForbiddenException('Username is incorrect');
-    // return this._mail.forgetPassword(email)
   }
 
   async logout(id: number): Promise<boolean> {

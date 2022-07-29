@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToOne,
+  RelationId,
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
@@ -65,7 +66,7 @@ export class User extends AlphaModel {
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
-  @Column({ nullable: true })
+  @RelationId((x: User) => x.city)
   cityId?: number;
 
   @OneToOne(() => Lawyer, (x) => x.user)
