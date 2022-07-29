@@ -1,11 +1,10 @@
 import {
-  BaseEntity,
   Column,
   CreateDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
+// @Check(`"age" > 18`)
 export class AlphaModel {
   // For MongoDB
   // @PrimaryGeneratedColumn("uuid")
@@ -20,6 +19,7 @@ export class AlphaModel {
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
+    select: false
   })
   public createdAt?: Date;
 
@@ -27,6 +27,8 @@ export class AlphaModel {
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
     onUpdate: 'CURRENT_TIMESTAMP(6)',
+    select: false,
+
   })
   public updatedAt?: Date;
 
@@ -39,4 +41,9 @@ export class AlphaModel {
 
   // @VersionColumn()
   // public version: Date;
+
+  // @AfterLoad()
+  // updateCounters() {
+  //     if (this.likesCount === undefined) this.likesCount = 0
+  // }
 }

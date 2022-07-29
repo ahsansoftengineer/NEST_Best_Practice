@@ -4,8 +4,6 @@ import {
   Post,
   Body,
   Patch,
-  Param,
-  Delete,
   Query,
   HttpException,
   HttpStatus,
@@ -15,7 +13,7 @@ import { Public, Roles } from 'core/decorators';
 
 import { ROLE, STATUS_APPOINT } from 'core/enums';
 import { AppoinmentService } from './appoinment.service';
-import { CreateAppoinmentDto, UpdateAppoinmentDto } from './dto/create-appoinment.dto';
+import { CreateAppoinmentDto } from './dto/create-appoinment.dto';
 
 @Controller('appointment')
 @ApiTags('appointment')
@@ -64,9 +62,9 @@ export class AppoinmentController {
     )
   }
 
-  @Roles(ROLE.LAWYER)
-  @Delete(':id')
-  async remove(@Param('id') id: number) {
-    return this._ss.remove(+id);
-  }
+  // @Roles(ROLE.LAWYER)
+  // @Delete(':id')
+  // async remove(@Param('id') id: number) {
+  //   return this._ss.remove(+id);
+  // }
 }

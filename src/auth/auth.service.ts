@@ -54,12 +54,16 @@ export class AuthService {
     const courts = await this.repos.court.findBy({
       id: In([...data.courtIds]),
     });
+    console.log({courts});
+    
     const specialization = await this.repos.specialization.findOneBy({
       id: data.specializationId,
     });
+    console.log(specialization);
+    
     const lawyerResult: Lawyer = {
-      specialization,
-      court: courts,
+      specializationId: data.specializationId,
+      courtIds: data.courtIds,
       user,
     };
 
@@ -107,11 +111,11 @@ export class AuthService {
     return this._mail.forgetPassword(email);
   }
 
-  async changePassword(changePasswordCode: string) {
-    // const user = await this.repos.findOneBy({email})
-    // if (!user) throw new ForbiddenException('Username is incorrect');
-    // return this._mail.forgetPassword(email)
-  }
+  // async changePassword(changePasswordCode: string) {
+  //   // const user = await this.repos.findOneBy({email})
+  //   // if (!user) throw new ForbiddenException('Username is incorrect');
+  //   // return this._mail.forgetPassword(email)
+  // }
 
   async logout(id: number): Promise<boolean> {
     if (!id) return false;

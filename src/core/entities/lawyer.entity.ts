@@ -7,6 +7,7 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
+  RelationId,
 } from 'typeorm';
 import {
   User,
@@ -38,16 +39,29 @@ export class Lawyer extends AlphaModel {
   @Column()
   specializationId?: number;
 
-  @ManyToMany(() => Court, (c) => c.lawyer, {
+  @ManyToMany(() => Court, (c) => c.lawyers, {
     eager: true,
+    cascade: true
   })
   @JoinTable({ 
     name: 'court_lawyer', 
-    joinColumn: {foreignKeyConstraintName: 'fk_lawyer_court'} 
-  })
-  court?: Court[];
+    // joinColumn: {foreignKeyConstraintName: 'fk_lawyer_court'}
+    joinColumn: {
+        name: "lawyer",
+        referencedColumnName: "id",
+        foreignKeyConstraintName: "fk_court_lawyerId"
+    },
+    inverseJoinColumn: {
+        name: "court",
+        referencedColumnName: "id",
+        foreignKeyConstraintName: "fk_lawyer_courtId"
+    },
 
-  // courtIds?: number[]; // It cannot be used in any case
+  })
+  courts?: Court[];
+
+  @RelationId((d: Lawyer) => d.courts)
+  courtIds?: number[]; // It cannot be used in any case
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
