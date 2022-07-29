@@ -1,3 +1,4 @@
+import { All } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ENV } from 'core/constant';
 import { baseEntities, entities } from 'core/entities/entities';
@@ -10,11 +11,12 @@ export const configTypeORM: TypeOrmModuleOptions = {
   password: ENV.DB_PASSWORD,
   database: ENV.DB_DATABASE,
   entities: [...baseEntities, ...entities], // STEP 2
-  logging: ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
+  logging: 'all',// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
   retryDelay: 10000,
   retryAttempts: 2,
   synchronize: ENV.DB_SYNC,
   dropSchema: ENV.DB_DROP,
+
 };
 
 export const TypeOrmModuleRoot = TypeOrmModule.forRoot(configTypeORM);
