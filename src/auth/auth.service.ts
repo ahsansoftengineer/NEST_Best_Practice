@@ -10,7 +10,6 @@ import {
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
-import { In } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 
 import { SignUpDto } from './dto';
@@ -43,7 +42,7 @@ export class AuthService {
 
     return this.returnGeneratedToken(user);
   }
-
+  // Note: Extreme Nessary Not Many to many Insert TypeORM
   async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 
@@ -51,20 +50,22 @@ export class AuthService {
 
     const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING);
     user.password = await argon.hash(data.password);
-    const courts = await this.repos.court.findBy({
-      id: In([...data.courtIds]),
-    });
-    console.log({courts});
-    
-    const specialization = await this.repos.specialization.findOneBy({
-      id: data.specializationId,
-    });
-    console.log(specialization);
-    
+    // const specialization = await this.repos.specialization.findOneBy({
+    //   id: data.specializationId,
+    // });
+
+    // const courts = await this.repos.court.find({where :{id:  In(data.courtIds)}});
+    // const courts = await this.repos.court.findBy({id:  In(data.courtIds)});
+    // NOTE: Make Courts Ids Object [{id:1}, {id:2}]
+    // const courts = data.courtIds.map(id => ({ ...new Court(), id }));
+    const courts = data.courtIds.map(id => ({id})) as any; 
+
     const lawyerResult: Lawyer = {
       specializationId: data.specializationId,
-      courtIds: data.courtIds,
       user,
+      // courts: courts, // When reteriving data before 
+      // courtIds: data.courtIds,// This cannot be done alternate would be
+        courts, // Make Courts Ids Object [{id:1}, {id:2}]
     };
 
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });

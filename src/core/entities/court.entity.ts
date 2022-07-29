@@ -1,4 +1,4 @@
-import { Entity, JoinTable, ManyToMany, RelationId } from 'typeorm';
+import { Entity, ManyToMany } from 'typeorm';
 import { BetaModel } from './beta-model';
 import { Lawyer } from './lawyer.entity';
 
@@ -6,7 +6,7 @@ import { Lawyer } from './lawyer.entity';
 export class Court extends BetaModel {
   @ManyToMany(() => Lawyer, (e) => e.courts)
   lawyers: Lawyer[]
-
-  @RelationId((d: Court) => d.lawyers)
-  lawyerIds?: number[];
+  // This is Causing Eager Loading
+  // @RelationId((d: Court) => d.lawyers)
+  // lawyerIds?: number[];
 }
