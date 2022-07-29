@@ -16,12 +16,11 @@ import {
   LawyerClient,
   Task,
   Appoinment,
-  AlphaModel
+  AlphaModel,
 } from './index';
 
 @Entity()
 export class Lawyer extends AlphaModel {
-  
   @ManyToOne(() => User, (x) => x.lawyer, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
   user?: User;
@@ -41,9 +40,9 @@ export class Lawyer extends AlphaModel {
   @ManyToMany(() => Court, (c) => c.lawyer, {
     eager: true,
   })
-  @JoinTable({ 
-    name: 'court_lawyer', 
-    joinColumn: {foreignKeyConstraintName: 'fk_lawyer_court'} 
+  @JoinTable({
+    name: 'court_lawyer',
+    joinColumn: { foreignKeyConstraintName: 'fk_lawyer_court' },
   })
   court?: Court[];
 

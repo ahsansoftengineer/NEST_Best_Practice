@@ -5,9 +5,9 @@ import { Lawyer } from './lawyer.entity';
 @Entity()
 export class Court extends BetaModel {
   @ManyToMany(() => Lawyer, (e) => e.court)
-  @JoinTable({ 
-    name: 'court_lawyer', 
+  @JoinTable({
+    name: 'court_lawyer',
   })
-  @JoinColumn({foreignKeyConstraintName: 'fk_court_lawyer'} )
+  @JoinColumn({ foreignKeyConstraintName: 'fk_court_lawyer' })
   lawyer?: Lawyer[];
 }

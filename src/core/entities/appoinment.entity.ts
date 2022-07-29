@@ -5,7 +5,7 @@ import { Lawyer } from './lawyer.entity';
 import { User } from './user.entity';
 
 @Entity()
-export class Appoinment extends BetaModel{
+export class Appoinment extends BetaModel {
   @ManyToOne(() => User, (x) => x.appointment, { cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_appointment' })
   user?: User;
@@ -36,7 +36,4 @@ export class Appoinment extends BetaModel{
   // will be reterived from lawyer
   // specilizationId,
   // cityId
-
-
-
 }
