@@ -62,6 +62,7 @@ export class AuthService {
     // NOTE: Make Courts Ids Object [{id: 1}, {id: 2}]
     // const courts = data.courtIds.map(id => ({...new Court(), id}))
     // const courts = data.courtIds.map(id => {id}) as any
+   
     const lawyerResult: Lawyer = {
       user,
       specializationId: data.specializationId,

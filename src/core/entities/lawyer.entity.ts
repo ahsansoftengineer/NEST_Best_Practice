@@ -37,8 +37,8 @@ export class Lawyer extends AlphaModel {
 
   @Column()
   specializationId?: number;
-
-  @ManyToMany(() => Court, {
+  
+  @ManyToMany(() => Court, (c) => c.lawyers, {
     eager: true,
     // cascade: true// if it work with that then remove it
   })

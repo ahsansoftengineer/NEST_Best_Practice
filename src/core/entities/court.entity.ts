@@ -1,4 +1,5 @@
-import { Entity,  ManyToMany, RelationId, Unique } from 'typeorm';
+
+import { Entity,  ManyToMany, Unique } from 'typeorm';
 import { BetaModel } from './beta-model';
 import { Lawyer } from './lawyer.entity';
 
