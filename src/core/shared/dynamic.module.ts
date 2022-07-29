@@ -9,10 +9,10 @@
 //   static forRoot(entities = [], options?): DynamicModule {
 //     // const providers = createDatabaseProviders(options, entities);
 //     return {
-//       global: true, 
+//       global: true,
 //       module: DynamiteModule,
 //       providers: [RepoService],
 //       exports: [RepoService],
 //     };
 //   }
-}
+// }

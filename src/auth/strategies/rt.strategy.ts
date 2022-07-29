@@ -15,8 +15,8 @@ export class RtStrategy extends PassportStrategy(
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       passReqToCallback: true,
-      secretOrKey: ENV.RT_SECRET,
-      // secretOrKey: config.get<string>('RT_SECRET'),
+      secretOrKey: ENV.JWT_RT_SECRET,
+      // secretOrKey: config.get<string>('JWT_RT_SECRET'),
     });
   }
 

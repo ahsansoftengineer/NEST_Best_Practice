@@ -16,18 +16,18 @@ import { Appoinment } from './appoinment.entity';
 import { LawyerClient } from './lawyer-client.entity';
 
 export const entities = [
-  Book,
-  User,
-  News,
-  Casez,
-  Court,
-  City,
-  Specialization,
-  Lawyer,
-  LawyerTeam,
-  LawyerClient,
-  Task,
   Appoinment,
+  Book,
+  Casez,
+  City,
+  Court,
+  News,
+  User,
+  Lawyer,
+  LawyerClient,
+  LawyerTeam,
+  Specialization,
+  Task,
 ];
 
 export const baseEntities = [AlphaModel, BetaModel];

@@ -1,5 +1,5 @@
 import { Get, Param } from '@nestjs/common';
-import { BaseService } from './index';
+import { BaseService } from 'core/service';
 
 export abstract class BaseController {
   _ss: BaseService;

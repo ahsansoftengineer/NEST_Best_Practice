@@ -3,33 +3,37 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
-import { Lawyer, User,  } from "./index";
+import { Lawyer, User, Task } from './index';
 
 @Entity()
 export class LawyerTeam extends AlphaModel {
-  @Column({ nullable: true, length: 250, default: '' })
-  responsibility: string
+  @Column({ length: 250 })
+  responsibility: string;
 
-  @Column({ nullable: true, length: 250, default: '' })
-  timing: string
+  @Column({ nullable: true, default: '' })
+  timing: string;
 
-  @Column({ nullable: true, length: 250, type: 'number'  })
-  amount: number
+  @Column({ nullable: true })
+  amount: number;
 
   @OneToOne(() => User, (x) => x.lawyerTeam, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerTeam' })
   user?: User;
 
-  @Column({ nullable: true,  })
+  @Column({ nullable: true })
   userId?: number;
 
-  @ManyToOne(() => Lawyer, x => x.lawyerTeam, { eager: true, cascade: true })
+  @ManyToOne(() => Lawyer, (x) => x.lawyerTeam)
   @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerTeam' })
   lawyer?: Lawyer;
 
-  @Column({ nullable: true,  })
+  @Column({ nullable: true })
   lawyerId?: number;
+
+  @OneToMany(() => Task, (x) => x.lawyerTeam)
+  task?: Task[];
 }

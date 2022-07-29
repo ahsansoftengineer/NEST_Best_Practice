@@ -1,8 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, IntersectionType } from '@nestjs/swagger';
 import {
   IsEnum,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   Length,
@@ -10,36 +9,10 @@ import {
 import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
+import { UserReqFieldDto } from './user-req-field.dto';
 
-export class SignUpDto extends SignInDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+export class SignUpDto extends IntersectionType(SignInDto, UserReqFieldDto) {
   // Status and Role Must be comment out in Production
-  @ApiProperty({
-    enum: STATUS,
-    isArray: false,
-    example: STATUS.PENDING,
-    default: STATUS.PENDING,
-  })
-  @IsOptional()
-  @IsEnum(STATUS, {
-    message: 'Status must be (Active, Pending, Block, Reject)',
-  })
-  status: STATUS;
-
-  @ApiProperty({
-    enum: ROLE,
-    isArray: false,
-    example: ROLE.LAWYER,
-    default: ROLE.LAWYER,
-  })
-  @IsOptional()
-  @IsEnum(ROLE, {
-    message: 'Role must be (Admin, Lawyer, Client, User)',
-  })
-  role: ROLE;
 
   @ApiProperty({
     description:
@@ -52,29 +25,7 @@ export class SignUpDto extends SignInDto {
   })
   confirmPassword: string;
 
-  @IsNotEmpty()
-  @Length(11, 17)
-  @ApiProperty()
-  mobile: string;
-
-  @ApiProperty({
-    enum: GENDER,
-    isArray: false,
-    example: GENDER.MALE,
-  })
-  @IsNotEmpty()
-  @IsEnum(GENDER)
-  gender: GENDER;
-
   @IsOptional()
   // @IsNumber()
   cityId: number;
-
-  @IsOptional()
-  @ApiProperty()
-  address: string;
-
-  @IsOptional()
-  @ApiProperty()
-  image: string;
 }

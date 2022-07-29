@@ -1,6 +1,7 @@
 export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
+  NONE = 'None',
 }
 
 export enum ROLE {
@@ -27,11 +28,22 @@ export enum ROLE {
 
 // Lawyer Status
 export enum STATUS {
-  NONE = 'NONE', // APPONTMENT_CLIENT, LAWYER_CLIENT,
+  NONE = 'None', // APPONTMENT_CLIENT, LAWYER_CLIENT,
   ACTIVE = 'Active',
   REJECT = 'Reject',
   PENDING = 'Pending', // LAWYER DEFAULT
   BLOCK = 'Block',
+}
+
+// Appointment Status
+export enum STATUS_APPOINT {
+  // Admin
+  PENDING = 'Pending',
+  DIRECT = 'Direct',
+  CANCEL = 'Cancel',
+  // Lawyer
+  ACCEPT = 'Accept',
+  REJECT = 'Reject',
 }
 
 // Lawyer Team

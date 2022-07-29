@@ -1,12 +1,8 @@
 import {
   Body,
   Controller,
-  Get,
-  HttpCode,
   HttpException,
   HttpStatus,
-  Param,
-  Patch,
   Post,
   UploadedFile,
   UseGuards,
@@ -16,14 +12,12 @@ import { ApiTags } from '@nestjs/swagger';
 import { ROLE, STATUS } from 'core/enums';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage } from 'core/interceptor';
-import { unlink } from 'fs/promises';
 
 import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
 import { RtGuard } from '../core/guards';
 import { AuthService } from './auth.service';
 import { SignInDto, SignUpDto } from './dto';
 import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
-import { UpdateUser } from './dto/user-update.dto';
 import { Tokens } from './types';
 
 @Controller('auth')
