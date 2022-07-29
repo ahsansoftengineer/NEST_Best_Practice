@@ -17,7 +17,12 @@ export class LawyerTeamService extends BaseService {
   async create(data: CreateLawyerTeamDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
+    // TODO:fix this later
+    const lawyer = await this.repos.lawyer.findOneBy({userId: data.lawyerId})
+    throwForbiddenException(!lawyer)
+    data.lawyerId = lawyer.id
     const lawyerTeam: LawyerTeam = {
+      lawyerId:data.lawyerId,
       responsibility: data.responsibility,
       timing: data.timing,
       amount: data.amount,
@@ -28,13 +33,6 @@ export class LawyerTeamService extends BaseService {
     const password = await generatePassword();
     const hashResult = await argon.hash(password);
     lawyerTeam.user.password = hashResult;
-    const lawyer = await this.repos.lawyer.findOneBy({userId: data.lawyerId})
-    throwForbiddenException(!lawyer)
-    lawyerTeam.lawyer = lawyer
-    lawyerTeam.lawyerId = lawyer.id
-    console.log({ lawyerTeam });
-    console.log({lawyer});
-    
 
     const create = await this.repos.lawyerTeam.create({ ...lawyerTeam });
     // const result = await this.repos.lawyerTeam.save(create).catch((error) => 
