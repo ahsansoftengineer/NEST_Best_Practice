@@ -17,7 +17,7 @@ import { LawyerTeamModule } from './lawyer-team/lawyer-team.module';
     NewsModule,
     CasezModule,
     CourtModule,
-    SpecializationModule,
+    SpecializationModule, 
     CityModule,
     LawyerModule,
     TaskModule,
