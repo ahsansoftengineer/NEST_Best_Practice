@@ -26,8 +26,8 @@ export const deSearalizeUser = (d: any) => {
   };
   delete result.userId
   delete result.hashedRt
-  delete result.createdAt
-  delete result.updatedAt
+  // delete result.createdAt
+  // delete result.updatedAt
   delete result.password
   delete result.user
   delete result.role

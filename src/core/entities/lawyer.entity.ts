@@ -34,10 +34,10 @@ export class Lawyer extends AlphaModel {
     foreignKeyConstraintName: 'fk_specialization_user',
   })
   specialization?: Specialization;
-
+ 
   @Column()
   specializationId?: number;
-
+  
   @ManyToMany(() => Court, (c) => c.lawyers, {
     eager: true,
     // cascade: true// if it work with that then remove it
@@ -57,8 +57,8 @@ export class Lawyer extends AlphaModel {
   })
   courts?: Court[];
 
-  @RelationId((d: Lawyer) => d.courts)
-  courtIds?: number[]; // It cannot be used in any case
+  // @RelationId((d: Lawyer) => d.courts)
+  // courtIds?: number[]; // It cannot be used in any case
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];

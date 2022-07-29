@@ -8,6 +8,6 @@ export class Court extends BetaModel {
   @ManyToMany(() => Lawyer, (e) => e.courts)
   lawyers?: Lawyer[];
 
-  // @RelationId((d: Court) => d.lawyer)
+  // @RelationId((d: Court) => d.lawyers)
   // lawyerIds?:number[]
 }
