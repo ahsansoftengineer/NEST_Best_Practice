@@ -32,7 +32,7 @@ export class LawyerTeam extends AlphaModel {
   @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerTeam' })
   lawyer?: Lawyer;
 
-  @Column({ nullable: true })
+  @RelationId((d: LawyerTeam) => d.lawyer)
   lawyerId?: number;
 
   @OneToMany(() => Task, (x) => x.lawyerTeam)

@@ -34,7 +34,7 @@ export class Lawyer extends AlphaModel {
     foreignKeyConstraintName: 'fk_specialization_user',
   })
   specialization?: Specialization;
-
+ 
   @Column()
   specializationId?: number;
   
