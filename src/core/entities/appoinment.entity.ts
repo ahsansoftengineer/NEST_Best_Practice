@@ -1,14 +1,11 @@
 import { STATUS_APPOINT } from 'core/enums';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { AlphaModel } from './alpha-model';
 import { BetaModel } from './beta-model';
 import { Lawyer } from './lawyer.entity';
 import { User } from './user.entity';
 
 @Entity()
 export class Appoinment extends BetaModel{
-
-    
   @ManyToOne(() => User, (x) => x.appointment, { cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_appointment' })
   user?: User;

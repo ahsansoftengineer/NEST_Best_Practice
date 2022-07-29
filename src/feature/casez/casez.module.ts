@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Casez } from 'core/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Casez])],
   controllers: [CasezController],
   providers: [CasezService],
 })
