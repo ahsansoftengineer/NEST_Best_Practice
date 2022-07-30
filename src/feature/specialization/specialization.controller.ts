@@ -22,7 +22,7 @@ import { Roles } from 'core/decorators';
 @ApiTags('specialization')
 export class SpecializationController extends BaseController {
   constructor(public _ss: SpecializationService) {
-    super()
+    super();
   }
 
   @Post()

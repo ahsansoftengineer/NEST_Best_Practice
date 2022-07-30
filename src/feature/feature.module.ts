@@ -5,8 +5,6 @@ import { CasezModule } from './casez/casez.module';
 import { CourtModule } from './court/court.module';
 import { SpecializationModule } from './specialization/specialization.module';
 import { CityModule } from './city/city.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AlphaModel, BetaModel } from 'core/entities';
 import { LawyerModule } from './lawyer/lawyer.module';
 import { TaskModule } from './task/task.module';
 import { AppoinmentModule } from './appoinment/appoinment.module';
@@ -19,7 +17,7 @@ import { LawyerTeamModule } from './lawyer-team/lawyer-team.module';
     NewsModule,
     CasezModule,
     CourtModule,
-    SpecializationModule,
+    SpecializationModule, 
     CityModule,
     LawyerModule,
     TaskModule,

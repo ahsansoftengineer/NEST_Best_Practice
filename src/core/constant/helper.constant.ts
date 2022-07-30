@@ -19,19 +19,36 @@ export const searalizeUser = (d: any, role: ROLE, status: STATUS) => {
 };
 
 export const deSearalizeUser = (d: any) => {
-  return {
+  const result = {
     ...d,
-    ...d.user,
+    ...d?.user,
+    desc: d?.desc
   };
+  delete result.userId
+  delete result.hashedRt
+  // delete result.createdAt
+  // delete result.updatedAt
+  delete result.password
+  delete result.user
+  delete result.role
+  return result
 };
 
 export const deSearalizeUsers = (d: any[]) => {
-  d.map((y) => ({
-    ...y,
-    ...y.user,
-  }));
+  d.map((y) => deSearalizeUser(y));
 };
 
 export const throwForbiddenException = (data) => {
   if (data) throw new ForbiddenException('Email Address already exsit');
+};
+
+export const generatePassword = () => {
+  let result = '';
+  const characters =
+    '!@#~%^&*()_+}{":ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < 12; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 };

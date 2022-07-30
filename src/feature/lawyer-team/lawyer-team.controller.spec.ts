@@ -10,7 +10,7 @@ describe('LawyerTeamController', () => {
       controllers: [LawyerTeamController],
       providers: [LawyerTeamService],
     }).compile();
-
+  
     controller = module.get<LawyerTeamController>(LawyerTeamController);
   });
 

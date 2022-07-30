@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToOne,
+  RelationId,
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
@@ -49,24 +50,23 @@ export class User extends AlphaModel {
     default: GENDER.NONE,
     type: 'enum',
     enum: GENDER,
-
   })
   gender: GENDER;
 
-  @Column({ nullable: true})
+  @Column({ nullable: true })
   address: string;
 
-  @Column({ nullable: true, default:'No Image provided', length: 200 })
+  @Column({ nullable: true, default: 'No Image provided', length: 200 })
   image?: string;
 
   @Column({ length: 1000, nullable: true })
   hashedRt?: string;
 
-  @ManyToOne(() => City, (e) => e.user, { eager: true, nullable: true})
+  @ManyToOne(() => City, (e) => e.user, { eager: true, nullable: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
-  @Column({nullable: true})
+  @RelationId((x: User) => x.city)
   cityId?: number;
 
   @OneToOne(() => Lawyer, (x) => x.user)

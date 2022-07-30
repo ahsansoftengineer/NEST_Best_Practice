@@ -1,12 +1,14 @@
-import { Entity, ManyToMany } from 'typeorm';
+
+import { Entity,  ManyToMany, Unique } from 'typeorm';
 import { BetaModel } from './beta-model';
 import { Lawyer } from './lawyer.entity';
 
 @Entity()
+@Unique('court-title-unique', ['title'])
 export class Court extends BetaModel {
   @ManyToMany(() => Lawyer, (e) => e.courts)
-  lawyers: Lawyer[]
-  // This is Causing Eager Loading
+  lawyers?: Lawyer[];
+
   // @RelationId((d: Court) => d.lawyers)
-  // lawyerIds?: number[];
+  // lawyerIds?:number[]
 }

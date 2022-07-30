@@ -22,13 +22,12 @@ export class AlphaModel {
     select: false
   })
   public createdAt?: Date;
-
+  
   @UpdateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
     onUpdate: 'CURRENT_TIMESTAMP(6)',
-    select: false,
-
+    select: false
   })
   public updatedAt?: Date;
 

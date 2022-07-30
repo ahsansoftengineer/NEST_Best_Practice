@@ -17,12 +17,11 @@ import {
   LawyerClient,
   Task,
   Appoinment,
-  AlphaModel
+  AlphaModel,
 } from './index';
 
 @Entity()
 export class Lawyer extends AlphaModel {
-  
   @ManyToOne(() => User, (x) => x.lawyer, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
   user?: User;
@@ -38,30 +37,28 @@ export class Lawyer extends AlphaModel {
 
   @Column()
   specializationId?: number;
-
+  
   @ManyToMany(() => Court, (c) => c.lawyers, {
     eager: true,
-    cascade: true
+    // cascade: true// if it work with that then remove it
   })
-  @JoinTable({ 
-    name: 'court_lawyer', 
-    // joinColumn: {foreignKeyConstraintName: 'fk_lawyer_court'}
-    joinColumn: {
-        name: "lawyer",
-        referencedColumnName: "id",
-        foreignKeyConstraintName: "fk_court_lawyerId"
+  @JoinTable({
+    name: 'court_lawyer',
+    joinColumn: { 
+      name: 'lawyerId',
+      referencedColumnName: 'id',
+      foreignKeyConstraintName: 'fk_lawyer_court',
     },
-    inverseJoinColumn: {
-        name: "court",
-        referencedColumnName: "id",
-        foreignKeyConstraintName: "fk_lawyer_courtId"
+    inverseJoinColumn: { 
+      name: 'courtId',
+      referencedColumnName: 'id',
+      foreignKeyConstraintName: 'fk_court_lawyer',
     },
-
   })
   courts?: Court[];
 
-  @RelationId((d: Lawyer) => d.courts)
-  courtIds?: number[]; // It cannot be used in any case
+  // @RelationId((d: Lawyer) => d.courts)
+  // courtIds?: number[]; // It cannot be used in any case
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
