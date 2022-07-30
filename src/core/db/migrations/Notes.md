@@ -2,10 +2,7 @@
 * npm i -g ts-node  @types/node typescript  typeorm
 * npm i ts-node --save-dev
 * typeorm init
-* typeorm init --name my-project
-* typeorm init --database mssql
-* typeorm init --name my-project --module esm
-* typeorm init --name my-project --express
+* typeorm init --name my-project --express --module esm --database mysql
 * typeorm init --docker
 * npm run typeorm migration:generate -- -n migrationNameHere
 
