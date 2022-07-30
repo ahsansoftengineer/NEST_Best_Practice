@@ -7,9 +7,10 @@ import {
   searalizeUser,
   throwForbiddenException,
 } from 'core/constant';
-import { Court, Lawyer, User } from 'core/entities';
+import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
+import { In } from 'typeorm';
 import { MailService } from './auth-mailer.service';
 
 import { SignUpDto } from './dto';
