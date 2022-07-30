@@ -14,6 +14,7 @@ const typeORMGeneralOptions: TypeOrmModuleOptions = {
   retryDelay: 10000,
   retryAttempts: 2, 
   logging: true,// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
+  // logger: 'advanced-console' // default
 
   // synchronize: ENV.DB_SYNC,
   // dropSchema: ENV.DB_DROP,
@@ -28,8 +29,8 @@ const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
     return {
       ...typeORMGeneralOptions,
       migrations: [
-        __dirname + '/../db/migrations/*{.ts,.js}'
-        // '/dist/src/core/db/migrations/*.js'
+        // __dirname + '/../db/migrations/*{.ts,.js}'
+        '/dist/src/core/db/migrations/*.js'
       ],
       cli: {
         migerationDir: 'src/core/db/migrations'

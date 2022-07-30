@@ -25,15 +25,12 @@
 {
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/core/config/ConfigTypeOrmMigration.ts",
-
     "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/core/config/ormconfig.ts",
-    "migration:generate": "npm run typeorm:cli -- migration:generate -d src/core/db/migrations -n",
     "migration:create": "npm run typeorm:cli -- migration:create -d src/core/db/migrations -n",
     "migration:run": "npm run typeorm:cli -- migration:run",
     "migration:revert": "npm run typeorm:cli -- migration:revert",
-    
     "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts",
+    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
 
 }
     

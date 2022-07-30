@@ -15,7 +15,13 @@ import { LawyerClient } from './lawyer-client.entity';
 import { LawyerTeam } from './lawyer-team.entity';
 import { Lawyer } from './lawyer.entity';
 
-@Entity()
+@Entity({
+  // orderBy: {
+  //   name: "ASC",
+  //   id: "DESC",
+  // },
+  // synchronize: false,
+})
 @Unique('email', ['email'])
 export class User extends AlphaModel {
   @Column({ length: 60 })
