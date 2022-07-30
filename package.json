@@ -22,7 +22,14 @@
     "test:e2e": "dotenv -e .env.test -- jest -i --no-cache -c ./test/jest-e2e.json",
     "test": "dotenv -e .env.test -- jest -i --no-cache -c jest.config.json",
     "copy:assets": "cpx 'src/assets/**' 'dist/assets'",
-    "typeorm": "typeorm-ts-node-esm"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/core/config/ConfigTypeOrmMigration.ts",
+    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -d src/core/config/ormconfig.ts",
+    "migration:create": "npm run typeorm:cli -- migration:create -d src/core/db/migrations -n",
+    "migration:run": "npm run typeorm:cli -- migration:run",
+    "migration:revert": "npm run typeorm:cli -- migration:revert",
+    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
+    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
   },
   "dependencies": {
     "@casl/ability": "^5.4.4",
@@ -90,7 +97,7 @@
     "ts-jest": "28.0.1",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "4.0.0",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.3.5",
     "webpack": "^5.73.0",
     "webpack-node-externals": "^3.0.0"

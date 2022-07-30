@@ -3,7 +3,7 @@ import { ENV } from 'core/constant';
 import { baseEntities, entities } from 'core/entities/entities';
 // STEP 1
 // MysqlConnectionOptions
-const typeOrmGeneralOptions: TypeOrmModuleOptions = {
+const typeORMGeneralOptions: TypeOrmModuleOptions = {
   type: ENV.DB_TYPE,
   host: ENV.DB_HOST,
   port: ENV.DB_PORT,
@@ -12,32 +12,33 @@ const typeOrmGeneralOptions: TypeOrmModuleOptions = {
   database: ENV.DB_DATABASE,
   entities: [...baseEntities, ...entities], // STEP 2
   retryDelay: 10000,
-  retryAttempts: 2,
-  logging: 'all',// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
+  retryAttempts: 2, 
+  logging: true,// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
 
   // synchronize: ENV.DB_SYNC,
   // dropSchema: ENV.DB_DROP,
 }
-const typeOrmModuleOptions: TypeOrmModuleOptions = {
+export const typeOrmModuleOptions: TypeOrmModuleOptions = {
+  ...typeORMGeneralOptions,
   synchronize: ENV.DB_SYNC,
   dropSchema: ENV.DB_DROP,
 };
 const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
   useFactory: async () => {
     return {
-      ...typeOrmGeneralOptions,
+      ...typeORMGeneralOptions,
       migrations: [
         __dirname + '/../db/migrations/*{.ts,.js}'
         // '/dist/src/core/db/migrations/*.js'
       ],
       cli: {
-        migerationDir: 'scr/core/db/migrations'
+        migerationDir: 'src/core/db/migrations'
       },
       extra: {
-        charset:'utf8mb_unicode_ci'
+        charset:'utf8_unicode_ci'
       },
       synchronize: ENV.DB_SYNC,
-      // dropSchema: ENV.DB_DROP,
+      dropSchema: ENV.DB_DROP,
     }
   }
   
