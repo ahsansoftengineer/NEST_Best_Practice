@@ -6,7 +6,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import {
   configMailer,
   configStaticFiles,
-  TypeOrmModuleRoot,
+  TypeOrmModuleRootAsync
 } from 'core/config';
 import { RolesGuard } from 'core/guards/role.guard';
 import { FeatureModule } from 'feature/feature.module';
@@ -24,7 +24,7 @@ import { LoggerMiddleware } from 'core/middleware';
       dest: '../public',
     }),
     configStaticFiles,
-    TypeOrmModuleRoot,
+    TypeOrmModuleRootAsync,
     MailerModule.forRoot(configMailer),
     SharedModule,
     AuthModule,
