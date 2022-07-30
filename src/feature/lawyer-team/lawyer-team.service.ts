@@ -17,8 +17,12 @@ export class LawyerTeamService extends BaseService {
   async create(data: CreateLawyerTeamDto) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
+    // TODO:fix this later
+    const lawyer = await this.repos.lawyer.findOneBy({userId: data.lawyerId})
+    throwForbiddenException(!lawyer)
+    data.lawyerId = lawyer.id
     const lawyerTeam: LawyerTeam = {
-      lawyerId: data.lawyerId,
+      lawyerId:data.lawyerId,
       responsibility: data.responsibility,
       timing: data.timing,
       amount: data.amount,
@@ -29,18 +33,20 @@ export class LawyerTeamService extends BaseService {
     const password = await generatePassword();
     const hashResult = await argon.hash(password);
     lawyerTeam.user.password = hashResult;
-    console.log({ lawyerTeam });
 
     const create = await this.repos.lawyerTeam.create({ ...lawyerTeam });
-    const save = await this.repos.lawyerTeam.save(create).catch((error) => {
+    // const result = await this.repos.lawyerTeam.save(create).catch((error) => 
+    const result: any = await this.repos.lawyerTeam.save(create).catch((error) =>{
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
-    });
-    console.log({save});
+    });    
+    if (result) {
+      console.log('hello');
+    }
     
     // TODO: SENT TEAM MEMBER MESSAGE
     // Email this password
-    return save;
+    return result;
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
