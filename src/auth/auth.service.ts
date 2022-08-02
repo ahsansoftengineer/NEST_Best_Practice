@@ -58,7 +58,7 @@ export class AuthService {
     //   id: In([...data.courtIds]),
     // }); 
     // const courts = await this.repos.court.find({where : {id: In(data.courtIds)}})
-    const courts = await this.repos.court.findBy({id: In(data.courtIds)})
+    const courts = await this.repos.court.findBy({id: In(data.courtIds)}) 
     // NOTE: Make Courts Ids Object [{id: 1}, {id: 2}]
     // const courts = data.courtIds.map(id => ({...new Court(), id}))
     // const courts = data.courtIds.map(id => {id}) as any
