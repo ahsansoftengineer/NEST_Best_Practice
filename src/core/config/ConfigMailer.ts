@@ -1,3 +1,5 @@
+import { MailerModule } from "@nestjs-modules/mailer";
+
 export const configMailer = {
   // transport: 'smtps://user@domain.com:pass@smtp.domain.com',
   transport: {
@@ -17,3 +19,49 @@ export const configMailer = {
     from: '"No Reply" <no-reply@localhost>',
   },
 };
+
+// const mailerModule = MailerModule.forRoot({
+//   transport: {
+//     host: 'smtp.example.com',
+//     port: 587,
+//     secure: false, // upgrade later with STARTTLS
+//     auth: {
+//       user: "username",
+//       pass: "password",
+//     },
+//   },
+//   defaults: {
+//     from:'"nest-modules" <modules@nestjs.com>',
+//   },
+//   template: {
+//     dir: process.cwd() + '/templates/',
+//     adapter: new HandlebarsAdapter(), // or new PugAdapter()
+//     options: {
+//       strict: true,
+//     },
+//   },
+// })
+
+// const mailerModuleAsync = MailerModule.forRootAsync({
+//   useFactory: () => ({
+//     transport: {
+//       host: 'smtp.example.com',
+//       port: 587,
+//       secure: false, // upgrade later with STARTTLS
+//       auth: {
+//         user: "username",
+//         pass: "password",
+//       },
+//     },
+//     defaults: {
+//       from:'"nest-modules" <modules@nestjs.com>',
+//     },
+//     template: {
+//       dir: process.cwd() + '/templates/',
+//       adapter: new HandlebarsAdapter(), // or new PugAdapter() or new EjsAdapter()
+//       options: {
+//         strict: true,
+//       },
+//     },
+//   }),
+// })

@@ -27,6 +27,7 @@ import { LoggerMiddleware } from 'core/middleware';
     MailerModule.forRoot(configMailer),
     SharedModule,
     AuthModule,
+
     FeatureModule,
     AdminModule,
   ],
