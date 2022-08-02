@@ -6,14 +6,13 @@ import { MulterModule } from '@nestjs/platform-express';
 import {
   configMailer,
   configStaticFiles,
-  TypeOrmModuleRoot,
+  TypeOrmModuleRootAsync
 } from 'core/config';
 import { RolesGuard } from 'core/guards/role.guard';
 import { FeatureModule } from 'feature/feature.module';
 import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
-import { PlayModule } from './play/play.module';
 import { SharedModule } from 'core/shared/shared.module';
 import { LoggerMiddleware } from 'core/middleware';
 
@@ -24,13 +23,12 @@ import { LoggerMiddleware } from 'core/middleware';
       dest: '../public',
     }),
     configStaticFiles,
-    TypeOrmModuleRoot,
+    TypeOrmModuleRootAsync,
     MailerModule.forRoot(configMailer),
     SharedModule,
     AuthModule,
     FeatureModule,
     AdminModule,
-    PlayModule,
   ],
   providers: [
     {

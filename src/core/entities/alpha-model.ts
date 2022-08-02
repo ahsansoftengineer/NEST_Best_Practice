@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
+// @Check(`"age" > 18`)
 export class AlphaModel {
   // For MongoDB
   // @PrimaryGeneratedColumn("uuid")
@@ -40,4 +40,9 @@ export class AlphaModel {
 
   // @VersionColumn()
   // public version: Date;
+
+  // @AfterLoad()
+  // updateCounters() {
+  //     if (this.likesCount === undefined) this.likesCount = 0
+  // }
 }

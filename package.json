@@ -7,13 +7,13 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build && npm run copy:assets",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "build": "nest build",
     "start": "nest start && npm run copy:assets",
     "comment-start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -21,7 +21,15 @@
     "MY SETTINGS": "BELOW CODE IS MY OWN SETTINGS",
     "test:e2e": "dotenv -e .env.test -- jest -i --no-cache -c ./test/jest-e2e.json",
     "test": "dotenv -e .env.test -- jest -i --no-cache -c jest.config.json",
-    "copy:assets": "cpx 'src/assets/**' 'dist/assets'"
+    "copy:assets": "cpx 'src/assets/**' 'dist/assets'",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/core/config/ConfigTypeOrmMigration.ts",
+    "migration:generate": "npm run build && npm run typeorm migration:generate UserMigration",
+    "migration:create": "npm run typeorm:cli -- migration:create -d src/core/db/migrations -n",
+    "migration:run": "npm run typeorm:cli -- migration:run",
+    "migration:revert": "npm run typeorm:cli -- migration:revert",
+    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
+    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
   },
   "dependencies": {
     "@casl/ability": "^5.4.4",
@@ -88,8 +96,8 @@
     "supertest": "^6.1.3",
     "ts-jest": "28.0.1",
     "ts-loader": "^9.2.3",
-    "ts-node": "^10.0.0",
-    "tsconfig-paths": "4.0.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.3.5",
     "webpack": "^5.73.0",
     "webpack-node-externals": "^3.0.0"

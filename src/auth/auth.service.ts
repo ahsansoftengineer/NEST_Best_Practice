@@ -7,7 +7,7 @@ import {
   searalizeUser,
   throwForbiddenException,
 } from 'core/constant';
-import { Court, Lawyer, User } from 'core/entities';
+import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
 import { In } from 'typeorm';
@@ -43,7 +43,7 @@ export class AuthService {
 
     return this.returnGeneratedToken(user);
   }
-
+  // Note: Extreme Nessary Not Many to many Insert TypeORM
   async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 

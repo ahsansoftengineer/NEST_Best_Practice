@@ -23,7 +23,7 @@ export class LawyerTeam extends AlphaModel {
 
   @OneToOne(() => User, (x) => x.lawyerTeam, { eager: true, cascade: true })
   @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerTeam' })
-  user?: User;
+  user?: User; 
 
   @RelationId((d: LawyerTeam) => d.user)
   userId?: number;

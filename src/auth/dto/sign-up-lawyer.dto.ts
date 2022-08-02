@@ -3,12 +3,13 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 import { SignUpDto } from './sign-up.dto';
 
 export class SignUpLawyerDto extends SignUpDto {
-  // @IsNumber()
+  @IsNumber()
   @IsNotEmpty()
   specializationId: number;
 
   @ApiProperty({
     isArray: true,
+    // type: Number,
     example: [1, 2, 3, 4],
   })
   @IsNotEmpty()
