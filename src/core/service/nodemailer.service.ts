@@ -5,14 +5,14 @@ import { Injectable } from "@nestjs/common";
 export class MailerServiceCustom {
   constructor(private readonly mailerService: MailerService) {}
   
-  public example(): void {
+  public sendEmail(): void {
     this
       .mailerService
       .sendMail({
         to: 'test@nestjs.com', // list of receivers
         from: 'noreply@nestjs.com', // sender address
         subject: 'Testing Nest MailerModule ✔', // Subject line
-        text: 'welcome', // plaintext body
+        // text: 'welcome', // plaintext body
         html: '<b>welcome</b>', // HTML body content
       })
       .then((success) => {
@@ -23,7 +23,7 @@ export class MailerServiceCustom {
       });
   }
   
-  public example2(): void {
+  public sendTemplate(): void {
     this
       .mailerService
       .sendMail({
@@ -43,8 +43,7 @@ export class MailerServiceCustom {
         console.log(err)
       });
   }
-  
-  public example3(): void {
+  public sendTemplateNoReply(): void {
     this
       .mailerService
       .sendMail({
@@ -110,7 +109,6 @@ export class MailerServiceCustom {
       `
     })
   }
-
   emailAppointmentCreated(name:string){
     return this.generalEmailPattern({
       subject: 'Kacheri Appointment saved confirmation',
@@ -129,7 +127,6 @@ export class MailerServiceCustom {
       `
     })
   }
-
   emailAppointmentForward(name:string){
     return this.generalEmailPattern({
       subject: 'Kacheri Appointment Acceptance',
@@ -140,7 +137,6 @@ export class MailerServiceCustom {
       `
     })
   }
-
   emailAppointmentAccept_Reject(name:string, Accept: boolean, DateTime: string){
     let message;
     if(Accept) message = `Your Appointment has been Accepted by lawyer and your appointment is schedule on ${DateTime}`
