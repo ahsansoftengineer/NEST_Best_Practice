@@ -1,6 +1,8 @@
 import { BetaModel } from "core/entities";
 import { City } from './city.entity';
 import { Court } from './court.entity';
+import { Lawyer } from './lawyer.entity';
+
 import { Column, Entity, JoinColumn, ManyToOne, RelationId, Unique } from "typeorm";
 
 @Entity()
@@ -31,5 +33,14 @@ export class LawyerCase extends BetaModel{
   // @RelationId((x: LawyerCase) => x.court)
   @Column()
   courtId?: number;
+
+  @ManyToOne(() => Lawyer, (x) => x.lawyerCase)
+  @JoinColumn({ name: 'lawyerId', foreignKeyConstraintName: 'fk_lawyerCase' })
+  lawyer?: Lawyer;
+
+  // @RelationId((d: LawyerTeam) => d.lawyer)
+  @Column()
+  lawyerId?: number;
+
   
 }

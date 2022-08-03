@@ -1,11 +1,9 @@
-import { ForbiddenException, HttpException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { throwForbiddenException } from 'core/constant';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import { deSearalizeUsers } from 'core/constant';
 import { LawyerCase } from 'core/entities/lawyer-case.entity';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
-import { NOTFOUND } from 'dns';
-import { In } from 'typeorm';
-import { CreateLawyerCaseDto, UpdateLawyerCaseDto } from './dto/create-lawyer-case.dto';
+import { CreateLawyerCaseDto } from './dto/create-lawyer-case.dto';
 
 @Injectable()
 export class LawyerCasesService extends BaseService {
@@ -17,13 +15,9 @@ export class LawyerCasesService extends BaseService {
   }
 
   async create(data: CreateLawyerCaseDto) {
-    // const existCase = await this.repos.lawyerCase.findOneBy({ title: data.title });
-    // throwForbiddenException(existCase);
-    
-    // const courts = await this.repos.court.findBy({id: In(data.courtId)}) 
-
 
     const caseresult: LawyerCase = {
+      lawyerId:data.lawyerId,
       courtId: data.courtId,
       cityId: data.cityId,
       suit:data.suit,
@@ -31,9 +25,6 @@ export class LawyerCasesService extends BaseService {
       desc:data.desc,
       lasthearing:data.lasthearing,
       nexthearing:data.nexthearing
-
-      // courts: courts, // when reteriving data before
-      // courtIds: data.courtIds // This doesn't work in any way
     };
 
     const lawyercase = this.repos.lawyerCase.create({ ...caseresult });
@@ -44,25 +35,24 @@ export class LawyerCasesService extends BaseService {
 
     return lawyercase;
   }
-
-  // update(id: number, updateLawyerCaseDto: UpdateLawyerCaseDto) {
-  //   return `This action updates a #${id} lawyerCase`;
-  // }
-  
     
   async causelist(courtId: number,cityId: number,nexthearing:string) {
     const result = await this.repos.lawyerCase.findBy({courtId, cityId, nexthearing })
     if(result?.length) return result
     else return {message: 'Data Not found'}
-    // return result
-         
-        
-        
-  
-    
-      // return data || { message: `court ${courtId} does not exsist`} || { message: `cityId ${cityId} does not exsist` } || { message: `Date ${nexthearing} does not exsist` }
-      // return data || {message:'Not Found'};
-    
+  }
+
+  getLawyerCase(id) {
+    return this.repos.lawyerCase
+      .findBy({ lawyerId: id})
+      .then((x) => deSearalizeUsers(x));
+  }
+
+  deleteLawyerCase(lawyerId, id) {
+    return this.repos.lawyerCase
+      .createQueryBuilder('l')
+      .delete()
+      .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
   }
 
 }

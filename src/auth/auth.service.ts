@@ -71,6 +71,9 @@ export class AuthService {
       courts: courts, 
     };
 
+    // console.log({lawyerResult});
+    
+
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });
     await this.repos.lawyer.save(lawyer).catch((error) => {
       console.log({ db_error: error });

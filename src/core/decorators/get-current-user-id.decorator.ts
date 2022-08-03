@@ -10,6 +10,14 @@ export const GetCurrentUserId = createParamDecorator(
   },
 );
 
+// export const GetCurrentLawyerId = createParamDecorator(
+//   (_: undefined, context: ExecutionContext): number => {
+//     const request = context.switchToHttp().getRequest();
+//     const lawyer = request.user as JwtPayload;
+//     return lawyer.sub; // For Getting Lawyer Id
+//   },
+// );
+
 export const GetJwtPayload = createParamDecorator(
   (_: undefined, context: ExecutionContext): JwtPayload => {
     const request = context.switchToHttp().getRequest();

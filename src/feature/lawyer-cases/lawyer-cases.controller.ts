@@ -2,29 +2,36 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, U
 import { LawyerCasesService } from './lawyer-cases.service';
 import { CreateLawyerCaseDto, UpdateLawyerCaseDto } from './dto/create-lawyer-case.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Public, Roles } from 'core/decorators';
+import { GetCurrentUserId, Public, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
 
 @Controller('lawyer-cases')
 @ApiTags('lawyerCase')
-// @Roles(ROLE.LAWYER)
+@Roles(ROLE.LAWYER)
 export class LawyerCasesController {
   constructor(private readonly lawyerCasesService: LawyerCasesService) {}
 
   @Get('filter')
-  @Public()
-  // @UseFilters(NotFoundException)
   findCauseList(
     @Query() {courtId, cityId, nexthearing}) {
       return this.lawyerCasesService.causelist(courtId,cityId,nexthearing)
   }
 
   @Post()
-  @Public()
-  create(@Body() createLawyerCaseDto: CreateLawyerCaseDto) {
+  // @Public()
+  create(@Body() createLawyerCaseDto: CreateLawyerCaseDto,
+         @GetCurrentUserId() userId: number) {
+          createLawyerCaseDto.lawyerId = userId;
+
     return this.lawyerCasesService.create(createLawyerCaseDto);
   }
 
+  @Get('case')
+  getLawyerClients(@GetCurrentUserId() userId: number) {
+    console.log({ userId });
+    return this.lawyerCasesService.getLawyerCase(userId);
+  }
+ 
   @Get()
   findAll() {
     return this.lawyerCasesService.findAll();
@@ -39,9 +46,15 @@ export class LawyerCasesController {
     return this.lawyerCasesService.updateSimple(+id, updateLawyerCaseDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lawyerCasesService.remove(+id);
+  @Delete('case/:id')
+  deleteMember(@GetCurrentUserId() userId: number, @Param('id') id: number) {
+    console.log({ userId });
+    return this.lawyerCasesService.deleteLawyerCase(userId, id);
   }
+
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.lawyerCasesService.remove(+id);
+  // }
 
 }

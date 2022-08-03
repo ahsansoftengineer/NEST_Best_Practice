@@ -7,6 +7,7 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
+  PrimaryColumn,
   RelationId,
 } from 'typeorm';
 import {
@@ -15,19 +16,20 @@ import {
   Specialization,
   LawyerTeam,
   LawyerClient,
+  LawyerCase,
   Task,
   Appoinment,
   AlphaModel,
 } from './index';
 
 @Entity()
-export class Lawyer extends AlphaModel {
+export class Lawyer {
   @ManyToOne(() => User, (x) => x.lawyer, { eager: true, cascade: true })
-  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyer' })
+  @JoinColumn({name: 'id', foreignKeyConstraintName: 'fk_user_lawyer' })
   user?: User;
 
-  @Column()
-  userId?: number;
+  @PrimaryColumn()
+  id?: number;
 
   @ManyToOne(() => Specialization, (e) => e.lawyers, { eager: true })
   @JoinColumn({
@@ -62,6 +64,9 @@ export class Lawyer extends AlphaModel {
 
   @OneToMany(() => LawyerTeam, (x) => x.lawyer)
   lawyerTeam?: LawyerTeam[];
+
+  @OneToMany(() => LawyerCase, (x) => x.lawyer)
+  lawyerCase?: LawyerCase[];
 
   @OneToMany(() => LawyerClient, (x) => x.lawyer)
   lawyerClient?: LawyerClient[];

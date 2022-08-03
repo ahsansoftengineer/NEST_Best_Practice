@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { CreateDto } from "core/base";
 
 export class CreateLawyerCaseDto extends CreateDto{
@@ -25,6 +25,9 @@ export class CreateLawyerCaseDto extends CreateDto{
   @ApiProperty()
   @IsNotEmpty()
   nexthearing : string;
+
+  @IsOptional()
+  lawyerId: number;
 
 
 }
