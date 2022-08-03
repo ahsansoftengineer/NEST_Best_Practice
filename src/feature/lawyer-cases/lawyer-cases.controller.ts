@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseFilters } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseFilters, Query } from '@nestjs/common';
 import { LawyerCasesService } from './lawyer-cases.service';
 import { CreateLawyerCaseDto, UpdateLawyerCaseDto } from './dto/create-lawyer-case.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -10,6 +10,14 @@ import { ROLE } from 'core/enums';
 // @Roles(ROLE.LAWYER)
 export class LawyerCasesController {
   constructor(private readonly lawyerCasesService: LawyerCasesService) {}
+
+  @Get('filter')
+  @Public()
+  // @UseFilters(NotFoundException)
+  findCauseList(
+    @Query() {courtId, cityId, nexthearing}) {
+      return this.lawyerCasesService.causelist(courtId,cityId,nexthearing)
+  }
 
   @Post()
   @Public()
@@ -26,7 +34,6 @@ export class LawyerCasesController {
   findOne(@Param('id') id: string) {
     return this.lawyerCasesService.findOne(+id);
   }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLawyerCaseDto: UpdateLawyerCaseDto) {
     return this.lawyerCasesService.updateSimple(+id, updateLawyerCaseDto);
@@ -35,17 +42,6 @@ export class LawyerCasesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.lawyerCasesService.remove(+id);
-  }
-
-  @Get(':courtid/:cityid/:date')
-  @Public()
-  // @UseFilters(NotFoundException)
-  async findCauseList(@Param('courtid') courtId: number, @Param('cityid')cityId:number, @Param('date')nexthearing:string) {
-    try {
-      return await this.lawyerCasesService.causelist(courtId,cityId,nexthearing)
-    } catch (err) {
-      throw new NotFoundException();
-    }
   }
 
 }

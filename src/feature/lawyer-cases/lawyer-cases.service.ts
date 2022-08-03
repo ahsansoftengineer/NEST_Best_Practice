@@ -50,8 +50,13 @@ export class LawyerCasesService extends BaseService {
   // }
   
     
-  causelist(courtId: number,cityId: number,nexthearing:string) {
-        return this.repos.lawyerCase.findBy({courtId, cityId, nexthearing }) || { message: ` does not exsist` };
+  async causelist(courtId: number,cityId: number,nexthearing:string) {
+    const result = await this.repos.lawyerCase.findBy({courtId, cityId, nexthearing })
+    if(result?.length) return result
+    else return {message: 'Data Not found'}
+    // return result
+         
+        
         
   
     
