@@ -1,5 +1,5 @@
 export * from '../constant/SetEnvironmentVariables';
-export * from './ConfigMailer';
+// export * from './ConfigMailer';
 export * from './ConfigMulter';
 export * from './ConfigSession';
 export * from './ConfigStaticFiles';

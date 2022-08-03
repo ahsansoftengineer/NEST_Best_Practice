@@ -1,19 +1,19 @@
 import { MailerService } from "@nestjs-modules/mailer";
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 
 @Injectable()
-export class MailerServiceCustom {
-  constructor(private readonly mailerService: MailerService) {}
-  
-  public example(): void {
-    this
+export class MailService {
+  // @Inject(MailerService) mailerService: MailerService
+  constructor(public mailerService: MailerService){}
+  public send({to, subject, html}) {
+    return this
       .mailerService
       .sendMail({
-        to: 'test@nestjs.com', // list of receivers
         from: 'noreply@nestjs.com', // sender address
-        subject: 'Testing Nest MailerModule ✔', // Subject line
-        text: 'welcome', // plaintext body
-        html: '<b>welcome</b>', // HTML body content
+        to,
+        subject,
+        html
+        // text: 'welcome', // plaintext body
       })
       .then((success) => {
         console.log(success)
@@ -70,7 +70,7 @@ export class MailerServiceCustom {
       Content: `
       <h3> Dear ${name}</h3>
       <p>${message}</p>
-      <p><i>please feel free to contact us in case of any query.</i></p>
+      
       `
     }
   }
@@ -78,7 +78,7 @@ export class MailerServiceCustom {
     return this.generalEmailPattern({
       subject: 'Kacheri Account Confirmation!',
       name, 
-      message:'Your Signup Request has been forwarded for activation it will take couple of days to proceed.'
+      message:''
     })
   }
   emailLawyerSignUpByAdmin(name:string, email){
