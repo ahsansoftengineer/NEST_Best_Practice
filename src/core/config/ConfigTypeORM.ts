@@ -16,13 +16,11 @@ const typeORMGeneralOptions: TypeOrmModuleOptions = {
   logging: true,// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
   // logger: 'advanced-console' // default
 
-  // synchronize: ENV.DB_SYNC,
-  // dropSchema: ENV.DB_DROP,
+  synchronize: ENV.DB_SYNC,
+  dropSchema: ENV.DB_DROP,
 }
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   ...typeORMGeneralOptions,
-  synchronize: ENV.DB_SYNC,
-  dropSchema: ENV.DB_DROP,
 };
 const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
   useFactory: async () => {
@@ -38,8 +36,6 @@ const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
       extra: {
         charset:'utf8_unicode_ci'
       },
-      synchronize: ENV.DB_SYNC,
-      dropSchema: ENV.DB_DROP,
     }
   }
   
