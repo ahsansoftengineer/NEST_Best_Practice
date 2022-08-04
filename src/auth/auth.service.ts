@@ -1,4 +1,4 @@
-import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   argon,
@@ -9,8 +9,7 @@ import {
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { CoreService } from 'core/service';
-import { In, Not } from 'typeorm';
-
+import { In } from 'typeorm';
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
@@ -55,6 +54,7 @@ export class AuthService extends CoreService{
       const lawyer = this.repos.lawyer.create(lawyerResult);
       await this.repos.lawyer.save(lawyer)
       await this.mail.lawyerAccount({to: data.email, name: data.name})
+
       // this.mail.lawyerAccountActivation({})
       const {email, id, name} =  lawyer.user
       return {email, id, name} 

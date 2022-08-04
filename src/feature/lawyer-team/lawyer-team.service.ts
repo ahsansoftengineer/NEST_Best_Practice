@@ -52,6 +52,7 @@ export class LawyerTeamService extends BaseService {
         // const {email, id, name} =  lawyer.user
         return result 
       
+
     } catch(e){
       // TODO: ROLED BACK TRANSACTION
 
@@ -66,6 +67,7 @@ export class LawyerTeamService extends BaseService {
     // } catch(e){
     //     // TODO: if mail doesn't sent then drop the data maybe
     // }
+
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
