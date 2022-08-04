@@ -1,10 +1,10 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum, IsNumberString } from 'class-validator';
 import { STATUS } from 'core/enums';
 
 export class ChangeStatusDto {
   @ApiProperty()
-  @IsNumber()
+  @IsNumberString()
   id: number;
 
   @ApiProperty({
