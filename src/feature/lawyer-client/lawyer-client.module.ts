@@ -6,4 +6,4 @@ import { LawyerClientController } from './lawyer-client.controller';
   controllers: [LawyerClientController],
   providers: [LawyerClientService],
 })
-export class LawyerClientModule {}
+export class LawyerClientModule {} 

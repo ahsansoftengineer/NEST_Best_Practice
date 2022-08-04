@@ -22,7 +22,7 @@ export class AppoinmentService extends BaseService {
     const result = this.repos.appointment;
     if (!status)
       return result.find({
-        where: [
+        where: [ 
           { status: STATUS_APPOINT.DIRECT },
           { status: STATUS_APPOINT.ACCEPT }, 
           { status: STATUS_APPOINT.REJECT },

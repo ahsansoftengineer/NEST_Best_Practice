@@ -8,6 +8,7 @@ import {
   UploadedFile,
   HttpException,
   HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
@@ -35,6 +36,7 @@ export class LawyerTeamController {
     //     HttpStatus.FORBIDDEN,
     //   );
     // body.image = image.filename;
+    // body['lawyerId'] = userId
     body.lawyerId = userId;
 
     return this._ss.create(body);
@@ -54,7 +56,7 @@ export class LawyerTeamController {
   }
 
   @Roles(ROLE.LAWYER)
-  @Get('members/:id')
+  @Delete('members/:id')
   deleteMember(@GetCurrentUserId() userId: number, @Param('id') id: number) {
     console.log({ userId });
     return this._ss.deleteLawyerMember(userId, id);
