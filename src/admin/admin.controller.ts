@@ -29,10 +29,10 @@ export class AdminController {
     return this._ss.getLawyer(id);
   }
 
-  @Get('causelistadmin')
+  @Get('cause-list-admin')
   @Roles(ROLE.ADMIN)
   findCauseList(
-    @Query() {courtId,nexthearing}) {
-      return this._ss.causeListAdmin(courtId,nexthearing)
+    @Query() {courtId,nexthearing,lawyerId}) {
+      return this._ss.causeListAdmin({courtId,lawyerId,nexthearing}) 
   }
 }

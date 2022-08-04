@@ -2,7 +2,7 @@ import { BetaModel } from "core/entities";
 import { City } from './city.entity';
 import { Court } from './court.entity';
 import { Lawyer } from './lawyer.entity';
-import { Column, Entity, JoinColumn, ManyToOne, RelationId, Unique } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, Unique } from "typeorm";
 @Entity()
 @Unique('case-title-unique', ['title'])
 export class LawyerCase extends BetaModel{

@@ -9,10 +9,12 @@ import { ROLE } from 'core/enums';
 @Roles(ROLE.LAWYER)
 export class LawyerCasesController {
   constructor(private readonly lawyerCasesService: LawyerCasesService) {}
+
   @Get('filter')
   findCauseList(
-    @Query() {courtId, cityId, nexthearing}) {
-      return this.lawyerCasesService.causelist(courtId,cityId,nexthearing)
+    @Query() {courtId, cityId, nexthearing},
+    @GetCurrentUserId() userId: number) {
+      return this.lawyerCasesService.causelist(courtId,cityId,nexthearing,userId)
   }
   @Post()
   create(@Body() createLawyerCaseDto: CreateLawyerCaseDto,

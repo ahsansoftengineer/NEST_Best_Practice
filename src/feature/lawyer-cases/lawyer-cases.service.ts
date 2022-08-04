@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { deSearalizeUsers } from 'core/constant';
+import { deSearalizeUsers, throwForbiddenException, throwForbiddenExceptiontitle } from 'core/constant';
 import { LawyerCase } from 'core/entities/lawyer-case.entity';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
@@ -12,6 +12,10 @@ export class LawyerCasesService extends BaseService {
     super.repo = this.repos.lawyerCase;
   }
   async create(data: CreateLawyerCaseDto) {
+
+    const existUser = await this.repos.lawyerCase.findOneBy({ title: data.title });
+    throwForbiddenExceptiontitle(existUser);
+    
     const caseresult: LawyerCase = {
       lawyerId:data.lawyerId,
       courtId: data.courtId,
@@ -29,8 +33,8 @@ export class LawyerCasesService extends BaseService {
     });
     return lawyercase;
   }
-  async causelist(courtId: number,cityId: number,nexthearing:string) {
-    const result = await this.repos.lawyerCase.findBy({courtId, cityId, nexthearing })
+  async causelist(courtId: number,cityId: number,nexthearing:string,lawyerId) {
+    const result = await this.repos.lawyerCase.findBy({courtId, cityId, nexthearing ,lawyerId})
     if(result?.length) return result
     else return {message: 'Data Not found'}
   }
@@ -39,7 +43,7 @@ export class LawyerCasesService extends BaseService {
       .findBy({ lawyerId: id})
       .then((x) => deSearalizeUsers(x));
   }
-  deleteLawyerCase(lawyerId, id) {
+  deleteLawyerCase(lawyerId, id) { 
     return this.repos.lawyerCase
       .createQueryBuilder('l')
       .delete()

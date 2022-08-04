@@ -37,8 +37,8 @@ export class AdminService {
     });
   }
 
-  async causeListAdmin(courtId: number,nexthearing:string) {
-    const result = await this.repos.lawyerCase.findBy({courtId,nexthearing })
+  async causeListAdmin({courtId,nexthearing,lawyerId}) {
+    const result = await this.repos.lawyerCase.findBy({courtId,nexthearing, lawyerId })
     if(result?.length) return result
     else return {message: 'Data Not found'}
   }

@@ -77,15 +77,13 @@ export class AuthService {
     };
 
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });
-    // const result = await this.repos.lawyer.save(lawyer).catch((error) => {
-    //   console.log({ db_error: error });
-    //   throw new ForbiddenException('Credentials incorrect');
-    // });
+    await this.repos.lawyer.save(lawyer).catch((error) => {
+      console.log({ db_error: error });
+      throw new ForbiddenException('Credentials incorrect');
+    });
     // if(result) await  this.mail.lawyerSignUp(data.email, data.name)
-    const result = await this.mail.lawyerAccount({to: data.email, name: data.name})
-    console.log(result);
-    return null
-    // return this.returnGeneratedToken(lawyer.user);
+    // const result = await this.mail.lawyerAccount({to: data.email, name: data.name})
+    return this.returnGeneratedToken(lawyer.user);
   }
 
   async signUpLocal(data: SignUpDto): Promise<Tokens> {
