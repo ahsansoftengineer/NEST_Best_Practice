@@ -4,12 +4,13 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsNumberString,
   IsOptional,
   IsString,
   Length,
 } from 'class-validator';
 import { CreateDto } from 'core/base';
-import { ROLE, STATUS_APPOINT } from 'core/enums';
+import { STATUS_APPOINT } from 'core/enums';
 
 export class CreateAppoinmentDto extends CreateDto {
   @ApiProperty()
@@ -54,7 +55,7 @@ export class CreateAppoinmentDto extends CreateDto {
   time: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   lawyerId: number;
 
   // gender: GENDER;

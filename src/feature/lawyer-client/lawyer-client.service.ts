@@ -14,14 +14,15 @@ import { CreateLawyerClientDto } from './dto/create-lawyer-client.dto';
 export class LawyerClientService extends BaseService {
   // constructor(public repos: RepoService){}
 
-  async create(data: CreateLawyerClientDto) {
+  async create(data: any) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
     const user = searalizeUser(data, ROLE.CLIENT_LAWYER, STATUS.NONE);
     const lawyerClient: LawyerClient = {
-      lawyerId: data.lawyerId,
-      type: data.type,
+      lawyerId:data.lawyerId,
+      type: data.type,  
       suite: data.suite,
+      caseNo:data.caseNo,
       user,
     };
     // TODO: WORK HERE SET RANDOM PASSWORD
@@ -30,16 +31,16 @@ export class LawyerClientService extends BaseService {
     console.log({ lawyerClient });
 
     const create = this.repos.lawyerClient.create({ ...lawyerClient });
-    const save = await this.repos.lawyerClient.save(create).catch((error) => {
+    const save = await this.repos.lawyerClient.save(create).then(deSearalizeUser).catch((error) => {
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });
-    return save;
+    return save
   }
 
   getLawyerClients(id) {
     return this.repos.lawyerClient
-      .findBy({ lawyer: { id } })
+      .findBy({ lawyerId: id})
       .then((x) => deSearalizeUsers(x));
   }
 

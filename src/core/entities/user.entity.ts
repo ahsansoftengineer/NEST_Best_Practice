@@ -15,7 +15,13 @@ import { LawyerClient } from './lawyer-client.entity';
 import { LawyerTeam } from './lawyer-team.entity';
 import { Lawyer } from './lawyer.entity';
 
-@Entity()
+@Entity({
+  // orderBy: {
+  //   name: "ASC",
+  //   id: "DESC",
+  // },
+  // synchronize: false,
+})
 @Unique('email', ['email'])
 export class User extends AlphaModel {
   @Column({ length: 60 })
@@ -51,13 +57,13 @@ export class User extends AlphaModel {
     type: 'enum',
     enum: GENDER,
   })
-  gender: GENDER;
+  gender: GENDER; 
 
   @Column({ nullable: true })
   address: string;
 
   @Column({ nullable: true, default: 'No Image provided', length: 200 })
-  image?: string;
+  image?: string; 
 
   @Column({ length: 1000, nullable: true })
   hashedRt?: string;
@@ -66,7 +72,8 @@ export class User extends AlphaModel {
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
-  @RelationId((x: User) => x.city)
+  // @RelationId((x: User) => x.city)
+  @Column({nullable:true})
   cityId?: number;
 
   @OneToOne(() => Lawyer, (x) => x.user)

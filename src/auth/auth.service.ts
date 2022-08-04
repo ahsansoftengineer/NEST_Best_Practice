@@ -1,5 +1,4 @@
-import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ForbiddenException, HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   argon,
@@ -7,11 +6,11 @@ import {
   searalizeUser,
   throwForbiddenException,
 } from 'core/constant';
-import { Court, Lawyer, User } from 'core/entities';
+import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { RepoService } from 'core/shared/service/repo.service';
+import { SendgridService } from 'core/shared/service/sandgrid.service';
 import { In } from 'typeorm';
-import { MailService } from './auth-mailer.service';
 
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
@@ -23,9 +22,9 @@ export class AuthService {
   logger: Logger;
   constructor(
     private _jwt: JwtService,
-    private _config: ConfigService,
-    private _mail: MailService,
     public repos: RepoService,
+    public mail: SendgridService
+
   ) {
     this.logger = new Logger();
   }
@@ -43,14 +42,14 @@ export class AuthService {
 
     return this.returnGeneratedToken(user);
   }
-
-  async signUpLawyer(data: SignUpLawyerDto): Promise<Tokens> {
+  // Note: Extreme Nessary Not Many to many Insert TypeORM
+  async signUpLawyer(data: SignUpLawyerDto): Promise<any> {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
 
     throwForbiddenException(existUser);
 
     const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING);
-    user.password = await argon.hash(data.password);
+    user.password = await argon.hash(data.password); 
     // const specialization = await this.repos.specialization.findOneBy({
     //   id: data.specializationId,
     // });
@@ -58,25 +57,35 @@ export class AuthService {
     //   id: In([...data.courtIds]),
     // }); 
     // const courts = await this.repos.court.find({where : {id: In(data.courtIds)}})
-    // const courts = await this.repos.court.findBy({id: In(data.courtIds)})
+    const courts = await this.repos.court.findBy({id: In(data.courtIds)})
+    
+    if(courts.length != data.courtIds.length) 
+      throw new HttpException('some courts are invalid', HttpStatus.BAD_REQUEST)
+    if(courts.length == 0) 
+      throw new HttpException('at least one court is required', HttpStatus.BAD_REQUEST)
     // NOTE: Make Courts Ids Object [{id: 1}, {id: 2}]
     // const courts = data.courtIds.map(id => ({...new Court(), id}))
-    const courts = data.courtIds.map(id => {id}) as any
+    // const courts = data.courtIds.map(id => {id}) as any
+   
     const lawyerResult: Lawyer = {
       user,
       specializationId: data.specializationId,
+      courts, 
+      // Other way of Setting Courts
       // courts: courts, // when reteriving data before
       // courtIds: data.courtIds // This doesn't work in any way
-      courts: courts, 
     };
 
     const lawyer = this.repos.lawyer.create({ ...lawyerResult });
-    await this.repos.lawyer.save(lawyer).catch((error) => {
-      console.log({ db_error: error });
-      throw new ForbiddenException('Credentials incorrect');
-    });
-
-    return this.returnGeneratedToken(lawyer.user);
+    // const result = await this.repos.lawyer.save(lawyer).catch((error) => {
+    //   console.log({ db_error: error });
+    //   throw new ForbiddenException('Credentials incorrect');
+    // });
+    // if(result) await  this.mail.lawyerSignUp(data.email, data.name)
+    const result = await this.mail.lawyerAccount({to: data.email, name: data.name})
+    console.log(result);
+    return null
+    // return this.returnGeneratedToken(lawyer.user);
   }
 
   async signUpLocal(data: SignUpDto): Promise<Tokens> {
@@ -111,7 +120,7 @@ export class AuthService {
   async forgetPassword(email: string) {
     const user = await this.repos.user.findOneBy({ email });
     if (!user) throw new ForbiddenException('Username is incorrect');
-    return this._mail.forgetPassword(email);
+    // return this._mail.forgetPassword(email);
   }
 
   async logout(id: number): Promise<boolean> {

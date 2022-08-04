@@ -1,19 +1,13 @@
-import { MailerModule } from '@nestjs-modules/mailer';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
-import {
-  configMailer,
-  configStaticFiles,
-  TypeOrmModuleRoot,
-} from 'core/config';
+import { configStaticFiles, ENV, TypeOrmModuleRootAsync } from 'core/config';
 import { RolesGuard } from 'core/guards/role.guard';
 import { FeatureModule } from 'feature/feature.module';
 import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
-import { PlayModule } from './play/play.module';
 import { SharedModule } from 'core/shared/shared.module';
 import { LoggerMiddleware } from 'core/middleware';
 
@@ -24,13 +18,17 @@ import { LoggerMiddleware } from 'core/middleware';
       dest: '../public',
     }),
     configStaticFiles,
-    TypeOrmModuleRoot,
-    MailerModule.forRoot(configMailer),
+    TypeOrmModuleRootAsync,
+    // SendGridModule.forRoot({
+    //   apikey: ENV.MAIL_API_KEY
+    // }),
+
+    // MailerModule.forRoot(configMailer),
     SharedModule,
     AuthModule,
+
     FeatureModule,
     AdminModule,
-    PlayModule,
   ],
   providers: [
     {
@@ -43,7 +41,7 @@ import { LoggerMiddleware } from 'core/middleware';
     },
   ],
   exports: [
-    MailerModule, // Those modules has Services Must needs to be exported
+    // MailerModule, // Those modules has Services Must needs to be exported
   ],
 })
 export class AppModule implements NestModule {

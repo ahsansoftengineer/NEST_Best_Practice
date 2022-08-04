@@ -36,4 +36,10 @@ export class AdminService {
       select: this.userSelectiveColumns,
     });
   }
+
+  async causeListAdmin(courtId: number,nexthearing:string) {
+    const result = await this.repos.lawyerCase.findBy({courtId,nexthearing })
+    if(result?.length) return result
+    else return {message: 'Data Not found'}
+  }
 }

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { MailService } from './auth-mailer.service';
-
+import { SendgridService } from 'core/shared/service/sandgrid.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AtStrategy, RtStrategy } from './strategies';
@@ -9,6 +8,6 @@ import { AtStrategy, RtStrategy } from './strategies';
 @Module({
   imports: [JwtModule.register({})],
   controllers: [AuthController],
-  providers: [MailService, AuthService, AtStrategy, RtStrategy],
+  providers: [AuthService, AtStrategy, RtStrategy, SendgridService],
 })
 export class AuthModule {}

@@ -26,8 +26,8 @@ export const deSearalizeUser = (d: any) => {
   };
   delete result.userId
   delete result.hashedRt
-  delete result.createdAt
-  delete result.updatedAt
+  // delete result.createdAt
+  // delete result.updatedAt
   delete result.password
   delete result.user
   delete result.role
@@ -35,7 +35,7 @@ export const deSearalizeUser = (d: any) => {
 };
 
 export const deSearalizeUsers = (d: any[]) => {
-  d.map((y) => deSearalizeUser(y));
+  return d.map((y) => deSearalizeUser(y));
 };
 
 export const throwForbiddenException = (data) => {

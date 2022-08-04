@@ -1,19 +1,34 @@
-import { PartialType } from '@nestjs/swagger';
-import { SignUpDto } from 'auth/dto';
-import { IsNotEmpty, IsNumberString, IsString } from 'class-validator';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { UserReqFieldDto } from 'auth/dto/user-req-field.dto';
+import { IsNotEmpty, IsNumberString, IsOptional, IsString } from 'class-validator';
 
-export class CreateLawyerClientDto extends SignUpDto {
-  @IsNumberString()
-  @IsNotEmpty()
-  lawyerId: number;
+export class CreateLawyerClientDto extends UserReqFieldDto {
 
-  @IsString()
+  // @ApiProperty()
+  // @IsNumberString()
+  // @IsNotEmpty()
+  // lawyerId: number;
+
+  @ApiProperty()
+  @IsString() 
   @IsNotEmpty()
   type: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   suite: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty() 
+  caseNo: string;
+
+  @IsOptional()
+  // @IsNumber()
+  cityId: number;
+
+  
 }
 
 export class UpdateLawyerClientDto extends PartialType(CreateLawyerClientDto) {}

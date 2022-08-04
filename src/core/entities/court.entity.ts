@@ -1,5 +1,6 @@
-import { Entity,  ManyToMany, Unique } from 'typeorm';
+import { Entity,  ManyToMany, OneToMany, Unique } from 'typeorm';
 import { BetaModel } from './beta-model';
+import { LawyerCase } from './lawyer-case.entity';
 import { Lawyer } from './lawyer.entity';
 
 @Entity()
@@ -8,6 +9,9 @@ export class Court extends BetaModel {
   @ManyToMany(() => Lawyer, (e) => e.courts)
   lawyers?: Lawyer[];
 
-  // @RelationId((d: Court) => d.lawyer)
+  // @RelationId((d: Court) => d.lawyers)
   // lawyerIds?:number[]
+
+  @OneToMany(() => LawyerCase, (e) => e.court)
+  casecourt?: Court;
 }

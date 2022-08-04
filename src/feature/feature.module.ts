@@ -10,7 +10,7 @@ import { TaskModule } from './task/task.module';
 import { AppoinmentModule } from './appoinment/appoinment.module';
 import { LawyerClientModule } from './lawyer-client/lawyer-client.module';
 import { LawyerTeamModule } from './lawyer-team/lawyer-team.module';
-
+import { LawyerCasesModule } from './lawyer-cases/lawyer-cases.module';
 @Module({
   imports: [
     BookModule,
@@ -24,6 +24,7 @@ import { LawyerTeamModule } from './lawyer-team/lawyer-team.module';
     AppoinmentModule,
     LawyerClientModule,
     LawyerTeamModule,
+    LawyerCasesModule,
   ],
 })
 export class FeatureModule {}

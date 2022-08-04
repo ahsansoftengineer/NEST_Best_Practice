@@ -1,8 +1,17 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { UserReqFieldDto } from 'auth/dto/user-req-field.dto';
-import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsOptional, Length } from 'class-validator';
 
-export class CreateLawyerTeamDto extends UserReqFieldDto {
+export class CreateLawyerTeamDto {
+  @ApiProperty({
+    description: 'email for the Token is required in Email formit',
+  })
+  @IsNotEmpty()
+  @IsEmail()
+  @Length(7, 50)
+  email: string;
+
+
   @IsNotEmpty()
   responsibility: string;
 
@@ -10,8 +19,13 @@ export class CreateLawyerTeamDto extends UserReqFieldDto {
   timing: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   amount: number;
+
+  @IsNotEmpty()
+  @Length(11, 17)
+  @ApiProperty()
+  mobile: string;
 
   @IsOptional()
   lawyerId: number;
