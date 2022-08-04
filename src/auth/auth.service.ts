@@ -31,9 +31,7 @@ export class AuthService extends CoreService{
     throwForbiddenException(existUser);
 
     const user = this.repos.user.create({ ...data, password: hashResult });
-    await this.repos.user.save(user).catch(() => {
-      throw new ForbiddenException('Credentials incorrect');
-    });
+    await this.repos.user.save(user)
 
     return this.returnGeneratedToken(user);
   }
@@ -55,10 +53,7 @@ export class AuthService extends CoreService{
     };
     try{
       const lawyer = this.repos.lawyer.create(lawyerResult);
-      await this.repos.lawyer.save(lawyer).catch((error) => {
-        console.log({ db_error: error });
-        throw new ForbiddenException('Credentials incorrect');
-      });
+      await this.repos.lawyer.save(lawyer)
       await this.mail.lawyerAccount({to: data.email, name: data.name})
       return this.returnGeneratedToken(lawyer.user);
     } catch(e){
@@ -77,9 +72,7 @@ export class AuthService extends CoreService{
       );
 
     const user = this.repos.user.create({ ...data, password: hashResult });
-    await this.repos.user.save(user).catch(() => {
-      throw new ForbiddenException('Credentials incorrect');
-    });
+    await this.repos.user.save(user)
 
     return this.returnGeneratedToken(user);
   }
