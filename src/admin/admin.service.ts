@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ROLE } from 'core/enums';
+import { CoreService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
 import { ChangeStatusDto } from './dto/admin.dto';
 
 @Injectable()
-export class AdminService {
-  constructor(public repos: RepoService) {}
+export class AdminService extends CoreService {
   private userSelectiveColumns = {
     name: true,
     email: true,
@@ -20,7 +20,13 @@ export class AdminService {
     const user = await this.repos.user.findOneBy({ id });
     if (!user)
       throw new HttpException('User does not Exsist', HttpStatus.NOT_FOUND);
-    return this.repos.user.update(id, { status });
+      try{
+        const result = this.repos.user.update(id, { status });
+        this.mail.lawyerAccountActivation({name: user.name, to: user.email})
+        return result
+      }catch(e){
+
+      }
   }
 
   async getLawyers() {

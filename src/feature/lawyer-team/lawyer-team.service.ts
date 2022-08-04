@@ -34,18 +34,18 @@ export class LawyerTeamService extends BaseService {
     const hashResult = await argon.hash(password);
     lawyerTeam.user.password = hashResult;
 
-    const create = await this.repos.lawyerTeam.create({ ...lawyerTeam });
-    // const result = await this.repos.lawyerTeam.save(create).catch((error) => 
-    const result: any = await this.repos.lawyerTeam.save(create).then(deSearalizeUser).catch((error) =>{
-      console.log({ db_error: error });
-      throw new ForbiddenException('Credentials incorrect');
-    });    
-    if (result) {
+    try{
+      const create = await this.repos.lawyerTeam.create({ ...lawyerTeam });
+      // const result = await this.repos.lawyerTeam.save(create).catch((error) => 
+      const result: any = await this.repos.lawyerTeam.save(create).then(deSearalizeUser).catch((error) =>{
+        console.log({ db_error: error });
+        throw new ForbiddenException('Credentials incorrect');
+      });    
+      return result;
+    } catch(e){
+      // TODO: ROLED BACK TRANSACTION
+
     }
-    
-    // TODO: SENT TEAM MEMBER MESSAGE
-    // Email this password
-    return result;
   }
 
   // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS

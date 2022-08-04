@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   argon,
@@ -8,8 +8,7 @@ import {
 } from 'core/constant';
 import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
-import { RepoService } from 'core/shared/service/repo.service';
-import { SendgridService } from 'core/shared/service/sandgrid.service';
+import { CoreService } from 'core/service';
 import { In } from 'typeorm';
 
 import { SignUpDto } from './dto';
@@ -18,15 +17,11 @@ import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
 import { JwtPayload, Tokens } from './types';
 
 @Injectable()
-export class AuthService {
-  logger: Logger;
+export class AuthService extends CoreService{
   constructor(
     private _jwt: JwtService,
-    public repos: RepoService,
-    public mail: SendgridService
-
   ) {
-    this.logger = new Logger();
+    super()
   }
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
     this.logger.warn('Sign Up Admin is triggered!');
@@ -36,54 +31,34 @@ export class AuthService {
     throwForbiddenException(existUser);
 
     const user = this.repos.user.create({ ...data, password: hashResult });
-    await this.repos.user.save(user).catch(() => {
-      throw new ForbiddenException('Credentials incorrect');
-    });
+    await this.repos.user.save(user)
 
     return this.returnGeneratedToken(user);
   }
   // Note: Extreme Nessary Not Many to many Insert TypeORM
   async signUpLawyer(data: SignUpLawyerDto): Promise<any> {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
-
     throwForbiddenException(existUser);
-
     const user: User = searalizeUser(data, ROLE.LAWYER, STATUS.PENDING);
     user.password = await argon.hash(data.password); 
-    // const specialization = await this.repos.specialization.findOneBy({
-    //   id: data.specializationId,
-    // });
-    // const courts = await this.repos.court.findBy({
-    //   id: In([...data.courtIds]),
-    // }); 
-    // const courts = await this.repos.court.find({where : {id: In(data.courtIds)}})
     const courts = await this.repos.court.findBy({id: In(data.courtIds)})
-    
     if(courts.length != data.courtIds.length) 
       throw new HttpException('some courts are invalid', HttpStatus.BAD_REQUEST)
     if(courts.length == 0) 
       throw new HttpException('at least one court is required', HttpStatus.BAD_REQUEST)
-    // NOTE: Make Courts Ids Object [{id: 1}, {id: 2}]
-    // const courts = data.courtIds.map(id => ({...new Court(), id}))
-    // const courts = data.courtIds.map(id => {id}) as any
-   
     const lawyerResult: Lawyer = {
       user,
       specializationId: data.specializationId,
       courts, 
-      // Other way of Setting Courts
-      // courts: courts, // when reteriving data before
-      // courtIds: data.courtIds // This doesn't work in any way
     };
-
-    const lawyer = this.repos.lawyer.create({ ...lawyerResult });
-    await this.repos.lawyer.save(lawyer).catch((error) => {
-      console.log({ db_error: error });
-      throw new ForbiddenException('Credentials incorrect');
-    });
-    // if(result) await  this.mail.lawyerSignUp(data.email, data.name)
-    // const result = await this.mail.lawyerAccount({to: data.email, name: data.name})
-    return this.returnGeneratedToken(lawyer.user);
+    try{
+      const lawyer = this.repos.lawyer.create(lawyerResult);
+      await this.repos.lawyer.save(lawyer)
+      await this.mail.lawyerAccount({to: data.email, name: data.name})
+      return this.returnGeneratedToken(lawyer.user);
+    } catch(e){
+        // TODO: if mail doesn't sent then drop the data maybe
+    }
   }
 
   async signUpLocal(data: SignUpDto): Promise<Tokens> {
@@ -97,9 +72,7 @@ export class AuthService {
       );
 
     const user = this.repos.user.create({ ...data, password: hashResult });
-    await this.repos.user.save(user).catch(() => {
-      throw new ForbiddenException('Credentials incorrect');
-    });
+    await this.repos.user.save(user)
 
     return this.returnGeneratedToken(user);
   }
