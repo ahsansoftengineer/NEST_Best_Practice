@@ -1,5 +1,3 @@
-import { Injectable } from '@nestjs/common';
-import { BetaModel } from 'core/entities';
 import { unlink } from 'fs/promises';
 import { Repository } from 'typeorm';
 import { CoreService } from './core.service';

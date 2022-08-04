@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseFilters, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { LawyerCasesService } from './lawyer-cases.service';
 import { CreateLawyerCaseDto, UpdateLawyerCaseDto } from './dto/create-lawyer-case.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { GetCurrentUserId, Public, Roles } from 'core/decorators';
+import { GetCurrentUserId, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
 
 @Controller('lawyer-cases')
