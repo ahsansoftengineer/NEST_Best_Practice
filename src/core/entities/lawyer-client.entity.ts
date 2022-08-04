@@ -1,14 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, RelationId } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
 import { AlphaModel } from './alpha-model';
 import { Lawyer, User } from './index';
 
 @Entity()
-export class LawyerClient extends AlphaModel {
+export class LawyerClient {
   @Column({ length: 100, default: '' })
   type: string;
 
   @Column({ length: 100, default: '' })
   suite: string;
+
+  @Column({length: 100})
+  caseNo: string;
 
   @ManyToOne(() => Lawyer, (x) => x.lawyerClient, {
     // eager: true,
@@ -21,9 +24,9 @@ export class LawyerClient extends AlphaModel {
   lawyerId?: number;
 
   @OneToOne(() => User, (x) => x.lawyerClient, { eager: true, cascade: true })
-  @JoinColumn({ foreignKeyConstraintName: 'fk_user_lawyerClient' })
+  @JoinColumn({name: 'id', foreignKeyConstraintName: 'fk_user_lawyerClient' })
   user?: User;
 
-  @RelationId((d: LawyerClient) => d.user)
-  userId?: number;
+  @PrimaryColumn()
+  id?: number;
 }

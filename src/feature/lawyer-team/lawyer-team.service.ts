@@ -18,10 +18,10 @@ export class LawyerTeamService extends BaseService {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
     // TODO:fix this later
-    const lawyer = await this.repos.lawyer.findOneBy({userId: data.lawyerId})
+    const lawyer = await this.repos.lawyer.findOneBy({id: data.lawyerId})
     throwForbiddenException(!lawyer)
     data.lawyerId = lawyer.id
-    const lawyerTeam: LawyerTeam = {
+    const lawyerTeam: LawyerTeam = { 
       lawyerId:data.lawyerId,
       responsibility: data.responsibility,
       timing: data.timing,
@@ -36,12 +36,11 @@ export class LawyerTeamService extends BaseService {
 
     const create = await this.repos.lawyerTeam.create({ ...lawyerTeam });
     // const result = await this.repos.lawyerTeam.save(create).catch((error) => 
-    const result: any = await this.repos.lawyerTeam.save(create).catch((error) =>{
+    const result: any = await this.repos.lawyerTeam.save(create).then(deSearalizeUser).catch((error) =>{
       console.log({ db_error: error });
       throw new ForbiddenException('Credentials incorrect');
     });    
     if (result) {
-      console.log('hello');
     }
     
     // TODO: SENT TEAM MEMBER MESSAGE

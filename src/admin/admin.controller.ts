@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Patch } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Public, Roles } from 'core/decorators';
 
@@ -27,5 +27,12 @@ export class AdminController {
   @Roles(ROLE.ADMIN)
   getLawyer(@Param('id') id: number) {
     return this._ss.getLawyer(id);
+  }
+
+  @Get('causelistadmin')
+  @Roles(ROLE.ADMIN)
+  findCauseList(
+    @Query() {courtId,nexthearing}) {
+      return this._ss.causeListAdmin(courtId,nexthearing)
   }
 }
