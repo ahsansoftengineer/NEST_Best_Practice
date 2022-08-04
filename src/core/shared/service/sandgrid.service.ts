@@ -8,35 +8,44 @@ export class SendgridService {
     constructor() {
         SendGrid.setApiKey(ENV.MAIL_API_KEY);
     }
-    async lawyerSignUp(to: string, name: string){
+    async lawyerAccount({to, name}){
         await this.sendEmail({
             to,
-            subject: 'Kacheri Sign Up Confirmation!',
+            subject: 'Kacheri Lawyer Account Confirmation!',
             html: `
             <h2>Dear ${name} Conguragulation</h2>
-
             <p>Your Signup Request has been forwarded for activation it will take couple of days to proceed.<p>
-            ${this.query}
             `
         })
     }
-    async TeamSignUp(to: string, name: string){
+    async lawyerAccountActivation(to: string, name: string){
         await this.sendEmail({
             to,
-            subject: 'Kacheri Sign Up Confirmation!',
+            subject: 'Kacheri Account Activation',
             html: `
-            <h2>Dear ${name} Conguragulation</h2>
-
-            <p>Your Signup Request has been forwarded for activation it will take couple of days to proceed.<p>
-            ${this.query}
+            <h2>Dear ${name} Conguragulation!</h2>
+            <p>Your Signup Request has been accepted and you're now live at kacheri, <p>
             `
         })
     }
+    async teamAccount({to, name, email, password, lawyer}){
+        await this.sendEmail({
+            to,
+            subject: 'Kacheri Lawyer Team Account',
+            html: `
+            <h2>Dear ${name} Conguragulation!</h2>
+            <p>Your account has been created against ${email} and your password ${password} by ${lawyer} <p>
+            <p>to customize your account <a href='#' target="_blank">click</a>
+            `
+        })
+    }
+    
     private query = '<p><i>please feel free to contact us in case of any query.</i></p>'
-    sendEmail({to, subject, html}) {
+    private sendEmail({to, subject, html}) {
+        html = html + this.query
         return this.send({ from: ENV.MAIL_FROM, to, subject, html });
     }
-    send(mail: SendGrid.MailDataRequired) {
+    private send(mail: SendGrid.MailDataRequired) {
         return SendGrid.send(mail)
     }
     

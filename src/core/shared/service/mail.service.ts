@@ -95,7 +95,7 @@ export class MailService {
       subject: 'Kacheri Account Activation',
       name, 
       message:`
-      Your Signup Request has been accepted and you're now live at kacheri, 
+        Your Signup Request has been accepted and you're now live at kacheri, 
       `
     })
   }

@@ -82,11 +82,9 @@ export class AuthService {
     //   throw new ForbiddenException('Credentials incorrect');
     // });
     // if(result) await  this.mail.lawyerSignUp(data.email, data.name)
-    const result = await this.mail.lawyerSignUp(data.email, data.name)
+    const result = await this.mail.lawyerAccount({to: data.email, name: data.name})
     console.log(result);
     return null
-    
-
     // return this.returnGeneratedToken(lawyer.user);
   }
 
