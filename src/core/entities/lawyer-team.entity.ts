@@ -19,7 +19,7 @@ export class LawyerTeam {
   timing: string;
 
   @Column({ nullable: true })
-  amount: number;
+  amount: string;
 
   @OneToOne(() => User, (x) => x.lawyerTeam, { eager: true, cascade: true })
   @JoinColumn({name:'id', foreignKeyConstraintName: 'fk_user_lawyerTeam' })
