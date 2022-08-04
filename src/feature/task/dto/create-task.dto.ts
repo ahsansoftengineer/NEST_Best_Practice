@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional } from 'class-validator';
 import { CreateDto } from 'core/base';
 import { STATUS_TASK } from 'core/enums';
 
@@ -21,7 +21,7 @@ export class CreateTeamTaskDto extends CreateLawyerTaskDto {
   // @IsNotEmpty()
   // lawyerId: number
 
-  @IsNumber()
+  @IsNumberString()
   @IsNotEmpty()
   lawyerTeamId: number;
 }
