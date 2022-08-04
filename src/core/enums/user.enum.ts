@@ -2,6 +2,7 @@ export enum GENDER {
   MALE = 'male',
   FEMALE = 'female',
   NONE = 'None',
+  OTHER = 'I Prefer not to say'
 }
 
 export enum ROLE {

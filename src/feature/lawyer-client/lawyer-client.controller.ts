@@ -17,8 +17,8 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { ROLE } from 'core/enums';
 import { InterceptorImage } from 'core/interceptor';
-import { GetCurrentUserId, Roles } from 'core/decorators';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
+import { GetCurrentUserId, Roles } from 'core/decorators';
 
 @Controller('lawyer-client')
 @ApiTags('lawyer-client')
@@ -31,7 +31,10 @@ export class LawyerClientController {
   create(
     @Body() body: CreateLawyerClientDto,
     @UploadedFile() image: Express.Multer.File,
+    @GetCurrentUserId() userId: number
+    
   ) {
+    body['lawyerId'] = userId
     if (!image?.filename)
       throw new HttpException(
         'user profile image is required',
@@ -46,21 +49,21 @@ export class LawyerClientController {
   }
 
   @Roles(ROLE.LAWYER)
-  @Get('members')
+  @Get('clients')
   getLawyerClients(@GetCurrentUserId() userId: number) {
     console.log({ userId });
     return this._ss.getLawyerClients(userId);
   }
 
   @Roles(ROLE.LAWYER)
-  @Get('members/:id')
+  @Get('clients/:id')
   getLawyerClient(@GetCurrentUserId() userId: number, @Param('id') id: number) {
     console.log({ userId });
     return this._ss.getLawyerClient(userId, id);
   }
 
   @Roles(ROLE.LAWYER)
-  @Get('members/:id')
+  @Delete('clients/:id')
   deleteMember(@GetCurrentUserId() userId: number, @Param('id') id: number) {
     console.log({ userId });
     return this._ss.deleteLawyerMember(userId, id);

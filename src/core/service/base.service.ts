@@ -6,7 +6,7 @@ import { CoreService } from './core.service';
 
 // @Injectable()
 export class BaseService extends CoreService {
-  public repo: Repository<BetaModel>;
+  public repo: Repository<any>;
   findAll() {
     return this.repo.find() || { message: `record does not exsist` };
   }
