@@ -18,7 +18,6 @@ export class LawyerCasesController {
   }
 
   @Post()
-  // @Public()
   create(@Body() createLawyerCaseDto: CreateLawyerCaseDto,
          @GetCurrentUserId() userId: number) {
           createLawyerCaseDto.lawyerId = userId;
