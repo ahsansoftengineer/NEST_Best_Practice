@@ -41,6 +41,4 @@ export class LawyerCase extends BetaModel{
   // @RelationId((d: LawyerTeam) => d.lawyer)
   @Column()
   lawyerId?: number;
-
-  
 }

@@ -28,8 +28,6 @@ export class CreateLawyerCaseDto extends CreateDto{
 
   @IsOptional()
   lawyerId: number;
-
-
 }
 
 
