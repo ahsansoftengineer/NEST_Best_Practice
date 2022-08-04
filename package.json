@@ -32,6 +32,7 @@
     "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
   },
   "dependencies": {
+    "@anchan828/nest-sendgrid": "^0.6.3",
     "@casl/ability": "^5.4.4",
     "@nestjs-modules/mailer": "^1.3.17",
     "@nestjs/common": "^8.0.0",

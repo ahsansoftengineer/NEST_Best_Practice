@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsNumberString,
   IsOptional,
   IsString,
   Length,
@@ -54,7 +55,7 @@ export class CreateAppoinmentDto extends CreateDto {
   time: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   lawyerId: number;
 
   // gender: GENDER;

@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { UserReqFieldDto } from 'auth/dto/user-req-field.dto';
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsOptional, Length } from 'class-validator';
 
 export class CreateLawyerTeamDto {
   @ApiProperty({
@@ -19,7 +19,7 @@ export class CreateLawyerTeamDto {
   timing: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumberString()
   amount: number;
 
   @IsNotEmpty()
