@@ -72,7 +72,8 @@ export class User extends AlphaModel {
   @JoinColumn({ foreignKeyConstraintName: 'fk_city_user' })
   city?: City;
 
-  @RelationId((x: User) => x.city)
+  // @RelationId((x: User) => x.city)
+  @Column({nullable:true})
   cityId?: number;
 
   @OneToOne(() => Lawyer, (x) => x.user)

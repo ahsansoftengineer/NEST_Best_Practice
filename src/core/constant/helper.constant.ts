@@ -35,7 +35,7 @@ export const deSearalizeUser = (d: any) => {
 };
 
 export const deSearalizeUsers = (d: any[]) => {
-  d.map((y) => deSearalizeUser(y));
+  return d.map((y) => deSearalizeUser(y));
 };
 
 export const throwForbiddenException = (data) => {
