@@ -11,7 +11,7 @@ export class Appoinment {
 
   @Column({length:100})
   desc: string;
-
+  
   @ManyToOne(() => User, (x) => x.appointment, { cascade: true })
   @JoinColumn({name: 'id', foreignKeyConstraintName: 'fk_user_appointment' })
   user?: User;
