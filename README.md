@@ -7,6 +7,7 @@
 npm install -g pnpm // Fast installation
 npm i -g @nestjs/cli
 npm i --location=global @nestjs/cli
+npm i --save @sendgrid/mail
 
 npm cache clean --force
 rm package-lock.json
@@ -154,4 +155,27 @@ signIn(@Request() req, @Body() body: SignInDto) {
   return this._ss.validateUser(body);
 }
 ```
-### New Topic
+### SEND EMAIL USING SENDGRID
+```javascript
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+javascript
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(ENV.SENDGRID_API_KEY)
+const msg = {
+  to: 'test@example.com', // Change to your recipient
+  from: 'test@example.com', // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
+```
