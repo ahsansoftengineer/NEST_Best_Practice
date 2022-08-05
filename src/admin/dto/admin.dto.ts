@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNumberString } from 'class-validator';
+import { IsEnum, IsNumber, IsNumberString } from 'class-validator';
 import { STATUS } from 'core/enums';
 
 export class ChangeStatusDto {
   @ApiProperty()
-  @IsNumberString()
+  @IsNumber()
   id: number;
 
   @ApiProperty({

@@ -11,6 +11,8 @@ export class CreateLawyerTeamDto {
   @Length(7, 50)
   email: string;
 
+  @IsNotEmpty()
+  name: string;
 
   @IsNotEmpty()
   responsibility: string;
@@ -20,7 +22,7 @@ export class CreateLawyerTeamDto {
 
   @IsNotEmpty()
   @IsNumberString()
-  amount: number;
+  amount: string;
 
   @IsNotEmpty()
   @Length(11, 17)

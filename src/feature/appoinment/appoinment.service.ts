@@ -46,7 +46,7 @@ export class AppoinmentService extends BaseService {
       user: { status: STATUS.ACTIVE },
     });
     if (!lawyer) throw new ForbiddenException('invalid Lawyer provided');
-    const appointmentResult: Appoinment = {
+    const d: Appoinment = {
       user,
       lawyerId: data.lawyerId,
       date: data.date,
@@ -55,26 +55,51 @@ export class AppoinmentService extends BaseService {
       title: data.title,
       desc: data.desc,
     };
+    try{
+      const appoint = await this.repos.appointment.create(d);
+      let result: any = await this.repos.appointment.save(appoint).then(deSearalizeUser)
+      await this.mail.appointmentUser({
+        to:result?.email,
+        name:result?.name,
+      })
+  
+      result = deSearalizeUser(result)
+      if (result) {
+        // send Email to Client of Pending State of Case Registration
+      }
+      return result;
+    }catch(e){
 
-    const appoint = await this.repos.appointment.create({
-      ...appointmentResult,
-    });
-    let result: any = await this.repos.appointment.save(appoint).catch((error) => {
-      console.log({ db_error: error });
-      throw new ForbiddenException('Credentials incorrect');
-    });
-    result = deSearalizeUser(result)
-    if (result) {
-      // send Email to Client of Pending State of Case Registration
     }
-    return result;
+   
   }
 
-  statusAdmin({ status, id }) {
-    return this.repos.appointment.update({ id }, { status });
+   async statusAdmin({ id, status,  name, email, date = undefined, time = undefined }) {
+    const update: any = {status}
+    if(date) update.date = date
+    if(time) update.time = time
+    console.log({id, status, name, email, date, time});
+    
+    try {
+      const result = await this.repos.appointment.update({ id }, update);
+      await this.mail.appointmentReSchedule({
+        to: email, status ,date, time, name
+      })
+      return result;
+    } catch (e) {
+      
+    }
   }
+  async statusLawyer({ id, status, name, email}) {
+    try {
+      const result = await this.statusAdmin({id, status, name, email})
+      await this.mail.appointmentAcceptRejectByLawyer({
+        to: email, status , name,  date:'', time:''
+      })
+      return result;
 
-  statusLawyer({ status, id }) {
-    return this.repos.appointment.update({ id }, { status });
+    } catch (error) {
+      
+    }
   }
 }

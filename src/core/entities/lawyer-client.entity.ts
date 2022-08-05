@@ -1,5 +1,4 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
-import { AlphaModel } from './alpha-model';
 import { Lawyer, User } from './index';
 
 @Entity()

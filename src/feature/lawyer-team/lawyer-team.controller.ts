@@ -4,21 +4,17 @@ import {
   Post,
   Body,
   Param,
-  UseInterceptors,
-  UploadedFile,
-  HttpException,
-  HttpStatus,
   Delete,
 } from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 import { ROLE } from 'core/enums';
-import { InterceptorImage } from 'core/interceptor';
-import { HandleUniqueError } from 'core/error/HandleUniqueError';
-import { GetCurrentUserId, Roles } from 'core/decorators';
+import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
+import { JwtPayload } from 'auth/types';
 
-@Controller('lawyer-team')
+
+@Controller('lawyer-team') 
 export class LawyerTeamController {
   constructor(private readonly _ss: LawyerTeamService) {}
 
@@ -27,7 +23,7 @@ export class LawyerTeamController {
   // @UseInterceptors(InterceptorImage)
   create(
     @Body() body: CreateLawyerTeamDto,
-    @GetCurrentUserId() userId: number,
+    @GetJwtPayload() user: JwtPayload,
     // @UploadedFile() image: Express.Multer.File,
   ) {
     // if (!image?.filename)
@@ -37,9 +33,7 @@ export class LawyerTeamController {
     //   );
     // body.image = image.filename;
     // body['lawyerId'] = userId
-    body.lawyerId = userId;
-
-    return this._ss.create(body);
+    return this._ss.create(body, user);
   }
 
   @Roles(ROLE.LAWYER)
