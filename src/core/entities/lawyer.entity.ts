@@ -8,7 +8,6 @@ import {
   OneToMany,
   OneToOne,
   PrimaryColumn,
-  RelationId,
 } from 'typeorm';
 import {
   User,

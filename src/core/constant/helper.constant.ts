@@ -42,6 +42,10 @@ export const throwForbiddenException = (data) => {
   if (data) throw new ForbiddenException('Email Address already exsit');
 };
 
+export const throwForbiddenExceptiontitle = (data) => {
+  if (data) throw new ForbiddenException('Title already exsit');
+};
+
 export const generatePassword = () => {
   let result = '';
   const characters =

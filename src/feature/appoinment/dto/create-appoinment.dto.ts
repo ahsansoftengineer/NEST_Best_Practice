@@ -55,7 +55,7 @@ export class CreateAppoinmentDto extends CreateDto {
   time: string;
 
   @IsNotEmpty()
-  @IsNumberString()
+  @IsNumber()
   lawyerId: number;
 
   // gender: GENDER;

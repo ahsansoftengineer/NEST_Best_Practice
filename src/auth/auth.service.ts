@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   argon,
@@ -10,7 +10,6 @@ import { Lawyer, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { CoreService } from 'core/service';
 import { In } from 'typeorm';
-
 import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
@@ -55,7 +54,11 @@ export class AuthService extends CoreService{
       const lawyer = this.repos.lawyer.create(lawyerResult);
       await this.repos.lawyer.save(lawyer)
       await this.mail.lawyerAccount({to: data.email, name: data.name})
-      return this.returnGeneratedToken(lawyer.user);
+
+      // this.mail.lawyerAccountActivation({})
+      const {email, id, name} =  lawyer.user
+      return {email, id, name} 
+      // return this.returnGeneratedToken(lawyer.user);
     } catch(e){
         // TODO: if mail doesn't sent then drop the data maybe
     }
@@ -78,8 +81,9 @@ export class AuthService extends CoreService{
   }
 
   async signinLocal(dto: SignInDto): Promise<Tokens> {
-    const user = await this.repos.user.findOneBy({ email: dto.email });
-
+    const user = await this.repos.user.findOneBy({ email: dto.email});
+    if( user.status != STATUS.ACTIVE)
+      throw new BadRequestException('user unverified')
     if (!user) throw new ForbiddenException('Access Denied');
 
     const passwordMatches = await argon.verify(user.password, dto.password);
@@ -114,16 +118,17 @@ export class AuthService extends CoreService{
     return this.returnGeneratedToken(user);
   }
   async returnGeneratedToken(user: User) {
-    const tokens = await this.getTokens(user.id, user.email, user.role);
+    const tokens = await this.getTokens(user as any);
     await this.updateRtHash(user.id, tokens.refresh_token);
     tokens.user = this.returnedSearializedUser(user);
     return tokens;
   }
-  async getTokens(id: number, email: string, role: ROLE): Promise<Tokens> {
+  async getTokens({id, email, role, name}): Promise<Tokens> {
     const jwtPayload: JwtPayload = {
       sub: id,
       email,
       role,
+      name
     };
 
     const [at, rt] = await Promise.all([
@@ -157,5 +162,25 @@ export class AuthService extends CoreService{
     status,
   }: User) {
     return { id, name, email, gender, mobile, role, status };
+  }
+
+  async getLawyerByName({name, email}) {
+    return this.repos.user.find({
+      where: { name, email, role: ROLE.LAWYER },
+      select: {name: true, email: true, id: true},
+    });
+  }
+
+  async invitelawyer({name, to, from}) {
+    try {
+      await this.mail.sendRequestForTeam({
+        to,
+        name,
+        from
+      })
+    } catch (error) {
+      
+    }
+     
   }
 }
