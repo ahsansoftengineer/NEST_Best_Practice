@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Get, Param, Patch, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { isEmail } from 'class-validator';
 import { Public, Roles } from 'core/decorators';
 
 import { ROLE } from 'core/enums';
@@ -34,5 +35,12 @@ export class AdminController {
   findCauseList(
     @Query() {courtId,nexthearing,lawyerId}) {
       return this._ss.causeListAdmin({courtId,lawyerId,nexthearing}) 
+  }
+  @Post('email')
+  @Roles(ROLE.ADMIN)
+  sendEmail(@Body() {to, subject, html}){
+    // if(isEmail(to))
+    
+    this._ss.sendEmail({to, subject, html})
   }
 }
