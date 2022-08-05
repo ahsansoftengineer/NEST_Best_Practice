@@ -92,16 +92,6 @@ export class SendgridService {
         })
       } 
     }
-    async appointmentForward({to, name}){
-        await this.sendEmail({
-            to,
-            subject: 'Kacheri Appointment Recommended',
-            html: `
-            <h2>Dear ${name}</h2>
-            
-            `
-        })
-    }
     async appointmentAcceptRejectByLawyer({to, name, status,date,time}){
         let message;
         if(status) message = `Your Appointment has been accepted by lawyer and your appointment`
@@ -116,6 +106,19 @@ export class SendgridService {
             `
         })
     }
+    async sendRequestForTeam({to, name, from}){
+      await this.sendEmail({
+          to,
+          subject: 'Kacheri Lawyer Invitation',
+          html: `
+          <h2>Dear ${name}</h2>
+          <h3>Kacheri Invitation Lawyer Team Member</h3>
+          <p>You are invited as Team member of lawyer <b>${from}</b></p>
+          <p>please click the following to become a team member <a href='#' target="_blank">click</a><p>
+          `
+          // maybe need a invitation table for user to accept and reject invitation on app
+      })
+  }
     async adminEmail({to, subject, html}){
         await this.sendEmail({
             to,

@@ -1,9 +1,12 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -13,7 +16,7 @@ import { ROLE, STATUS } from 'core/enums';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
 import { InterceptorImage } from 'core/interceptor';
 
-import { Public, GetCurrentUserId, GetCurrentUser } from '../core/decorators';
+import { Public, GetCurrentUserId, GetCurrentUser, Roles } from '../core/decorators';
 import { RtGuard } from '../core/guards';
 import { AuthService } from './auth.service';
 import { SignInDto, SignUpDto } from './dto';
@@ -93,5 +96,19 @@ export class AuthController {
     @GetCurrentUser('refreshToken') refreshToken: string,
   ): Promise<Tokens> {
     return this._ss.refreshTokens(userId, refreshToken);
+  }
+
+  @Get('lawyer-name-email')
+  @Roles(ROLE.LAWYER)
+  getLawyer(@Query() {name, email}) {
+    return this._ss.getLawyerByName({name, email});
+  }
+
+  @Post('send-invitation')
+  @Roles(ROLE.LAWYER)
+  async sendinvite(@GetCurrentUser() user, @Body() {name,email} ){
+    await this._ss.invitelawyer({to: email, name, from: user.name,})
+    return {message: 'invitation sent'}
+
   }
 }

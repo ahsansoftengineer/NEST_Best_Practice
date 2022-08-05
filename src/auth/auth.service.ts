@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   argon,
@@ -162,5 +162,25 @@ export class AuthService extends CoreService{
     status,
   }: User) {
     return { id, name, email, gender, mobile, role, status };
+  }
+
+  async getLawyerByName({name, email}) {
+    return this.repos.user.find({
+      where: { name, email, role: ROLE.LAWYER },
+      select: {name: true, email: true, id: true},
+    });
+  }
+
+  async invitelawyer({name, to, from}) {
+    try {
+      await this.mail.sendRequestForTeam({
+        to,
+        name,
+        from
+      })
+    } catch (error) {
+      
+    }
+     
   }
 }
