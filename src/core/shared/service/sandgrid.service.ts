@@ -106,6 +106,7 @@ export class SendgridService {
             `
         })
     }
+
     async sendRequestForTeam({to, name, from}){
       await this.sendEmail({
           to,
@@ -118,12 +119,25 @@ export class SendgridService {
           `
           // maybe need a invitation table for user to accept and reject invitation on app
       })
-  }
+    }
+
     async adminEmail({to, subject, html}){
         await this.sendEmail({
             to,
             subject,
             html,
+        })
+    }
+    async forgetPassword({to, name, uuidToken}){
+
+        await this.sendEmail({
+            to,
+            subject: 'Kacheri Forget Password',
+            html: `
+            <h2>Dear ${name}</h2>
+            <h3>Kacheri Forget Password</h3>
+            <p>Click the following link to change new password <a href='linktosite/${uuidToken}' target="_blank">Kacheri Portal Change Password</a></p>
+            `
         })
     }
     private query = '<p><i>please feel free to contact us in case of any query.</i></p>'
