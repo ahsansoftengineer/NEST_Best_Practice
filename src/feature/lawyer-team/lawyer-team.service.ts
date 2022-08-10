@@ -36,7 +36,7 @@ export class LawyerTeamService extends BaseService {
       responsibility: data.responsibility,
       timing: data.timing,
       amount: data.amount,
-      user: searalizeUser(data, ROLE.TEAM, STATUS.NONE)
+      user: searalizeUser(data, ROLE.TEAM, STATUS.ACTIVE)
     };
 
     // TODO: WORK HERE SET RANDOM PASSWORD
