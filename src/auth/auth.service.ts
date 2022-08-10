@@ -64,7 +64,6 @@ export class AuthService extends CoreService{
         // TODO: if mail doesn't sent then drop the data maybe
     }
   }
-
   async signUpLocal(data: SignUpDto): Promise<Tokens> {
     const hashResult = await argon.hash(data.password);
 
@@ -80,7 +79,6 @@ export class AuthService extends CoreService{
 
     return this.returnGeneratedToken(user);
   }
-
   async signinLocal(dto: SignInDto): Promise<Tokens> {
     const user = await this.repos.user.findOneBy({ email: dto.email});
     if( user.status != STATUS.ACTIVE)
@@ -92,7 +90,6 @@ export class AuthService extends CoreService{
 
     return this.returnGeneratedToken(user);
   }
-
   async forgetPassword(email: string) {
     const user = await this.repos.user.findOneBy({ email });
     if (!user) throw new ForbiddenException('Username is incorrect');
@@ -112,7 +109,6 @@ export class AuthService extends CoreService{
     await this.repos.user.update(id, {password: await argon.hash(password), forgetPasswordToken: null})
     return {message: "Password Updated Successfully"}
   }
-
   async logout(id: number): Promise<boolean> {
     if (!id) return false;
     const result = await this.repos.user.findOneBy({ id });
@@ -121,7 +117,6 @@ export class AuthService extends CoreService{
     }
     return true;
   }
-
   async refreshTokens(id: number, rt: string): Promise<Tokens> {
     const user = await this.repos.user.findOneBy({ id });
 
