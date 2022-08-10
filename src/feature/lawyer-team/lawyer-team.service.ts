@@ -1,5 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { JwtPayload } from 'auth/types';
+import { JwtService } from '@nestjs/jwt';
+import { SignInDto } from 'auth/dto';
+import { JwtPayload, Tokens } from 'auth/types';
 import {
   argon,
   deSearalizeUser,
@@ -7,15 +9,21 @@ import {
   generatePassword,
   searalizeUser,
   throwForbiddenException,
+  ENV
 } from 'core/constant';
-import { LawyerTeam } from 'core/entities';
+import { LawyerTeam, User } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
-import { BaseService } from 'core/service';
+import { BaseService, CoreService } from 'core/service';
 import { any } from 'joi';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
 export class LawyerTeamService extends BaseService {
+  constructor(
+    private _jwt: JwtService,
+  ) {
+    super()
+  }
   async create(data: CreateLawyerTeamDto, user: JwtPayload) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
@@ -28,7 +36,7 @@ export class LawyerTeamService extends BaseService {
       responsibility: data.responsibility,
       timing: data.timing,
       amount: data.amount,
-      user: searalizeUser(data, ROLE.TEAM, STATUS.NONE)
+      user: searalizeUser(data, ROLE.TEAM, STATUS.ACTIVE)
     };
 
     // TODO: WORK HERE SET RANDOM PASSWORD
@@ -56,7 +64,7 @@ export class LawyerTeamService extends BaseService {
     } catch(e){
       // TODO: ROLED BACK TRANSACTION
 
-    }
+    } 
     // try{
     //   const lawyer = this.repos.lawyer.create(lawyerResult);
     //   await this.repos.lawyer.save(lawyer)
@@ -97,4 +105,6 @@ export class LawyerTeamService extends BaseService {
       .delete()
       .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
   }
+
+
 }

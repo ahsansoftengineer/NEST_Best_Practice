@@ -7,8 +7,8 @@ export class CreateLawyerTaskDto extends CreateDto {
   @ApiProperty({
     enum: STATUS_TASK,
     isArray: false,
-    example: STATUS_TASK.PROCESS,
-    default: STATUS_TASK.PROCESS,
+    example: STATUS_TASK.ASSIGN,
+    default: STATUS_TASK.ASSIGN,
   })
   @IsOptional()
   @IsEnum(STATUS_TASK, {
@@ -23,6 +23,10 @@ export class CreateLawyerTaskDto extends CreateDto {
   @IsOptional()
   @ApiProperty()
   dueDate: Date;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  feedback?: string;
 
 }
 
