@@ -10,11 +10,14 @@ import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 import { ROLE } from 'core/enums';
-import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
-import { JwtPayload } from 'auth/types';
+import { GetCurrentUserId, GetJwtPayload, Public, Roles } from 'core/decorators';
+import { JwtPayload, Tokens } from 'auth/types';
+import { SignInDto } from 'auth/dto';
+import { ApiTags } from '@nestjs/swagger';
 
 
-@Controller('lawyer-team') 
+@Controller('lawyer-team')
+@ApiTags('lawyer-team')
 export class LawyerTeamController {
   constructor(private readonly _ss: LawyerTeamService) {}
 

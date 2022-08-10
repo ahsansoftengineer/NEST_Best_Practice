@@ -63,11 +63,11 @@ export class SendgridService {
             html: `
             <h2>Dear ${name}</h2>
             <h3>Kacheri Appointment Registration</h3>
-            <p>Your appointment is in process and you will be inform with status via email<p>
+            <p>Thank you for submitting your application at Kacheri, our representatives will get you on the board soon!<p>
             `
         })
     }
-    async appointmentReSchedule({to, name, date, time, status}){
+    async appointmentReSchedule({to, name, date, time, status,feedback}){
       if(status == STATUS_APPOINT.DIRECT){
         await this.sendEmail({
           to,
@@ -76,8 +76,9 @@ export class SendgridService {
           <h2>Dear ${name}</h2>
           <h3> Kacheri Appointment Admin Recommended </h3>
           <p>Your appointment is recommended and forwarded to Lawyer for further approval 
-          on data: ${date} and time: ${time}
-          <p>you will be informed and notified by email<p>
+          on data: ${date} and time: ${time}</p>
+          <p>Feedback: ${feedback}</p>
+          <p>you will be informed and notified by email</p>
           `
         })
       } 
@@ -92,10 +93,10 @@ export class SendgridService {
         })
       } 
     }
-    async appointmentAcceptRejectByLawyer({to, name, status,date,time}){
+    async appointmentAcceptRejectByLawyer({to, name, status,date,time,feedback }){
         let message;
-        if(status) message = `Your Appointment has been accepted by lawyer and your appointment`
-        else message = 'Your appointment has rejected by Lawyer'
+        if(status == 'Accept') message = `Your Appointment has been accepted by lawyer and your appointment`
+        else message = 'Your appointment has rejected by Lawyer Reason:' +feedback
         await this.sendEmail({
             to,
             subject: 'Kacheri Appointment ' +status,
@@ -106,6 +107,7 @@ export class SendgridService {
             `
         })
     }
+
     async sendRequestForTeam({to, name, from}){
       await this.sendEmail({
           to,
@@ -118,12 +120,25 @@ export class SendgridService {
           `
           // maybe need a invitation table for user to accept and reject invitation on app
       })
-  }
+    }
+
     async adminEmail({to, subject, html}){
         await this.sendEmail({
             to,
             subject,
             html,
+        })
+    }
+    async forgetPassword({to, name, uuidToken}){
+
+        await this.sendEmail({
+            to,
+            subject: 'Kacheri Forget Password',
+            html: `
+            <h2>Dear ${name}</h2>
+            <h3>Kacheri Forget Password</h3>
+            <p>Click the following link to change new password <a href='linktosite/${uuidToken}' target="_blank">Kacheri Portal Change Password</a></p>
+            `
         })
     }
     private query = '<p><i>please feel free to contact us in case of any query.</i></p>'

@@ -14,7 +14,7 @@ describe('SpecializationController', () => {
     controller = module.get<SpecializationController>(SpecializationController);
   });
 
-  it('should be defined', () => {
+  it('should be defined', () => { 
     expect(controller).toBeDefined();
   });
 });

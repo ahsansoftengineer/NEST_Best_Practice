@@ -9,7 +9,7 @@ export class Task extends BetaModel {
   @Column({
     type: 'enum',
     enum: STATUS_TASK,
-    default: STATUS_TASK.PENDING,
+    default: STATUS_TASK.ASSIGN,
     nullable: true,
   })
   status: STATUS_TASK;
@@ -33,4 +33,11 @@ export class Task extends BetaModel {
 
   @Column({ nullable: true, default: '' })
   pdf: string;
+
+  @Column()
+  dueDate:Date;
+
+  @Column({ nullable: true, length: 250, default: '' })
+  feedback?: string;
+
 }

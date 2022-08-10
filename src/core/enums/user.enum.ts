@@ -51,7 +51,8 @@ export enum STATUS_APPOINT {
 export enum STATUS_TASK {
   COMPLETE = 'Complete',
   PENDING = 'Pending',
-  PROCESS = 'Process',
-  QUEUE = 'Queue', // LAWYER DEFAULT
-  BLOCK = 'Block',
+  ACCEPT = 'Accept',
+  REJECT = 'Reject',
+  ASSIGN = 'Assign',
+  RE_ASSIGN = 'Re_Assign'
 }

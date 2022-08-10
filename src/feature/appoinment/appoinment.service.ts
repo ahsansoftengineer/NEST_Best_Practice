@@ -74,27 +74,27 @@ export class AppoinmentService extends BaseService {
    
   }
 
-   async statusAdmin({ id, status,  name, email, date = undefined, time = undefined }) {
-    const update: any = {status}
+   async statusAdmin({ id, status,  name, email, date = undefined, time = undefined,feedback=undefined }) {
+    const update: any = {status,feedback}
     if(date) update.date = date
     if(time) update.time = time
-    console.log({id, status, name, email, date, time});
+    // console.log({id, status, name, email, date, time});
     
     try {
       const result = await this.repos.appointment.update({ id }, update);
       await this.mail.appointmentReSchedule({
-        to: email, status ,date, time, name
+        to: email, status ,date, time, name,feedback
       })
       return result;
     } catch (e) {
       
     }
   }
-  async statusLawyer({ id, status, name, email}) {
+  async statusLawyer({ id, status, name, email, feedback }) {
     try {
-      const result = await this.statusAdmin({id, status, name, email})
+      const result = await this.statusAdmin({id, status, name, email, feedback})
       await this.mail.appointmentAcceptRejectByLawyer({
-        to: email, status , name,  date:'', time:''
+        to: email, status , name,  date:'', time:'',feedback
       })
       return result;
 
