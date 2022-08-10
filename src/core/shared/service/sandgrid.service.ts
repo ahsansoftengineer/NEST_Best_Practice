@@ -63,7 +63,7 @@ export class SendgridService {
             html: `
             <h2>Dear ${name}</h2>
             <h3>Kacheri Appointment Registration</h3>
-            <p>Your appointment is in process and you will be inform with status via email<p>
+            <p>Thank you for submitting your application at Kacheri, our representatives will get you on the board soon!<p>
             `
         })
     }

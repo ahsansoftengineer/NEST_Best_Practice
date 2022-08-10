@@ -48,4 +48,7 @@ export class AdminService extends CoreService {
     if(result?.length) return result
     else return {message: 'Data Not found'}
   }
+  async sendEmail({to, subject, html}){
+   await this.mail.adminEmail({to, subject, html})
+  }
 }

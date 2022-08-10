@@ -39,10 +39,15 @@ export class TaskController {
 
   @Post('team')
   @Roles(ROLE.LAWYER)
+  @UseInterceptors(InterceptorPDF)
   createTeamTask(
     @Body() body: CreateTeamTaskDto,
     @GetCurrentUserId() userId: number,
+    @UploadedFile() pdf: Express.Multer.File,
   ) {
+    if(pdf?.filename){
+      body.pdf = pdf.filename;
+    }
     return this._ss.createTeamTask(body, userId);
   }
 
