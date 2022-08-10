@@ -48,15 +48,15 @@ export class AppoinmentController {
 
   @Patch('admin-status')
   @Roles(ROLE.ADMIN)
-  async statusAdmin(@Body() { id, status, email, date, time, name}) {
-    return this._ss.statusAdmin({ id, status, email, date, time, name });
+  async statusAdmin(@Body() { id, status, email, date, time, name,feedback}) {
+    return this._ss.statusAdmin({ id, status, email, date, time, name ,feedback});
   }
 
   @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
-  async statusLawyer(@Body() { id, status, email, name }) {
+  async statusLawyer(@Body() { id, status, email, name, feedback  }) {
     if (STATUS_APPOINT.ACCEPT == status || STATUS_APPOINT.REJECT == status)
-      return this._ss.statusLawyer({ id, status, email, name});
+      return this._ss.statusLawyer({ id, status, email, name,feedback });
     throw new HttpException(
       'you are only authorized for Accept & Reject',
       HttpStatus.FORBIDDEN,

@@ -62,6 +62,10 @@ export class CreateAppoinmentDto extends CreateDto {
   // cityId: number;
   // address: string;
   // image: string;
+
+  @IsOptional()
+  feedback?: string;
+
 }
 
 export class UpdateAppoinmentDto extends PartialType(CreateAppoinmentDto) {}

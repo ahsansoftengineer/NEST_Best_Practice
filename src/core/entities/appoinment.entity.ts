@@ -42,4 +42,8 @@ export class Appoinment {
   // will be reterived from lawyer
   // specilizationId,
   // cityId
+
+  @Column()
+  feedback?: string;
+
 }
