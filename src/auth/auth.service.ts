@@ -14,6 +14,7 @@ import { SignUpDto } from './dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
 import { JwtPayload, Tokens } from './types';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class AuthService extends CoreService{
@@ -95,7 +96,21 @@ export class AuthService extends CoreService{
   async forgetPassword(email: string) {
     const user = await this.repos.user.findOneBy({ email });
     if (!user) throw new ForbiddenException('Username is incorrect');
-    // return this._mail.forgetPassword(email);
+    const uuidToken: string = uuid();
+    await this.repos.user.update(user.id, {forgetPasswordToken: uuidToken})
+
+    await this.mail.forgetPassword({to: user.email, name: user.name, uuidToken});
+    return {message: "Forget Password Email Sent on " +  user.email}
+  }
+  async forgetPasswordUpdate({forgetPasswordToken, password}) {
+    const user = await this.repos.user.findOneBy({ forgetPasswordToken });
+    if (!user) throw new ForbiddenException('Invalid Forget Password Token');
+    await this.repos.user.update(user.id, {forgetPasswordToken: null, password: await argon.hash(password)})
+    return {message: "Now you can login with your new updated password"}
+  }
+  async changePassword({id, password}) {
+    await this.repos.user.update(id, {password: await argon.hash(password), forgetPasswordToken: null})
+    return {message: "Password Updated Successfully"}
   }
 
   async logout(id: number): Promise<boolean> {

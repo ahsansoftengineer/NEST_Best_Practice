@@ -79,9 +79,26 @@ export class AuthController {
 
   @Public()
   @Post('forget-password')
-  forgetPassword(@Body() body: { email: string }): Promise<Tokens> {
-    // return this._ss.forgetPassword(body.email);
-    return 
+  forgetPassword(@Body() { email }) {
+    return this._ss.forgetPassword(email);
+  }
+
+  @Public()
+  @Post('forget-change-password')
+  forgetChangePassword(@Body() { forgetPasswordToken, password, confirmPassword }) {
+    if(password != confirmPassword) 
+      throw new HttpException('password confirmPassword not matched', HttpStatus.BAD_REQUEST)
+    return this._ss.forgetPasswordUpdate({forgetPasswordToken, password});
+  }
+
+  @Post('change-password')
+  changePassword(
+    @GetCurrentUserId() id: string,
+    @Body() { password, confirmPassword }
+    ) {
+    if(password != confirmPassword) 
+      throw new HttpException('password confirmPassword not matched', HttpStatus.BAD_REQUEST)
+    return this._ss.changePassword({id, password});
   }
 
   @Post('logout')
