@@ -67,7 +67,7 @@ export class SendgridService {
             `
         })
     }
-    async appointmentReSchedule({to, name, date, time, status}){
+    async appointmentReSchedule({to, name, date, time, status,feedback}){
       if(status == STATUS_APPOINT.DIRECT){
         await this.sendEmail({
           to,
@@ -76,8 +76,9 @@ export class SendgridService {
           <h2>Dear ${name}</h2>
           <h3> Kacheri Appointment Admin Recommended </h3>
           <p>Your appointment is recommended and forwarded to Lawyer for further approval 
-          on data: ${date} and time: ${time}
-          <p>you will be informed and notified by email<p>
+          on data: ${date} and time: ${time}</p>
+          <p>Feedback: ${feedback}</p>
+          <p>you will be informed and notified by email</p>
           `
         })
       } 
@@ -92,10 +93,10 @@ export class SendgridService {
         })
       } 
     }
-    async appointmentAcceptRejectByLawyer({to, name, status,date,time}){
+    async appointmentAcceptRejectByLawyer({to, name, status,date,time,feedback }){
         let message;
-        if(status) message = `Your Appointment has been accepted by lawyer and your appointment`
-        else message = 'Your appointment has rejected by Lawyer'
+        if(status == 'Accept') message = `Your Appointment has been accepted by lawyer and your appointment`
+        else message = 'Your appointment has rejected by Lawyer Reason:' +feedback
         await this.sendEmail({
             to,
             subject: 'Kacheri Appointment ' +status,
