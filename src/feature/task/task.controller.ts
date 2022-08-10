@@ -69,14 +69,26 @@ export class TaskController {
 
   @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
-  statusLawyerTask(@Body() { id, status }, @GetCurrentUserId() userId: number) {
-    return this._ss.statusLawyerTask({ id, status }, userId);
+  @UseInterceptors(InterceptorPDF)
+  statusLawyerTask(@Body() body: { id, status, feedback, pdf },
+  @GetCurrentUserId() userId: number,
+  @UploadedFile() pdf: Express.Multer.File) {
+  if(pdf?.filename){
+    body.pdf = pdf.filename;
+  }            
+    return this._ss.statusLawyerTask(body, userId);
   }
 
   @Patch('team-status')
-  @Roles(ROLE.LAWYER)
-  statusTeamTask(@Body() { id, status }, @GetCurrentUserId() userId: number) {
-    return this._ss.statusTeamTask({ id, status }, userId);
+  @Roles(ROLE.TEAM,ROLE.LAWYER)
+  @UseInterceptors(InterceptorPDF)
+  statusTeamTask(@Body() body: { id, status, feedback, pdf },
+                 @GetCurrentUserId() userId: number,
+                 @UploadedFile() pdf: Express.Multer.File) {
+  if(pdf?.filename){
+       body.pdf = pdf.filename;
+  }            
+    return this._ss.statusTeamTask( body, userId);
   }
 
   // @Roles(ROLE.LAWYER)

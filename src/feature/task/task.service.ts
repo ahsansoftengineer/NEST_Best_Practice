@@ -27,12 +27,12 @@ export class TaskService extends BaseService {
     return save;
   }
 
-  async statusLawyerTask({ id, status }, lawyerId: number) {
-    return this.repos.task.update({ id, lawyerId }, { status });
+  async statusLawyerTask({ id, status,feedback,pdf }, lawyerId: number) {
+    return this.repos.task.update({ id, lawyerId }, { status, feedback, pdf });
   }
 
-  async statusTeamTask({ id, status }, lawyerTeamId: number) {
-    return this.repos.task.update({ id, lawyerTeamId }, { status });
+  async statusTeamTask({ id, status,feedback,pdf }, lawyerTeamId: number) {
+    return this.repos.task.update({ id, lawyerTeamId }, { status, feedback, pdf});
   }
 
   // async update(lawyerId: number, id, data: UpdateTaskDto,) {

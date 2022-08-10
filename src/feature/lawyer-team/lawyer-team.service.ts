@@ -64,7 +64,7 @@ export class LawyerTeamService extends BaseService {
     } catch(e){
       // TODO: ROLED BACK TRANSACTION
 
-    }
+    } 
     // try{
     //   const lawyer = this.repos.lawyer.create(lawyerResult);
     //   await this.repos.lawyer.save(lawyer)

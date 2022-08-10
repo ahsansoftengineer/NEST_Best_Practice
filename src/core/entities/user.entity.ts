@@ -50,7 +50,7 @@ export class User extends AlphaModel {
   password: string;
 
   @Column({ length: 500, default: '' })
-  forgetPasswordToken: string;
+  forgetPasswordToken?: string;
 
   @Column({ length: 20 })
   mobile: string;
