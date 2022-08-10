@@ -7,6 +7,7 @@ import {
   Get,
   UploadedFile,
   UseInterceptors,
+  Patch,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtPayload } from 'auth/types';
@@ -66,13 +67,13 @@ export class TaskController {
     return this._ss.createLawyerTask(body, userId);
   }
 
-  @Post('lawyer-status')
+  @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
   statusLawyerTask(@Body() { id, status }, @GetCurrentUserId() userId: number) {
     return this._ss.statusLawyerTask({ id, status }, userId);
   }
 
-  @Post('team-status')
+  @Patch('team-status')
   @Roles(ROLE.LAWYER)
   statusTeamTask(@Body() { id, status }, @GetCurrentUserId() userId: number) {
     return this._ss.statusTeamTask({ id, status }, userId);
