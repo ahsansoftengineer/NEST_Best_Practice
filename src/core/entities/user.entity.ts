@@ -5,7 +5,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToOne,
-  RelationId,
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';

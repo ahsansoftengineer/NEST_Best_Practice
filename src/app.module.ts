@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { MulterModule } from '@nestjs/platform-express';
-import { configStaticFiles, ENV, TypeOrmModuleRootAsync } from 'core/config';
+import { configStaticFiles, TypeOrmModuleRootAsync } from 'core/config';
 import { RolesGuard } from 'core/guards/role.guard';
 import { FeatureModule } from 'feature/feature.module';
 import { AuthModule } from './auth/auth.module';

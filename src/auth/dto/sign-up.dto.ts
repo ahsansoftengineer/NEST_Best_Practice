@@ -1,12 +1,9 @@
 import { ApiProperty, IntersectionType } from '@nestjs/swagger';
 import {
-  IsEnum,
   IsNotEmpty,
   IsOptional,
-  IsString,
   Length,
 } from 'class-validator';
-import { GENDER, ROLE, STATUS } from 'core/enums';
 import { Match } from 'core/validator';
 import { SignInDto } from './sign-in.dto';
 import { UserReqFieldDto } from './user-req-field.dto';
