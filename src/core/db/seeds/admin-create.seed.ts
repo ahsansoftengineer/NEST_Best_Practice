@@ -1,11 +1,13 @@
 import { argon } from "core/constant";
 import { User } from "core/entities";
 import { GENDER, ROLE, STATUS } from "core/enums";
-import { Connection } from "typeorm";
+import { Connection} from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
 
 export default class CreateAdmin implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
+    console.log('seeding called');
+    // await getManager().query('TRUNCATE user');
     await connection
       .createQueryBuilder()
       .insert()
@@ -22,7 +24,6 @@ export default class CreateAdmin implements Seeder {
           address:'Admin Address', 
         })
       .execute()
-      console.log('seeding called');
       
   }
 }
