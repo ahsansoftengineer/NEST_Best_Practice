@@ -28,14 +28,15 @@ const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
       ...typeORMGeneralOptions,
       migrations: [
         // __dirname + '/../db/migrations/*{.ts,.js}'
-        '/dist/src/core/db/migrations/*.js'
+        '/dist/core/db/migrations/*.js'
       ],
       cli: {
-        migerationDir: 'src/core/db/migrations'
+        migerationDir: 'core/db/migrations'
       },
       extra: {
-        charset:'utf8_unicode_ci'
+        charset:'utf8_unicode_ci',
       },
+
     }
   }
   
