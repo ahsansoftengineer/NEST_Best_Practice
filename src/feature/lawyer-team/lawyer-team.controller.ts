@@ -5,14 +5,14 @@ import {
   Body,
   Param,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { LawyerTeamService } from './lawyer-team.service';
-import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
+import { CreateLawyerTeamDto, UpdateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 import { ROLE } from 'core/enums';
-import { GetCurrentUserId, GetJwtPayload, Public, Roles } from 'core/decorators';
-import { JwtPayload, Tokens } from 'auth/types';
-import { SignInDto } from 'auth/dto';
+import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
+import { JwtPayload } from 'auth/types';
 import { ApiTags } from '@nestjs/swagger';
 
 
@@ -24,7 +24,7 @@ export class LawyerTeamController {
   @Roles(ROLE.LAWYER)
   @Post()
   // @UseInterceptors(InterceptorImage)
-  create(
+  create( 
     @Body() body: CreateLawyerTeamDto,
     @GetJwtPayload() user: JwtPayload,
     // @UploadedFile() image: Express.Multer.File,
@@ -58,4 +58,10 @@ export class LawyerTeamController {
     console.log({ userId });
     return this._ss.deleteLawyerMember(userId, id);
   }
+
+  @Roles(ROLE.TEAM)
+  @Patch('update-members/:id')
+  update( @Param('id') id: number, @Body() body: UpdateLawyerTeamDto) {
+      return this._ss.updateteam(id, body);
+    }
 }

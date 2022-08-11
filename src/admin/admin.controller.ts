@@ -1,16 +1,25 @@
 import { Controller, Post, Body, Get, Param, Patch, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { isEmail } from 'class-validator';
-import { Public, Roles } from 'core/decorators';
+import {Roles } from 'core/decorators';
 
 import { ROLE } from 'core/enums';
 import { AdminService } from './admin.service';
 import { ChangeStatusDto } from './dto';
+import { AdminCauseListDto } from './dto/admin-cause-list.dto';
+import { AdminSendMailDto } from './dto/admin-sendmail.dto';
 
 @Controller('admin')
 @ApiTags('admin')
 export class AdminController {
   constructor(public _ss: AdminService) {}
+
+  @Get('cause-list-admin')
+  @Roles(ROLE.ADMIN)
+  findCauseList(
+    @Query() body:AdminCauseListDto) { 
+      return this._ss.causeListAdmin(body) 
+  }
+
   @Patch('lawyer/change-status')
   @Roles(ROLE.ADMIN)
   changeLawyerStatus(@Body() body: ChangeStatusDto) {
@@ -30,17 +39,10 @@ export class AdminController {
     return this._ss.getLawyer(id);
   }
 
-  @Get('cause-list-admin')
-  @Roles(ROLE.ADMIN)
-  findCauseList(
-    @Query() {courtId,nexthearing,lawyerId}) {
-      return this._ss.causeListAdmin({courtId,lawyerId,nexthearing}) 
-  }
+
   @Post('email')
   @Roles(ROLE.ADMIN)
-  sendEmail(@Body() {to, subject, html}){
-    // if(isEmail(to))
-    
-    this._ss.sendEmail({to, subject, html})
+  sendEmail(@Body() body:AdminSendMailDto){    
+    this._ss.sendEmail(body)
   }
 }
