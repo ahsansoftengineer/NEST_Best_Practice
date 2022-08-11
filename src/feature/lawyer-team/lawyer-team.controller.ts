@@ -11,9 +11,8 @@ import { LawyerTeamService } from './lawyer-team.service';
 import { CreateLawyerTeamDto, UpdateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 import { ROLE } from 'core/enums';
-import { GetCurrentUserId, GetJwtPayload, Public, Roles } from 'core/decorators';
-import { JwtPayload, Tokens } from 'auth/types';
-import { SignInDto } from 'auth/dto';
+import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
+import { JwtPayload } from 'auth/types';
 import { ApiTags } from '@nestjs/swagger';
 
 
@@ -25,7 +24,7 @@ export class LawyerTeamController {
   @Roles(ROLE.LAWYER)
   @Post()
   // @UseInterceptors(InterceptorImage)
-  create(
+  create( 
     @Body() body: CreateLawyerTeamDto,
     @GetJwtPayload() user: JwtPayload,
     // @UploadedFile() image: Express.Multer.File,

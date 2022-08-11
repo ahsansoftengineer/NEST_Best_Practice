@@ -23,10 +23,6 @@ export class LawyerTeamService extends BaseService {
   async create(data: CreateLawyerTeamDto, user: JwtPayload) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
-    // TODO:fix this later
-    // const lawyer = await this.repos.lawyer.findOneBy({id: data.lawyerId})
-    // throwForbiddenException(!lawyer)
-    // data.lawyerId = lawyer.id
     const lawyerTeam: LawyerTeam = { 
       lawyerId:user.sub,
       responsibility: data.responsibility,
@@ -34,8 +30,6 @@ export class LawyerTeamService extends BaseService {
       amount: data.amount,
       user: searalizeUser(data, ROLE.TEAM, STATUS.ACTIVE)
     };
-
-    // TODO: WORK HERE SET RANDOM PASSWORD
     const password = await generatePassword();
     const hashResult = await argon.hash(password);
     lawyerTeam.user.password = hashResult;
@@ -58,23 +52,11 @@ export class LawyerTeamService extends BaseService {
       
 
     } catch(e){
-      // TODO: ROLED BACK TRANSACTION
 
     } 
-    // try{
-    //   const lawyer = this.repos.lawyer.create(lawyerResult);
-    //   await this.repos.lawyer.save(lawyer)
-    //   await this.mail.lawyerAccount({to: data.email, name: data.name})
-    //   const {email, id, name} =  lawyer.user
-    //   return {email, id, name} 
-    //   // return this.returnGeneratedToken(lawyer.user);
-    // } catch(e){
-    //     // TODO: if mail doesn't sent then drop the data maybe
-    // }
 
   }
 
-  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMembers(lawyerId) {
     console.log({ lawyerId });
 
@@ -83,7 +65,6 @@ export class LawyerTeamService extends BaseService {
       .then((x) => deSearalizeUsers(x));
   }
 
-  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMember(lawyerId, id) {
     return this.repos.lawyerTeam
       .createQueryBuilder('l')

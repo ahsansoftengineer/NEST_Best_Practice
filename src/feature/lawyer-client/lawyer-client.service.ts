@@ -8,7 +8,6 @@ import {
 import { LawyerClient } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
 import { BaseService } from 'core/service';
-import { CreateLawyerClientDto } from './dto/create-lawyer-client.dto';
 
 @Injectable()
 export class LawyerClientService extends BaseService {

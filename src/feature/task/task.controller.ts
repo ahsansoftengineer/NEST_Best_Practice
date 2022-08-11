@@ -15,6 +15,7 @@ import { GetCurrentUserId, GetJwtPayload, Roles } from 'core/decorators';
 import { ROLE } from 'core/enums';
 import { InterceptorPDF } from 'core/interceptor';
 import { CreateLawyerTaskDto, CreateTeamTaskDto } from './dto/create-task.dto';
+import { UpdateStatusTaskDto } from './dto/update-status-task.dto';
 import { TaskService } from './task.service';
 
 @Controller('task')
@@ -25,7 +26,6 @@ export class TaskController {
   @Get()
   @Roles(ROLE.LAWYER, ROLE.TEAM)
   gets(@GetJwtPayload() p: JwtPayload) {
-    // TODO CHECK IF IT IS GOING TO WORK
     const search: any = {};
     const key = p.role == ROLE.LAWYER ? 'lawyerId' : 'lawyerTeamId';
     search[key] = p.sub;
@@ -70,7 +70,7 @@ export class TaskController {
   @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
   @UseInterceptors(InterceptorPDF)
-  statusLawyerTask(@Body() body: { id, status, feedback, pdf },
+  statusLawyerTask(@Body() body: UpdateStatusTaskDto,
   @GetCurrentUserId() userId: number,
   @UploadedFile() pdf: Express.Multer.File) {
   if(pdf?.filename){
@@ -82,7 +82,7 @@ export class TaskController {
   @Patch('team-status')
   @Roles(ROLE.TEAM,ROLE.LAWYER)
   @UseInterceptors(InterceptorPDF)
-  statusTeamTask(@Body() body: { id, status, feedback, pdf },
+  statusTeamTask(@Body() body: UpdateStatusTaskDto,
                  @GetCurrentUserId() userId: number,
                  @UploadedFile() pdf: Express.Multer.File) {
   if(pdf?.filename){

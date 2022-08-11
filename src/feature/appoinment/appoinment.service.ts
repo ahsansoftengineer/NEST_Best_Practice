@@ -1,10 +1,9 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { deSearalizeUser, searalizeUser, throwForbiddenException } from 'core/constant';
 import { Appoinment, User } from 'core/entities';
-import { GENDER, ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
+import { ROLE, STATUS, STATUS_APPOINT } from 'core/enums';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
-import { In, Not } from 'typeorm';
 import { CreateAppoinmentDto } from './dto/create-appoinment.dto';
 
 @Injectable()

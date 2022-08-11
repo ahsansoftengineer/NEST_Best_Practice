@@ -4,7 +4,6 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Param,
   Post,
   Query,
   UploadedFile,
@@ -20,6 +19,7 @@ import { Public, GetCurrentUserId, GetCurrentUser, Roles } from '../core/decorat
 import { RtGuard } from '../core/guards';
 import { AuthService } from './auth.service';
 import { SignInDto, SignUpDto } from './dto';
+import { LawyerGetOrInvite } from './dto/lawyer-get&invite.dto';
 import { SignUpLawyerDto } from './dto/sign-up-lawyer.dto';
 import { Tokens } from './types';
 
@@ -117,8 +117,8 @@ export class AuthController {
 
   @Get('lawyer-name-email')
   @Roles(ROLE.LAWYER)
-  getLawyer(@Query() {name, email}) {
-    return this._ss.getLawyerByName({name, email});
+  getLawyer(@Query() body:LawyerGetOrInvite) {
+    return this._ss.getLawyerByName(body);
   }
 
   @Post('send-invitation')
