@@ -1,6 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Public } from 'core/decorators';
 import {
   Court,
   Lawyer,
@@ -37,5 +36,6 @@ export class RepoService {
     @InjectRepository(LawyerClient)
     public lawyerClient: Repository<LawyerClient>,
     @InjectRepository(LawyerCase) public lawyerCase: Repository<LawyerCase>,
-  ) {}
+  ) {
+  }
 }
