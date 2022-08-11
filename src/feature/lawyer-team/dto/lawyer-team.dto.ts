@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { UserReqFieldDto } from 'auth/dto/user-req-field.dto';
-import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsOptional, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, Length, Matches } from 'class-validator';
 
 export class CreateLawyerTeamDto {
   @ApiProperty({
@@ -33,4 +33,24 @@ export class CreateLawyerTeamDto {
   lawyerId: number;
 }
 
-export class UpdateLawyerTeamDto extends PartialType(CreateLawyerTeamDto) {}
+export class UpdateLawyerTeamDto{
+
+  @IsNotEmpty()
+  @ApiProperty()
+  @IsString()
+  name: string;
+
+  @IsNotEmpty()
+  @Length(11, 17) 
+  @ApiProperty()
+  mobile: string;
+
+  @ApiProperty({
+    description:
+      'password must has special character, alpha numeric and capital / small letters',
+  })
+  @IsNotEmpty()
+  @Length(7, 20)
+  password: string;
+
+}

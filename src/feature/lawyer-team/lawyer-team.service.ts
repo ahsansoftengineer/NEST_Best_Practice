@@ -1,7 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { SignInDto } from 'auth/dto';
-import { JwtPayload, Tokens } from 'auth/types';
+import { JwtPayload } from 'auth/types';
 import {
   argon,
   deSearalizeUser,
@@ -9,20 +7,18 @@ import {
   generatePassword,
   searalizeUser,
   throwForbiddenException,
-  ENV
 } from 'core/constant';
-import { LawyerTeam, User } from 'core/entities';
+import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
-import { BaseService, CoreService } from 'core/service';
-import { any } from 'joi';
+import { BaseService } from 'core/service';
+import { RepoService } from 'core/shared/service/repo.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
 export class LawyerTeamService extends BaseService {
-  constructor(
-    private _jwt: JwtService,
-  ) {
+  constructor(public repos: RepoService) {
     super()
+    this.repo = this.repos.user
   }
   async create(data: CreateLawyerTeamDto, user: JwtPayload) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
@@ -106,5 +102,13 @@ export class LawyerTeamService extends BaseService {
       .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
   }
 
+  async updateteam(id: number, data: any, cb = null) {
+    let result: any = await this.findOne(id);
+    if (cb) await cb(result, data);
+    const hashResult = await argon.hash(data.password);
+    data.password = hashResult
+    if (result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
 
 }
