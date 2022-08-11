@@ -63,5 +63,5 @@ export class LawyerTeamController {
   @Patch('update-members/:id')
   update( @Param('id') id: number, @Body() body: UpdateLawyerTeamDto) {
       return this._ss.updateteam(id, body);
-    }
+    } 
 }

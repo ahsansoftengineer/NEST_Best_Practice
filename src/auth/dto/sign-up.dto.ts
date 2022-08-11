@@ -25,6 +25,7 @@ export class SignUpDto extends IntersectionType(SignInDto, UserReqFieldDto) {
   })
   confirmPassword: string;
 
+  @ApiProperty()
   @IsOptional()
   // @IsNumber()
   cityId: number;

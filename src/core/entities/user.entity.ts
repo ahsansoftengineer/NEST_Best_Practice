@@ -91,4 +91,8 @@ export class User extends AlphaModel {
 
   @OneToOne(() => LawyerTeam, (x) => x.user)
   lawyerTeam?: LawyerTeam;
+
+  @Column({ nullable: true })
+  location?: string;
+
 }

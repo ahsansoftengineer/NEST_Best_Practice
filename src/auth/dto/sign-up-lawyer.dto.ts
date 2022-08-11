@@ -3,6 +3,7 @@ import { IsNotEmpty, IsNumber, IsNumberString } from 'class-validator';
 import { SignUpDto } from './sign-up.dto';
 
 export class SignUpLawyerDto extends SignUpDto {
+  @ApiProperty()
   @IsNumberString()
   @IsNotEmpty()
   specializationId: number;
