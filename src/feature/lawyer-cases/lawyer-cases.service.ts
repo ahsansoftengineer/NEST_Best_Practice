@@ -47,6 +47,6 @@ export class LawyerCasesService extends BaseService {
     return this.repos.lawyerCase
       .createQueryBuilder('l')
       .delete()
-      .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
+      .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId }); 
   }
 }
