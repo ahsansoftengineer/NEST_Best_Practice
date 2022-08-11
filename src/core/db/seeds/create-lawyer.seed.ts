@@ -12,17 +12,19 @@ export default class CreateLawyerSeed implements Seeder {
       desc: 'Specialization Descs', 
     }).execute()
 
-    await insert.into(Court).values({ 
-      title: 'Court Title',
-      desc: 'Court Desc ', 
-    }).execute()
+    await insert.into(Court).values([
+      { 
+        title: 'Court Title',
+        desc: 'Court Desc '
+      },
+      {
+        title: 'Court Title 2',
+        desc: 'Court Desc 2', 
+      }
+      ]).execute()
+    
 
-    await insert.into(Court).values({ 
-      title: 'Court Title 2',
-      desc: 'Court Desc 2', 
-    }).execute()
-
-    await insert.into(User).values({ 
+    const lawyer = await insert.into(User).values({ 
       name: 'Lawyer', 
       mobile: '03212825500',
       email: 'ssyedahmed31@gmail.com',  
@@ -33,7 +35,8 @@ export default class CreateLawyerSeed implements Seeder {
       desc: 'Lawyer Desc', 
       address:'Lawyer Address', 
     }).execute()
-
+    console.log({lawyer});
+    
     await insert.into(Lawyer).values({
       specializationId: 1,
       id: 2,
