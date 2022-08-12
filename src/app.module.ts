@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
 import { SharedModule } from 'core/shared/shared.module';
-import { LoggerMiddleware } from 'core/middleware';
+import { LoggerMiddleware } from 'core/middleware'; 
 
 @Module({
   imports: [
