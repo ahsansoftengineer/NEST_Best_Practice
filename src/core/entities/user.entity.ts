@@ -5,7 +5,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToOne,
-  RelationId,
   Unique,
 } from 'typeorm';
 import { AlphaModel } from './alpha-model';
@@ -91,4 +90,8 @@ export class User extends AlphaModel {
 
   @OneToOne(() => LawyerTeam, (x) => x.user)
   lawyerTeam?: LawyerTeam;
+
+  @Column({ nullable: true })
+  location?: string;
+
 }

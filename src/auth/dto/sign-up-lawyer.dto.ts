@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsNumberString } from 'class-validator';
+import { IsNotEmpty,IsNumberString } from 'class-validator';
 import { SignUpDto } from './sign-up.dto';
 
 export class SignUpLawyerDto extends SignUpDto {
+  @ApiProperty()
   @IsNumberString()
   @IsNotEmpty()
   specializationId: number;

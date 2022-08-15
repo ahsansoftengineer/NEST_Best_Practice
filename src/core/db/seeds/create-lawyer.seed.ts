@@ -10,7 +10,7 @@ export default class CreateLawyerSeed implements Seeder {
     await insert.into(Specialization).values({ 
       title: 'Specialization Titles',
       desc: 'Specialization Descs', 
-    }).execute()
+    }).execute() 
 
     await insert.into(Court).values([
       { 

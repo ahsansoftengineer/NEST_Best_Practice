@@ -14,6 +14,7 @@ export const searalizeUser = (d: any, role: ROLE, status: STATUS) => {
     cityId: d.cityId,
     image: d.image,
     address: d.address,
+    location:d.location
   };
   return user;
 };

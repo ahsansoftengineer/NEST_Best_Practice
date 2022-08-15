@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { deSearalizeUsers, throwForbiddenException, throwForbiddenExceptiontitle } from 'core/constant';
+import { deSearalizeUsers, throwForbiddenExceptiontitle } from 'core/constant';
 import { LawyerCase } from 'core/entities/lawyer-case.entity';
 import { BaseService } from 'core/service';
 import { RepoService } from 'core/shared/service/repo.service';
