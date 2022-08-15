@@ -19,7 +19,7 @@ export default class CreateMAppointmentSeed implements Seeder {
     console.log({appointment});
 
     await insert.into(Appoinment).values({
-      id: 8,
+      id: 5,
       title: 'Appointment',
       desc: 'Appointment desc',
       date: '20-06-2023',

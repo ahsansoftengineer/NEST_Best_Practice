@@ -51,7 +51,6 @@ export default class CreateLawyerWorkRoleBasedSeed implements Seeder {
     }).execute()
 
     await insert.into(Task).values({
-      id: 5,
       title: 'Task',
       desc: 'Task desc',
       pdf: 'task-image.pdf',
@@ -62,7 +61,6 @@ export default class CreateLawyerWorkRoleBasedSeed implements Seeder {
     }).execute()
 
     await insert.into(Task).values({
-      id: 6,
       title: 'Task team',
       desc: 'Task team desc',
       pdf: 'task-taem-image.pdf',
@@ -74,9 +72,8 @@ export default class CreateLawyerWorkRoleBasedSeed implements Seeder {
     }).execute()
 
     await insert.into(LawyerCase).values({
-      id: 7,
-      title: 'Task team',
-      desc: 'Task team desc',
+      title: 'Lawyer Case',
+      desc: 'Lawyer Case desc',
       suit: 'suite',
       nexthearing: '2022-10-03',
       lasthearing: '2022-08-03',
