@@ -1,7 +1,7 @@
 import { argon } from "core/constant";
 import { User } from "core/entities";
 import { GENDER, ROLE, STATUS } from "core/enums";
-import { Connection, In} from "typeorm";
+import { Connection} from "typeorm";
 import { Factory, Seeder } from "typeorm-seeding";
 
 export default class CreateAdminSeed implements Seeder {

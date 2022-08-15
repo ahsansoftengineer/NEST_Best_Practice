@@ -31,7 +31,7 @@
     "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
     "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n dist/core/config/ConfigTypeOrmMigration.js",
-    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n dist/core/config/ConfigTypeOrmMigration.js"
+    "seed:run": "npm run build && ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n dist/core/config/ConfigTypeOrmMigration.js"
   },
   "dependencies": {
     "@anchan828/nest-sendgrid": "^0.6.3",

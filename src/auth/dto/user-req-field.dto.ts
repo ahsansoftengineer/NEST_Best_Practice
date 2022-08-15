@@ -68,4 +68,9 @@ export class UserReqFieldDto {
   @IsOptional()
   @ApiProperty()
   image?: string;
+
+  @ApiProperty({description:
+    'Location is optional '})
+  @IsOptional()
+  location?:string;
 }
