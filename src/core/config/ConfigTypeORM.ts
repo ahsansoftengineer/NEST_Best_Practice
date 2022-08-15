@@ -20,6 +20,8 @@ const typeORMGeneralOptions: TypeOrmModuleOptions = {
 }
 export const typeOrmModuleOptions: TypeOrmModuleOptions = {
   ...typeORMGeneralOptions,
+  synchronize: true,
+  dropSchema: true,
 };
 const typeOrmModuleAsyncOptions: TypeOrmModuleAsyncOptions = {
   useFactory: async () => {
