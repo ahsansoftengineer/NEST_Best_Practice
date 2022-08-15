@@ -27,7 +27,7 @@ export class CasezController extends BaseController {
   }
 
   @Post()
-  @Roles(ROLE.LAWYER)
+  @Roles(ROLE.ADMIN)
   @UseInterceptors(InterceptorPDF)
   create(
     @Body() body: CreateCasezDto,
@@ -43,7 +43,7 @@ export class CasezController extends BaseController {
   }
 
   @Patch(':id')
-  @Roles(ROLE.LAWYER)
+  @Roles(ROLE.ADMIN)
   @UseInterceptors(InterceptorPDF)
   async update(
     @Param('id') id: number,
@@ -62,7 +62,7 @@ export class CasezController extends BaseController {
     );
   }
 
-  @Roles(ROLE.LAWYER)
+  @Roles(ROLE.ADMIN)
   @Delete(':id')
   async remove(@Param('id') id: number) {
     const result = await this._ss.repo.findOneBy({ id });

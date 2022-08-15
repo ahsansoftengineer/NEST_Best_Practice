@@ -29,7 +29,9 @@
     "migration:run": "npm run typeorm:cli -- migration:run",
     "migration:revert": "npm run typeorm:cli -- migration:revert",
     "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run -d src/modules/config/ormconfig.ts",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts"
+    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert -d src/modules/config/ormconfig.ts",
+    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n dist/core/config/ConfigTypeOrmMigration.js",
+    "seed:run": "npm run build && ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n dist/core/config/ConfigTypeOrmMigration.js"
   },
   "dependencies": {
     "@anchan828/nest-sendgrid": "^0.6.3",
@@ -68,7 +70,8 @@
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.4.0",
     "typeorm": "^0.3.7",
-    "typeorm-extension": "^2.1.4"
+    "typeorm-extension": "^2.1.4",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
@@ -100,6 +103,7 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.0.0",
+    "typeorm-seeder": "^0.3.0",
     "typescript": "^4.3.5",
     "webpack": "^5.73.0",
     "webpack-node-externals": "^3.0.0"

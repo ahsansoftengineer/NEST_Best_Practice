@@ -1,7 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { SignInDto } from 'auth/dto';
-import { JwtPayload, Tokens } from 'auth/types';
+import { JwtPayload } from 'auth/types';
 import {
   argon,
   deSearalizeUser,
@@ -9,28 +7,22 @@ import {
   generatePassword,
   searalizeUser,
   throwForbiddenException,
-  ENV
 } from 'core/constant';
-import { LawyerTeam, User } from 'core/entities';
+import { LawyerTeam } from 'core/entities';
 import { ROLE, STATUS } from 'core/enums';
-import { BaseService, CoreService } from 'core/service';
-import { any } from 'joi';
+import { BaseService } from 'core/service';
+import { RepoService } from 'core/shared/service/repo.service';
 import { CreateLawyerTeamDto } from './dto/lawyer-team.dto';
 
 @Injectable()
 export class LawyerTeamService extends BaseService {
-  constructor(
-    private _jwt: JwtService,
-  ) {
+  constructor(public repos: RepoService) {
     super()
+    this.repo = this.repos.user
   }
   async create(data: CreateLawyerTeamDto, user: JwtPayload) {
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
-    // TODO:fix this later
-    // const lawyer = await this.repos.lawyer.findOneBy({id: data.lawyerId})
-    // throwForbiddenException(!lawyer)
-    // data.lawyerId = lawyer.id
     const lawyerTeam: LawyerTeam = { 
       lawyerId:user.sub,
       responsibility: data.responsibility,
@@ -38,8 +30,6 @@ export class LawyerTeamService extends BaseService {
       amount: data.amount,
       user: searalizeUser(data, ROLE.TEAM, STATUS.ACTIVE)
     };
-
-    // TODO: WORK HERE SET RANDOM PASSWORD
     const password = await generatePassword();
     const hashResult = await argon.hash(password);
     lawyerTeam.user.password = hashResult;
@@ -62,23 +52,11 @@ export class LawyerTeamService extends BaseService {
       
 
     } catch(e){
-      // TODO: ROLED BACK TRANSACTION
 
     } 
-    // try{
-    //   const lawyer = this.repos.lawyer.create(lawyerResult);
-    //   await this.repos.lawyer.save(lawyer)
-    //   await this.mail.lawyerAccount({to: data.email, name: data.name})
-    //   const {email, id, name} =  lawyer.user
-    //   return {email, id, name} 
-    //   // return this.returnGeneratedToken(lawyer.user);
-    // } catch(e){
-    //     // TODO: if mail doesn't sent then drop the data maybe
-    // }
 
   }
 
-  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMembers(lawyerId) {
     console.log({ lawyerId });
 
@@ -87,7 +65,6 @@ export class LawyerTeamService extends BaseService {
       .then((x) => deSearalizeUsers(x));
   }
 
-  // TODO: NOT WORK CHEQUE THE QUERY BUILDER DOCS
   getLawyerMember(lawyerId, id) {
     return this.repos.lawyerTeam
       .createQueryBuilder('l')
@@ -106,5 +83,13 @@ export class LawyerTeamService extends BaseService {
       .where('id = :id AND lawyerId = :lawyerId', { id, lawyerId });
   }
 
+  async updateteam(id: number, data: any, cb = null) {
+    let result: any = await this.findOne(id);
+    if (cb) await cb(result, data);
+    const hashResult = await argon.hash(data.password);
+    data.password = hashResult
+    if (result) result = await this.repo.update(id, data);
+    return result || { message: `id ${id} does not exsist` };
+  }
 
 }

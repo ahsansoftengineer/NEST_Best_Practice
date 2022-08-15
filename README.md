@@ -36,6 +36,11 @@ npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestj
 npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session webpack-node-externals run-script-webpack-plugin webpack  
 ```
 
+### Legecy Command / Force
+```java
+npm install --save-dev typeorm-seeder --legacy-peer-deps
+```
+
 ### Hot Reloading
 * * Filename => webpack-hmr.config.js
 ```javascript
@@ -178,4 +183,66 @@ sgMail
     console.error(error)
   })
 
+```
+
+### TypeORM Migerations
+* Packages to Install
+```java
+npm i typeorm
+npm i -D typeorm-seeder --legacy-peer-deps
+```
+* package.json
+```json
+{
+    "scripts": {
+      "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n dist/core/config/ConfigTypeOrmMigration.js",
+      "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n dist/core/config/typeorm.config-migrations.ts"
+    }
+}
+```
+* To Customize the Seed Location 
+```yaml
+TYPEORM_SEEDING_FACTORIES=core/db/factories/**/*{.ts,.js}
+TYPEORM_SEEDING_SEEDS=core/db/seeds/**/*{.ts,.js}
+```
+* Run the following command
+```java
+npm run seed:config
+```
+* * Should Display the following Result
+```javascript
+TypeORM Seeding v1.6.1
+{
+  type: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'root',
+  password: 'root',
+  database: 'klp',
+  entities: [
+    [class AlphaModel],
+    [class BetaModel extends AlphaModel],
+    [class Appoinment],
+    [class Book extends BetaModel],
+    [class Casez extends BetaModel],
+    [class City extends BetaModel],
+    [class Court extends BetaModel],
+    [class News extends BetaModel],
+    [class User extends AlphaModel],
+    [class Lawyer],
+    [class LawyerClient],
+    [class LawyerTeam],
+    [class Specialization extends BetaModel],
+    [class Task extends BetaModel],
+    [class LawyerCase extends BetaModel]
+  ],
+  retryDelay: 10000,
+  retryAttempts: 2,
+  logging: true,
+  synchronize: true,
+  dropSchema: true,
+  baseDirectory: 'D:\\Programming\\NEST_Best_Practice',
+  factories: [ 'src/database/factories/**/*{.ts,.js}' ],
+  seeds: [ 'src/database/seeds/**/*{.ts,.js}' ]
+}
 ```

@@ -16,6 +16,8 @@ import { AppoinmentService } from './appoinment.service';
 import {
   CreateAppoinmentDto,
 } from './dto/create-appoinment.dto';
+import { UpdateStatusAdminAppoinmentDto } from './dto/update-statusAdmin-appoinment.dto';
+import { UpdateStatusLawyerAppoinmentDto } from './dto/update-statusLawyer-appoinment.dto';
 
 @Controller('appointment')
 @ApiTags('appointment')
@@ -31,8 +33,6 @@ export class AppoinmentController {
   @Get('lawyer-list')
   @Roles(ROLE.LAWYER)
   lawyerList(@Query('status') status: STATUS_APPOINT) {
-    console.log({ status });
-
     if (!status || 'Accept,Reject,Direct'.indexOf(status) != -1)
       return this._ss.lawyerList(status);
     throw new HttpException(
@@ -48,15 +48,15 @@ export class AppoinmentController {
 
   @Patch('admin-status')
   @Roles(ROLE.ADMIN)
-  async statusAdmin(@Body() { id, status, email, date, time, name,feedback}) {
-    return this._ss.statusAdmin({ id, status, email, date, time, name ,feedback});
+  async statusAdmin(@Body() body: UpdateStatusAdminAppoinmentDto) {
+    return this._ss.statusAdmin(body);
   }
 
   @Patch('lawyer-status')
   @Roles(ROLE.LAWYER)
-  async statusLawyer(@Body() { id, status, email, name, feedback  }) {
-    if (STATUS_APPOINT.ACCEPT == status || STATUS_APPOINT.REJECT == status)
-      return this._ss.statusLawyer({ id, status, email, name,feedback });
+  async statusLawyer(@Body() body: UpdateStatusLawyerAppoinmentDto) {
+    if (STATUS_APPOINT.ACCEPT == body.status || STATUS_APPOINT.REJECT == body.status)
+      return this._ss.statusLawyer(body);
     throw new HttpException(
       'you are only authorized for Accept & Reject',
       HttpStatus.FORBIDDEN,
