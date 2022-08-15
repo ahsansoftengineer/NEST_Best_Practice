@@ -49,6 +49,7 @@ export class AuthService extends CoreService{
     const lawyerResult: Lawyer = {
       user,
       specializationId: data.specializationId,
+      license:data.license, 
       courts, 
     };
     try{

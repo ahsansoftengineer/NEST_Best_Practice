@@ -38,6 +38,9 @@ export class Lawyer {
  
   @Column()
   specializationId?: number;
+
+  @Column()
+  license: string; 
   
   @ManyToMany(() => Court, (c) => c.lawyers, {
     eager: true,
