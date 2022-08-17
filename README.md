@@ -46,6 +46,10 @@ npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestj
 ```java
 npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session @types/passport-google-oauth20  webpack-node-externals run-script-webpack-plugin webpack  
 ```
+#### PROBELEMATIC DEPENDENCIES
+```java
+  npm i typeorm-seeding
+```
 #### LEGACY COMMAND / FORCE
 ```java
 npm install --save-dev typeorm-seeder --legacy-peer-deps
