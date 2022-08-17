@@ -1,5 +1,6 @@
 declare namespace NodeJS {
   export interface ProcessEnv{
+    ENVIRONMENT: 'DEV'| 'PROD' | 'STAGE'
     DB_DATABASE: any;
     DB_TYPE: any; // 'mysql' | 'postgress' | "mariadb"
     DB_HOST: string;
