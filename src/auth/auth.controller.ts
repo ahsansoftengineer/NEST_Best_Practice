@@ -7,13 +7,14 @@ import {
   Post,
   Query,
   UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ROLE, STATUS } from 'core/enums';
 import { HandleUniqueError } from 'core/error/HandleUniqueError';
-import { InterceptorImage } from 'core/interceptor';
+import { InterceptorImage, Interceptor_Files_PDF_Image } from 'core/interceptor';
 
 import { Public, GetCurrentUserId, GetCurrentUser, Roles } from '../core/decorators';
 import { RtGuard } from '../core/guards';
@@ -51,19 +52,24 @@ export class AuthController {
 
   @Public()
   @Post('local/sign-up-lawyer')
-  @UseInterceptors(InterceptorImage)
+  @UseInterceptors(Interceptor_Files_PDF_Image)
   signupLawyer(
     @Body() body: SignUpLawyerDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFiles()
+    files: { image?: Express.Multer.File[]; pdf?: Express.Multer.File[] },
   ): Promise<Tokens> {
     body.courtIds = JSON.parse(body.courtIds.toString());
 
-    if (!image?.filename)
+    if (!files?.image || !files?.image[0]?.filename)
+      throw new HttpException('image is required', HttpStatus.BAD_REQUEST);
+    body.image = files.image[0].filename;
+    if (!files?.pdf || !files?.pdf[0]?.filename)
       throw new HttpException(
-        'user profile image is required',
-        HttpStatus.FORBIDDEN,
+        'licenes pdf document is required',
+        HttpStatus.BAD_REQUEST,
       );
-    body.image = image.filename;
+    body.license = files.pdf[0].filename;
+
     try {
       return this._ss.signUpLawyer(body);
     } catch (e) {

@@ -1,6 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { SignUpDto } from 'auth/dto';
-import { IsNumber, IsNumberString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsNumberString, IsOptional } from 'class-validator';
 
 export class CreateLawyerDto extends SignUpDto {
   @IsOptional()
@@ -8,7 +8,12 @@ export class CreateLawyerDto extends SignUpDto {
   id: number;
 
   @IsNumberString()
+  @ApiProperty()
   specializationId: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  license: string;
 
   @IsNumber({}, { each: true })
   courtIds: number[];
