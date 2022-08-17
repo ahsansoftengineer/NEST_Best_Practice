@@ -40,11 +40,11 @@ npm run start:dev
 * * Don't know the use case of dotenv cli
 #### DEPENDENCIES
 ```java
-npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer @casl/ability nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli
+npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler @nestjs/serve-static @nestjs-modules/mailer @casl/ability nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli passport-google-oauth20 
 ```
 #### DEV DEPENDENCIES
 ```java
-npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session webpack-node-externals run-script-webpack-plugin webpack  
+npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session @types/passport-google-oauth20  webpack-node-externals run-script-webpack-plugin webpack  
 ```
 #### LEGACY COMMAND / FORCE
 ```java

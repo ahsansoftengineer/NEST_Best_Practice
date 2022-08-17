@@ -10,7 +10,7 @@ import { AdminModule } from './admin/admin.module';
 import { SharedModule } from 'core/shared/shared.module';
 import { LoggerMiddleware } from 'core/middleware'; 
 
-@Module({
+@Module({ 
   imports: [
     configConfig,
     MulterModule.register({
