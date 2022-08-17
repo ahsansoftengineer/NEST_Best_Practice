@@ -25,21 +25,32 @@ npm config set fetch-retry-maxtimeout 600000
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+#### SETTING ENV
+* * File -> .env, .env.prod, .env.dev
+* * File -> AppModule.ts
+* * File -> ConfigConfig.ts
+```java
+// To Set the Environment in Power Shell use the following command to change the ENV
+$env:ENVIRONMENT = 'STAGE'
+// and then run the following command
+npm run start:dev
+// TODO: NOTE some how it is not working
+```
 #### QUERY
 * * Don't know the use case of dotenv cli
-### DEPENDENCIES
+#### DEPENDENCIES
 ```java
 npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer @casl/ability nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli
 ```
-### DEV DEPENDENCIES
+#### DEV DEPENDENCIES
 ```java
 npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session webpack-node-externals run-script-webpack-plugin webpack  
 ```
-### LEGACY COMMAND / FORCE
+#### LEGACY COMMAND / FORCE
 ```java
 npm install --save-dev typeorm-seeder --legacy-peer-deps
 ```
-### HOT RELOADING
+#### HOT RELOADING
 * * Filename => webpack-hmr.config.js
 ```javascript
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -66,7 +77,8 @@ module.exports = function (options, webpack) {
   };
 };
 ```
-### CREATE AN CHILD ENTITY
+### TYPEORM
+#### CREATE AN CHILD ENTITY
 
 * * 1 Create Entity
 ```java
@@ -135,55 +147,7 @@ export class FeatureSchoolModule { }
 })
 export class AppModule {}
 ```
-### CUSTOM META DECORATOR
-* Create a Decorator
-* * [auth.decorator.ts](src/auth/auth.decorator.ts)
-* How to Check the Meta Atached by the Decorator in the Guard
-* * [auth.decorator.ts](src/auth/guard/auth.guard.ts)
-* Configure the Guard as the provide in any Module
-* * [auth.module.ts](src/auth/auth.module.ts)
-```java
-{
-  // This could be set in any module
-  provide: APP_GUARD,
-  useClass: JwtAuthGuard,
-},
-```
-* Set the Decorator on the Controller End point
-* * [auth.controller.ts](src/auth/auth.controller.ts)
-```java
-@Post('sign-in')
-// @UseGuards(LocalAuthGuard)
-@Public()
-signIn(@Request() req, @Body() body: SignInDto) {
-  return this._ss.validateUser(body);
-}
-```
-### SEND EMAIL USING SENDGRID
-```javascript
-// using Twilio SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-javascript
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(ENV.SENDGRID_API_KEY)
-const msg = {
-  to: 'test@example.com', // Change to your recipient
-  from: 'test@example.com', // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-}
-sgMail
-  .send(msg)
-  .then(() => {
-    console.log('Email sent')
-  })
-  .catch((error) => {
-    console.error(error)
-  })
-
-```
-### TYPEORM MIGIRATION
+#### TYPEORM MIGIRATION
 * Packages to Install
 ```java
 npm i typeorm
@@ -243,4 +207,52 @@ TypeORM Seeding v1.6.1
   factories: [ 'src/database/factories/**/*{.ts,.js}' ],
   seeds: [ 'src/database/seeds/**/*{.ts,.js}' ]
 }
+```
+### CUSTOM META DECORATOR
+* Create a Decorator
+* * [auth.decorator.ts](src/auth/auth.decorator.ts)
+* How to Check the Meta Atached by the Decorator in the Guard
+* * [auth.decorator.ts](src/auth/guard/auth.guard.ts)
+* Configure the Guard as the provide in any Module
+* * [auth.module.ts](src/auth/auth.module.ts)
+```java
+{
+  // This could be set in any module
+  provide: APP_GUARD,
+  useClass: JwtAuthGuard,
+},
+```
+* Set the Decorator on the Controller End point
+* * [auth.controller.ts](src/auth/auth.controller.ts)
+```java
+@Post('sign-in')
+// @UseGuards(LocalAuthGuard)
+@Public()
+signIn(@Request() req, @Body() body: SignInDto) {
+  return this._ss.validateUser(body);
+}
+```
+### SEND EMAIL USING SENDGRID
+```javascript
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+javascript
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(ENV.SENDGRID_API_KEY)
+const msg = {
+  to: 'test@example.com', // Change to your recipient
+  from: 'test@example.com', // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
 ```

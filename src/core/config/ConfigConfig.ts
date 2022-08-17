@@ -13,3 +13,10 @@ export const configConfig = ConfigModule.forRoot({
     isGlobal: true,
     envFilePath
 })
+
+// To Set the Environment in Power Shell use the following command to change the ENV
+// TODO $env:ENVIRONMENT = 'STAGE' ${Power Shell}
+// and then run the following command
+// TODO npm run start:dev
+// NOTE some how it is not working
+// Console is displaying the correct message but file is not picking by env
