@@ -25,7 +25,7 @@ npm config set fetch-retry-maxtimeout 600000
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
-### QUERY
+#### QUERY
 * * Don't know the use case of dotenv cli
 ### DEPENDENCIES
 ```java
