@@ -26,7 +26,7 @@ export class AuthService extends CoreService{
   async signUpAdmin(data: SignUpDto): Promise<Tokens> {
     this.logger.warn('Sign Up Admin is triggered!');
     const hashResult = await argon.hash(data.password);
-
+    
     const existUser = await this.repos.user.findOneBy({ email: data.email });
     throwForbiddenException(existUser);
 
