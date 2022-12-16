@@ -8,7 +8,7 @@ const typeORMGeneralOptions: TypeOrmModuleOptions = {
   host: ENV.DB_HOST,
   port: ENV.DB_PORT,
   username: ENV.DB_USERNAME,
-  password: ENV.DB_PASSWORD,
+  password: ENV.DB_PASSWORD.toString(), // '12345678', 
   database: ENV.DB_DATABASE,
   entities: [...baseEntities, ...entities], // STEP 2
   retryDelay: 10000,

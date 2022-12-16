@@ -9,8 +9,10 @@ import { AtGuard } from './core/guards';
 import { AdminModule } from './admin/admin.module';
 import { SharedModule } from 'core/shared/shared.module';
 import { LoggerMiddleware } from 'core/middleware'; 
+import { AppController } from 'app.controller';
 
 @Module({ 
+  // controllers: [AppController],
   imports: [
     configConfig,
     MulterModule.register({
