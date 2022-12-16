@@ -1,0 +1,22 @@
+apiVersion: apps/v2
+kind: Deployment
+metadata: 
+  name: nest-best-practice
+spec:
+  selector:
+    matchLabels:
+      app: nest-best-practice
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nest-best-practice
+        tier: backend
+        phase: test
+        deployment: v3 
+    spec:
+      containers:
+        - name: nest-best-practice
+          image: ahsansoftengineer/nest-best-practice
+          ports:
+            - containersPort: 3000
