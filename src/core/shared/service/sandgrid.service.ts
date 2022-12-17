@@ -107,7 +107,6 @@ export class SendgridService {
             `
         })
     }
-
     async sendRequestForTeam({to, name, from}){
       await this.sendEmail({
           to,
@@ -121,7 +120,6 @@ export class SendgridService {
           // maybe need a invitation table for user to accept and reject invitation on app
       })
     }
-
     async adminEmail({to, subject, html}){
         await this.sendEmail({
             to,
@@ -149,7 +147,6 @@ export class SendgridService {
     private send(mail: SendGrid.MailDataRequired) {
         return SendGrid.send(mail)
     }
-
 }
 
 // SendGrid.setApiKey(ENV.MAIL_API_KEY);

@@ -1,7 +1,7 @@
-## Basic Setup for NestJS
-### Starting Appliication
-
-#### Difference among PNPM, NPM, YARN
+# NEST JS SETTINGS
+## STARTING APPLICATION
+### KNOWLEDGE
+#### DIFFERENCE PNPM, NPM, YARN
 * PNPM: PNPM is 3 times faster and more efficient than NPM. With both cold and hot cache, PNPM is faster than Yarn. Pnpm simply links files from the global store, while yarn copies files from its cache. Package versions are never saved more than once on a disk.
 ```shell
 npm install -g pnpm // Fast installation
@@ -13,35 +13,44 @@ npm cache clean --force
 rm package-lock.json
 nest new project-name
 ```
-#### Global Configuration for NPM
+#### CONFIG NPM GLOBAL
 ```shell
 npm config set timeout 6000000
 npm config set fetch-retries 3
 npm config set cache-min 3600
 npm config set fetch-retry-maxtimeout 600000
 ```
-#### Git Global Configuration
+#### CONFIG GIT GLOBAL
 ```shell
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
-### POINTS
+#### SETTING ENV
+* * File -> .env, .env.prod, .env.dev
+* * File -> AppModule.ts
+* * File -> ConfigConfig.ts
+```java
+// To Set the Environment in Power Shell use the following command to change the ENV
+$env:ENVIRONMENT = 'STAGE'
+// and then run the following command
+npm run start:dev
+// TODO: NOTE some how it is not working
+```
+#### QUERY
 * * Don't know the use case of dotenv cli
-### Dependencies
+#### DEPENDENCIES
 ```java
-npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler  @nestjs/serve-static @nestjs-modules/mailer @casl/ability nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli
+npm i --save @nestjs/config @nestjs/typeorm @nestjs/passport  @nestjs/jwt @nestjs/throttler @nestjs/serve-static @nestjs-modules/mailer @casl/ability nodemailer typeorm mysql2 express-session bcrypt class-validator class-transformer  passport passport-local  passport-jwt typeorm-extension joi bcrypt helmet csurf cpx argon2 dotenv-parse dotenv-cli passport-google-oauth20 
 ```
-### DevDependencies
+#### DEV DEPENDENCIES
 ```java
-npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session webpack-node-externals run-script-webpack-plugin webpack  
+npm i -D @types/node @types/bcrypt @types/passport-local @types/passport-jwt @types/express-session  @types/joi @types/bcrypt @types/multer @types/express-session @types/passport-google-oauth20  webpack-node-externals run-script-webpack-plugin webpack  
 ```
-
-### Legecy Command / Force
+#### LEGACY COMMAND / FORCE
 ```java
 npm install --save-dev typeorm-seeder --legacy-peer-deps
 ```
-
-### Hot Reloading
+#### HOT RELOADING
 * * Filename => webpack-hmr.config.js
 ```javascript
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -68,7 +77,8 @@ module.exports = function (options, webpack) {
   };
 };
 ```
-### CREATE AN CHILD ENTITY
+### TYPEORM
+#### CREATE AN CHILD ENTITY
 
 * * 1 Create Entity
 ```java
@@ -116,18 +126,19 @@ export class FeatureSchoolModule { }
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      email: 'root',
-      password: 'root',
-      database: 'schoolmgmt',
-      // This how you Registered your Model Classes
-      entities,
-      synchronize: true,
-      dropSchema: true,
-      // logger: 'advanced-console',
-      logging: true,
+      type: ENV.DB_TYPE,
+      host: ENV.DB_HOST,
+      port: ENV.DB_PORT,
+      username: ENV.DB_USERNAME,
+      password: ENV.DB_PASSWORD,
+      database: ENV.DB_DATABASE,
+      entities: [...baseEntities, ...entities], // STEP 2
+      retryDelay: 10000,
+      retryAttempts: 2, 
+      logging: true,// ['query', 'error'] /* true, 'all', new MyCustomLogger()*/,
+      // logger: 'advanced-console' // default
+      synchronize: ENV.DB_SYNC,
+      dropSchema: ENV.DB_DROP,
       // subscribers: [],
       // migrations: [],
     }),
@@ -136,56 +147,7 @@ export class FeatureSchoolModule { }
 })
 export class AppModule {}
 ```
-### Create a Custom Meta Decorator
-* Create a Decorator
-* * [auth.decorator.ts](src/auth/auth.decorator.ts)
-* How to Check the Meta Atached by the Decorator in the Guard
-* * [auth.decorator.ts](src/auth/guard/auth.guard.ts)
-* Configure the Guard as the provide in any Module
-* * [auth.module.ts](src/auth/auth.module.ts)
-```java
-{
-  // This could be set in any module
-  provide: 'APP_GUARD',
-  useClass: JwtAuthGuard,
-},
-```
-* Set the Decorator on the Controller End point
-* * [auth.controller.ts](src/auth/auth.controller.ts)
-```java
-@Post('sign-in')
-// @UseGuards(LocalAuthGuard)
-@Public()
-signIn(@Request() req, @Body() body: SignInDto) {
-  return this._ss.validateUser(body);
-}
-```
-### SEND EMAIL USING SENDGRID
-```javascript
-// using Twilio SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-javascript
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(ENV.SENDGRID_API_KEY)
-const msg = {
-  to: 'test@example.com', // Change to your recipient
-  from: 'test@example.com', // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-}
-sgMail
-  .send(msg)
-  .then(() => {
-    console.log('Email sent')
-  })
-  .catch((error) => {
-    console.error(error)
-  })
-
-```
-
-### TypeORM Migerations
+#### TYPEORM MIGIRATION
 * Packages to Install
 ```java
 npm i typeorm
@@ -245,4 +207,52 @@ TypeORM Seeding v1.6.1
   factories: [ 'src/database/factories/**/*{.ts,.js}' ],
   seeds: [ 'src/database/seeds/**/*{.ts,.js}' ]
 }
+```
+### CUSTOM META DECORATOR
+* Create a Decorator
+* * [auth.decorator.ts](src/auth/auth.decorator.ts)
+* How to Check the Meta Atached by the Decorator in the Guard
+* * [auth.decorator.ts](src/auth/guard/auth.guard.ts)
+* Configure the Guard as the provide in any Module
+* * [auth.module.ts](src/auth/auth.module.ts)
+```java
+{
+  // This could be set in any module
+  provide: APP_GUARD,
+  useClass: JwtAuthGuard,
+},
+```
+* Set the Decorator on the Controller End point
+* * [auth.controller.ts](src/auth/auth.controller.ts)
+```java
+@Post('sign-in')
+// @UseGuards(LocalAuthGuard)
+@Public()
+signIn(@Request() req, @Body() body: SignInDto) {
+  return this._ss.validateUser(body);
+}
+```
+### SEND EMAIL USING SENDGRID
+```javascript
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+javascript
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(ENV.SENDGRID_API_KEY)
+const msg = {
+  to: 'test@example.com', // Change to your recipient
+  from: 'test@example.com', // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
 ```
